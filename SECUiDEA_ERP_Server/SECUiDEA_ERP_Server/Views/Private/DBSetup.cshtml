@@ -1,0 +1,202 @@
+﻿@using SECUiDEA_ERP_Server.Models.ResultModels
+@using SECUiDEA_ERP_Server.Models.ControllerModels.Private
+@using InputType = SECUiDEA_ERP_Server.Models.ControllerModels.InputType
+@model List<DBSetupViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Database Setup</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/css/font.css" asp-append-version="true" />
+
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js" defer="defer" asp-append-version="true"></script>
+    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js" defer="defer" asp-append-version="false"></script>
+    <script type="text/javascript" src="/lib/sweetalert2/sweetalert2.all.min.js" defer="defer"></script>
+
+    <style>
+        html, body {
+            height:100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #fdfdfd;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .db-setup-container .card {
+            border-color: #4f657b;
+        }
+
+        .db-setup-container .card-header {
+            background-color: #1a4977;
+            color: white;
+        }
+
+        .db-setup-container .input-group-text {
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            color: #495057;
+        }
+
+        .db-setup-container .card-footer {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .db-setup-container .btn-test {
+            background-color: #2d6da3;
+            border-color: #2d6da3;
+            color: white;
+        }
+
+            .db-setup-container .btn-test:hover {
+                background-color: #235780;
+                border-color: #235780;
+            }
+
+        .db-setup-container .btn-save {
+            background-color: #40916c;
+            border-color: #40916c;
+            color: white;
+        }
+
+            .db-setup-container .btn-save:hover {
+                background-color: #2d6a4f;
+                border-color: #2d6a4f;
+            }
+    </style>
+
+    <script type="text/javascript" src="~/js/DBSetup.min.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        const dbSetup = new DBSetupManager({
+            testConnectionURL: '/Private/TestConnection',
+            saveSingleURL: '/Private/SaveSingleDBSetup',
+            formPrefix: "dbSetupForm_",
+            databaseType: "databaseType",
+            sectionNameKey: "sectionName",
+            settingsPrefix: "connectionSettings"
+        });
+
+        async function testConnection(index) {
+            try {
+                const response = await dbSetup.testConnection(index);
+                if (response.isSuccess === true) {
+                    Swal.fire('Success', response.message, 'success');
+                } else {
+                    Swal.fire('Fail', response.message, 'error');
+                }
+            } catch (e) {
+                Swal.fire('Fail', 'An error occurred while communicating with the server.', 'error');
+            }
+        }
+
+        async function saveSingleSetup(index) {
+            try {
+                const response = await dbSetup.saveSingleSetup(index);
+                if (response.isSuccess === true) {
+                    Swal.fire('Fail', response.message, 'success');
+                } else {
+                    Swal.fire('Fail', response.message, 'error');
+                }
+            } catch (e) {
+                Swal.fire('Fail', 'An error occurred while communicating with the server.', 'error');
+            }
+        }
+    </script>
+</head>
+<body class="d-flex flex-column">
+    <section class="background">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="db-setup-container col-md-6 col-xl-5 col-xxl-4">
+                @for (var i = 0; i < Model.Count; i++)
+                {
+                    var settings = Model[i].GetSettingDefinitions();
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="mb-0">@Model[i].sectionName (@Model[i].databaseType)</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="dbSetupForm_@i">
+                                <input type="hidden" asp-for="@Model[i].sectionName" name="sectionName" />
+                                <input type="hidden" asp-for="@Model[i].databaseType" name="databaseType" />
+
+                                @foreach (var setting in settings)
+                                {
+                                    <div class="input-group">
+                                        <label class="input-group-text" style="min-width: 150px;">@setting.Key</label>
+                                        @switch (setting.Type)
+                                        {
+                                            case InputType.Select:
+                                                {
+                                                    <select class="form-select"
+                                                            name="connectionSettings[@setting.Key]">
+                                                        @foreach (var option in setting.Options)
+                                                        {
+                                                            <option value="@option" selected="@(option == setting.Value)">@option</option>
+                                                        }
+                                                    </select>
+                                                }
+                                                break;
+                                            case InputType.Password:
+                                                {
+                                                    <input type="password"
+                                                           class="form-control"
+                                                           name="connectionSettings[@setting.Key]"
+                                                           value="@setting.Value" />
+                                                }
+                                                break;
+                                            default:
+                                                {
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="connectionSettings[@setting.Key]"
+                                                           value="@setting.Value" />
+                                                }
+                                                break;
+                                        }
+                                    </div>
+                                }
+                            </form>
+                        </div>
+                        <div class="card-footer text-end">
+                            <button type="button"
+                                    class="btn btn-test"
+                                    onclick="testConnection(@i)">
+                                Test Connection
+                            </button>
+                            <button type="button"
+                                    class="btn btn-save"
+                                    onclick="saveSingleSetup(@i)">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</body>
+</html>
