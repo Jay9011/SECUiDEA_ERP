@@ -34,7 +34,7 @@ public class DBSetupService : IDBSetupService
     
             _dbSetupContainer.UpdateSetup(setting.sectionName, connectionInfo);
 
-            return BoolResultModel.Success("{{what}} 설정이 성공적으로 저장되었습니다.",
+            return BoolResultModel.Success("response:기본.{{what}} 설정이 성공적으로 저장되었습니다.",
                 new Dictionary<string, object>
                 {
                     { "what", setting.sectionName }
@@ -59,7 +59,7 @@ public class DBSetupService : IDBSetupService
                 }
             }
 
-            return BoolResultModel.Success("{{what}} 설정이 성공적으로 저장되었습니다.",
+            return BoolResultModel.Success("response:기본.{{what}} 설정이 성공적으로 저장되었습니다.",
                 new Dictionary<string, object>
                 {
                     { "what", "DB.데이터베이스" }
@@ -75,7 +75,7 @@ public class DBSetupService : IDBSetupService
     {
         if (setting == null)
         {
-            return BoolResultModel.Fail("{{what}}가 잘못되었습니다.",
+            return BoolResultModel.Fail("response:기본.{{what}}가 잘못되었습니다.",
                 new Dictionary<string, object>
                 {
                     { "what", "기본.요청 파라미터" }

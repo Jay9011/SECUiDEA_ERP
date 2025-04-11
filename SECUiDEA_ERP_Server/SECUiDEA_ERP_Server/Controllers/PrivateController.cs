@@ -84,7 +84,7 @@ public class PrivateController : Controller
     {
         if (setting == null)
         {
-            return BadRequest(BoolResultModel.Fail("{{what}}가 잘못되었습니다.",
+            return BadRequest(BoolResultModel.Fail("response:기본.{{what}}가 잘못되었습니다.",
                 new Dictionary<string, object>
                 {
                     { "what", "기본.요청 파라미터" }

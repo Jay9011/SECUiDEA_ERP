@@ -1,12 +1,18 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using System.Globalization
+@{
+    var currentCulture = CultureInfo.CurrentCulture.Name;
+    var language = currentCulture.Split('-')[0]; // "ko-KR" -> "ko" 형태로 변환
+}
+
+<!DOCTYPE html>
+<html lang="@language">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebApplicationTEST</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebApplicationTEST.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -44,6 +50,58 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- i18n 라이브러리 로드 -->
+    <script src="~/lib/i18next/i18next.min.js"></script>
+    <script src="~/lib/i18next-http-backend/i18nextHttpBackend.min.js"></script>
+
+    <script>
+        const currentLanguage = "@language";
+
+        i18next
+        .use(i18nextHttpBackend)
+        .init({
+            lng: currentLanguage,
+            fallbackLng: "ko",
+            returnNull: false,
+            returnEmptyString: false,
+            ns: ["translation", "response"],
+            defaultNS: "translation",
+            detection: {
+                order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag'],
+                cache: ['localStorage', 'sessionStorage', 'cookie'],
+                lookupQuerystring: 'lng',
+                lookupCookie: 'i18next',
+                lookupLocalStorage: 'i18nextLng',
+                lookupSessionStorage: 'i18nextLng',
+            },
+            backend: {
+                loadPath: "/locales/{{lng}}/{{ns}}.json"
+            },
+            interpolation: {
+                escapeValue: false
+            }
+        });
+
+        window.t = function(key, options) {
+            return i18next.t(key, options);
+        };
+
+        $(document).ready(function() {
+            // data-i18n 속성을 가진 모든 요소를 찾아 번역
+            $('[data-i18n]').each(function() {
+                const $element = $(this);
+                const key = $element.data('i18n');
+
+                if ($element.data('i18n-html')) {
+                    $element.html(i18next.t(key));
+                } else {
+                    $element.text(i18next.t(key));
+                }
+            });
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

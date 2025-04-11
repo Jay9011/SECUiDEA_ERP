@@ -1,0 +1,23 @@
+{
+    "기본": {
+        "성공": "Success",
+        "실패": "Fail",
+        "오류": "Error",
+        "조회": "View",
+        "저장": "Save",
+        "삭제": "Delete",
+        "추가": "Add",
+        "수정": "Edit",
+        "검색": "Search",
+        "취소": "Cancel",
+        "확인": "Confirm",
+        "닫기": "Close",
+        "초기화": "Reset",
+        "요청 파라미터": "Request Parameters"
+    },
+    "DB": {
+        "데이터베이스": "Database",
+        "연결테스트": "Test Connection",
+        "데이터베이스_설정": "Database Setup"
+    }
+}

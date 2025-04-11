@@ -1,0 +1,18 @@
+{
+    "기본": {
+        "{{what}}가 잘못되었습니다.": "{{what}} is invalid.",
+        "{{what}}가 존재하지 않습니다.": "{{what}} does not exist.",
+        "{{what}}가 이미 존재합니다.": "{{what}} already exists.",
+        "{{what}}가 추가되었습니다.": "{{what}} has been added.",
+        "{{what}}가 수정되었습니다.": "{{what}} has been modified.",
+        "{{what}}가 삭제되었습니다.": "{{what}} has been deleted.",
+        "{{what}} 설정이 성공적으로 저장되었습니다.": "{{what}} settings have been successfully saved.",
+        "{{what}} 설정이 성공적으로 추가되었습니다.": "{{what}} settings have been successfully added.",
+        "{{what}} 설정이 성공적으로 조회되었습니다.": "{{what}} settings have been successfully retrieved.",
+        "{{what}} 설정이 성공적으로 수정되었습니다.": "{{what}} settings have been successfully modified.",
+        "{{what}} 설정이 성공적으로 삭제되었습니다.": "{{what}} settings have been successfully deleted."
+    },
+    "오류": {
+        "서버와 통신하는 동안 {{what}}가 발생했습니다.": "An {{what}} occurred while communicating with the server."
+    }
+}
