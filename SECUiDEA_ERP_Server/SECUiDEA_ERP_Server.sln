@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SECUiDEA_ERP_Server", "SECUiDEA_ERP_Server\SECUiDEA_ERP_Server.csproj", "{6F1143A2-95C9-4C3D-BF82-A00424CF2AA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S1UserDAL", "S1UserDAL\S1UserDAL.csproj", "{DCC4F34F-60A3-4480-A06D-3F340ACC45A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{6F1143A2-95C9-4C3D-BF82-A00424CF2AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F1143A2-95C9-4C3D-BF82-A00424CF2AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F1143A2-95C9-4C3D-BF82-A00424CF2AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC4F34F-60A3-4480-A06D-3F340ACC45A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC4F34F-60A3-4480-A06D-3F340ACC45A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC4F34F-60A3-4480-A06D-3F340ACC45A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC4F34F-60A3-4480-A06D-3F340ACC45A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DCC4F34F-60A3-4480-A06D-3F340ACC45A6} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85B21D69-B2FE-4980-828B-E93575BC4CA2}

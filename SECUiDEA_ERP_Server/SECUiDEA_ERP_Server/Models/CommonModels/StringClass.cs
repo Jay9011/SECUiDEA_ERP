@@ -1,14 +1,46 @@
 ﻿namespace SECUiDEA_ERP_Server.Models.CommonModels;
 
-public class StringClass
+public static class StringClass
 {
     // 경로 관련
+    public const string SECUiDEARegistry = "SoftWare\\SECUiDEA";
     public const string SECUiDEACrypt = "SoftWare\\SECUiDEA\\Crypt";
-    
+
+    public static readonly string SECUiDEAJWT = Path.Combine(SECUiDEARegistry, "JWT");
+
+    // 인증 관련
+    public const string Permission = "Permission";
+    public const string JwtSettings = "JwtSettings";
+    public const string SessionId = "SessionId";
+    public const string Secret = "Secret";
+    public const string Issuer = "Issuer";
+    public const string Audience = "Audience";
+    public const string ExpiryMinutes = "ExpiryMinutes";
+    public const string ExpiryHours = "ExpiryHours";
+    public const string RefreshTokenDays = "RefreshTokenDays";
+    public const string AutoLoginDays = "AutoLoginDays";
+    public const string PreventDuplicateLogin = "PreventDuplicateLogin";
+    public const string InactivityTimeout = "InactivityTimeout";
+    public const string InactivityTimeoutMinutes = "InactivityTimeoutMinutes";
+
+    public static readonly string JwtSettingsFullPath = Path.Combine(SECUiDEAJWT, JwtSettings);
+
+    public const string SECUiDEA_Issuer = "SECUiDEA.API";
+    public const string SECUiDEA_Audience = "SECUiDEA.Client";
+    public const int DefaultExpiryMinutes = 15;             // 기본 JWT 유효기간 (분 단위)
+    public const int DefaultExpiryHours = 1;                // 기본 JWT 유효기간 (시간 단위)
+    public const int DefaultRefreshTokenDays = 7;           // 기본 Refresh Token 유효기간 (일 단위)
+    public const int DefaultAutoLoginDays = 30;             // 기본 자동 로그인 유효기간 (일 단위)
+    public const bool DefaultPreventDuplicateLogin = false; // 기본 중복 로그인 방지 여부
+    public const bool DefaultInactivityTimeout = false;     // 기본 비활성 시간 초과 여부
+    public const int DefaultInactivityTimeoutMinutes = 30;  // 기본 비활성 시간 초과 (분 단위)
+
     // 설정 파일 관련
     public const string IoDbSetupFile = "dbSetupFile";
+    public const string IoRegistry = "registry";
     public const string S1Access = "S1ACCESS";
     public const string SECUIDEA = "SECUiDEA";
+    public const string JwtSetupDb = SECUIDEA;
     
     // 암호화 관련
     public const string CryptoAes = "AES";
