@@ -1,4 +1,6 @@
-﻿using SECUiDEA_ERP_Server.Models.CommonModels;
+﻿using CoreDAL.ORM;
+using CoreDAL.ORM.Extensions;
+using SECUiDEA_ERP_Server.Models.CommonModels;
 
 namespace SECUiDEA_ERP_Server.Models.Authentication;
 
@@ -18,13 +20,14 @@ public class JwtSettings
 /// <summary>
 /// JWT 인증 토큰 재발급용 토큰
 /// </summary>
-public class RefreshToken
+public class RefreshToken : SQLParam
 {
     public string SessionId { get; set; } = Guid.NewGuid().ToString();
 
     public int Id { get; set; }
     public string Provider { get; set; } = Providers.SECUiDEA; // 공급자 (예: S1, SECUiDEA)
     public string UserId { get; set; }
+    [DbParameter]
     public string Token { get; set; }
     public DateTime ExpiryDate { get; set; }
     public string CreatedByIp { get; set; }

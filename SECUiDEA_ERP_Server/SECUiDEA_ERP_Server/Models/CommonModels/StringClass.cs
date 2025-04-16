@@ -11,6 +11,7 @@ public static class StringClass
     // 인증 관련
     public const string Permission = "Permission";
     public const string JwtSettings = "JwtSettings";
+    public const string RefreshToken = "refreshToken";
     public const string SessionId = "SessionId";
     public const string Secret = "Secret";
     public const string Issuer = "Issuer";

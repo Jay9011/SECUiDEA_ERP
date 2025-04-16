@@ -18,3 +18,7 @@ CREATE TABLE UserSessions
     DeactivatedReason NVARCHAR(255) NULL,
     CONSTRAINT UK_SessionId UNIQUE (SessionId),
 );
+GO
+-- 인덱스 추가
+CREATE INDEX IX_UserSessions_UserId_Provider ON UserSessions(UserId, Provider);
+CREATE INDEX IX_UserSessions_ExpiryDate ON UserSessions(ExpiryDate);

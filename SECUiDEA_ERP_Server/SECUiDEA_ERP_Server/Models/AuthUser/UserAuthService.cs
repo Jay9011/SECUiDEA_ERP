@@ -10,10 +10,11 @@ public class UserAuthService
     private readonly JwtService _jwtService;
     private readonly SessionService _sessionService;
     private readonly IRefreshTokenRepository _tokenRepository;
+    private readonly UserRepositoryFactory _userRepositoryFactory;
 
     #endregion
 
-    public UserAuthService(JwtService jwtService, SessionService sessionService, IRefreshTokenRepository tokenRepository)
+    public UserAuthService(JwtService jwtService, SessionService sessionService, IRefreshTokenRepository tokenRepository, UserRepositoryFactory userRepositoryFactory)
     {
 
         #region 의존 주입
@@ -21,6 +22,7 @@ public class UserAuthService
         _jwtService = jwtService;
         _sessionService = sessionService;
         _tokenRepository = tokenRepository;
+        _userRepositoryFactory = userRepositoryFactory;
 
         #endregion
     }
@@ -149,8 +151,7 @@ public class UserAuthService
 
     private async Task<User> GetUserByIdAsync(string provider, string userId)
     {
-        // TODO: 구현 필요: Provider에 따라 적절한 User Repository 선택
-        // IUserRepository userRepository = GetUserRepositoryByProvider(provider);
-        // return await userRepository.GetByIdAsync(userId);
+        var repository = _userRepositoryFactory.GetRepository(provider);
+        return await repository.GetUserModelByIdAsync(userId);
     }
 }
