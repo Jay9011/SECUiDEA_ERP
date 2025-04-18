@@ -1,0 +1,23 @@
+// 추상적인 스타일 (변수, 믹신, 함수)
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+// 기본 스타일
+@import './base/reset';
+
+// 레이아웃 스타일
+@import './layouts/header';
+@import './layouts/footer';
+@import './layouts/sidebar';
+@import './layouts/main-layout';
+
+// 컴포넌트 스타일
+@import './components/button';
+@import './components/card';
+@import './components/form';
+@import './components/alert';
+
+// 페이지 스타일
+@import './pages/home';
+@import './pages/login';
+@import './pages/visit-reservation'; 

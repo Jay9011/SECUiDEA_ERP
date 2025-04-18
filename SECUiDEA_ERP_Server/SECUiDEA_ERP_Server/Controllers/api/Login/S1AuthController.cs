@@ -1,16 +1,20 @@
 ﻿using CoreDAL.Configuration.Interface;
+using CoreDAL.ORM.Extensions;
+using CryptoManager;
 using Microsoft.AspNetCore.Mvc;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
+using SECUiDEA_ERP_Server.Models.ControllerModels.api.Login.S1AuthModel;
 using SECUiDEA_ERP_Server.Models.ResultModels;
 
 namespace SECUiDEA_ERP_Server.Controllers.api.Login;
 
 [Route("api/Login/[controller]/[action]")]
-public class S1AuthController : Controller
+public class S1AuthController : BaseController
 {
     #region 의존 주입
 
+    private readonly ICryptoManager _cryptoSha512;
     private readonly IDatabaseSetupContainer _dbContainer;
     private readonly UserAuthService _authService;
     private readonly UserRepositoryFactory _userRepositoryFactory;
@@ -18,57 +22,54 @@ public class S1AuthController : Controller
 
     #endregion
 
-    public S1AuthController(IDatabaseSetupContainer dbContainer, UserAuthService authService, UserRepositoryFactory userRepositoryFactory)
+    private readonly IDatabaseSetup _dbSetup;
+
+    public S1AuthController(IDatabaseSetupContainer dbContainer, UserAuthService authService, UserRepositoryFactory userRepositoryFactory, [FromKeyedServices(StringClass.CryptoS1Sha512)] ICryptoManager cryptoSha512)
     {
+        #region 의존 주입
+
         _dbContainer = dbContainer;
         _authService = authService;
         _userRepositoryFactory = userRepositoryFactory;
+        _cryptoSha512 = cryptoSha512;
+
+        #endregion
+
+        // DBSetup 인스턴스 생성
+        _dbSetup = _dbContainer.GetSetup(StringClass.S1Access);
 
         // S1UserRepository 인스턴스 생성
         _userRepository = _userRepositoryFactory.GetRepository(StringClass.S1Access) as S1UserRepository;
     }
 
     /// <summary>
-    /// TODO: S1ACCESS 로그인 처리
+    /// S1ACCESS 로그인 처리
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult<dynamic>> Login([FromBody] LoginRequestModel request)
+    public async Task<IActionResult> Login([FromBody] S1UserDTO request)
     {
         try
         {
-            // 1. S1ACCESS 인증 처리
-            var user = await _userRepository.AuthenticateAsync(request.UserId, request.Password);
+            // S1ACCESS 인증 처리
+            var user = await _userRepository.AuthenticateAsync(request.Id, _cryptoSha512.Encrypt(request.Password));
             if (user == null)
             {
                 return Unauthorized(BoolResultModel.Fail("인증 실패: 사용자 정보가 일치하지 않습니다."));
             }
 
-            // 2. 인증 성공 후 토큰 발급 및 세션 생성
+            // 인증 성공 후 토큰 발급 및 세션 생성
             string ipAddress = GetClientIpAddress();
             var tokenResponse = await _authService.CompleteLoginAsync(
-                StringClass.S1Access,
+                _userRepository.ProviderName,
                 user,
                 ipAddress,
-                request.RememberMe);
+                request.rememberMe);
 
-            // 3. 리프레시 토큰을 쿠키에 저장
-            SetRefreshTokenCookie(tokenResponse.RefreshToken);
-
-            // 4. 응답 반환
-            return Ok(new
-            {
-                success = true,
-                data = new
+            return Ok(BoolResultModel.Success("",
+                new Dictionary<string, object>
                 {
-                    accessToken = tokenResponse.AccessToken,
-                    expiryDate = tokenResponse.ExpiryDate,
-                    user = new
-                    {
-                        id = user.ID,
-                        role = user.UserRole
-                    }
-                }
-            });
+                    { "token", tokenResponse }
+                }));
         }
         catch (Exception ex)
         {
@@ -104,25 +105,89 @@ public class S1UserRepository : IUserRepository
     /// </summary>
     /// <param name="userId"></param>
     /// <returns></returns>
-    public Task<User> GetUserModelByIdAsync(string userId)
+    public async Task<User> GetUserModelByIdAsync(string userId)
     {
-        // TODO: UserID로 사용자 정보 조회
-        // TODO: User에 대한 Role과 Permission 정보도 함께 조회
+        var param = new S1UserParams
+        {
+            ID = userId
+        };
+
+        var result = await _dbSetup.DAL.ExecuteProcedureAsync(_dbSetup, "SECUiDEA_GetUserById_SEL", param);
+
+        if (result.IsSuccess && result.DataSet?.Tables.Count > 0 && result.DataSet.Tables[0].Rows.Count > 0)
+        {
+            var userEntity = result.DataSet.Tables[0].Rows[0].ToObject<S1UserTable>();
+
+            // 결과 확인
+            if (userEntity.AuthType.Equals("Fail"))
+            {
+                return null;
+            }
+
+            var user = new User
+            {
+                ID = userEntity.Id,
+                UserRole = userEntity.AuthType
+            };
+
+            // 권한 정보 로드
+            await LoadUserPermissionsAsync(user);
+
+            return user;
+        }
+
+        return null;
     }
 
     /// <summary>
     /// 인증 처리
     /// </summary>
-    /// <param name="username"></param>
+    /// <param name="userId"></param>
     /// <param name="password"></param>
     /// <returns></returns>
-    public Task<User> AuthenticateAsync(string username, string password)
+    public async Task<User> AuthenticateAsync(string userId, string password)
     {
-        // TODO: 실제 사용자 인증 처리 (로그인 로직)
+        var param = new S1UserParams
+        {
+            ID = userId
+        };
+
+        var result = await _dbSetup.DAL.ExecuteProcedureAsync(_dbSetup, "SECUiDEA_GetUserById_SEL", param);
+
+        if (result.IsSuccess && result.DataSet?.Tables.Count > 0 && result.DataSet.Tables[0].Rows.Count > 0)
+        {
+            var userEntity = result.DataSet.Tables[0].Rows[0].ToObject<S1UserTable>();
+
+            // 결과 확인
+            if (userEntity.AuthType.Equals("Fail"))
+            {
+                return null;
+            }
+
+            // 비밀번호 검증
+            if (userEntity.Password != password)
+            {
+                return null;
+            }
+
+            var user = new User
+            {
+                ID = userEntity.Id,
+                Name = userEntity.Name,
+                UserRole = userEntity.AuthType
+            };
+
+            // 권한 정보 로드
+            await LoadUserPermissionsAsync(user);
+
+            return user;
+        }
+
+        return null;
     }
 
     private async Task LoadUserPermissionsAsync(User user)
     {
-        // TODO: 사용자 권한 정보 로드
+        return;
     }
 }

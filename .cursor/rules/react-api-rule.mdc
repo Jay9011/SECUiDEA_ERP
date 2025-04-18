@@ -1,0 +1,236 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# React 프로젝트 코딩 규칙 및 원칙
+
+## 1. 단일 책임 원칙 (SRP)
+
+- **컴포넌트 단일 책임**: 각 컴포넌트는 한 가지 기능에만 집중해야 합니다.
+  ```jsx
+  // ❌ 나쁜 예: 너무 많은 책임
+  function UserDashboard() {
+    // 인증 로직
+    // 사용자 정보 관리
+    // 레이아웃 관리
+    // API 호출
+  }
+  
+  // ✅ 좋은 예: 분리된 책임
+  function UserProfile() { /* 사용자 정보 표시만 담당 */ }
+  function UserStats() { /* 통계 정보만 담당 */ }
+  function Dashboard() { return (<><UserProfile /><UserStats /></>) }
+  ```
+
+- **유틸리티 함수 분리**: jwt.js와 cookies.js 분리 사례처럼 유틸리티 함수는 논리적 카테고리별로 분리합니다.
+
+## 2. 관심사 분리
+
+- **비즈니스 로직과 UI 분리**: 비즈니스 로직은 hooks, contexts, services로 분리합니다.
+  ```jsx
+  // ❌ 나쁜 예: 컴포넌트 내 복잡한 로직
+  function ProductList() {
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+      fetch('/api/products')
+        .then(res => res.json())
+        .then(data => setProducts(data.filter(p => p.isActive).sort(...)));
+    }, []);
+    
+    // UI 렌더링...
+  }
+  
+  // ✅ 좋은 예: 커스텀 훅으로 분리
+  function useProducts() {
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+      // 데이터 페칭 및 가공 로직
+    }, []);
+    
+    return { products };
+  }
+  
+  function ProductList() {
+    const { products } = useProducts();
+    // 순수 UI 렌더링
+  }
+  ```
+
+## 3. 모듈화 및 재사용성
+
+- **작은 모듈 지향**: 100줄 이상의 파일은 분할을 고려하세요.
+- **파일명 규칙**: 파일명은 기능을 명확히 설명해야 합니다 (예: `userAuthentication.js`, `dateFormatter.js`).
+- **경로 구조**: 논리적 도메인별로 구조화하세요.
+  ```
+  /components
+    /common         # 공통 UI 컴포넌트
+    /features       # 특정 기능 관련 컴포넌트
+    /layouts        # 레이아웃 구성 요소
+  /hooks            # 커스텀 훅
+  /contexts         # Context API 관련 코드
+  /utils            # 유틸리티 함수
+  /services         # API 통신 등의 서비스
+  /styles           # 스타일 관련 파일
+  ```
+
+## 4. React 컴포넌트 원칙
+
+- **함수형 컴포넌트 사용**: 클래스형보다 함수형 컴포넌트 사용을 권장합니다.
+- **컴포넌트 합성**: 상속 대신 합성으로 재사용성을 높입니다.
+  ```jsx
+  // ✅ 좋은 예: 합성 패턴
+  function Card({ children, title }) {
+    return (
+      <div className="card">
+        <h3>{title}</h3>
+        <div className="card-content">{children}</div>
+      </div>
+    );
+  }
+
+  function UserCard({ user }) {
+    return (
+      <Card title={user.name}>
+        <p>Email: {user.email}</p>
+      </Card>
+    );
+  }
+  ```
+
+- **Props 검증**: PropTypes 또는 TypeScript로 props를 엄격하게 검증합니다.
+
+## 5. 상태 관리
+
+- **지역 vs 전역 상태**: 컴포넌트 지역 상태는 useState, 여러 컴포넌트 공유는 Context API 사용하세요.
+- **단방향 데이터 흐름**: 상태는 항상 위에서 아래로 흘러야 합니다.
+- **불변성 유지**: 상태 업데이트는 항상 불변성을 지켜야 합니다.
+  ```jsx
+  // ❌ 나쁜 예: 직접 변경
+  const updateUser = () => {
+    user.name = 'New Name';
+    setUser(user);
+  };
+  
+  // ✅ 좋은 예: 불변성 유지
+  const updateUser = () => {
+    setUser({ ...user, name: 'New Name' });
+  };
+  ```
+
+## 6. 성능 최적화
+
+- **메모이제이션**: React.memo, useMemo, useCallback을 필요한 경우에만 사용합니다.
+- **가상 리스트**: 대량의 리스트는 windowing 기법을 사용합니다.
+- **지연 로딩**: React.lazy와 Suspense로 코드 분할합니다.
+  ```jsx
+  const HeavyComponent = React.lazy(() => import('./HeavyComponent'));
+  
+  function App() {
+    return (
+      <Suspense fallback={<Loading />}>
+        <HeavyComponent />
+      </Suspense>
+    );
+  }
+  ```
+
+## 7. 에러 처리
+
+- **명시적 에러 처리**: 모든 비동기 작업에 try-catch 블록을 사용합니다.
+- **에러 경계**: React의 Error Boundary를 사용해 UI 오류를 격리합니다.
+  ```jsx
+  class ErrorBoundary extends React.Component {
+    state = { hasError: false };
+    
+    static getDerivedStateFromError() {
+      return { hasError: true };
+    }
+    
+    render() {
+      if (this.state.hasError) {
+        return <ErrorFallback />;
+      }
+      return this.props.children;
+    }
+  }
+  ```
+
+## 8. 테스트 원칙
+
+- **테스트 우선**: 중요한 기능은 테스트 먼저 작성합니다.
+- **컴포넌트 고립**: 단위 테스트는 의존성을 모킹하여 컴포넌트를 고립시킵니다.
+- **통합 테스트**: 복잡한 상호작용은 통합 테스트로 검증합니다.
+
+## 9. 문서화
+
+- **JSDoc 주석**: 복잡한 함수나 컴포넌트는 JSDoc으로 문서화합니다.
+  ```jsx
+  /**
+   * 사용자 인증 처리 훅
+   * @param {Object} options - 인증 옵션
+   * @param {boolean} options.redirectOnSuccess - 성공 시 리다이렉트 여부
+   * @returns {Object} 인증 관련 상태와 함수
+   */
+  function useAuth({ redirectOnSuccess = true } = {}) {
+    // 구현...
+  }
+  ```
+
+- **README 유지**: 각 주요 디렉토리에 README.md가 있다면 설명을 추가하거나 업데이트하세요.
+
+## 10. 코드 가독성
+
+- **일관된 코드 스타일**: ESLint와 Prettier를 사용해 일관성을 유지합니다.
+- **의미 있는 이름**: 변수, 함수명은 명확하고 설명적이어야 합니다.
+  ```jsx
+  // ❌ 나쁜 예
+  const h = () => {...};
+  const d = userData.find(u => u.id === id);
+  
+  // ✅ 좋은 예
+  const handleSubmit = () => {...};
+  const userDetails = userData.find(user => user.id === userId);
+  ```
+
+- **주석 사용**: 복잡한 로직에만 주석을 추가합니다. 자명한 코드에는 주석을 지양합니다.
+
+## 12. 확장성 고려
+
+- **플러그인 아키텍처**: 핵심 기능은 플러그인으로 확장 가능하게 설계합니다.
+- **설정 기반 기능**: 하드코딩보다 설정 객체를 통한 기능 활성화를 권장합니다.
+  ```jsx
+  // ❌ 나쁜 예: 하드코딩된 기능
+  function UserList() {
+    // 항상 정렬 수행
+    const sortedUsers = users.sort((a, b) => a.name.localeCompare(b.name));
+    // ...
+  }
+  
+  // ✅ 좋은 예: 설정 기반 기능
+  function UserList({ sortable = true, filterable = true }) {
+    // 설정에 따라 기능 활성화
+    let processedUsers = [...users];
+    
+    if (sortable) {
+      processedUsers = processedUsers.sort(...);
+    }
+    
+    if (filterable) {
+      // 필터링 로직
+    }
+    // ...
+  }
+  ```
+
+## 13. 보안 고려
+
+- **사용자 입력 검증**: 모든 사용자 입력은 검증 후 사용합니다.
+
+## 14. 라이브러리 사용 규칙
+
+- axios 대신 fetch API를 사용해주세요.
+
+이 원칙들은 프로젝트 확장에 따라 발전시켜 나가야 하며, 팀 상황에 맞게 조정하는 것이 중요합니다. 원칙을 따르되 과도한 엄격함보다는 생산성과 실용성의 균형을 찾아야 합니다.

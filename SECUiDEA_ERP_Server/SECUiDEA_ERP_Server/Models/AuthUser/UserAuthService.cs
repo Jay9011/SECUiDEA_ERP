@@ -53,7 +53,7 @@ public class UserAuthService
         {
             AccessToken = accessToken,
             RefreshToken = refreshToken.Token,
-            ExpiryDate = DateTime.UtcNow.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
+            ExpiryDate = DateTime.Now.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
             SessionId = sessionId
         };
     }
@@ -99,7 +99,7 @@ public class UserAuthService
         {
             AccessToken = newAccessToken,
             RefreshToken = token.Token,
-            ExpiryDate = DateTime.UtcNow.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
+            ExpiryDate = DateTime.Now.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
             SessionId = token.SessionId
         };
     }
@@ -142,7 +142,7 @@ public class UserAuthService
             return;
 
         refreshToken.IsRevoked = true;
-        refreshToken.RevokedAt = DateTime.UtcNow;
+        refreshToken.RevokedAt = DateTime.Now;
         refreshToken.RevokedByIp = ipAddress;
         refreshToken.ReasonRevoked = reason;
 

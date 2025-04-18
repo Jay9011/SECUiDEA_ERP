@@ -17,8 +17,8 @@ public interface IUserRepository
     /// <summary>
     /// 사용자 인증 로직
     /// </summary>
-    /// <param name="username"></param>
+    /// <param name="userId"></param>
     /// <param name="password"></param>
     /// <returns></returns>
-    public Task<User> AuthenticateAsync(string username, string password);
+    public Task<User> AuthenticateAsync(string userId, string password);
 }

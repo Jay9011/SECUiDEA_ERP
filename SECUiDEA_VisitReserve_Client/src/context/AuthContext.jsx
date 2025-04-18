@@ -1,53 +1,111 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { parseJwt } from '../utils/jwt';
+import { setCookie, getCookie, deleteCookie } from '../utils/cookies';
 
-const AuthContext = createContext();
-
-export const useAuth = () => {
-    return useContext(AuthContext);
-};
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [authHeader, setAuthHeader] = useState(null);
 
+    // 쿠키에서 토큰 확인하여 사용자 상태 설정
     useEffect(() => {
-        // 로컬 스토리지에서 사용자 정보와 토큰을 확인
-        const token = localStorage.getItem('token');
-        const userInfo = localStorage.getItem('userInfo');
-
-        if (token && userInfo) {
-            setUser(JSON.parse(userInfo));
+        const token = getCookie('accessToken');
+        if (token) {
+            const decodedToken = parseJwt(token);
+            setUser({
+                id: decodedToken.nameid,
+                role: decodedToken.role,
+                // 추가 정보가 토큰에 포함되면 여기서 추출
+                // userName: decodedToken.userName,
+                // permissions: decodedToken.permissions ? JSON.parse(decodedToken.permissions) : []
+            });
             setIsAuthenticated(true);
 
-            // axios 기본 헤더에 토큰 설정
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            // 인증 헤더 설정
+            setAuthHeader({ 'Authorization': `Bearer ${token}` });
         }
 
         setLoading(false);
     }, []);
 
-    const login = (token, userInfo) => {
-        localStorage.setItem('token', token);
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    // 브라우저 닫기 이벤트에 로그아웃 함수 연결
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            if (isAuthenticated) {
+                // 비컨 API로 로그아웃 요청 (비동기 요청이 완료되지 않아도 브라우저가 닫힘)
+                const sessionId = getCookie('sessionId');
+                const refreshToken = getCookie('refreshToken');
 
+                if (sessionId && refreshToken) {
+                    const logoutUrl = `${import.meta.env.VITE_API_URL}/auth/logout`;
+                    navigator.sendBeacon(
+                        logoutUrl,
+                        JSON.stringify({
+                            sessionId,
+                            refreshToken
+                        })
+                    );
+                }
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    }, [isAuthenticated]);
+
+    const login = (token, userInfo) => {
+        // 세션 쿠키로 저장 (브라우저 닫히면 자동 삭제)
+        setCookie('accessToken', token);
+        setCookie('refreshToken', userInfo.refreshToken);
+        setCookie('sessionId', userInfo.sessionId);
+
+        // 사용자 상태 업데이트
         setUser(userInfo);
         setIsAuthenticated(true);
 
-        // axios 기본 헤더에 토큰 설정
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        // 인증 헤더 설정
+        setAuthHeader({ 'Authorization': `Bearer ${token}` });
     };
 
-    const logout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userInfo');
+    const logout = async () => {
+        try {
+            const sessionId = getCookie('sessionId');
+            const refreshToken = getCookie('refreshToken');
 
-        setUser(null);
-        setIsAuthenticated(false);
+            // 백엔드에 로그아웃 요청 보내기
+            if (sessionId && refreshToken) {
+                const response = await fetch(import.meta.env.VITE_API_URL + '/auth/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...authHeader
+                    },
+                    body: JSON.stringify({
+                        sessionId,
+                        refreshToken
+                    })
+                });
 
-        // axios 기본 헤더에서 토큰 제거
-        delete axios.defaults.headers.common['Authorization'];
+                if (!response.ok) {
+                    throw new Error('로그아웃 처리 중 오류가 발생했습니다.');
+                }
+            }
+        } catch (error) {
+            console.error('서버 로그아웃 처리 중 오류 발생:', error);
+        } finally {
+            // 쿠키에서 토큰 및 세션 정보 제거
+            deleteCookie('accessToken');
+            deleteCookie('refreshToken');
+            deleteCookie('sessionId');
+
+            // 상태 초기화
+            setUser(null);
+            setIsAuthenticated(false);
+            setAuthHeader(null);
+        }
     };
 
     const value = {
@@ -55,7 +113,8 @@ export const AuthProvider = ({ children }) => {
         loading,
         isAuthenticated,
         login,
-        logout
+        logout,
+        authHeader
     };
 
     return (
@@ -63,4 +122,6 @@ export const AuthProvider = ({ children }) => {
             {!loading && children}
         </AuthContext.Provider>
     );
-}; 
+};
+
+export const useAuth = () => useContext(AuthContext);

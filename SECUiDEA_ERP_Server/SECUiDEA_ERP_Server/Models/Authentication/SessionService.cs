@@ -79,12 +79,12 @@ public class SessionService : IDisposable
             UserId = userId,
             SessionId = sessionId,
             IpAddress = ipAddress,
-            CreatedAt = DateTime.UtcNow,
-            LastActivityAt = DateTime.UtcNow,
+            CreatedAt = DateTime.Now,
+            LastActivityAt = DateTime.Now,
             IsActive = true,
             ExpiryDate = rememberMe
-                ? DateTime.UtcNow.AddDays(_jwtService.GetSettings.AutoLoginDays)
-                : DateTime.UtcNow.AddDays(_jwtService.GetSettings.RefreshTokenDays),
+                ? DateTime.Now.AddDays(_jwtService.GetSettings.AutoLoginDays)
+                : DateTime.Now.AddDays(_jwtService.GetSettings.RefreshTokenDays),
         });
 
         // 중복 로그인 방지 설정이 활성화 된 경우
@@ -165,7 +165,7 @@ public class SessionService : IDisposable
         }
 
         // 마지막 Activity 시간 업데이트
-        session.LastActivityAt = DateTime.UtcNow;
+        session.LastActivityAt = DateTime.Now;
 
         // DB의 세션 업데이트
         _ = Task.Run(async () =>
@@ -187,7 +187,7 @@ public class SessionService : IDisposable
             return;
 
         session.IsActive = false;
-        session.DeactivatedAt = DateTime.UtcNow;
+        session.DeactivatedAt = DateTime.Now;
         session.DeactivatedReason = reason;
 
         // DB 업데이트
@@ -241,7 +241,7 @@ public class SessionService : IDisposable
             return true;
 
         // 마지막 활동 시간 확인
-        var inactiveTime = DateTime.UtcNow - session.LastActivityAt;
+        var inactiveTime = DateTime.Now - session.LastActivityAt;
         var timeoutMinutes = _jwtService.GetSettings.InactivityTimeoutMinutes;
 
         return (inactiveTime.TotalMinutes > timeoutMinutes);

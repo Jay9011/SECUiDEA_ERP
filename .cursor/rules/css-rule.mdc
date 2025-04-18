@@ -1,0 +1,26 @@
+---
+description: 
+globs: *.css,*.scss,*.sass
+alwaysApply: false
+---
+# CSS 또는 SCSS와 관련된 규칙
+
+## 1. 스타일링 규칙
+
+- **CSS 모듈화**: CSS-in-JS 또는 CSS Modules를 권장합니다.
+- **변수 활용**: 색상, 폰트 등 변수로 관리하여 일관성을 유지합니다.
+  ```scss
+  // _variables.scss
+  $primary-color: #007bff;
+  $font-family: 'Noto Sans KR', sans-serif;
+  
+  // component.module.scss
+  @import 'variables';
+  
+  .container {
+    font-family: $font-family;
+    color: $primary-color;
+  }
+  ```
+
+- **반응형 디자인**: 미디어 쿼리는 일관된 브레이크포인트를 사용합니다.

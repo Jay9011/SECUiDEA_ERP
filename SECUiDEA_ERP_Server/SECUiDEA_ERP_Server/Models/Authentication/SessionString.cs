@@ -6,8 +6,8 @@ public class SessionProcedure
     public const string GetActives = "Auth_GetActiveSessions";
     public const string GetLatest = "Auth_GetLatestSession";
 
-    public const string Insert = "Auth_SaveSession";
-    public const string Update = "Auth_UpdateSession";
+    public const string Insert = "Auth_SessionInsert";
+    public const string Update = "Auth_SessionUpdate";
 
     public const string DeactivateOthers = "Auth_DeactivateOtherSessions";
 

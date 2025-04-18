@@ -1,0 +1,125 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.footer {
+  background-color: $primary-color;
+  color: $light-text;
+  padding: $spacing-xl 0;
+  margin-top: auto;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    
+    @include mobile {
+      padding: 0 $spacing-md;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: $spacing-xl;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+      text-align: center;
+    }
+  }
+
+  &__info {
+    h3 {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-md;
+      color: $light-text;
+    }
+
+    p {
+      margin-bottom: $spacing-sm;
+      font-size: $font-size-sm;
+      opacity: 0.8;
+    }
+
+    &-contact {
+      margin-top: $spacing-md;
+      
+      .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: $spacing-sm;
+        
+        @include mobile {
+          justify-content: center;
+        }
+        
+        i {
+          margin-right: $spacing-sm;
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+
+  &__links {
+    h4 {
+      font-size: $font-size-base;
+      margin-bottom: $spacing-md;
+      color: $light-text;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+    }
+
+    a {
+      color: $light-text;
+      opacity: 0.8;
+      transition: opacity $transition-speed $transition-ease;
+      
+      &:hover {
+        opacity: 1;
+        color: $light-text;
+      }
+    }
+  }
+
+  &__bottom {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-md;
+    border-top: 1px solid rgba($light-text, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $font-size-sm;
+    
+    @include mobile {
+      flex-direction: column;
+      gap: $spacing-md;
+      text-align: center;
+    }
+    
+    &-copyright {
+      opacity: 0.8;
+    }
+    
+    &-social {
+      display: flex;
+      gap: $spacing-md;
+      
+      a {
+        color: $light-text;
+        font-size: $font-size-lg;
+        opacity: 0.8;
+        transition: opacity $transition-speed $transition-ease;
+        
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+} 

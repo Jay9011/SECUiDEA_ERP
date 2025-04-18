@@ -22,24 +22,36 @@ public class JwtSettings
 /// </summary>
 public class RefreshToken : SQLParam
 {
+    [DbParameter]
     public string SessionId { get; set; } = Guid.NewGuid().ToString();
-
+    [DbParameter]
     public int Id { get; set; }
+    [DbParameter]
     public string Provider { get; set; } = Providers.SECUiDEA; // 공급자 (예: S1, SECUiDEA)
+    [DbParameter]
     public string UserId { get; set; }
     [DbParameter]
     public string Token { get; set; }
+    [DbParameter]
     public DateTime ExpiryDate { get; set; }
+    [DbParameter]
     public string CreatedByIp { get; set; }
+    [DbParameter]
     public DateTime CreatedAt { get; set; }
+    [DbParameter]
     public bool IsRevoked { get; set; }
+    [DbParameter]
     public DateTime? RevokedAt { get; set; }
+    [DbParameter]
     public string RevokedByIp { get; set; }
+    [DbParameter]
     public string ReplacedByToken { get; set; }
+    [DbParameter]
     public string ReasonRevoked { get; set; }
+    [DbParameter]
     public DateTime LastActivityDate { get; set; }
 
-    public bool IsExpired => DateTime.UtcNow >= ExpiryDate;
+    public bool IsExpired => DateTime.Now >= ExpiryDate;
     public bool IsActive => !IsRevoked && !IsExpired;
 }
 

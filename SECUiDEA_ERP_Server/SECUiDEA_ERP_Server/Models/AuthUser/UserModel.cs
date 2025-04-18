@@ -15,6 +15,7 @@ public class Permission
 public class User
 {
     public string ID { get; set; }
+    public string Name { get; set; } = "Unknown";
     public string UserRole { get; set; }
     public List<Permission> Permissions { get; set; } = new List<Permission>();
 }

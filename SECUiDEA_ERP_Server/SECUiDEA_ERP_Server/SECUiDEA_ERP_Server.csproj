@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AuthService" Version="1.0.0" />
     <PackageReference Include="CoreDAL" Version="1.1.1-beta" />
     <PackageReference Include="CryptoManager" Version="1.0.4" />
     <PackageReference Include="FileIOHelper" Version="1.1.1" />
@@ -16,14 +15,6 @@
     <PackageReference Include="System.Drawing.Common" Version="9.0.4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.8.0" />
     <PackageReference Include="UserDALInterface" Version="1.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\S1UserDAL\S1UserDAL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\ControllerModels\api\Login\" />
   </ItemGroup>
 
 </Project>

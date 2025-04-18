@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,27 +17,38 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/Auth/Login`, {
-                userId,
-                password
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/Login/S1Auth/Login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: userId,
+                    password: password,
+                    rememberMe: rememberMe
+                })
             });
 
-            if (response.data.isSuccess) {
-                // 토큰을 로컬 스토리지에 저장
-                localStorage.setItem('token', response.data.data.token);
-                localStorage.setItem('userInfo', JSON.stringify(response.data.data.userInfo));
+            const data = await response.json();
 
-                // 홈 페이지로 이동
+            if (data.isSuccess) {
+                const tokenResponse = data.data.token;
+
+                login(tokenResponse.accessToken, {
+                    id: userId,
+                    refreshToken: tokenResponse.refreshToken,
+                    sessionId: tokenResponse.sessionId,
+                    tokenExpiry: tokenResponse.expiryDate
+                });
+
+                // 로그인 성공 후 이동 위치
                 navigate('/');
             } else {
-                setError(response.data.message || '로그인에 실패했습니다.');
+                setError(data.message || '로그인에 실패했습니다.');
             }
         } catch (err) {
-            if (err.response) {
-                setError(err.response.data.message || '로그인에 실패했습니다.');
-            } else {
-                setError('서버와 통신 중 오류가 발생했습니다.');
-            }
+            setError('서버와 통신 중 오류가 발생했습니다.');
+            console.error('로그인 오류:', err);
         } finally {
             setLoading(false);
         }
@@ -66,6 +79,16 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
+                    </div>
+                    <div className="form-group">
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                            />
+                            자동 로그인
+                        </label>
                     </div>
                     <button type="submit" disabled={loading}>
                         {loading ? '로그인 중...' : '로그인'}

@@ -1,4 +1,5 @@
 ﻿using CoreDAL.Configuration.Interface;
+using CoreDAL.ORM;
 using CoreDAL.ORM.Extensions;
 using SECUiDEA_ERP_Server.Models.CommonModels;
 
@@ -30,7 +31,17 @@ public class RefreshTokenRepository : IRefreshTokenRepository
             Token = token
         };
 
-        var result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.GetRefreshTokenByToken, parameter);
+        SQLResult result;
+
+        try
+        {
+            result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.GetRefreshTokenByToken, parameter);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         if (result.IsSuccess && result.DataSet?.Tables.Count > 0 && result.DataSet.Tables[0].Rows.Count > 0)
         {
@@ -43,8 +54,17 @@ public class RefreshTokenRepository : IRefreshTokenRepository
     public async Task SaveTokenAsync(RefreshToken token)
     {
         var dbSetup = _dbContainer.GetSetup(StringClass.JwtSetupDb);
+        SQLResult result;
 
-        var result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.SaveRefreshToken, token);
+        try
+        {
+            result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.SaveRefreshToken, token);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         if (!result.IsSuccess)
         {
@@ -55,8 +75,17 @@ public class RefreshTokenRepository : IRefreshTokenRepository
     public async Task UpdateTokenAsync(RefreshToken token)
     {
         var dbSetup = _dbContainer.GetSetup(StringClass.JwtSetupDb);
+        SQLResult result;
 
-        var result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.UpdateRefreshToken, token);
+        try
+        {
+            result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.UpdateRefreshToken, token);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         if (!result.IsSuccess)
         {
@@ -67,12 +96,25 @@ public class RefreshTokenRepository : IRefreshTokenRepository
     public async Task<List<RefreshToken>> GetActiveTokensByUserIdAsync(string provider, string userId)
     {
         var dbSetup = _dbContainer.GetSetup(StringClass.JwtSetupDb);
+
         var parameter = new RefreshToken
         {
             Provider = provider,
             UserId = userId
         };
-        var result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.GetActiveTokensByUserId, parameter);
+
+        SQLResult result;
+
+        try
+        {
+            result = await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, JwtProcedure.GetActiveTokensByUserId, parameter);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
         if (result.IsSuccess && result.DataSet?.Tables.Count > 0 && result.DataSet.Tables[0].Rows.Count > 0)
         {
             return result.DataSet.Tables[0].ToObject<RefreshToken>() as List<RefreshToken>;

@@ -64,7 +64,7 @@ public class AuthController : BaseController
             HttpOnly = true,
             Secure = Request.IsHttps,
             SameSite = SameSiteMode.Strict,
-            Expires = DateTime.UtcNow.AddDays(7)
+            Expires = DateTime.Now.AddDays(7)
         };
 
         Response.Cookies.Append(StringClass.RefreshToken, token, cookieOptions);

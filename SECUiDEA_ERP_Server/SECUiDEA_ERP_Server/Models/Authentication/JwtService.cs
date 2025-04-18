@@ -67,6 +67,7 @@ public class JwtService
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, user.ID),  // 사용자 ID 정보
+            new Claim(ClaimTypes.Name, user.Name),          // 사용자 이름 정보
             new Claim(ClaimTypes.Role, user.UserRole)       // 사용자 역할 정보
         };
 
@@ -93,7 +94,7 @@ public class JwtService
             Subject = new ClaimsIdentity(claims),                               // 모든 Claim 정보 추가
             Issuer = _jwtSettings.Issuer,                                       // 토큰 발급자 정보
             Audience = _jwtSettings.Audience,                                   // 토큰 대상자 정보
-            Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiryMinutes),   // 토큰 만료 시간 정보
+            Expires = DateTime.Now.AddMinutes(_jwtSettings.ExpiryMinutes),      // 토큰 만료 시간 정보
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),                                  // 토큰 서명 대칭키
                 SecurityAlgorithms.HmacSha256Signature                 // 토큰 서명 해시 알고리즘
@@ -168,8 +169,8 @@ public class JwtService
         var tokenValue = Convert.ToBase64String(randomBytes);
 
         var expiryDate = rememberMe
-            ? DateTime.UtcNow.AddDays(_jwtSettings.AutoLoginDays)
-            : DateTime.UtcNow.AddHours(_jwtSettings.RefreshTokenDays);
+            ? DateTime.Now.AddDays(_jwtSettings.AutoLoginDays)
+            : DateTime.Now.AddDays(_jwtSettings.RefreshTokenDays);
 
         return new RefreshToken
         {
@@ -177,9 +178,9 @@ public class JwtService
             Token = tokenValue,
             ExpiryDate = expiryDate,
             CreatedByIp = ipAddress,
-            CreatedAt = DateTime.UtcNow,
+            CreatedAt = DateTime.Now,
             SessionId = sessionId,
-            LastActivityDate = DateTime.UtcNow
+            LastActivityDate = DateTime.Now
         };
     }
 

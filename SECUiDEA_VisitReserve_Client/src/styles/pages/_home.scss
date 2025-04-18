@@ -1,0 +1,308 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.home {
+  &__hero {
+    background-color: $primary-color;
+    background-image: linear-gradient(135deg, darken($primary-color, 10%) 0%, $primary-color 100%);
+    color: $light-text;
+    padding: $spacing-xxl 0;
+    margin-bottom: $spacing-xl;
+    
+    @include mobile {
+      padding: $spacing-xl 0;
+    }
+    
+    &-container {
+      @include flex-between;
+      gap: $spacing-xl;
+      
+      @include mobile {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+    }
+    
+    &-content {
+      flex: 1;
+      
+      h1 {
+        font-size: 3rem;
+        font-weight: $font-weight-bold;
+        margin-bottom: $spacing-lg;
+        line-height: 1.2;
+        
+        @include mobile {
+          font-size: 2rem;
+        }
+      }
+      
+      p {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-xl;
+        opacity: 0.9;
+        line-height: 1.6;
+        
+        @include mobile {
+          font-size: $font-size-base;
+        }
+      }
+      
+      .cta-button {
+        @include button($secondary-color);
+        padding: $spacing-md $spacing-xl;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        
+        @include mobile {
+          width: 100%;
+        }
+      }
+    }
+    
+    &-image {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      
+      img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: $box-shadow-lg;
+      }
+      
+      @include mobile {
+        justify-content: center;
+        margin-bottom: $spacing-lg;
+      }
+    }
+  }
+
+  &__features {
+    margin-bottom: $spacing-xxl;
+    
+    &-title {
+      text-align: center;
+      margin-bottom: $spacing-xl;
+      
+      h2 {
+        font-size: $font-size-xxl;
+        color: $primary-color;
+        margin-bottom: $spacing-sm;
+      }
+      
+      p {
+        font-size: $font-size-lg;
+        color: lighten($text-color, 20%);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    }
+    
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-xl;
+      
+      @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @include mobile {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    &-item {
+      @include card;
+      text-align: center;
+      transition: transform $transition-speed $transition-ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+      }
+      
+      .icon {
+        font-size: 3rem;
+        color: $secondary-color;
+        margin-bottom: $spacing-md;
+      }
+      
+      h3 {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-sm;
+      }
+      
+      p {
+        color: lighten($text-color, 20%);
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__stats {
+    background-color: $background-color;
+    padding: $spacing-xl 0;
+    margin-bottom: $spacing-xxl;
+    
+    &-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-lg;
+      
+      @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @include mobile {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    &-item {
+      text-align: center;
+      
+      .number {
+        font-size: 2.5rem;
+        font-weight: $font-weight-bold;
+        color: $primary-color;
+        margin-bottom: $spacing-xs;
+      }
+      
+      .label {
+        font-size: $font-size-base;
+        color: lighten($text-color, 20%);
+      }
+    }
+  }
+
+  &__cta {
+    background-color: $secondary-color;
+    color: $light-text;
+    padding: $spacing-xl 0;
+    margin-bottom: $spacing-xxl;
+    text-align: center;
+    border-radius: 8px;
+    
+    h2 {
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-md;
+    }
+    
+    p {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-xl;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.9;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-md;
+      
+      @include mobile {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn-primary {
+        @include button($primary-color);
+        padding: $spacing-sm $spacing-xl;
+      }
+      
+      .btn-outline {
+        @include button(transparent, $light-text);
+        border: 1px solid $light-text;
+        padding: $spacing-sm $spacing-xl;
+        
+        &:hover {
+          background-color: rgba($light-text, 0.1);
+        }
+      }
+    }
+  }
+
+  &__data-container {
+    @include card;
+    margin-top: $spacing-xl;
+    
+    h2 {
+      color: $primary-color;
+      margin-bottom: $spacing-lg;
+      padding-bottom: $spacing-sm;
+      border-bottom: 1px solid $border-color;
+    }
+    
+    h3 {
+      color: $text-color;
+      margin-bottom: $spacing-md;
+    }
+    
+    ul {
+      list-style: none;
+      
+      li {
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $border-color;
+        @include flex-between;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        &:hover {
+          background-color: lighten($border-color, 5%);
+        }
+      }
+    }
+  }
+  
+  &__user-info {
+    @include card;
+    margin-bottom: $spacing-xl;
+    
+    h2 {
+      margin-bottom: $spacing-md;
+      color: $primary-color;
+    }
+    
+    p {
+      margin-bottom: $spacing-sm;
+      color: $text-color;
+    }
+    
+    .permissions {
+      margin-top: $spacing-md;
+      
+      h3 {
+        font-size: $font-size-base;
+        margin-bottom: $spacing-sm;
+      }
+      
+      ul {
+        background-color: $background-color;
+        border-radius: 4px;
+        padding: $spacing-sm;
+        
+        li {
+          padding: $spacing-xs $spacing-sm;
+          font-size: $font-size-sm;
+          border-bottom: 1px solid $border-color;
+          
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+    
+    .logout-button {
+      @include button($accent-color);
+      margin-top: $spacing-md;
+    }
+  }
+} 

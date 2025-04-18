@@ -1,0 +1,71 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  
+  .login-box {
+    width: 100%;
+    
+    h2 {
+      color: $primary-color;
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-lg;
+      text-align: center;
+    }
+    
+    .error-message {
+      background-color: lighten($error-color, 38%);
+      color: $error-color;
+      padding: $spacing-sm;
+      border-radius: 4px;
+      margin-bottom: $spacing-md;
+      text-align: center;
+      font-size: $font-size-sm;
+    }
+    
+    .form-group {
+      margin-bottom: $spacing-md;
+      
+      label {
+        display: block;
+        margin-bottom: $spacing-xs;
+        font-weight: $font-weight-medium;
+        color: $text-color;
+      }
+      
+      input[type="text"],
+      input[type="password"],
+      input[type="email"] {
+        width: 100%;
+        padding: $spacing-sm;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        font-size: $font-size-base;
+        transition: border-color $transition-speed $transition-ease;
+        
+        &:focus {
+          outline: none;
+          border-color: $secondary-color;
+          box-shadow: 0 0 0 2px rgba($secondary-color, 0.2);
+        }
+      }
+      
+      input[type="checkbox"] {
+        margin-right: $spacing-xs;
+        cursor: pointer;
+      }
+    }
+    
+    button[type="submit"] {
+      @include button($secondary-color);
+      width: 100%;
+      margin-top: $spacing-md;
+      padding: $spacing-md;
+      font-weight: $font-weight-bold;
+    }
+  }
+} 

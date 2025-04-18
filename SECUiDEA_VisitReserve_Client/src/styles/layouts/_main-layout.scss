@@ -1,0 +1,87 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__main {
+    flex: 1;
+    padding: $spacing-xl 0;
+    
+    @include mobile {
+      padding: $spacing-lg 0;
+    }
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    
+    @include mobile {
+      padding: 0 $spacing-md;
+    }
+  }
+
+  &__content {
+    &--with-sidebar {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: $spacing-xl;
+      
+      @include mobile {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &__page-header {
+    margin-bottom: $spacing-xl;
+    
+    h1 {
+      font-size: $font-size-xxl;
+      color: $primary-color;
+      margin-bottom: $spacing-sm;
+      
+      @include mobile {
+        font-size: $font-size-xl;
+      }
+    }
+    
+    p {
+      color: lighten($text-color, 20%);
+      font-size: $font-size-lg;
+      
+      @include mobile {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-sm;
+    color: lighten($text-color, 30%);
+    
+    a {
+      color: lighten($text-color, 30%);
+      
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+    
+    .separator {
+      margin: 0 $spacing-xs;
+    }
+    
+    .current {
+      color: $text-color;
+      font-weight: $font-weight-medium;
+    }
+  }
+} 
