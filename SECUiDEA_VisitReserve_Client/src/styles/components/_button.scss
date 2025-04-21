@@ -17,6 +17,7 @@
   border-radius: $border-radius;
   cursor: pointer;
   transition: all $transition-speed $transition-ease;
+  box-sizing: border-box;
   
   &:disabled {
     opacity: 0.7;
@@ -195,6 +196,7 @@
 // 레이아웃 변형
 .btn-block {
   display: flex;
+  box-sizing: border-box;
   width: 100%;
 }
 
@@ -284,42 +286,6 @@
     &:hover {
       color: darken-color($accent-color, 10%);
       box-shadow: 0 0 10px rgba($accent-color, 0.5), 0 0 20px rgba($accent-color, 0.3);
-    }
-  }
-}
-
-
-.login-btn {
-  @extend .btn;
-  @extend .btn-secondary;
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-medium;
-  letter-spacing: 0.3px;
-}
-
-.logout-btn {
-  @extend .btn;
-  @extend .btn-accent;
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  letter-spacing: 0.3px;
-  
-  @include mobile {
-    width: 32px;
-    height: 32px;
-    padding: $spacing-xs;
-    font-size: 0;
-    border-radius: 50%;
-    
-    &::before {
-      content: '→';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: $font-size-lg;
     }
   }
 }

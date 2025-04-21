@@ -1,6 +1,15 @@
 @import "../../styles/abstracts/variables";
 @import "../../styles/abstracts/mixins";
 
+// mobile-only 클래스 추가 - 데스크톱에서는 숨김
+.mobile-only {
+  display: none;
+  
+  @include mobile {
+    display: block;
+  }
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -14,10 +23,14 @@
   
   &_main {
     flex: 1 0 auto;
-    padding-top: $header-height;
+    padding-top: $spacing-md;
     padding-bottom: $spacing-xl;
     width: 100%;
     box-sizing: border-box;
+    
+    @include mobile {
+      padding-top: $header-height;
+    }
   }
   
   &_container {

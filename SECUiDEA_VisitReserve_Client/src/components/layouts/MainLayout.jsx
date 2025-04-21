@@ -20,7 +20,10 @@ const MainLayout = ({ children }) => {
 
     return (
         <div className="layout">
-            <Header onToggleNav={toggleMobileMenu} />
+            {/* Header는 모바일에서만 사용 */}
+            <div className="mobile-only">
+                <Header onToggleNav={toggleMobileMenu} />
+            </div>
             <Navigation isOpen={mobileMenuOpen} onClose={closeMobileMenu} />
 
             <main className="layout_main">
@@ -40,7 +43,7 @@ const MainLayout = ({ children }) => {
                                     <i>📱</i> 고객지원: 02-123-4567
                                 </div>
                                 <div className="contact-item">
-                                    <i>✉️</i> 이메일: support@visitreserve.com
+                                    <i>✉️</i> 이메일: support@asmk.com
                                 </div>
                             </div>
                         </div>
@@ -50,29 +53,20 @@ const MainLayout = ({ children }) => {
                             <ul>
                                 <li><Link to="/">홈</Link></li>
                                 <li><Link to="/visit-reservation">방문 신청</Link></li>
-                                <li><Link to="/faq">자주 묻는 질문</Link></li>
-                                <li><Link to="/terms">이용약관</Link></li>
                             </ul>
                         </div>
 
                         <div className="footer_links">
                             <h4>리소스</h4>
                             <ul>
-                                <li><Link to="/help">도움말</Link></li>
                                 <li><Link to="/privacy">개인정보처리방침</Link></li>
-                                <li><Link to="/contact">문의하기</Link></li>
                             </ul>
                         </div>
                     </div>
 
                     <div className="footer_bottom">
                         <div className="footer_bottom-copyright">
-                            &copy; {new Date().getFullYear()} 방문 예약 시스템. All rights reserved.
-                        </div>
-                        <div className="footer_bottom-social">
-                            <a href="#" aria-label="페이스북">f</a>
-                            <a href="#" aria-label="인스타그램">i</a>
-                            <a href="#" aria-label="유튜브">y</a>
+                            &copy; {new Date().getFullYear()} SECUiDEA. All rights reserved.
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,6 @@
 @import "../../styles/abstracts/variables";
 @import "../../styles/abstracts/mixins";
 
-
 .navigation {
   position: fixed;
   top: 0;
@@ -49,6 +48,9 @@
   }
 
   &_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: $spacing-md;
     margin-bottom: $spacing-xl;
     
@@ -68,6 +70,17 @@
         font-weight: $font-weight-bold;
       }
     }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  // 로그인/로그아웃 영역 스타일
+  &_auth {
+    margin-bottom: $spacing-lg;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   &_menu {

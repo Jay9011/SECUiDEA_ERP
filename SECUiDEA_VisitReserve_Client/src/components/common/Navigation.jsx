@@ -7,13 +7,23 @@ import './Navigation.scss';
 import Logo from '../../assets/images/Logo.svg';
 
 const Navigation = ({ isOpen, onClose }) => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = useState('');
 
     useEffect(() => {
         setActiveLink(location.pathname);
     }, [location]);
+
+    // 로그아웃 처리 함수
+    const handleLogout = async () => {
+        try {
+            await logout();
+            onClose(); // 로그아웃 후 네비게이션 닫기
+        } catch (error) {
+            console.error("로그아웃 처리 중 오류 발생:", error);
+        }
+    };
 
     // 사용자 권한에 따른 메뉴 필터링 (예시)
     const getMenuItems = () => {
@@ -49,6 +59,23 @@ const Navigation = ({ isOpen, onClose }) => {
                             <img src={Logo} alt="Logo" />
                             <span>방문 예약 시스템</span>
                         </Link>
+                    </div>
+
+                    <div className="navigation_auth">
+                        {user ? (
+                            <button
+                                onClick={handleLogout}
+                                className="navigation_auth-logout">
+                                로그아웃
+                            </button>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="btn btn-block btn-secondary btn-animated"
+                                onClick={onClose}>
+                                로그인
+                            </Link>
+                        )}
                     </div>
 
                     <ul className="navigation_menu">
