@@ -60,6 +60,7 @@ const MainLayout = ({ children }) => {
                             <h4>리소스</h4>
                             <ul>
                                 <li><Link to="/privacy">개인정보처리방침</Link></li>
+                                <li><Link to="/about">About</Link></li>
                             </ul>
                         </div>
                     </div>

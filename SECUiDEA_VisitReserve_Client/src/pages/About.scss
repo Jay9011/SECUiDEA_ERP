@@ -1,0 +1,118 @@
+@import '../styles/abstracts/variables';
+@import '../styles/abstracts/mixins';
+
+.about-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: $spacing-lg 0;
+
+    &_header {
+        margin-bottom: $spacing-xl;
+
+        h1 {
+            margin-bottom: $spacing-sm;
+            font-size: $font-size-xxl;
+            color: $primary-color;
+        }
+
+        p {
+            font-size: $font-size-lg;
+            color: $text-color;
+            opacity: 0.8;
+        }
+    }
+
+    &_section {
+        margin-bottom: $spacing-xl;
+        padding-bottom: $spacing-lg;
+        border-bottom: 1px solid $border-color;
+
+        &:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            font-size: $font-size-xl;
+            color: $primary-color;
+            margin-bottom: $spacing-md;
+        }
+
+        p {
+            margin-bottom: $spacing-md;
+            line-height: 1.6;
+        }
+    }
+
+    .licenses {
+        .license-item {
+            margin-bottom: $spacing-lg;
+
+            h3 {
+                font-size: $font-size-lg;
+                margin-bottom: $spacing-xs;
+            }
+
+            p {
+                margin-bottom: $spacing-xs;
+            }
+
+            a {
+                color: $secondary-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .license-text {
+            background-color: $background-color;
+            padding: $spacing-md;
+            border-radius: $border-radius;
+            font-size: $font-size-sm;
+            color: $text-color;
+            border-left: 4px solid $secondary-color;
+
+            p {
+                margin-bottom: $spacing-xs;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    &_actions {
+        display: flex;
+        margin-top: $spacing-xl;
+        justify-content: center;
+
+        .btn-primary {
+            padding: $spacing-sm $spacing-xl;
+        }
+    }
+
+    @include mobile {
+        padding: $spacing-lg $spacing-md;
+        
+        &_header {
+          h1 {
+            font-size: $font-size-xl;
+          }
+          
+          p {
+            font-size: $font-size-base;
+          }
+        }
+        
+        &_features {
+          grid-template-columns: 1fr;
+        }
+    }
+}

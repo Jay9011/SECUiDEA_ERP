@@ -9,6 +9,7 @@ import ErrorLayout from './components/layouts/ErrorLayout';
 // 페이지
 import Home from './pages/Home';
 import Login from './pages/Login';
+import About from './pages/About';
 import NotFound from './pages/NotFound';
 
 import ProtectedRoute from './components/ProtectedRoute';
@@ -31,21 +32,27 @@ const App = () => {
 
           <Route path="/login"
             element={
-              <AuthLayout>
+              <MainLayout>
                 <Login />
-              </AuthLayout>
+              </MainLayout>
             }
           />
 
-          <Route path="/not-found"
+          <Route path="/about"
+            element={
+              <MainLayout>
+                <About />
+              </MainLayout>
+            }
+          />
+
+          <Route path="*"
             element={
               <ErrorLayout>
                 <NotFound />
               </ErrorLayout>
             }
           />
-
-          <Route path="*" element={<Navigate to="/not-found" />} />
         </Routes>
       </Router>
     </AuthProvider>
