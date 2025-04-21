@@ -1,20 +1,21 @@
-@import './variables';
+@use 'variables';
+@use 'functions';
 
 // 반응형 mixin
 @mixin mobile {
-  @media (max-width: #{$breakpoint-md - 1px}) {
+  @media (max-width: #{variables.$breakpoint-md - 1px}) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg - 1px}) {
+  @media (min-width: #{variables.$breakpoint-md}) and (max-width: #{variables.$breakpoint-lg - 1px}) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: #{$breakpoint-lg}) {
+  @media (min-width: #{variables.$breakpoint-lg}) {
     @content;
   }
 }
@@ -37,29 +38,6 @@
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
   gap: $gap;
-}
-
-// button 스타일
-@mixin button($bg-color: $primary-color, $text-color: $light-text) {
-  display: inline-block;
-  padding: $spacing-sm $spacing-lg;
-  background-color: $bg-color;
-  color: $text-color;
-  border: none;
-  border-radius: 4px;
-  font-weight: $font-weight-medium;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color $transition-speed $transition-ease;
-  
-  &:hover {
-    background-color: darken($bg-color, 10%);
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
 }
 
 // 카드

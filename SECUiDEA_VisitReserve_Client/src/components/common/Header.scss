@@ -1,0 +1,252 @@
+@use "sass:color";
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
+@import "../../styles/components/button";
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 50;
+  width: calc(100% - #{$nav-width});
+  height: $header-height;
+  box-sizing: border-box;
+  box-shadow: $box-shadow;
+  background-color: $light-text;
+  
+  @include mobile {
+    left: 0;
+    width: 100%;
+  }
+
+  &_container {
+    @include flex-between;
+    margin: 0 auto;
+    padding: $spacing-md;
+    max-width: $container-max-width;
+    height: 100%;
+    box-sizing: border-box;
+
+    @include mobile {
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+
+  &_menu-toggle {
+    display: none;
+    position: relative;
+    margin-right: $spacing-md;
+    width: 24px;
+    height: 18px;
+    border: none;
+    cursor: pointer;
+    background: none;
+    
+    @include mobile {
+      display: block;
+    }
+    
+    span {
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $primary-color;
+      transition: all $transition-speed $transition-ease;
+      
+      &:nth-child(1) {
+        top: 0;
+      }
+      
+      &:nth-child(2) {
+        top: 8px;
+      }
+      
+      &:nth-child(3) {
+        top: 16px;
+      }
+    }
+    
+    &.active {
+      span:nth-child(1) {
+        top: 8px;
+        transform: rotate(45deg);
+      }
+      
+      span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      span:nth-child(3) {
+        top: 8px;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &_logo {
+    display: flex;
+    align-items: center;
+    
+    a {
+      display: none;
+      align-items: center;
+      text-decoration: none;
+
+      @include mobile {
+        display: flex;
+      }
+    }
+    
+    img {
+      height: 36px;
+      margin-right: $spacing-sm;
+
+      @include mobile {
+        height: 28px;
+      }
+    }
+
+    h1 {
+      margin: 0;
+      white-space: nowrap;
+      color: $primary-color;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+
+      @include mobile {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  &_actions {
+    @include flex-center;
+    gap: $spacing-md;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      
+      @include mobile {
+        .name {
+          display: none;
+        }
+      }
+      
+      .avatar {
+        @include flex-center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        color: $light-text;
+        background-color: $secondary-color;
+        font-weight: $font-weight-bold;
+      }
+    }
+
+    .logout-btn {
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+      
+      @include mobile {
+        position: relative;
+        padding: $spacing-xs;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        font-size: 0;
+        
+        &::before {
+          content: '→';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: $font-size-lg;
+        }
+      }
+    }
+    
+    .login-btn {
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+    }
+  }
+}
+
+.mobile-nav {
+  display: none;
+  
+  @include mobile-nav;
+  
+  &.open {
+    display: block;
+  }
+  
+  &_container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: $spacing-xl;
+  }
+  
+  &_close {
+    align-self: flex-end;
+    margin-bottom: $spacing-xl;
+    border: none;
+    color: $light-text;
+    background: none;
+    font-size: 24px;
+  }
+  
+  &_menu {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    
+    a {
+      padding: $spacing-sm 0;
+      color: $light-text;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-medium;
+      
+      &.active {
+        color: lighten-color($secondary-color, 20%);
+      }
+    }
+  }
+  
+  &_bottom {
+    margin-top: auto;
+    padding-top: $spacing-xl;
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: $spacing-lg;
+      gap: $spacing-md;
+      color: $light-text;
+      
+      .avatar {
+        @include flex-center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: $light-text;
+        color: $primary-color;
+        font-weight: $font-weight-bold;
+      }
+      
+      .name {
+        font-weight: $font-weight-medium;
+      }
+    }
+    
+    .logout-btn {
+      width: 100%;
+    }
+  }
+} 

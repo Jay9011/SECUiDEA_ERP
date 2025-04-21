@@ -1,0 +1,34 @@
+@use "sass:color";
+
+// 색상 관련 함수
+@function lighten-color($color, $percentage) {
+  @return color.scale($color, $lightness: $percentage);
+}
+
+@function darken-color($color, $percentage) {
+  @return color.scale($color, $lightness: -$percentage);
+}
+
+@function rgba-color($color, $alpha) {
+  @return rgba($color, $alpha);
+}
+
+// 색조 조정 함수
+@function adjust-hue-color($color, $degrees) {
+  @return color.adjust($color, $hue: $degrees);
+}
+
+// 명도 조정 함수
+@function adjust-lightness($color, $amount) {
+  @return color.adjust($color, $lightness: $amount);
+}
+
+// 채도 조정 함수
+@function adjust-saturation($color, $amount) {
+  @return color.adjust($color, $saturation: $amount);
+}
+
+// 색상 혼합 함수
+@function mix-colors($color1, $color2, $weight: 50%) {
+  @return color.mix($color1, $color2, $weight);
+} 

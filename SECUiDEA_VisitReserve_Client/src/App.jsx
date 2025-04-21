@@ -11,6 +11,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 
+import ProtectedRoute from './components/ProtectedRoute';
+
 // 스타일
 import './styles/main.scss';
 
@@ -19,9 +21,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          {/* 메인 레이아웃을 사용하는 페이지 */}
-          <Route
-            path="/"
+          <Route path="/"
             element={
               <MainLayout>
                 <Home />
@@ -29,9 +29,7 @@ const App = () => {
             }
           />
 
-          {/* 인증 레이아웃을 사용하는 페이지 */}
-          <Route
-            path="/login"
+          <Route path="/login"
             element={
               <AuthLayout>
                 <Login />
@@ -39,9 +37,7 @@ const App = () => {
             }
           />
 
-          {/* 에러 레이아웃을 사용하는 페이지 */}
-          <Route
-            path="/not-found"
+          <Route path="/not-found"
             element={
               <ErrorLayout>
                 <NotFound />
@@ -49,7 +45,6 @@ const App = () => {
             }
           />
 
-          {/* 존재하지 않는 경로는 NotFound 페이지로 리디렉션 */}
           <Route path="*" element={<Navigate to="/not-found" />} />
         </Routes>
       </Router>
