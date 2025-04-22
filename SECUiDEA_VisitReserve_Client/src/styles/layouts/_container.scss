@@ -1,0 +1,123 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+@mixin make-container($max-width: $container-max-width, $padding: $spacing-md) {
+    width: 100%;
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $padding;
+    padding-right: $padding;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
+    box-sizing: border-box;
+
+    // 최대 너비 설정
+    &-sm {
+        max-width: 640px;
+    }
+
+    &-md {
+        max-width: 768px;
+    }
+
+    &-lg {
+        max-width: 992px;
+    }
+
+    &-xl {
+        max-width: $container-max-width;
+    }
+
+    &-fluid {
+        max-width: 100%;
+    }
+
+    // 패딩 변형
+    &-p {
+        &-xs {
+            padding-left: $spacing-xs;
+            padding-right: $spacing-xs;
+        }
+
+        &-sm {
+            padding-left: $spacing-sm;
+            padding-right: $spacing-sm;
+        }
+
+        &-md {
+            padding-left: $spacing-md;
+            padding-right: $spacing-md;
+        }
+
+        &-lg {
+            padding-left: $spacing-lg;
+            padding-right: $spacing-lg;
+        }
+
+        &-xl {
+            padding-left: $spacing-xl;
+            padding-right: $spacing-xl;
+        }
+    }
+
+    // 반응형 조정
+    @include mobile {
+        padding-left: $spacing-sm;
+        padding-right: $spacing-sm;
+    }
+}
+
+.section {
+    padding-top: $spacing-xl;
+    padding-bottom: $spacing-xl;
+    width: 100%;
+
+    &-sm {
+        padding-top: $spacing-md;
+        padding-bottom: $spacing-md;
+    }
+
+    &-md {
+        padding-top: $spacing-lg;
+        padding-bottom: $spacing-lg;
+    }
+
+    &-lg {
+        padding-top: $spacing-xl;
+        padding-bottom: $spacing-xl;
+    }
+
+    &-xl {
+        padding-top: $spacing-xxl;
+        padding-bottom: $spacing-xxl;
+    }
+
+    // 배경 색상 변형
+    &-primary {
+        background-color: $primary-color;
+        color: $light-text;
+    }
+
+    &-secondary {
+        background-color: $secondary-color;
+        color: $light-text;
+    }
+
+    &-light {
+        background-color: $background-color;
+        color: $text-color;
+    }
+
+    &-dark {
+        background-color: darken-color($primary-color, 10%);
+        color: $light-text;
+    }
+}

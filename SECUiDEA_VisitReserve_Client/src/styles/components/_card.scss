@@ -1,0 +1,184 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+@import "../abstracts/functions";
+
+.card {
+    background-color: $light-text;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow;
+    padding: $spacing-lg;
+    transition: all $transition-speed $transition-ease;
+    overflow: hidden;
+
+    &-hover {
+        &:hover {
+            box-shadow: $box-shadow-lg;
+            transform: translateY(-2px);
+        }
+    }
+
+    // 크기
+    &-sm {
+        padding: $spacing-sm;
+    }
+
+    &-md {
+        padding: $spacing-md;
+    }
+
+    &-lg {
+        padding: $spacing-lg;
+    }
+
+    &-xl {
+        padding: $spacing-xl;
+    }
+
+    // 테두리
+    &-border {
+        border: 1px solid $border-color;
+
+        &-top {
+            border-top: 3px solid $primary-color;
+        }
+
+        &-left {
+            border-left: 3px solid $primary-color;
+        }
+
+        &-primary {
+            border-color: $primary-color;
+        }
+
+        &-secondary {
+            border-color: $secondary-color;
+        }
+
+        &-success {
+            border-color: $success-color;
+        }
+
+        &-warning {
+            border-color: $warning-color;
+        }
+
+        &-danger {
+            border-color: $error-color;
+        }
+    }
+
+    // 컬러
+    &-primary {
+        background-color: $primary-color;
+        color: $light-text;
+    }
+
+    &-secondary {
+        background-color: $secondary-color;
+        color: $light-text;
+    }
+
+    &-success {
+        background-color: $success-color;
+        color: $light-text;
+    }
+
+    &-warning {
+        background-color: $warning-color;
+        color: $light-text;
+    }
+
+    &-danger {
+        background-color: $error-color;
+        color: $light-text;
+    }
+
+    &-light {
+        background-color: $background-color;
+    }
+
+    // 카드 구조
+    &-header {
+        margin: -$spacing-lg;
+        margin-bottom: $spacing-md;
+        padding: $spacing-md $spacing-lg;
+        border-bottom: 1px solid $border-color;
+        background-color: rgba($primary-color, 0.05);
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+        }
+
+        &-primary {
+            background-color: $primary-color;
+            color: $light-text;
+        }
+
+        &-secondary {
+            background-color: $secondary-color;
+            color: $light-text;
+        }
+
+        &-success {
+            background-color: $success-color;
+            color: $light-text;
+        }
+    }
+
+    &-body {
+        padding: $spacing-md 0;
+    }
+
+    &-footer {
+        margin: -$spacing-lg;
+        margin-top: $spacing-md;
+        padding: $spacing-md $spacing-lg;
+        border-top: 1px solid $border-color;
+        background-color: rgba($primary-color, 0.02);
+    }
+
+    // 카드 내부 타이틀
+    &-title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        margin-top: 0;
+        margin-bottom: $spacing-sm;
+    }
+
+    &-subtitle {
+        font-size: $font-size-base;
+        color: rgba($text-color, 0.7);
+        margin-top: -$spacing-sm;
+        margin-bottom: $spacing-md;
+    }
+}
+
+// 미리 정의된 카드 스타일
+.info-card {
+    @extend .card;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: $spacing-xl;
+
+    &-icon {
+        margin-bottom: $spacing-md;
+    }
+
+    h3 {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        margin: 0 0 $spacing-sm 0;
+    }
+
+    p {
+        margin: 0;
+        color: rgba($text-color, 0.8);
+    }
+}

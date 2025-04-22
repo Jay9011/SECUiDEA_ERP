@@ -1,0 +1,124 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+@import "../abstracts/functions";
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+
+    // 기본 상태 타입
+    &--approved,
+    &--success {
+        background-color: rgba($success-color, 0.1);
+        color: $success-color;
+    }
+
+    &--pending,
+    &--warning {
+        background-color: rgba($warning-color, 0.1);
+        color: $warning-color;
+    }
+
+    &--rejected,
+    &--danger,
+    &--error {
+        background-color: rgba($error-color, 0.1);
+        color: $error-color;
+    }
+
+    &--inactive,
+    &--disabled {
+        background-color: rgba($text-color, 0.1);
+        color: rgba($text-color, 0.7);
+    }
+
+    &--info {
+        background-color: rgba($secondary-color, 0.1);
+        color: $secondary-color;
+    }
+
+    // 크기
+    &-sm {
+        padding: 0.15em 0.4em;
+        font-size: calc($font-size-sm * 0.85);
+    }
+
+    &-md {
+        padding: 0.25em 0.6em;
+        font-size: $font-size-sm;
+    }
+
+    &-lg {
+        padding: 0.35em 0.8em;
+        font-size: $font-size-base;
+    }
+
+    // 아이콘이 있는 경우
+    &-with-icon {
+        svg,
+        i {
+            margin-right: $spacing-xs;
+        }
+    }
+
+    // 도트 표시기
+    &-dot {
+        position: relative;
+        padding-left: 1.2em;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0.4em;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            background-color: currentColor;
+        }
+    }
+
+    // 형태
+    &-rounded {
+        border-radius: $border-radius;
+    }
+
+    &-pill {
+        border-radius: 50px;
+        padding-left: 0.8em;
+        padding-right: 0.8em;
+    }
+
+    &-bordered {
+        border: 1px solid currentColor;
+        background-color: transparent;
+    }
+}
+
+// 추가 상태
+.visit-item_status {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    padding: 4px $spacing-sm;
+    border-radius: $border-radius;
+
+    &--approved {
+        @extend .status-indicator--approved;
+    }
+
+    &--pending {
+        @extend .status-indicator--pending;
+    }
+
+    &--rejected {
+        @extend .status-indicator--rejected;
+    }
+
+    &--canceled {
+        background-color: rgba($text-color, 0.1);
+        color: rgba($text-color, 0.7);
+    }
+}

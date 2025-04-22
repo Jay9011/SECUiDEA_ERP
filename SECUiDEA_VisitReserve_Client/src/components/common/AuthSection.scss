@@ -1,0 +1,65 @@
+.auth-section {
+  margin: 1rem 0;
+  
+  .user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      background-color: rgba(0, 0, 0, 0.05);
+      width: 100%;
+      
+      .avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: var(--primary-color, #4a6cf7);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      
+      .user-details {
+        display: flex;
+        flex-direction: column;
+        
+        .name {
+          font-weight: 600;
+          font-size: 0.9rem;
+        }
+        
+        .role {
+          font-size: 0.8rem;
+          color: var(--body-color, #637381);
+        }
+      }
+    }
+    
+    .logout-btn {
+      padding: 0.5rem 1rem;
+      background-color: transparent;
+      border: 1px solid #e74c3c;
+      color: #e74c3c;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      
+      &:hover {
+        background-color: #e74c3c;
+        color: white;
+      }
+    }
+  }
+} 

@@ -1,0 +1,24 @@
+@import "../../styles/abstracts/variables";
+@import "../../styles/components/card";
+
+.process-card {
+    @extend .card;
+    position: relative;
+
+    &::before {
+        content: attr(data-step);
+        position: absolute;
+        top: $spacing-sm;
+        right: $spacing-sm;
+        width: 24px;
+        height: 24px;
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+    }
+}

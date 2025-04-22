@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@smithery/cli": "^1.1.71"
+    "@smithery/cli": "^1.1.71",
+    "lucide-react": "^0.503.0"
   }
 }

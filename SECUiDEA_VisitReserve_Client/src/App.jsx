@@ -14,9 +14,6 @@ import NotFound from './pages/NotFound';
 
 import ProtectedRoute from './components/ProtectedRoute';
 
-// 스타일
-import './styles/main.scss';
-
 const App = () => {
   return (
     <AuthProvider>

@@ -1,0 +1,168 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+@import "../abstracts/functions";
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25em 0.5em;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    line-height: 1;
+    border-radius: $border-radius;
+    white-space: nowrap;
+
+    // 크기
+    &-xs {
+        font-size: calc($font-size-sm * 0.85);
+        padding: 0.15em 0.4em;
+    }
+
+    &-sm {
+        font-size: $font-size-sm;
+        padding: 0.25em 0.5em;
+    }
+
+    &-md {
+        font-size: $font-size-base;
+        padding: 0.25em 0.6em;
+    }
+
+    &-lg {
+        font-size: $font-size-lg;
+        padding: 0.3em 0.7em;
+    }
+
+    // 색상
+    &-primary {
+        background-color: $primary-color;
+        color: $light-text;
+    }
+
+    &-secondary {
+        background-color: $secondary-color;
+        color: $light-text;
+    }
+
+    &-success {
+        background-color: $success-color;
+        color: $light-text;
+    }
+
+    &-warning {
+        background-color: $warning-color;
+        color: $light-text;
+    }
+
+    &-danger {
+        background-color: $error-color;
+        color: $light-text;
+    }
+
+    // 불투명도 있는 배경
+    &-light {
+        &-primary {
+            background-color: rgba($primary-color, 0.1);
+            color: $primary-color;
+        }
+
+        &-secondary {
+            background-color: rgba($secondary-color, 0.1);
+            color: $secondary-color;
+        }
+
+        &-success {
+            background-color: rgba($success-color, 0.1);
+            color: $success-color;
+        }
+
+        &-warning {
+            background-color: rgba($warning-color, 0.1);
+            color: $warning-color;
+        }
+
+        &-danger {
+            background-color: rgba($error-color, 0.1);
+            color: $error-color;
+        }
+    }
+
+    // 아웃라인 스타일
+    &-outline {
+        background-color: transparent;
+        border: 1px solid currentColor;
+
+        &-primary {
+            color: $primary-color;
+        }
+
+        &-secondary {
+            color: $secondary-color;
+        }
+
+        &-success {
+            color: $success-color;
+        }
+
+        &-warning {
+            color: $warning-color;
+        }
+
+        &-danger {
+            color: $error-color;
+        }
+    }
+
+    // 형태 변형
+    &-rounded {
+        border-radius: 30px;
+    }
+
+    &-pill {
+        border-radius: 50px;
+        padding-left: 0.8em;
+        padding-right: 0.8em;
+    }
+
+    // 뱃지 내 아이콘
+    svg,
+    i {
+        margin-right: 0.3em;
+
+        &:only-child {
+            margin-right: 0;
+        }
+    }
+
+    // 포지셔닝 유틸리티
+    &-position {
+        position: absolute;
+
+        &-top-right {
+            top: -0.5em;
+            right: -0.5em;
+        }
+
+        &-top-left {
+            top: -0.5em;
+            left: -0.5em;
+        }
+
+        &-bottom-right {
+            bottom: -0.5em;
+            right: -0.5em;
+        }
+
+        &-bottom-left {
+            bottom: -0.5em;
+            left: -0.5em;
+        }
+    }
+
+    // 뱃지가 포함된 컨테이너
+    &-container {
+        position: relative;
+        display: inline-block;
+    }
+}

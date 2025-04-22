@@ -1,29 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 import { useAuth } from "../../context/AuthContext";
 
+// 컴포넌트
+import AuthSection from "./AuthSection";
+// 스타일
 import './Navigation.scss';
-
+// 리소스
 import Logo from '../../assets/images/Logo.svg';
 
 const Navigation = ({ isOpen, onClose }) => {
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = useState('');
 
     useEffect(() => {
         setActiveLink(location.pathname);
     }, [location]);
-
-    // 로그아웃 처리 함수
-    const handleLogout = async () => {
-        try {
-            await logout();
-            onClose(); // 로그아웃 후 네비게이션 닫기
-        } catch (error) {
-            console.error("로그아웃 처리 중 오류 발생:", error);
-        }
-    };
 
     // 사용자 권한에 따른 메뉴 필터링 (예시)
     const getMenuItems = () => {
@@ -62,20 +56,7 @@ const Navigation = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="navigation_auth">
-                        {user ? (
-                            <button
-                                onClick={handleLogout}
-                                className="navigation_auth-logout">
-                                로그아웃
-                            </button>
-                        ) : (
-                            <Link
-                                to="/login"
-                                className="btn btn-block btn-secondary btn-animated"
-                                onClick={onClose}>
-                                로그인
-                            </Link>
-                        )}
+                        <AuthSection onClose={onClose} />
                     </div>
 
                     <ul className="navigation_menu">
@@ -91,20 +72,6 @@ const Navigation = ({ isOpen, onClose }) => {
                             </li>
                         ))}
                     </ul>
-
-                    {user && (
-                        <div className="navigation_user">
-                            <div className="user-info">
-                                <div className="avatar">
-                                    {user.userName ? user.userName.charAt(0) : user.id.charAt(0)}
-                                </div>
-                                <div className="user-details">
-                                    <span className="name">{user.userName || user.id}</span>
-                                    <span className="role">{user.userRole || user.role || '일반 사용자'}</span>
-                                </div>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </nav>
 

@@ -1,0 +1,43 @@
+@import "../../styles/abstracts/variables";
+@import "../../styles/components/card";
+
+.visit-card {
+    @extend .card;
+    box-shadow: $box-shadow;
+    padding: 0;
+    max-width: 400px;
+    width: 100%;
+
+    &_header {
+        @extend .card-header;
+        @extend .card-header-primary;
+        margin: 0;
+    }
+
+    &_body {
+        padding: $spacing-lg;
+    }
+
+    &_more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $secondary-color;
+        text-decoration: none;
+        font-weight: $font-weight-medium;
+        padding: $spacing-md 0 0;
+
+        svg {
+            margin-left: $spacing-xs;
+            transition: transform $transition-speed $transition-ease;
+        }
+
+        &:hover {
+            color: darken-color($secondary-color, 15%);
+
+            svg {
+                transform: translateX(4px);
+            }
+        }
+    }
+}

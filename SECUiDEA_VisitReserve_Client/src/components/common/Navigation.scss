@@ -76,7 +76,6 @@
     }
   }
 
-  // 로그인/로그아웃 영역 스타일
   &_auth {
     margin-bottom: $spacing-lg;
     padding: $spacing-sm 0;
@@ -102,44 +101,6 @@
         &:hover, &.active {
           background-color: rgba(255, 255, 255, 0.1);
           color: $light-text;
-        }
-      }
-    }
-  }
-
-  &_user {
-    margin-top: auto;
-    padding-top: $spacing-md;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    
-    .user-info {
-      display: flex;
-      align-items: center;
-      
-      .avatar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: $spacing-sm;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.2);
-        font-weight: $font-weight-bold;
-      }
-      
-      .user-details {
-        display: flex;
-        flex-direction: column;
-        
-        .name {
-          font-weight: $font-weight-bold;
-          margin-bottom: 4px;
-        }
-        
-        .role {
-          font-size: $font-size-sm;
-          opacity: 0.7;
         }
       }
     }

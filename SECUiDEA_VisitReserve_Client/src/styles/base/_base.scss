@@ -1,5 +1,5 @@
-@import '../abstracts/variables';
-@import '../abstracts/functions';
+@import "../abstracts/variables";
+@import "../abstracts/functions";
 
 html {
   width: 100%;
@@ -22,7 +22,7 @@ a {
   color: $secondary-color;
   text-decoration: none;
   transition: color $transition-speed $transition-ease;
-  
+
   &:not(.btn):hover {
     color: darken-color($secondary-color, 15%);
   }
@@ -39,13 +39,14 @@ textarea {
 
 button {
   cursor: pointer;
-  
+
   &:disabled {
     cursor: not-allowed;
   }
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -54,7 +55,12 @@ img {
   height: auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: $spacing-md;
   font-weight: $font-weight-bold;
   line-height: 1.2;
@@ -64,60 +70,115 @@ p {
   margin-bottom: $spacing-md;
 }
 
+// 레이아웃
+.mb {
+  &-sm {
+    margin-bottom: $spacing-sm;
+  }
+
+  &-lg {
+    margin-bottom: $spacing-lg;
+  }
+
+  &-xl {
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.mt {
+  &-sm {
+    margin-top: $spacing-sm;
+  }
+
+  &-lg {
+    margin-top: $spacing-lg;
+  }
+
+  &-xl {
+    margin-top: $spacing-xl;
+  }
+}
+
+// 텍스트
+.text-white {
+  color: $light-text !important;
+}
+
+.text-primary {
+  color: $primary-color !important;
+}
+
+.text-secondary {
+  color: $secondary-color !important;
+}
+
+.text-accent {
+  color: $accent-color !important;
+}
+
+.text-error {
+  color: $error-color !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
 @font-face {
-  font-family: 'NotoSans';
-  src: url('/fonts/NotoSans-Regular.otf') format('opentype');
+  font-family: "NotoSans";
+  src: url("/fonts/NotoSans-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NotoSans';
-  src: url('/fonts/NotoSans-Light.otf') format('opentype');
+  font-family: "NotoSans";
+  src: url("/fonts/NotoSans-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NotoSans';
-  src: url('/fonts/NotoSans-Medium.otf') format('opentype');
+  font-family: "NotoSans";
+  src: url("/fonts/NotoSans-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NotoSans';
-  src: url('/fonts/NotoSans-Bold.otf') format('opentype');
+  font-family: "NotoSans";
+  src: url("/fonts/NotoSans-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NanumGothic';
-  src: url('/fonts/NanumGothic.eot');
-  src: url('/fonts/NanumGothic.woff') format('woff'),
-       url('/fonts/NanumGothic-Regular.ttf') format('truetype');
+  font-family: "NanumGothic";
+  src: url("/fonts/NanumGothic.eot");
+  src:
+    url("/fonts/NanumGothic.woff") format("woff"),
+    url("/fonts/NanumGothic-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NanumGothic';
-  src: url('/fonts/NanumGothic-Bold.ttf') format('truetype');
+  font-family: "NanumGothic";
+  src: url("/fonts/NanumGothic-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'NanumGothic';
-  src: url('/fonts/NanumGothic-ExtraBold.ttf') format('truetype');
+  font-family: "NanumGothic";
+  src: url("/fonts/NanumGothic-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
-} 
+}

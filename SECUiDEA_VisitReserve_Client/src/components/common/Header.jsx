@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 
+// 스타일
 import './Header.scss';
 
+// 리소스
 import Logo from '../../assets/images/Logo.svg';
 
 const Header = ({ onToggleNav }) => {
