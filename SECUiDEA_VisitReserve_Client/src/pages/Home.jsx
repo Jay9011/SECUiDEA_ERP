@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Calendar, User, FileText, CheckCircle, ChevronRight } from "lucide-react"
+import { useState } from "react";
 
 // 컴포넌트
 import { ProcessSteps } from "../components/steps/ProcessStep";
@@ -14,6 +15,7 @@ import '../styles/components/_icon-circle.scss';
 import './Home.scss';
 
 const Home = () => {
+    const [videoError, setVideoError] = useState(false);
 
     const processSteps = [
         {
@@ -36,8 +38,28 @@ const Home = () => {
         }
     ];
 
+    const handleVideoError = () => {
+        setVideoError(true);
+    };
+
     return (
         <div className="home">
+            <div className={`video-background ${videoError ? 'video-error' : ''}`}>
+                {!videoError && (
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        onError={handleVideoError}
+                    >
+                        <source src="/videos/background.mp4" type="video/mp4" />
+                        브라우저가 비디오 태그를 지원하지 않습니다.
+                    </video>
+                )}
+                <div className="video-overlay"></div>
+            </div>
+
             <section className="hero-section section">
                 <div className="container container-xl text-center">
                     <div className="content-wrapper">
