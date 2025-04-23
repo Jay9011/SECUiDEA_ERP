@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import LogoComponent from "./Logo";
 
 // 스타일
 import './Header.scss';
 
-// 리소스
-import Logo from '../../assets/images/Logo.svg';
-
-const Header = ({ onToggleNav }) => {
+const Header = React.memo(({ onToggleNav }) => {
     return (
         <header className="header">
             <div className="header_container">
@@ -19,12 +17,11 @@ const Header = ({ onToggleNav }) => {
                 </div>
 
                 <div className="header_center">
-                    <div className="header_logo">
-                        <Link to="/">
-                            <img src={Logo} alt="Logo" />
-                            <h1>방문 예약 시스템</h1>
-                        </Link>
-                    </div>
+                    <LogoComponent
+                        className="header_logo"
+                        textComponent="h1"
+                        textContent="방문 예약 시스템"
+                    />
                 </div>
 
                 <div className="header_right">
@@ -33,6 +30,6 @@ const Header = ({ onToggleNav }) => {
             </div>
         </header>
     );
-};
+});
 
-export default Header;
+export default React.memo(Header);

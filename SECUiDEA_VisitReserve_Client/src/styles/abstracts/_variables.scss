@@ -6,13 +6,15 @@ $accent-color: #e74c3c;
 $background-color: #f8f9fa;
 $text-color: #333333;
 $light-text: #ffffff;
+$text-primary: #333333;
+$text-secondary: #666666;
 $border-color: #e1e4e8;
 $success-color: #2ecc71;
 $warning-color: #f39c12;
 $error-color: #e74c3c;
 
 // 폰트
-$font-family-sans: 'NotoSans', 'NanumGothic', sans-serif;
+$font-family-sans: "NotoSans", "NanumGothic", sans-serif;
 $font-size-base: 16px;
 $font-size-sm: 14px;
 $font-size-lg: 18px;
@@ -43,7 +45,7 @@ $box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 
 // 애니메이션
 $transition-speed: 0.3s;
-$transition-ease: ease-in-out; 
+$transition-ease: ease-in-out;
 
 // 모서리
 $border-radius: 4px;

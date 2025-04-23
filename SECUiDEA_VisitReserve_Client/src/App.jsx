@@ -2,9 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 
 // 레이아웃
-import MainLayout from './components/layouts/MainLayout';
-import AuthLayout from './components/layouts/AuthLayout';
-import ErrorLayout from './components/layouts/ErrorLayout';
+import VideoLayout from './components/layouts/VideoLayout';
+import BaseLayout from './components/layouts/BaseLayout';
 
 // 페이지
 import Home from './pages/Home';
@@ -19,37 +18,17 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/"
-            element={
-              <MainLayout>
-                <Home />
-              </MainLayout>
-            }
-          />
+          {/* 동영상 배경이 있는 레이아웃 */}
+          <Route element={<VideoLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
 
-          <Route path="/login"
-            element={
-              <MainLayout>
-                <Login />
-              </MainLayout>
-            }
-          />
-
-          <Route path="/about"
-            element={
-              <MainLayout>
-                <About />
-              </MainLayout>
-            }
-          />
-
-          <Route path="*"
-            element={
-              <ErrorLayout>
-                <NotFound />
-              </ErrorLayout>
-            }
-          />
+          {/* 기본 배경의 레이아웃 */}
+          <Route element={<BaseLayout className="standard-layout" />}>
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </Router>
     </AuthProvider>

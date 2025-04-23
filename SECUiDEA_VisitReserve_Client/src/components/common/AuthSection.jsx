@@ -1,10 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 // 스타일
 import './AuthSection.scss';
 
-const AuthSection = ({ onClose }) => {
+const AuthSection = React.memo(({ onClose }) => {
     const { user, logout } = useAuth();
 
     // 로그아웃 처리 함수
@@ -46,6 +47,6 @@ const AuthSection = ({ onClose }) => {
             )}
         </div>
     );
-};
+});
 
 export default AuthSection; 

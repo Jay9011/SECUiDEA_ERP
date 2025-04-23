@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Mail, Lock, User } from 'lucide-react';
+
+import './Login.scss';
 
 const Login = () => {
     const [userId, setUserId] = useState('');
@@ -55,45 +58,67 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <div className="login-box">
-                <h2>로그인</h2>
-                {error && <div className="error-message">{error}</div>}
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="userId">사용자 ID</label>
-                        <input
-                            type="text"
-                            id="userId"
-                            value={userId}
-                            onChange={(e) => setUserId(e.target.value)}
-                            required
-                        />
+        <div className="login-page">
+            <div className="login-container">
+                <div className="login-box">
+                    <div className="login-logo">
+                        <User size={40} />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="password">비밀번호</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>
+                    <h2>방문 예약 시스템</h2>
+                    <p className="login-subtitle">계정에 로그인하세요</p>
+
+                    {error && <div className="error-message">{error}</div>}
+
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <div className="input-icon">
+                                <Mail size={20} />
+                            </div>
                             <input
-                                type="checkbox"
-                                checked={rememberMe}
-                                onChange={(e) => setRememberMe(e.target.checked)}
+                                type="text"
+                                id="userId"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                                placeholder="사용자 ID"
+                                required
                             />
-                            자동 로그인
-                        </label>
-                    </div>
-                    <button type="submit" disabled={loading}>
-                        {loading ? '로그인 중...' : '로그인'}
-                    </button>
-                </form>
+                        </div>
+
+                        <div className="form-group">
+                            <div className="input-icon">
+                                <Lock size={20} />
+                            </div>
+                            <input
+                                type="password"
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="비밀번호"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-options">
+                            <label className="remember-me">
+                                <input
+                                    type="checkbox"
+                                    checked={rememberMe}
+                                    onChange={(e) => setRememberMe(e.target.checked)}
+                                />
+                                <span>자동 로그인</span>
+                            </label>
+                            <a href="#" className="forgot-password">비밀번호 찾기</a>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="login-btn"
+                            disabled={loading}
+                        >
+                            {loading ? '로그인 중...' : '로그인'}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );

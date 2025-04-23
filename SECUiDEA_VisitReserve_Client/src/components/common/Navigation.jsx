@@ -1,16 +1,29 @@
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 // 컴포넌트
 import AuthSection from "./AuthSection";
+import LogoComponent from "./Logo";
+
 // 스타일
 import './Navigation.scss';
-// 리소스
-import Logo from '../../assets/images/Logo.svg';
 
-const Navigation = ({ isOpen, onClose }) => {
+// 개별 메뉴 아이템 컴포넌트
+const MenuItem = React.memo(({ item, isActive, onClick }) => (
+    <li>
+        <Link
+            to={item.path}
+            className={isActive ? 'active' : ''}
+            onClick={onClick}
+        >
+            {item.label}
+        </Link>
+    </li>
+));
+
+const Navigation = React.memo(({ isOpen, onClose }) => {
     const { user } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = useState('');
@@ -19,8 +32,8 @@ const Navigation = ({ isOpen, onClose }) => {
         setActiveLink(location.pathname);
     }, [location]);
 
-    // 사용자 권한에 따른 메뉴 필터링 (예시)
-    const getMenuItems = () => {
+    // 사용자 권한에 따른 메뉴 필터링
+    const menuItems = useMemo(() => {
         const baseMenu = [
             { path: '/', label: '홈' },
             { path: '/visit-reservation', label: '방문 예약' },
@@ -29,16 +42,15 @@ const Navigation = ({ isOpen, onClose }) => {
 
         // 관리자인 경우 추가 메뉴
         if (user && user.role === 'admin') {
-            baseMenu.push(
+            return [
+                ...baseMenu,
                 { path: '/admin/dashboard', label: '관리자 대시보드' },
                 { path: '/admin/users', label: '사용자 관리' }
-            );
+            ];
         }
 
         return baseMenu;
-    };
-
-    const menuItems = getMenuItems();
+    }, [user]);
 
     return (
         <>
@@ -48,12 +60,12 @@ const Navigation = ({ isOpen, onClose }) => {
                         &times;
                     </button>
 
-                    <div className="navigation_logo">
-                        <Link to="/" onClick={onClose}>
-                            <img src={Logo} alt="Logo" />
-                            <span>방문 예약 시스템</span>
-                        </Link>
-                    </div>
+                    <LogoComponent
+                        className="navigation_logo"
+                        onClick={onClose}
+                        textComponent="span"
+                        textContent="방문 예약 시스템"
+                    />
 
                     <div className="navigation_auth">
                         <AuthSection onClose={onClose} />
@@ -61,15 +73,12 @@ const Navigation = ({ isOpen, onClose }) => {
 
                     <ul className="navigation_menu">
                         {menuItems.map((item) => (
-                            <li key={item.path}>
-                                <Link
-                                    to={item.path}
-                                    className={activeLink === item.path ? 'active' : ''}
-                                    onClick={onClose}
-                                >
-                                    {item.label}
-                                </Link>
-                            </li>
+                            <MenuItem
+                                key={item.path}
+                                item={item}
+                                isActive={activeLink === item.path}
+                                onClick={onClose}
+                            />
                         ))}
                     </ul>
                 </div>
@@ -82,6 +91,6 @@ const Navigation = ({ isOpen, onClose }) => {
             ></div>
         </>
     );
-};
+});
 
-export default Navigation; 
+export default React.memo(Navigation); 
