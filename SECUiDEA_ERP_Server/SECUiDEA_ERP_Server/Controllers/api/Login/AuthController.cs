@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SECUiDEA_ERP_Server.Controllers.BaseControllers;
+using SECUiDEA_ERP_Server.Models.Authentication;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
 
 namespace SECUiDEA_ERP_Server.Controllers.api.Login;
 
 [Route("api/[controller]/[action]")]
-public class AuthController : BaseController
+public class AuthController : JwtController
 {
     #region 의존 주입
 
     private readonly UserAuthService _authService;
 
-    public AuthController(UserAuthService authService)
+    public AuthController(UserAuthService authService, JwtService jwtService) : base(jwtService)
     {
         _authService = authService;
     }
@@ -21,10 +23,26 @@ public class AuthController : BaseController
     [HttpPost]
     public async Task<IActionResult> RefreshToken()
     {
-        var refreshToken = Request.Cookies[StringClass.RefreshToken];
+        // 우선, 쿠키에서 토큰 확인
+        string? refreshToken = Request.Cookies[StringClass.RefreshToken];
+
+        // 쿠키에 없으면 요청 헤더나 본문에서 확인
+        if (string.IsNullOrEmpty(refreshToken) && Request.Headers.TryGetValue(StringClass.HXRefreshToken, out var headerToken))
+        {
+            refreshToken = headerToken;
+        }
+        else if (string.IsNullOrEmpty(refreshToken))
+        {
+            var requestBody = await GetRequestBodyAsync();
+            if (requestBody != null && requestBody.TryGetValue(StringClass.RefreshToken, out var bodyToken))
+            {
+                refreshToken = bodyToken?.ToString();
+            }
+        }
+
         if (string.IsNullOrEmpty(refreshToken))
         {
-            return Unauthorized(new { message = "Refresh token is missing" });
+            return Unauthorized(new { message = "Refresh token is required" });
         }
 
         string ipAddress = GetClientIpAddress();
@@ -37,7 +55,11 @@ public class AuthController : BaseController
             return Unauthorized(new { message = "Invalid refresh token" });
         }
 
-        SetRefreshTokenCookie(tokenResponse.RefreshToken);
+        // 브라우저 환경에서만 쿠키 설정
+        if (IsBrowserClient(Request))
+        {
+            SetRefreshTokenCookie(tokenResponse.RefreshToken, false, tokenResponse.ExpiryDate);
+        }
 
         return Ok(tokenResponse);
     }
@@ -55,18 +77,5 @@ public class AuthController : BaseController
 
         Response.Cookies.Delete(StringClass.RefreshToken);
         return Ok(new { message = "Logged out successfully" });
-    }
-
-    private void SetRefreshTokenCookie(string token)
-    {
-        var cookieOptions = new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = Request.IsHttps,
-            SameSite = SameSiteMode.Strict,
-            Expires = DateTime.Now.AddDays(7)
-        };
-
-        Response.Cookies.Append(StringClass.RefreshToken, token, cookieOptions);
     }
 }

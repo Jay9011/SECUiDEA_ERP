@@ -18,4 +18,7 @@ public class User
     public string Name { get; set; } = "Unknown";
     public string UserRole { get; set; }
     public List<Permission> Permissions { get; set; } = new List<Permission>();
+
+    public bool EnableSessionTimeout { get; set; } = false;
+    public int? SessionTimeoutMinutes { get; set; } = null;
 }

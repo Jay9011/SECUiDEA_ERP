@@ -89,8 +89,8 @@ public class Program
 
         // 로그인 기능
         builder.Services.AddSingleton<IRefreshTokenRepository, RefreshTokenRepository>();
-        builder.Services.AddSingleton<UserAuthService>();
         builder.Services.AddSingleton<UserRepositoryFactory>();
+        builder.Services.AddSingleton<UserAuthService>();
 
 
         /* ================================================

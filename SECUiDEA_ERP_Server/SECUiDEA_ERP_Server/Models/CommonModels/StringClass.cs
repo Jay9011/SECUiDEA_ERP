@@ -8,6 +8,9 @@ public static class StringClass
 
     public static readonly string SECUiDEAJWT = Path.Combine(SECUiDEARegistry, "JWT");
 
+    // 헤더 관련
+    public const string HXRefreshToken = "X-Refresh-Token";
+
     // 인증 관련
     public const string Permission = "Permission";
     public const string JwtSettings = "JwtSettings";

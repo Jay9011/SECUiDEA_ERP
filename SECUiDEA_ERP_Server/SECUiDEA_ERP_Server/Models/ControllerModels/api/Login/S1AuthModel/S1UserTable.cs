@@ -39,5 +39,13 @@ namespace SECUiDEA_ERP_Server.Models.ControllerModels.api.Login.S1AuthModel
         /// </summary>
         [JsonProperty("LastLoginDate", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime LastLogin { get; set; }
+
+        /// <summary>
+        /// 세션 타임아웃 설정
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public bool EnableSessionTimeout { get; set; } = false;
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int? SessionTimeoutMinutes { get; set; } = null;
     }
 }

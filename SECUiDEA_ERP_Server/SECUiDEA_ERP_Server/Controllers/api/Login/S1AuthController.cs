@@ -2,6 +2,8 @@
 using CoreDAL.ORM.Extensions;
 using CryptoManager;
 using Microsoft.AspNetCore.Mvc;
+using SECUiDEA_ERP_Server.Controllers.BaseControllers;
+using SECUiDEA_ERP_Server.Models.Authentication;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
 using SECUiDEA_ERP_Server.Models.ControllerModels.api.Login.S1AuthModel;
@@ -10,7 +12,7 @@ using SECUiDEA_ERP_Server.Models.ResultModels;
 namespace SECUiDEA_ERP_Server.Controllers.api.Login;
 
 [Route("api/Login/[controller]/[action]")]
-public class S1AuthController : BaseController
+public class S1AuthController : JwtController
 {
     #region 의존 주입
 
@@ -24,7 +26,11 @@ public class S1AuthController : BaseController
 
     private readonly IDatabaseSetup _dbSetup;
 
-    public S1AuthController(IDatabaseSetupContainer dbContainer, UserAuthService authService, UserRepositoryFactory userRepositoryFactory, [FromKeyedServices(StringClass.CryptoS1Sha512)] ICryptoManager cryptoSha512)
+    public S1AuthController(IDatabaseSetupContainer dbContainer, 
+        UserAuthService authService, 
+        UserRepositoryFactory userRepositoryFactory, 
+        [FromKeyedServices(StringClass.CryptoS1Sha512)] ICryptoManager cryptoSha512,
+        JwtService jwtService) : base(jwtService)
     {
         #region 의존 주입
 
@@ -64,6 +70,12 @@ public class S1AuthController : BaseController
                 user,
                 ipAddress,
                 request.rememberMe);
+
+            if (IsBrowserClient(Request))
+            {
+                SetRefreshTokenCookie(tokenResponse.RefreshToken, request.rememberMe, tokenResponse.ExpiryDate);
+            }
+
 
             return Ok(BoolResultModel.Success("",
                 new Dictionary<string, object>
@@ -174,7 +186,9 @@ public class S1UserRepository : IUserRepository
             {
                 ID = userEntity.Id,
                 Name = userEntity.Name,
-                UserRole = userEntity.AuthType
+                UserRole = userEntity.AuthType,
+                EnableSessionTimeout = userEntity.EnableSessionTimeout,
+                SessionTimeoutMinutes = userEntity.SessionTimeoutMinutes
             };
 
             // 권한 정보 로드

@@ -4,6 +4,7 @@ using CoreDAL.Configuration.Interface;
 using CoreDAL.ORM;
 using CoreDAL.ORM.Extensions;
 using Microsoft.Extensions.Caching.Memory;
+using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
 
 namespace SECUiDEA_ERP_Server.Models.Authentication;
@@ -14,6 +15,7 @@ public class SessionService : IDisposable
 
     private readonly JwtService _jwtService;
     private readonly IDatabaseSetupContainer _dbContainer;
+    private readonly UserRepositoryFactory _userRepositoryFactory;
 
     #endregion
 
@@ -30,13 +32,14 @@ public class SessionService : IDisposable
 
     #endregion
 
-    public SessionService(JwtService jwtService, IDatabaseSetupContainer dbContainer, IMemoryCache cache)
+    public SessionService(JwtService jwtService, IDatabaseSetupContainer dbContainer, IMemoryCache cache, UserRepositoryFactory userRepositoryFactory)
     {
         #region 의존 주입
 
         _jwtService = jwtService;
         _dbContainer = dbContainer;
         _cache = cache;
+        _userRepositoryFactory = userRepositoryFactory;
 
         #endregion
 
@@ -240,9 +243,21 @@ public class SessionService : IDisposable
         if (session == null || !session.IsActive)
             return true;
 
+        // 사용자의 세션 설정 가져오기
+        var user = await GetUserByIdAsync(session.UserId, session.Provider);
+        if (user == null)
+        {
+            return true;
+        }
+
+        if (!user.EnableSessionTimeout)
+        {
+            return false; // 세션 타임아웃 비활성화
+        }
+
         // 마지막 활동 시간 확인
         var inactiveTime = DateTime.Now - session.LastActivityAt;
-        var timeoutMinutes = _jwtService.GetSettings.InactivityTimeoutMinutes;
+        var timeoutMinutes = user.SessionTimeoutMinutes ?? _jwtService.GetSettings.InactivityTimeoutMinutes;
 
         return (inactiveTime.TotalMinutes > timeoutMinutes);
     }
@@ -345,7 +360,13 @@ public class SessionService : IDisposable
 
         await dbSetup.DAL.ExecuteProcedureAsync(dbSetup, SessionProcedure.Update, parameters);
     }
-    
+
+    private async Task<User> GetUserByIdAsync(string userId, string provider)
+    {
+        var repository = _userRepositoryFactory.GetRepository(provider);
+        return await repository.GetUserModelByIdAsync(userId);
+    }
+
     #region Cache 관리
 
     public async Task CleanupExpiredSessionsAsync()
