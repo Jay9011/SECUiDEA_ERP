@@ -22,3 +22,5 @@ GO
 -- 인덱스 추가
 CREATE INDEX IX_UserSessions_UserId_Provider ON UserSessions(UserId, Provider);
 CREATE INDEX IX_UserSessions_ExpiryDate ON UserSessions(ExpiryDate);
+CREATE INDEX IX_UserSessions_IsActive ON UserSessions(IsActive);
+GO

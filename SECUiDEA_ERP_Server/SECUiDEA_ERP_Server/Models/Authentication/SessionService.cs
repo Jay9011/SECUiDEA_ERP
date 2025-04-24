@@ -43,7 +43,13 @@ public class SessionService : IDisposable
 
         #endregion
 
+#if DEBUG
+        // 개발 모드에서는 1분마다 캐시 정리
+        _cacheCleanupTimer = new Timer(CleanupCacheCallback, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
+#else
         _cacheCleanupTimer = new Timer(CleanupCacheCallback, null, TimeSpan.Zero, TimeSpan.FromHours(1));
+#endif
+
     }
 
     private string GetUserKey(string userId, string provider)

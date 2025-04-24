@@ -9,12 +9,12 @@ public class JwtSettings
     public string Secret { get; set; }
     public string Issuer { get; set; }
     public string Audience { get; set; }
-    public int ExpiryMinutes { get; set; } = StringClass.DefaultExpiryMinutes;
-    public int RefreshTokenDays { get; set; } = StringClass.DefaultRefreshTokenDays;
-    public int AutoLoginDays { get; set; } = StringClass.DefaultAutoLoginDays;
+    public double ExpiryMinutes { get; set; } = StringClass.DefaultExpiryMinutes;
+    public double RefreshTokenDays { get; set; } = StringClass.DefaultRefreshTokenDays;
+    public double AutoLoginDays { get; set; } = StringClass.DefaultAutoLoginDays;
     public bool PreventDuplicateLogin { get; set; } = StringClass.DefaultPreventDuplicateLogin;      // 중복 로그인 방지 여부
     public bool InactivityTimeout { get; set; } = StringClass.DefaultInactivityTimeout;              // 비활성 타임아웃 여부
-    public int InactivityTimeoutMinutes { get; set; } = StringClass.DefaultInactivityTimeoutMinutes; // 비활성 타임아웃 시간 (분 단위)
+    public double InactivityTimeoutMinutes { get; set; } = StringClass.DefaultInactivityTimeoutMinutes; // 비활성 타임아웃 시간 (분 단위)
 }
 
 /// <summary>

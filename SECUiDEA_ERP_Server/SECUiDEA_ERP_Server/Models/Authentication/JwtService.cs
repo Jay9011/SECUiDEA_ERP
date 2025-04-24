@@ -401,19 +401,19 @@ public class JwtService
         };
 
         // JWT 만료 시간 설정
-        if (int.TryParse(values[StringClass.ExpiryMinutes], out var expiryMinutes))
+        if (double.TryParse(values[StringClass.ExpiryMinutes], out var expiryMinutes))
         {
             settings.ExpiryMinutes = expiryMinutes;
         }
 
         // Refresh Token 만료 시간 설정
-        if (int.TryParse(values[StringClass.RefreshTokenDays], out var refreshTokenDays))
+        if (double.TryParse(values[StringClass.RefreshTokenDays], out var refreshTokenDays))
         {
             settings.RefreshTokenDays = refreshTokenDays;
         }
 
         // 자동 로그인 만료 시간 설정
-        if (int.TryParse(values[StringClass.AutoLoginDays], out var autoLoginDays))
+        if (double.TryParse(values[StringClass.AutoLoginDays], out var autoLoginDays))
         {
             settings.AutoLoginDays = autoLoginDays;
         }
@@ -431,7 +431,7 @@ public class JwtService
         }
 
         // 비활성 타임아웃 시간 설정
-        if (int.TryParse(values[StringClass.InactivityTimeoutMinutes], out var inactivityTimeoutMinutes))
+        if (double.TryParse(values[StringClass.InactivityTimeoutMinutes], out var inactivityTimeoutMinutes))
         {
             settings.InactivityTimeoutMinutes = inactivityTimeoutMinutes;
         }

@@ -37,13 +37,6 @@ public class Program
         IIOHelper registryHelper = new RegistryHelper(StringClass.SECUiDEAJWT);
         builder.Services.AddKeyedSingleton<IIOHelper>(StringClass.IoRegistry, registryHelper);
 
-        /* ================================================
-         * 최우선 기타 설정 종료
-         * ================================================
-         * ================================================
-         * 의존 주입 시작
-         * ================================================
-         */
         ICryptoManager S1AES = new S1AES();
         ICryptoManager S1SHA512 = new S1SHA512();
         ICryptoManager SECUiDEA = new SecuAES256();
@@ -51,13 +44,20 @@ public class Program
         builder.Services.AddKeyedSingleton<ICryptoManager>(StringClass.CryptoS1Sha512, S1SHA512);
         builder.Services.AddKeyedSingleton<ICryptoManager>(StringClass.CryptoSecuidea, SECUiDEA);
 
+        var dbContainer = SetupDbContainer(dbSetupFileHelper, SECUiDEA);
+        builder.Services.AddSingleton<IDatabaseSetupContainer>(dbContainer);
+        builder.Services.AddSingleton<IDBSetupService, DBSetupService>();
 
+        /* ================================================
+         * 최우선 기타 설정 종료
+         * ================================================
+         * ================================================
+         * 의존 주입 시작
+         * ================================================
+         */
+        
         // JWT 초기 설정
         JwtService.JwtConfigSetup(registryHelper, SECUiDEA);
-
-        // JWT 서비스
-        builder.Services.AddSingleton<JwtService>();
-        builder.Services.AddSingleton<SessionService>();
 
         // JWT 인증 설정
         builder.Services.AddAuthentication(options =>
@@ -83,13 +83,10 @@ public class Program
             };
         });
 
-        var dbContainer = SetupDbContainer(dbSetupFileHelper, SECUiDEA);
-        builder.Services.AddSingleton<IDatabaseSetupContainer>(dbContainer);
-        builder.Services.AddSingleton<IDBSetupService, DBSetupService>();
-
-        // 로그인 기능
         builder.Services.AddSingleton<IRefreshTokenRepository, RefreshTokenRepository>();
         builder.Services.AddSingleton<UserRepositoryFactory>();
+        builder.Services.AddSingleton<JwtService>();
+        builder.Services.AddSingleton<SessionService>();
         builder.Services.AddSingleton<UserAuthService>();
 
 
@@ -140,6 +137,8 @@ public class Program
             });
         
         app.MapFallbackToFile("/index.html");
+
+        app.Services.GetRequiredService<SessionService>();
         
         app.Run();
     }

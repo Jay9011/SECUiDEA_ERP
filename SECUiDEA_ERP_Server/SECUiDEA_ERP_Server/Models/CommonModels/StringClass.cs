@@ -31,13 +31,13 @@ public static class StringClass
 
     public const string SECUiDEA_Issuer = "SECUiDEA.API";
     public const string SECUiDEA_Audience = "SECUiDEA.Client";
-    public const int DefaultExpiryMinutes = 15;             // 기본 JWT 유효기간 (분 단위)
-    public const int DefaultExpiryHours = 1;                // 기본 JWT 유효기간 (시간 단위)
-    public const int DefaultRefreshTokenDays = 7;           // 기본 Refresh Token 유효기간 (일 단위)
-    public const int DefaultAutoLoginDays = 30;             // 기본 자동 로그인 유효기간 (일 단위)
+    public const double DefaultExpiryMinutes = 15;             // 기본 JWT 유효기간 (분 단위)
+    public const double DefaultExpiryHours = 1;                // 기본 JWT 유효기간 (시간 단위)
+    public const double DefaultRefreshTokenDays = 7;           // 기본 Refresh Token 유효기간 (일 단위)
+    public const double DefaultAutoLoginDays = 30;             // 기본 자동 로그인 유효기간 (일 단위)
     public const bool DefaultPreventDuplicateLogin = false; // 기본 중복 로그인 방지 여부
     public const bool DefaultInactivityTimeout = false;     // 기본 비활성 시간 초과 여부
-    public const int DefaultInactivityTimeoutMinutes = 30;  // 기본 비활성 시간 초과 (분 단위)
+    public const double DefaultInactivityTimeoutMinutes = 30;  // 기본 비활성 시간 초과 (분 단위)
 
     // 설정 파일 관련
     public const string IoDbSetupFile = "dbSetupFile";

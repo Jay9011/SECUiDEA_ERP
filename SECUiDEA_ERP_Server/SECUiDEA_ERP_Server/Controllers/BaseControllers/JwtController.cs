@@ -25,7 +25,7 @@ public class JwtController : BaseController
         }
         else
         {
-            int days = rememberMe
+            double days = rememberMe
                 ? _jwtService.GetSettings.AutoLoginDays
                 : _jwtService.GetSettings.RefreshTokenDays;
 
