@@ -1,5 +1,7 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { Suspense } from 'react';
+import './i18n';
 
 // 레이아웃
 import VideoLayout from './components/layouts/VideoLayout';
@@ -13,24 +15,29 @@ import NotFound from './pages/NotFound';
 
 import ProtectedRoute from './components/ProtectedRoute';
 
+// 로딩 컴포넌트
+const Loading = () => <div className="loading">로딩 중...</div>;
+
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          {/* 동영상 배경이 있는 레이아웃 */}
-          <Route element={<VideoLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-          </Route>
+      <Suspense fallback={<Loading />}>
+        <Router basename="/visit">
+          <Routes>
+            {/* 동영상 배경이 있는 레이아웃 */}
+            <Route element={<VideoLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
 
-          {/* 기본 배경의 레이아웃 */}
-          <Route element={<BaseLayout className="standard-layout" />}>
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Router>
+            {/* 기본 배경의 레이아웃 */}
+            <Route element={<BaseLayout className="standard-layout" />}>
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Router>
+      </Suspense>
     </AuthProvider>
   );
 };

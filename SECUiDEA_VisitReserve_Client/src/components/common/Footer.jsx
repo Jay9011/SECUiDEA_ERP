@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = React.memo(() => {
+const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer_container">
@@ -44,6 +43,6 @@ const Footer = React.memo(() => {
             </div>
         </footer>
     );
-});
+};
 
-export default React.memo(Footer);
+export default Footer;

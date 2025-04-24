@@ -10,7 +10,7 @@
  */
 export function setCookie(name, value, options = {}) {
     const cookieOptions = {
-        path: '/',
+        path: '/visit',
         SameSite: 'Strict',
         ...options
     };
@@ -58,5 +58,5 @@ export function getCookie(name) {
  * @param {string} name - 삭제할 쿠키 이름
  */
 export function deleteCookie(name) {
-    document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+    document.cookie = `${name}=; path=/visit; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
 } 

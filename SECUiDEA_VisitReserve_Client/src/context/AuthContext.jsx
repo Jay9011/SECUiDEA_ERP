@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { parseJwt } from '../utils/jwt';
 import { setCookie, getCookie, deleteCookie } from '../utils/cookies';
 
@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [authHeader, setAuthHeader] = useState(null);
+
+    const apiUrl = useMemo(() => import.meta.env.VITE_API_URL, []);
 
     // 쿠키에서 토큰 확인하여 사용자 상태 설정
     useEffect(() => {
@@ -31,32 +33,33 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
+    // handleBeforeUnload 함수를 메모이제이션
+    const handleBeforeUnload = useCallback(() => {
+        if (isAuthenticated) {
+            // 비컨 API로 로그아웃 요청 (비동기 요청이 완료되지 않아도 브라우저가 닫힘)
+            const sessionId = getCookie('sessionId');
+            const refreshToken = getCookie('refreshToken');
+
+            if (sessionId && refreshToken) {
+                const logoutUrl = `${apiUrl}/auth/logout`;
+                navigator.sendBeacon(
+                    logoutUrl,
+                    JSON.stringify({
+                        sessionId,
+                        refreshToken
+                    })
+                );
+            }
+        }
+    }, [isAuthenticated, apiUrl]);
+
     // 브라우저 닫기 이벤트에 로그아웃 함수 연결
     useEffect(() => {
-        const handleBeforeUnload = () => {
-            if (isAuthenticated) {
-                // 비컨 API로 로그아웃 요청 (비동기 요청이 완료되지 않아도 브라우저가 닫힘)
-                const sessionId = getCookie('sessionId');
-                const refreshToken = getCookie('refreshToken');
-
-                if (sessionId && refreshToken) {
-                    const logoutUrl = `${import.meta.env.VITE_API_URL}/auth/logout`;
-                    navigator.sendBeacon(
-                        logoutUrl,
-                        JSON.stringify({
-                            sessionId,
-                            refreshToken
-                        })
-                    );
-                }
-            }
-        };
-
         window.addEventListener('beforeunload', handleBeforeUnload);
         return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-    }, [isAuthenticated]);
+    }, [handleBeforeUnload]);
 
-    const login = (token, userInfo) => {
+    const login = useCallback((token, userInfo) => {
         // 세션 쿠키로 저장 (브라우저 닫히면 자동 삭제)
         setCookie('accessToken', token);
         setCookie('refreshToken', userInfo.refreshToken);
@@ -65,19 +68,17 @@ export const AuthProvider = ({ children }) => {
         // 사용자 상태 업데이트
         setUser(userInfo);
         setIsAuthenticated(true);
-
-        // 인증 헤더 설정
         setAuthHeader({ 'Authorization': `Bearer ${token}` });
-    };
+    }, []);
 
-    const logout = async () => {
+    const logout = useCallback(async () => {
         try {
             const sessionId = getCookie('sessionId');
             const refreshToken = getCookie('refreshToken');
 
             // 백엔드에 로그아웃 요청 보내기
             if (sessionId && refreshToken) {
-                const response = await fetch(import.meta.env.VITE_API_URL + '/auth/logout', {
+                const response = await fetch(`${apiUrl}/auth/logout`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -106,16 +107,16 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(false);
             setAuthHeader(null);
         }
-    };
+    }, [authHeader, apiUrl]);
 
-    const value = {
+    const value = useMemo(() => ({
         user,
         loading,
         isAuthenticated,
         login,
         logout,
         authHeader
-    };
+    }), [user, loading, isAuthenticated, authHeader, login, logout]);
 
     return (
         <AuthContext.Provider value={value}>

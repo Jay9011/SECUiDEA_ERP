@@ -1,10 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 // 리소스
 import Logo from '../../assets/images/Logo.svg';
 
-const LogoComponent = React.memo(({
+const LogoComponent = ({
     className = '',
     onClick,
     textComponent = 'span',
@@ -20,6 +19,6 @@ const LogoComponent = React.memo(({
             </Link>
         </div>
     )
-});
+};
 
 export default LogoComponent;

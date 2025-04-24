@@ -1,0 +1,54 @@
+{
+    "공통": {
+        "환영": "Welcome",
+        "더보기": "Learn More",
+        "확인": "Confirm",
+        "취소": "Cancel",
+        "저장": "Save",
+        "제출": "Submit",
+        "뒤로": "Back",
+        "다음": "Next"
+    },
+    "방문": {
+        "제목": "Visit Reservation",
+        "양식": {
+            "방문자": "Visitor",
+            "이름": "Name",
+            "전화번호": "Phone Number",
+            "이메일": "Email",
+            "목적": "Purpose of Visit",
+            "날짜": "Visit Date",
+            "시간": "Visit Time",
+            "접견자": "Host",
+            "회사": "Company",
+            "부서": "Department",
+            "인원수": "Number of Visitors",
+            "신청": "Submit Reservation"
+        },
+        "상태": {
+            "대기중": "Pending Approval",
+            "승인됨": "Approved",
+            "거절됨": "Rejected",
+            "취소됨": "Canceled"
+        },
+        "메시지": {
+            "성공": "Reservation has been successfully created. {{예약번호}}",
+            "오류": "An error occurred while creating the reservation: {{오류내용}}",
+            "확인": "Are you sure you want to confirm this reservation?"
+        }
+    },
+    "관리": {
+        "제목": "Admin Panel",
+        "대시보드": "Dashboard",
+        "예약관리": "Reservation Management",
+        "사용자관리": "User Management",
+        "설정": "Settings"
+    },
+    "오류": {
+        "필수항목": "This field is required.",
+        "이메일형식": "Invalid email format.",
+        "전화번호형식": "Invalid phone number format.",
+        "서버오류": "A server error has occurred.",
+        "페이지없음": "Page not found."
+    }
+}

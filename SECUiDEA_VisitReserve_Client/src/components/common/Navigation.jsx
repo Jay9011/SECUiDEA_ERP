@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "../../context/AuthContext";
@@ -6,12 +5,13 @@ import { useAuth } from "../../context/AuthContext";
 // 컴포넌트
 import AuthSection from "./AuthSection";
 import LogoComponent from "./Logo";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 // 스타일
 import './Navigation.scss';
 
 // 개별 메뉴 아이템 컴포넌트
-const MenuItem = React.memo(({ item, isActive, onClick }) => (
+const MenuItem = ({ item, isActive, onClick }) => (
     <li>
         <Link
             to={item.path}
@@ -21,9 +21,9 @@ const MenuItem = React.memo(({ item, isActive, onClick }) => (
             {item.label}
         </Link>
     </li>
-));
+);
 
-const Navigation = React.memo(({ isOpen, onClose }) => {
+const Navigation = ({ isOpen, onClose }) => {
     const { user } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = useState('');
@@ -81,6 +81,10 @@ const Navigation = React.memo(({ isOpen, onClose }) => {
                             />
                         ))}
                     </ul>
+
+                    <div className="navigation_language-section">
+                        <LanguageSwitcher />
+                    </div>
                 </div>
             </nav>
 
@@ -91,6 +95,6 @@ const Navigation = React.memo(({ isOpen, onClose }) => {
             ></div>
         </>
     );
-});
+};
 
-export default React.memo(Navigation); 
+export default Navigation; 

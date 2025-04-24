@@ -1,10 +1,9 @@
-import React from "react";
 import LogoComponent from "./Logo";
 
 // 스타일
 import './Header.scss';
 
-const Header = React.memo(({ onToggleNav }) => {
+const Header = ({ onToggleNav }) => {
     return (
         <header className="header">
             <div className="header_container">
@@ -30,6 +29,6 @@ const Header = React.memo(({ onToggleNav }) => {
             </div>
         </header>
     );
-});
+};
 
-export default React.memo(Header);
+export default Header;

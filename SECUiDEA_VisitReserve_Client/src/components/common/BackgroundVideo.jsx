@@ -18,7 +18,7 @@ const BackgroundVideo = ({ className = '' }) => {
                     playsInline
                     onError={handleVideoError}
                 >
-                    <source src="/videos/background.mp4" type="video/mp4" />
+                    <source src="/visit/videos/background.mp4" type="video/mp4" />
                     브라우저가 비디오 태그를 지원하지 않습니다.
                 </video>
             )}

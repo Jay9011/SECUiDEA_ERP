@@ -1,5 +1,3 @@
-import React from 'react';
-
 // 스타일
 import './ProcessStep.scss';
 
