@@ -3,6 +3,7 @@ import { parseJwt } from '../utils/jwt';
 import { refreshAccessToken } from '../utils/api';
 import authService from '../utils/authService';
 import { useNavigate, useLocation } from 'react-router-dom';
+import LoadingOverlay from '../components/common/LoadingOverlay';
 
 const AuthContext = createContext(null);
 
@@ -170,6 +171,7 @@ export const AuthProvider = ({ children }) => {
      * @param {boolean} rememberMe - 로그인 유지 여부
      */
     const loginWithProvider = useCallback(async (provider, id, password, rememberMe = false) => {
+        setLoading(true);
         try {
             const data = await authService.login(provider, id, password, rememberMe);
             if (data.isSuccess) {
@@ -181,9 +183,8 @@ export const AuthProvider = ({ children }) => {
             } else {
                 throw new Error(data.message || '로그인에 실패했습니다.');
             }
-        } catch (error) {
-            console.error('로그인 처리 중 오류 발생:', error);
-            throw error;
+        } finally {
+            setLoading(false);
         }
     }, [updateUserState]);
 
@@ -218,7 +219,8 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
+            {loading && <LoadingOverlay />}
         </AuthContext.Provider>
     );
 };
