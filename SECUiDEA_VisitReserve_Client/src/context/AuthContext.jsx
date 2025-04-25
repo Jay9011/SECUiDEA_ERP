@@ -170,7 +170,6 @@ export const AuthProvider = ({ children }) => {
      * @param {boolean} rememberMe - 로그인 유지 여부
      */
     const loginWithProvider = useCallback(async (provider, id, password, rememberMe = false) => {
-        setLoading(true);
         try {
             const data = await authService.login(provider, id, password, rememberMe);
             if (data.isSuccess) {
@@ -182,8 +181,9 @@ export const AuthProvider = ({ children }) => {
             } else {
                 throw new Error(data.message || '로그인에 실패했습니다.');
             }
-        } finally {
-            setLoading(false);
+        } catch (error) {
+            console.error('로그인 처리 중 오류 발생:', error);
+            throw error;
         }
     }, [updateUserState]);
 

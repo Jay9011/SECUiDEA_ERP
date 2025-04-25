@@ -27,17 +27,6 @@ const authService = {
     },
 
     /**
-     * S1Auth 로그인 처리 (기존 호환성 유지)
-     * @param {string} id - 사용자 ID
-     * @param {string} password - 사용자 비밀번호
-     * @param {boolean} rememberMe - 로그인 유지 여부
-     * @returns {Promise<Object>} - 로그인 결과
-     */
-    loginWithS1Auth: async (id, password, rememberMe = false) => {
-        return await authService.login(AuthProvider.S1, id, password, rememberMe);
-    },
-
-    /**
      * 서버에 로그아웃 요청 전송
      * @param {string} sessionId - 세션 ID
      * @param {string} refreshToken - 리프레시 토큰

@@ -21,7 +21,7 @@ BEGIN
     -- 만료일이 오래된 비활성 RefreshToken 삭제
 	DELETE rt
 	FROM RefreshTokens rt
-	LEFT JOIN UserSessions us ON rt.SessionId = us.SessionId AND us.IsActive = 1
+	LEFT JOIN UserSessions us ON rt.SessionId = us.SessionId
 	WHERE us.SessionId IS NULL
 	   OR rt.LastActivityDate < DATEADD(DAY, -1, GETDATE());
 END
