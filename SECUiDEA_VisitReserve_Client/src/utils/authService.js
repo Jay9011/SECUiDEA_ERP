@@ -1,4 +1,4 @@
-import { setCookie, getCookie, deleteCookie } from './cookies';
+import { setCookie, getCookie, deleteCookie, getBooleanCookie, setBooleanCookie, setDateCookie, getDateCookie } from './cookies';
 import { S1LoginApi, LogoutApi } from './api';
 import { AuthProvider } from './authProviders';
 
@@ -100,10 +100,10 @@ const authService = {
 
     /**
      * 쿠키에서 액세스 토큰 만료 시간 가져오기
-     * @returns {number|null} 액세스 토큰 만료 시간
+     * @returns {number|null} 액세스 토큰 만료 시간 (타임스탬프)
      */
     getAccessTokenExpiryDate: () => {
-        return getCookie('accessExpiryDate');
+        return getDateCookie('accessExpiryDate');
     },
 
     /**
@@ -111,7 +111,7 @@ const authService = {
      * @returns {boolean} 리멤버 미 여부
      */
     isRememberMe: () => {
-        return getCookie('isRememberMe');
+        return getBooleanCookie('isRememberMe') || false;
     },
 
     /**
@@ -124,10 +124,10 @@ const authService = {
 
     /**
      * 쿠키에서 리프레시 토큰 만료 시간 가져오기
-     * @returns {number|null} 리프레시 토큰 만료 시간
+     * @returns {number|null} 리프레시 토큰 만료 시간 (타임스탬프)
      */
     getRefreshTokenExpiryDate: () => {
-        return getCookie('refreshExpiryDate');
+        return getDateCookie('refreshExpiryDate');
     },
 
     /**
@@ -143,15 +143,15 @@ const authService = {
      * @returns {boolean} 세션 타임아웃 여부
      */
     getEnableSessionTimeout: () => {
-        return getCookie('enableSessionTimeout');
+        return getBooleanCookie('enableSessionTimeout') || false;
     },
 
     /**
      * 쿠키에서 세션 ID 만료 시간 가져오기
-     * @returns {number|null} 세션 ID 만료 시간
+     * @returns {number|null} 세션 ID 만료 시간 (타임스탬프)
      */
     getSessionExpiryDate: () => {
-        return getCookie('sessionExpiryDate');
+        return getDateCookie('sessionExpiryDate');
     },
 
 
@@ -165,25 +165,25 @@ const authService = {
             setCookie('accessToken', data.accessToken);
         }
         if (data.accessExpiryDate) {
-            setCookie('accessExpiryDate', data.accessExpiryDate);
+            setDateCookie('accessExpiryDate', data.accessExpiryDate);
         }
         if (data.refreshToken) {
             setCookie('refreshToken', data.refreshToken);
         }
         if (data.refreshExpiryDate) {
-            setCookie('refreshExpiryDate', data.refreshExpiryDate);
+            setDateCookie('refreshExpiryDate', data.refreshExpiryDate);
         }
-        if (data.isRememberMe) {
-            setCookie('isRememberMe', data.isRememberMe);
+        if (data.isRememberMe !== undefined) {
+            setBooleanCookie('isRememberMe', data.isRememberMe);
         }
         if (data.sessionId) {
             setCookie('sessionId', data.sessionId);
         }
-        if (data.enableSessionTimeout) {
-            setCookie('enableSessionTimeout', data.enableSessionTimeout);
+        if (data.enableSessionTimeout !== undefined) {
+            setBooleanCookie('enableSessionTimeout', data.enableSessionTimeout);
         }
         if (data.sessionExpiryDate) {
-            setCookie('sessionExpiryDate', data.sessionExpiryDate);
+            setDateCookie('sessionExpiryDate', data.sessionExpiryDate);
         }
     }
 };

@@ -20,9 +20,9 @@ const Loading = () => <div className="loading">로딩 중...</div>;
 
 const App = () => {
   return (
-    <AuthProvider>
-      <Suspense fallback={<Loading />}>
-        <Router basename="/visit">
+    <Suspense fallback={<Loading />}>
+      <Router basename="/visit">
+        <AuthProvider>
           <Routes>
             {/* 동영상 배경이 있는 레이아웃 */}
             <Route element={<VideoLayout />}>
@@ -36,9 +36,9 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-        </Router>
-      </Suspense>
-    </AuthProvider>
+        </AuthProvider>
+      </Router>
+    </Suspense>
   );
 };
 
