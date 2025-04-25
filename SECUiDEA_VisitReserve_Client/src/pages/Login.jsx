@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, User } from 'lucide-react';
+import { ShieldHalf, Lock, User } from 'lucide-react';
 
-import { parseJwt } from '../utils/jwt';
-
+import { AuthProvider } from '../utils/authProviders';
 import './Login.scss';
 
 const Login = () => {
@@ -14,7 +13,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate();
-    const { login } = useAuth();
+    const { loginWithProvider } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,37 +21,10 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/Login/S1Auth/Login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: userId,
-                    password: password,
-                    rememberMe: rememberMe
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.isSuccess) {
-                const tokenResponse = data.data.token;
-
-                login(tokenResponse.accessToken, {
-                    id: userId,
-                    refreshToken: tokenResponse.refreshToken,
-                    sessionId: tokenResponse.sessionId,
-                    tokenExpiry: tokenResponse.expiryDate
-                });
-
-                // 로그인 성공 후 이동 위치
-                navigate('/');
-            } else {
-                setError(data.message || '로그인에 실패했습니다.');
-            }
+            await loginWithProvider(AuthProvider.S1, userId, password, rememberMe);
+            navigate('/');
         } catch (err) {
-            setError('서버와 통신 중 오류가 발생했습니다.');
+            setError(err.message || '로그인에 실패했습니다.');
             console.error('로그인 오류:', err);
         } finally {
             setLoading(false);
@@ -64,7 +36,7 @@ const Login = () => {
             <div className="login-container">
                 <div className="login-box">
                     <div className="login-logo">
-                        <User size={40} />
+                        <ShieldHalf size={40} />
                     </div>
                     <h2>방문 예약 시스템</h2>
                     <p className="login-subtitle">계정에 로그인하세요</p>
@@ -74,7 +46,7 @@ const Login = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <div className="input-icon">
-                                <Mail size={20} />
+                                <User size={20} />
                             </div>
                             <input
                                 type="text"

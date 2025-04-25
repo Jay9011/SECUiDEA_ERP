@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 // 컴포넌트
 import { ProcessSteps } from "../components/steps/ProcessStep";
-import VisitExample from "../components/VisitExample";
 
 // 스타일
 import '../styles/layouts/_container.scss';
@@ -61,13 +60,6 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            {/* 예제 다국어 컴포넌트 추가 */}
-            <section className="welcome-section section">
-                <div className="container container-xl">
-                    <VisitExample />
                 </div>
             </section>
 

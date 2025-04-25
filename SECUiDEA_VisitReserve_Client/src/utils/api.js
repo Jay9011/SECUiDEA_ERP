@@ -1,5 +1,6 @@
-import { getCookie, setCookie, deleteCookie } from "./cookies"
+import { getCookie, setCookie } from "./cookies"
 import { parseJwt } from "./jwt"
+import authService from "./authService";
 
 const apiBaseUrl = import.meta.env.VITE_BASE_API_URL;
 
@@ -29,7 +30,7 @@ const isTokenExpiringSoon = () => {
  * 토큰 갱신
  * @returns {boolean} 토큰 갱신 성공 여부
  */
-const refreshAccessToken = async () => {
+export const refreshAccessToken = async () => {
     const refreshToken = getCookie("refreshToken");
     const sessionId = getCookie("sessionId");
 
@@ -87,8 +88,8 @@ export const fetchWithAuth = async (endpoind, options = {}, requireAuth = true) 
 
             // 토큰 갱신 실패시 로그아웃 처리
             if (!refreshed) {
-                // TODO: 로그아웃 처리
-                window.location.href = "/login";
+                // 토큰 만료 처리 및 로그인 페이지로 리다이렉트
+                authService.handleTokenExpiration();
                 throw new Error("Failed to refresh access token");
             }
         }
@@ -109,14 +110,13 @@ export const fetchWithAuth = async (endpoind, options = {}, requireAuth = true) 
             const refreshed = await refreshAccessToken();
 
             if (refreshed) {
-                // 갱신을 성공하면 요청 재시도(?) -- TODO: 문제 없는지 확인해야 함 (재귀호출 등...)
+                // 갱신을 성공하면 요청 재시도
                 const accessToken = getCookie("accessToken");
                 fetchOptions.headers["Authorization"] = `Bearer ${accessToken}`;
                 return fetch(url, fetchOptions); // 재귀 호출의 문제 방지로 일반 fetch로 사용
             } else {
                 // 갱신 실패시 로그아웃 처리
-                // TODO: 로그아웃 처리
-                window.location.href = "/login";
+                authService.handleTokenExpiration();
                 throw new Error("Failed to refresh access token");
             }
         }
@@ -188,4 +188,43 @@ export const api = {
             method: "DELETE"
         });
     }
+}
+
+//////////////////////////////////////////
+// 인증 관련 API 함수 추가
+//////////////////////////////////////////
+
+/**
+ * S1 인증 기반 로그인 API 호출
+ * @param {string} id
+ * @param {string} password
+ * @param {boolean} rememberMe
+ * @returns {Promise} 로그인 결과 데이터
+ */
+export async function S1LoginApi(id, password, rememberMe = false) {
+    const response = await fetch(`${apiBaseUrl}/Login/S1Auth/Login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, password, rememberMe })
+    });
+    return response.json();
+}
+
+/**
+ * 로그아웃 API 호출
+ * @param {string} sessionId
+ * @param {string} refreshToken
+ * @returns {Promise} 로그아웃 응답
+ */
+export async function LogoutApi(sessionId, refreshToken) {
+    const response = await fetch(`${apiBaseUrl}/auth/logout`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ sessionId, refreshToken })
+    });
+    return response;
 }
