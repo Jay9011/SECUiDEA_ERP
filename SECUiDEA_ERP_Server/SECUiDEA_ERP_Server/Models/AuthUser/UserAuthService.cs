@@ -52,9 +52,13 @@ public class UserAuthService
         return new TokenResponse
         {
             AccessToken = accessToken,
+            AccessExpiryDate = DateTime.Now.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
             RefreshToken = refreshToken.Token,
-            ExpiryDate = DateTime.Now.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
-            SessionId = sessionId
+            RefreshExpiryDate = refreshToken.ExpiryDate,
+            IsRememberMe = rememberMe,
+            EnableSessionTimeout = user.EnableSessionTimeout,
+            SessionId = sessionId,
+            SessionExpiryDate = DateTime.Now.AddMinutes(user.SessionTimeoutMinutes)
         };
     }
 
@@ -67,7 +71,7 @@ public class UserAuthService
     public async Task<TokenResponse> RefreshTokenAsync(string refreshToken, string ipAddress)
     {
         // RefreshToken 조회
-        var token = await _tokenRepository.GetByTokenAsync(refreshToken);
+        RefreshToken token = await _tokenRepository.GetByTokenAsync(refreshToken);
         if (token == null || !token.IsActive)
         {
             return null;
@@ -83,7 +87,7 @@ public class UserAuthService
         }
 
         // 사용자 정보 조회
-        var user = await GetUserByIdAsync(token.Provider, token.UserId);
+        User user = await GetUserByIdAsync(token.Provider, token.UserId);
         if (user == null)
         {
             return null;
@@ -98,9 +102,12 @@ public class UserAuthService
         return new TokenResponse
         {
             AccessToken = newAccessToken,
+            AccessExpiryDate = DateTime.Now.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
             RefreshToken = token.Token,
-            ExpiryDate = DateTime.Now.AddMinutes(_jwtService.GetSettings.ExpiryMinutes),
-            SessionId = token.SessionId
+            RefreshExpiryDate = token.ExpiryDate,
+            EnableSessionTimeout = user.EnableSessionTimeout,
+            SessionId = token.SessionId,
+            SessionExpiryDate = DateTime.Now.AddMinutes(user.SessionTimeoutMinutes)
         };
     }
 

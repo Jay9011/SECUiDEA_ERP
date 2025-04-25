@@ -70,13 +70,7 @@ public class S1AuthController : JwtController
                 user,
                 ipAddress,
                 request.rememberMe);
-
-            if (IsBrowserClient(Request))
-            {
-                SetRefreshTokenCookie(tokenResponse.RefreshToken, request.rememberMe, tokenResponse.ExpiryDate);
-            }
-
-
+            
             return Ok(BoolResultModel.Success("",
                 new Dictionary<string, object>
                 {
@@ -139,7 +133,10 @@ public class S1UserRepository : IUserRepository
             var user = new User
             {
                 ID = userEntity.Id,
-                UserRole = userEntity.AuthType
+                Name = userEntity.Name,
+                UserRole = userEntity.AuthType,
+                EnableSessionTimeout = userEntity.EnableSessionTimeout,
+                SessionTimeoutMinutes = userEntity.SessionTimeoutMinutes
             };
 
             // 권한 정보 로드

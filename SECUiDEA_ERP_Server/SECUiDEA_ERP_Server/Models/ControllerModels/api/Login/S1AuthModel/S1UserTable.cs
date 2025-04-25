@@ -46,6 +46,6 @@ namespace SECUiDEA_ERP_Server.Models.ControllerModels.api.Login.S1AuthModel
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public bool EnableSessionTimeout { get; set; } = false;
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public int? SessionTimeoutMinutes { get; set; } = null;
+        public double SessionTimeoutMinutes { get; set; }
     }
 }

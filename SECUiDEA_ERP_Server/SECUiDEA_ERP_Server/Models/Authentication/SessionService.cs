@@ -263,7 +263,7 @@ public class SessionService : IDisposable
 
         // 마지막 활동 시간 확인
         var inactiveTime = DateTime.Now - session.LastActivityAt;
-        var timeoutMinutes = user.SessionTimeoutMinutes ?? _jwtService.GetSettings.InactivityTimeoutMinutes;
+        var timeoutMinutes = user.SessionTimeoutMinutes == 0 ? _jwtService.GetSettings.InactivityTimeoutMinutes : user.SessionTimeoutMinutes;
 
         return (inactiveTime.TotalMinutes > timeoutMinutes);
     }

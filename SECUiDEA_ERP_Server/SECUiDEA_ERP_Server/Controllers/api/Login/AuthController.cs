@@ -50,17 +50,9 @@ public class AuthController : JwtController
 
         if (tokenResponse == null)
         {
-            // 리프레시 토큰 쿠키 제거
-            Response.Cookies.Delete(StringClass.RefreshToken);
             return Unauthorized(new { message = "Invalid refresh token" });
         }
-
-        // 브라우저 환경에서만 쿠키 설정
-        if (IsBrowserClient(Request))
-        {
-            SetRefreshTokenCookie(tokenResponse.RefreshToken, false, tokenResponse.ExpiryDate);
-        }
-
+        
         return Ok(tokenResponse);
     }
 

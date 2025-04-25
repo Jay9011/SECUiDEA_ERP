@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, User } from 'lucide-react';
 
+import { parseJwt } from '../utils/jwt';
+
 import './Login.scss';
 
 const Login = () => {

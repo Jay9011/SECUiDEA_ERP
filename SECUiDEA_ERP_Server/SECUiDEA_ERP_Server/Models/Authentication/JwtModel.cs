@@ -4,6 +4,9 @@ using SECUiDEA_ERP_Server.Models.CommonModels;
 
 namespace SECUiDEA_ERP_Server.Models.Authentication;
 
+/// <summary>
+/// JWT 세팅 관련 모델
+/// </summary>
 public class JwtSettings
 {
     public string Secret { get; set; }
@@ -61,7 +64,11 @@ public class RefreshToken : SQLParam
 public class TokenResponse
 {
     public string AccessToken { get; set; }
+    public DateTime AccessExpiryDate { get; set; }
     public string RefreshToken { get; set; }
-    public DateTime ExpiryDate { get; set; }
+    public DateTime RefreshExpiryDate { get; set; }
+    public bool IsRememberMe { get; set; } = false;
+    public bool EnableSessionTimeout { get; set; } = false;
     public string SessionId { get; set; }
+    public DateTime SessionExpiryDate { get; set; }
 }
