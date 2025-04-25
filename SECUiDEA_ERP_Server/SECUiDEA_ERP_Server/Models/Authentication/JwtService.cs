@@ -62,7 +62,7 @@ public class JwtService
     public string GenerateJwtToken(User user, string? sessionId = null)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+        var key = Convert.FromBase64String(_jwtSettings.Secret);
 
         var claims = new List<Claim>
         {
@@ -197,7 +197,7 @@ public class JwtService
         try
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+            var key = Convert.FromBase64String(_jwtSettings.Secret);
 
             var validationParameters = new TokenValidationParameters
             {

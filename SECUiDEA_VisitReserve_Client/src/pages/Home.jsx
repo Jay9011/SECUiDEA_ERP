@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
-import { Calendar, User, FileText, CheckCircle, ChevronRight } from "lucide-react"
+import { Calendar, User, FileText, CheckCircle, ChevronRight, ShieldCheck } from "lucide-react"
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+
+
+import authService from '../utils/authService'
 
 // 컴포넌트
 import { ProcessSteps } from "../components/steps/ProcessStep";
@@ -14,8 +18,13 @@ import '../styles/components/_card.scss';
 import '../styles/components/_icon-circle.scss';
 import './Home.scss';
 
+const apiBaseUrl = import.meta.env.VITE_BASE_API_URL;
+
 const Home = () => {
     const { t } = useTranslation();
+    const [apiResponse, setApiResponse] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const processSteps = [
         {
@@ -38,6 +47,68 @@ const Home = () => {
         }
     ];
 
+    // Test API 호출 함수
+    const callTestApi = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${apiBaseUrl}/Visit/Test`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authService.getAccessToken()}` // JWT 토큰
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`API 호출 실패: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setApiResponse(data);
+            console.log('Test API 응답:', data);
+        } catch (err) {
+            setError(err.message);
+            console.error('API 호출 중 오류 발생:', err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Employee 전용 API 호출 함수
+    const callEmployeeVisitInfo = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${apiBaseUrl}/Visit/GetEmployeeVisitInfo`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authService.getAccessToken()}` // JWT 토큰
+                },
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error('인증되지 않은 사용자입니다.');
+                } else if (response.status === 403) {
+                    throw new Error('접근 권한이 없습니다. Employee 이상 권한이 필요합니다.');
+                } else {
+                    throw new Error(`API 호출 실패: ${response.status}`);
+                }
+            }
+
+            const data = await response.json();
+            setApiResponse(data);
+            console.log('Employee API 응답:', data);
+        } catch (err) {
+            setError(err.message);
+            console.error('API 호출 중 오류 발생:', err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="home">
             <section className="hero-section section">
@@ -57,7 +128,39 @@ const Home = () => {
                                     <FileText />
                                     {t('admin.reservations')}
                                 </Link>
+                                <button
+                                    onClick={callEmployeeVisitInfo}
+                                    className="btn btn-square-desktop btn-primary btn-lg btn-icon btn-rounded-desktop-xs"
+                                    disabled={isLoading}
+                                >
+                                    <ShieldCheck />
+                                    {isLoading ? t('common.loading') || '로딩 중...' : t('employee.access') || '직원 전용'}
+                                </button>
+                                <button
+                                    onClick={callTestApi}
+                                    className="btn btn-square-desktop btn-info btn-lg btn-icon btn-rounded-desktop-xs"
+                                    disabled={isLoading}
+                                >
+                                    <User />
+                                    {isLoading ? t('common.loading') || '로딩 중...' : t('common.test') || '테스트 API'}
+                                </button>
                             </div>
+
+                            {/* API 응답 결과 표시 */}
+                            {apiResponse && (
+                                <div className="api-response mt-lg p-md bg-light rounded">
+                                    <h3>{t('api.response') || 'API 응답 결과'}</h3>
+                                    <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
+                                </div>
+                            )}
+
+                            {/* 에러 메시지 표시 */}
+                            {error && (
+                                <div className="error-message mt-md p-md bg-danger text-white rounded">
+                                    <h3>{t('common.error') || '오류'}</h3>
+                                    <p>{error}</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
