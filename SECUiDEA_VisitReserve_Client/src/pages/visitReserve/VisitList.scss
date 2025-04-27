@@ -5,30 +5,30 @@
   max-width: 100%;
   margin: 0 auto;
   padding: $spacing-md;
-  
+
   .visit-list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: $spacing-lg;
-    
+
     .visit-list-title {
       display: flex;
       align-items: center;
       font-size: $font-size-xl;
       color: $primary-color;
       margin: 0;
-      
+
       .title-icon {
         margin-right: $spacing-sm;
         color: $primary-color;
       }
     }
-    
+
     .actions {
       display: flex;
       gap: $spacing-sm;
-      
+
       .btn {
         display: flex;
         align-items: center;
@@ -39,36 +39,36 @@
         font-weight: $font-weight-medium;
         cursor: pointer;
         transition: all 0.2s;
-        
+
         svg {
           margin-right: 6px;
         }
-        
+
         &.btn-refresh {
           background-color: transparent;
           color: $primary-color;
           border: 1px solid $primary-color;
-          
+
           &:hover {
             background-color: rgba($primary-color, 0.05);
           }
         }
-        
+
         &.btn-mock {
           background-color: rgba($warning-color, 0.8);
           color: white;
           border: none;
-          
+
           &:hover {
             background-color: $warning-color;
           }
         }
-        
+
         &.btn-api {
           background-color: rgba($success-color, 0.8);
           color: white;
           border: none;
-          
+
           &:hover {
             background-color: $success-color;
           }
@@ -76,7 +76,7 @@
       }
     }
   }
-  
+
   .error-message {
     display: flex;
     align-items: center;
@@ -85,38 +85,37 @@
     color: $danger-color;
     background-color: rgba($danger-color, 0.1);
     border-radius: $border-radius;
-    
+
     svg {
       margin-right: $spacing-xs;
     }
   }
-  
+
   .visit-list-wrapper {
     height: calc(100vh - 200px);
     overflow-y: auto;
     border-radius: $border-radius;
     background-color: rgba($primary-color, 0.02);
     padding: $spacing-sm;
-    
-    // 스크롤바 스타일링
+
     &::-webkit-scrollbar {
       width: 8px;
     }
-    
+
     &::-webkit-scrollbar-track {
       background-color: rgba($border-color, 0.2);
       border-radius: 8px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background-color: rgba($primary-color, 0.3);
       border-radius: 8px;
-      
+
       &:hover {
         background-color: rgba($primary-color, 0.5);
       }
     }
-    
+
     .end-message {
       text-align: center;
       padding: $spacing-md;
@@ -126,12 +125,12 @@
       border-top: 1px dashed rgba($border-color, 0.5);
     }
   }
-  
+
   .visit-list {
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
-    
+    gap: $spacing-sm;
+
     .no-visits {
       padding: $spacing-lg;
       text-align: center;
@@ -139,194 +138,14 @@
       border-radius: $border-radius;
       color: $text-secondary;
     }
-    
-    .visit-item {
-      background-color: #fff;
-      border-radius: $border-radius;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
-      position: relative;
-      
-      // 상태 변경 중인 아이템 스타일
-      &.item-pending {
-        background-color: rgba($primary-color, 0.02);
-        
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 3px;
-          background: linear-gradient(90deg, 
-            rgba($primary-color, 0.2), 
-            rgba($primary-color, 0.8),
-            rgba($primary-color, 0.2)
-          );
-          background-size: 200% 100%;
-          animation: shimmer 1.5s infinite linear;
-        }
-      }
-      
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      }
-      
-      .visit-item-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: $spacing-md;
-        background-color: rgba($primary-color, 0.03);
-        border-bottom: 1px solid rgba($primary-color, 0.1);
-        
-        .visitor-info {
-          display: flex;
-          flex-direction: column;
-          
-          .visitor-name {
-            font-weight: $font-weight-bold;
-            color: $text-color;
-            font-size: $font-size-base;
-          }
-          
-          .visitor-company {
-            font-size: $font-size-sm;
-            color: $text-secondary;
-          }
-        }
-        
-        .visit-status {
-          display: flex;
-          align-items: center;
-          padding: 4px 8px;
-          border-radius: 12px;
-          font-size: $font-size-sm;
-          
-          svg {
-            margin-right: 4px;
-          }
-          
-          &.status-pending {
-            background-color: rgba($warning-color, 0.15);
-            color: darken($warning-color, 10%);
-          }
-          
-          &.status-approved {
-            background-color: rgba($success-color, 0.15);
-            color: darken($success-color, 10%);
-            animation: approved-animation 0.5s ease;
-          }
-          
-          &.status-rejected {
-            background-color: rgba($danger-color, 0.15);
-            color: darken($danger-color, 10%);
-            animation: rejected-animation 0.5s ease;
-          }
-          
-          &.status-canceled {
-            background-color: rgba($text-secondary, 0.15);
-            color: darken($text-secondary, 10%);
-            animation: canceled-animation 0.5s ease;
-          }
-          
-          &.status-default {
-            background-color: rgba($primary-color, 0.15);
-            color: darken($primary-color, 10%);
-          }
-          
-          &.status-loading {
-            background-color: rgba($primary-color, 0.15);
-            color: darken($primary-color, 10%);
-            
-            .spin {
-              animation: spin 1s linear infinite;
-            }
-          }
-        }
-      }
-      
-      .visit-item-details {
-        padding: $spacing-md;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: $spacing-sm;
-        
-        @include mobile {
-          grid-template-columns: 1fr;
-        }
-        
-        .visit-detail {
-          display: flex;
-          flex-direction: column;
-          
-          .label {
-            font-size: $font-size-sm;
-            color: $text-secondary;
-            margin-bottom: 4px;
-          }
-          
-          .value {
-            font-weight: $font-weight-medium;
-            color: $text-color;
-          }
-        }
-      }
-      
-      .visit-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: $spacing-sm;
-        padding: $spacing-sm $spacing-md $spacing-md;
-        border-top: 1px solid rgba($border-color, 0.5);
-        
-        .btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 8px 16px;
-          border-radius: $border-radius;
-          font-size: $font-size-sm;
-          font-weight: $font-weight-medium;
-          cursor: pointer;
-          transition: all 0.2s;
-          
-          svg {
-            margin-right: 6px;
-          }
-          
-          &.btn-approve {
-            background-color: $success-color;
-            color: white;
-            border: none;
-            
-            &:hover {
-              background-color: darken($success-color, 5%);
-            }
-          }
-          
-          &.btn-reject {
-            background-color: transparent;
-            color: $danger-color;
-            border: 1px solid $danger-color;
-            
-            &:hover {
-              background-color: rgba($danger-color, 0.05);
-            }
-          }
-        }
-      }
-    }
   }
-  
+
   .loading-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: $spacing-md;
-    
+
     .spinner {
       width: 40px;
       height: 40px;
@@ -336,132 +155,15 @@
       animation: spin 1s linear infinite;
       margin-bottom: $spacing-sm;
     }
-    
+
     p {
       color: $text-secondary;
     }
   }
 }
 
-// 클릭 가능한 상태 버튼 스타일
-.visit-status-button {
-  display: flex;
-  align-items: center;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: $font-size-sm;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  svg {
-    margin-right: 4px;
-  }
-  
-  &.status-pending {
-    background-color: rgba($warning-color, 0.15);
-    color: darken($warning-color, 10%);
-    position: relative;
-    overflow: hidden;
-    
-    &::after {
-      content: '';
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: $warning-color;
-      margin-left: 6px;
-      animation: blink 1.5s infinite;
-    }
-    
-    &:hover {
-      background-color: rgba($warning-color, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 4px rgba($warning-color, 0.2);
-    }
-    
-    &:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-  }
-}
-
-// 애니메이션 정의
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  50% {
-    opacity: 0.15;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-}
-
-@keyframes approved-animation {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes rejected-animation {
-  0% {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-  60% {
-    transform: translateX(5px);
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes canceled-animation {
-  0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-} 

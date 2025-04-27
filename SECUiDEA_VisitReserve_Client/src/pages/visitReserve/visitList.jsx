@@ -8,6 +8,9 @@ import { useAuth } from '../../context/AuthContext';
 // 스타일
 import './visitList.scss';
 
+// 컴포넌트
+import VisitCard from '../../components/cards/VisitCard';
+
 // Mock 데이터
 import { generateMockVisitData, paginateMockData } from './mockData';
 
@@ -123,8 +126,8 @@ const VisitList = () => {
         }
     }, [API_BASE_URL, isMember, page, loading, useMockData, mockDataCache]);
 
-    // 방문 신청 상태 변경
-    const handleStatusChange = async (visitId, newStatus) => {
+    // 방문 신청 상태 변경 - useCallback으로 메모이제이션
+    const handleStatusChange = useCallback(async (visitId, newStatus) => {
         if (!isMember) return; // Member만 상태 변경 가능
         
         // 이미 상태 변경 중인 경우 중복 요청 방지
@@ -207,7 +210,7 @@ const VisitList = () => {
                 return newState;
             });
         }
-    };
+    }, [isMember, pendingStatusChanges, useMockData, mockDataCache, API_BASE_URL]);
 
     // 페이지 로드 시 데이터 가져오기
     useEffect(() => {
@@ -217,12 +220,12 @@ const VisitList = () => {
     }, [fetchVisits]);
 
     // 추가 데이터 로드
-    const loadMoreData = () => {
+    const loadMoreData = useCallback(() => {
         setPage(prevPage => prevPage + 1);
-    };
+    }, []);
 
     // 데이터 초기화 및 새로고침
-    const handleRefresh = () => {
+    const handleRefresh = useCallback(() => {
         setVisits([]);
         setPage(1);
         setHasMore(true);
@@ -233,16 +236,16 @@ const VisitList = () => {
         if (useMockData) {
             setMockDataCache(generateMockVisitData(50, isMember));
         }
-    };
+    }, [useMockData, isMember]);
 
     // 데이터 타입 전환
-    const toggleDataSource = () => {
+    const toggleDataSource = useCallback(() => {
         setUseMockData(prev => !prev);
         handleRefresh();
-    };
+    }, [handleRefresh]);
 
     // 방문 상태에 따른 스타일 및 아이콘 반환
-    const getStatusInfo = (status) => {
+    const getStatusInfo = useCallback((status) => {
         switch (status) {
             case 'pending':
                 return { 
@@ -275,6 +278,13 @@ const VisitList = () => {
                     className: 'status-default'
                 };
         }
+    }, [t]);
+
+    // 로딩 중 상태 정보
+    const loadingStatusInfo = {
+        label: '요청 중',
+        icon: <Loader2 size={18} className="spin" />,
+        className: 'status-loading'
     };
 
     // 다음 페이지 자동 로드 - useEffect로 page 변경 시 자동 로드
@@ -363,61 +373,19 @@ const VisitList = () => {
                                     const isPending = pendingStatusChanges[visit.id];
                                     // 표시할 상태 정보 결정
                                     const statusInfo = isPending 
-                                        ? { label: '요청 중', icon: <Loader2 size={18} className="spin" />, className: 'status-loading' }
+                                        ? loadingStatusInfo
                                         : getStatusInfo(visit.status);
                                     
                                     return (
-                                        <div 
-                                            key={visit.id} 
-                                            className={`visit-item ${isPending ? 'item-pending' : ''}`}
-                                        >
-                                            <div className="visit-item-header">
-                                                <div className="visitor-info">
-                                                    <span className="visitor-name">{visit.visitorName}</span>
-                                                    <span className="visitor-company">{visit.visitorCompany}</span>
-                                                </div>
-                                                
-                                                {isMember && visit.status === 'pending' && !isPending ? (
-                                                    // Member이고 대기중인 상태일 때 - 클릭 가능한 버튼으로 표시 (변경 중이 아닐 때)
-                                                    <button 
-                                                        className="visit-status-button status-pending"
-                                                        onClick={() => handleStatusChange(visit.id, 'approved')}
-                                                        title="클릭하여 승인하기"
-                                                    >
-                                                        <Clock size={18} />
-                                                        <span>승인 대기</span>
-                                                    </button>
-                                                ) : (
-                                                    // 그 외의 경우 또는 변경 중일 때 - 일반 상태 표시
-                                                    <div className={`visit-status ${statusInfo.className}`}>
-                                                        {statusInfo.icon}
-                                                        <span>{statusInfo.label}</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            
-                                            <div className="visit-item-details">
-                                                <div className="visit-detail">
-                                                    <span className="label">방문 일자:</span>
-                                                    <span className="value">{visit.visitDate}</span>
-                                                </div>
-                                                <div className="visit-detail">
-                                                    <span className="label">방문 시간:</span>
-                                                    <span className="value">{visit.visitTime}</span>
-                                                </div>
-                                                <div className="visit-detail">
-                                                    <span className="label">방문 목적:</span>
-                                                    <span className="value">{visit.visitPurpose}</span>
-                                                </div>
-                                                {isMember && (
-                                                    <div className="visit-detail">
-                                                        <span className="label">연락처:</span>
-                                                        <span className="value">{visit.visitorContact}</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            
-                                        </div>
+                                        <VisitCard
+                                            key={visit.id}
+                                            visit={visit}
+                                            isMember={isMember}
+                                            isPending={isPending}
+                                            statusInfo={statusInfo}
+                                            onStatusChange={handleStatusChange}
+                                            showContact={isMember}
+                                        />
                                     );
                                 })}
                             </div>

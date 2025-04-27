@@ -1,90 +1,104 @@
-import { Link } from "react-router-dom";
-import { Clock, ArrowRight } from "lucide-react";
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
+import { Clock, CheckCircle, X, AlertCircle, Loader2 } from 'lucide-react';
 
 // 스타일
 import './VisitCard.scss';
 
-/**
- * 방문 아이템 컴포넌트
- * @param {Object} props
- * @param {React.ReactNode} props.icon - 방문 아이템 아이콘 (선택사항)
- * @param {string} props.title - 방문 아이템 제목 (방문자 이름이나 시간 등)
- * @param {string} props.subtitle - 방문 아이템 부제목 (방문 장소나 목적 등)
- * @param {string} props.status - 방문 상태 텍스트
- * @param {'pending' | 'approved' | 'rejected'} props.statusType - 방문 상태 타입 (기본값: 'pending')
- * @returns {JSX.Element} 방문 아이템 컴포넌트
- */
-export const VisitItem = ({ icon, title, subtitle, status, statusType = 'pending' }) => (
-    <div className="visit-item">
-        {icon || <Clock size={20} className="visit-item_icon" />}
-        <div className="visit-item_details">
-            <p className="visit-item_title">{title}</p>
-            <p className="visit-item_subtitle">{subtitle}</p>
-        </div>
-        <div className={`visit-item_status visit-item_status--${statusType}`}>
-            {status}
-        </div>
-    </div>
-);
-
-/**
- * 방문 카드 컴포넌트
- * @param {Object} props
- * @param {string} props.title - 카드 제목
- * @param {Array} props.items - 방문 아이템 배열
- * @param {string} props.moreLink - 더보기 링크 경로
- * @param {Function} props.onViewMore - 더보기 클릭 핸들러
- * @param {string} props.moreLinkText - 더보기 링크 텍스트
- */
-const VisitCard = ({
-    title = '방문 예약',
-    items = [],
-    moreLink,
-    onViewMore,
-    moreLinkText = '모든 방문 일정 보기'
+const VisitCard = memo(({ 
+    visit, 
+    isMember, 
+    isPending, 
+    statusInfo, 
+    onStatusChange,
+    showContact = false 
 }) => {
     return (
-        <div className="visit-card">
-            <div className="visit-card_header">
-                <h3>{title}</h3>
+        <div className={`visit-item ${isPending ? 'item-pending' : ''}`}>
+            <div className="visit-item-header">
+                <div className="visitor-info">
+                    <span className="visitor-name">{visit.visitorName}</span>
+                    <span className="visitor-company">{visit.visitorCompany}</span>
+                </div>
+                
+                {isMember && visit.status === 'pending' && !isPending ? (
+                    // Member이고 대기중인 상태일 때 - 클릭 가능한 버튼으로 표시 (변경 중이 아닐 때)
+                    <button 
+                        className="visit-status-button status-pending"
+                        onClick={() => onStatusChange(visit.id, 'approved')}
+                        title="클릭하여 승인하기"
+                    >
+                        <Clock size={18} />
+                        <span>승인 대기</span>
+                    </button>
+                ) : (
+                    // 그 외의 경우 또는 변경 중일 때 - 일반 상태 표시
+                    <div className={`visit-status ${statusInfo.className}`}>
+                        {statusInfo.icon}
+                        <span>{statusInfo.label}</span>
+                    </div>
+                )}
             </div>
-
-            <div className="visit-card_body">
-                {
-                    items.length > 0 ? (
-                        <>
-                            {items.map((item, index) => (
-                                <VisitItem key={index}
-                                    title={item.title}
-                                    subtitle={item.subtitle}
-                                    status={item.status}
-                                    statusType={item.statusType}
-                                    icon={item.icon}
-                                />
-                            ))}
-
-                            {moreLink && (
-                                <div className="visit-card_more">
-                                    <Link to={moreLink}
-                                        className="visit-card_more"
-                                        onClick={onViewMore}
-                                    >
-                                        {moreLinkText}
-                                        <ArrowRight size={16} />
-                                    </Link>
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <div className="text-center py-lg">
-                            <p>방문 일정이 없습니다.</p>
-                        </div>
-                    )
-                }
+            
+            <div className="visit-item-details">
+                <div className="visit-detail">
+                    <span className="label">방문 일자:</span>
+                    <span className="value">{visit.visitDate}</span>
+                </div>
+                <div className="visit-detail">
+                    <span className="label">방문 시간:</span>
+                    <span className="value">{visit.visitTime}</span>
+                </div>
+                <div className="visit-detail">
+                    <span className="label">방문 목적:</span>
+                    <span className="value">{visit.visitPurpose}</span>
+                </div>
+                {showContact && (
+                    <div className="visit-detail">
+                        <span className="label">연락처:</span>
+                        <span className="value">{visit.visitorContact}</span>
+                    </div>
+                )}
             </div>
+        
         </div>
-
     );
-}
+}, (prevProps, nextProps) => {
+    // 최적화를 위한 비교 함수 (이전 props와 다음 props 비교)
+    return (
+        prevProps.visit.id === nextProps.visit.id &&
+        prevProps.visit.status === nextProps.visit.status &&
+        prevProps.isPending === nextProps.isPending &&
+        prevProps.isMember === nextProps.isMember
+    );
+});
 
-export default VisitCard;
+VisitCard.propTypes = {
+    /** 방문 데이터 객체 */
+    visit: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        visitorName: PropTypes.string.isRequired,
+        visitorCompany: PropTypes.string,
+        visitorContact: PropTypes.string,
+        visitDate: PropTypes.string.isRequired,
+        visitTime: PropTypes.string.isRequired,
+        visitPurpose: PropTypes.string,
+        status: PropTypes.string.isRequired
+    }).isRequired,
+    /** 사용자가 Member인지 여부 */
+    isMember: PropTypes.bool.isRequired,
+    /** 상태 변경 중인지 여부 */
+    isPending: PropTypes.bool.isRequired,
+    /** 상태 정보 (아이콘, 레이블, 클래스명) */
+    statusInfo: PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        icon: PropTypes.node.isRequired,
+        className: PropTypes.string.isRequired
+    }).isRequired,
+    /** 상태 변경 핸들러 함수 */
+    onStatusChange: PropTypes.func.isRequired,
+    /** 연락처 표시 여부 */
+    showContact: PropTypes.bool
+};
+
+export default VisitCard; 
