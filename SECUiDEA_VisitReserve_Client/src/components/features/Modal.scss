@@ -1,0 +1,126 @@
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-container {
+  background-color: $background-color;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: scaleIn 0.25s ease-out;
+  
+  // 사이즈 변형
+  &.modal-small {
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  &.modal-medium {
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  &.modal-large {
+    width: 90%;
+    max-width: 800px;
+  }
+  
+  @include mobile {
+    width: 90%;
+    border-radius: 10px;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid $border-color;
+  
+  .modal-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $text-color;
+    margin: 0;
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    color: $text-secondary;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: $text-color;
+    }
+  }
+}
+
+.modal-content {
+  padding: $spacing-lg;
+  overflow-y: auto;
+  flex: 1;
+  
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+.modal-footer {
+  padding: $spacing-md $spacing-lg;
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+  border-top: 1px solid $border-color;
+  
+  @include mobile {
+    padding: $spacing-md;
+    flex-direction: column;
+  }
+  
+  button {
+    min-width: 80px;
+  }
+}
+
+// 모달 애니메이션
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+} 

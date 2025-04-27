@@ -1,0 +1,431 @@
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
+
+@import '../../components/features/EmployeeSelector.scss';
+@import '../../components/features/InputWithButton.scss';
+
+.privacy-agreement-page {
+  width: 100%;
+  position: relative;
+  padding: $spacing-xl $spacing-md;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .page-header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    h1 {
+      margin-bottom: $spacing-sm;
+      color: $primary-color;
+      font-size: $font-size-xxl;
+      font-weight: $font-weight-bold;
+    }
+
+    .page-subtitle {
+      color: $text-secondary;
+      font-size: $font-size-lg;
+    }
+  }
+
+  .form-section {
+    background-color: $background-color;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: $spacing-lg;
+
+    @include mobile {
+      padding: $spacing-md;
+    }
+  }
+
+  .section-header {
+    margin-bottom: $spacing-lg;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      font-size: $font-size-xl;
+      color: $text-color;
+      margin-bottom: $spacing-xs;
+
+      svg {
+        color: $primary-color;
+      }
+    }
+
+    p {
+      color: $text-secondary;
+      font-size: $font-size-base;
+    }
+  }
+
+  // 개인정보 처리방침 섹션
+  .privacy-agreement-section {
+    margin-bottom: $spacing-xl;
+  }
+
+  .privacy-card {
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  // 아코디언 스타일
+  .accordion {
+    &.privacy-accordion {
+      .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $spacing-md;
+        background-color: rgba($primary-color, 0.05);
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: rgba($primary-color, 0.1);
+        }
+
+        .accordion-title {
+          font-weight: $font-weight-bold;
+          color: $primary-color;
+        }
+
+        .toggle-btn {
+          background: none;
+          border: none;
+          color: $primary-color;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px;
+
+          &:hover {
+            background-color: rgba($primary-color, 0.1);
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .accordion-content {
+        transition: max-height 0.4s ease;
+        overflow-y: auto;
+        border-top: 1px solid $border-color;
+
+        /* 스크롤바 커스터마이징 */
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: rgba($border-color, 0.2);
+          border-radius: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: rgba($primary-color, 0.3);
+          border-radius: 8px;
+
+          &:hover {
+            background-color: rgba($primary-color, 0.5);
+          }
+        }
+
+        &.expanded {
+          border-top: 1px solid $border-color;
+          padding-top: $spacing-md;
+        }
+
+        .content-inner {
+          padding: 0 $spacing-md $spacing-md;
+
+          h4 {
+            font-size: $font-size-base;
+            font-weight: $font-weight-bold;
+            margin: $spacing-md 0 $spacing-xs;
+            color: $text-color;
+          }
+
+          p,
+          ul {
+            margin-bottom: $spacing-md;
+            color: $text-secondary;
+            font-size: $font-size-sm;
+            line-height: 1.6;
+          }
+
+          ul {
+            padding-left: $spacing-md;
+
+            li {
+              margin-bottom: $spacing-xs;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 라디오 버튼 그룹 스타일
+  .privacy-radio-group {
+    padding: $spacing-md;
+    border-top: 1px solid $border-color;
+
+    .radio-label {
+      margin-bottom: $spacing-sm;
+      font-weight: $font-weight-bold;
+      color: $text-color;
+      font-size: $font-size-sm;
+    }
+
+    .radio-options {
+      display: flex;
+      gap: $spacing-lg;
+
+      @include mobile {
+        flex-direction: column;
+        gap: $spacing-xs;
+      }
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      input[type="radio"] {
+        margin-right: $spacing-xs;
+        width: 18px;
+        height: 18px;
+        accent-color: $primary-color;
+      }
+
+      span {
+        font-size: $font-size-sm;
+        color: $text-color;
+      }
+    }
+
+    .privacy-disagree-notice {
+      margin-top: $spacing-sm;
+      padding: $spacing-xs $spacing-sm;
+      background-color: rgba($error-color, 0.05);
+      border-left: 3px solid $error-color;
+      color: $error-color;
+      font-size: $font-size-xs;
+      border-radius: 4px;
+    }
+  }
+
+  // 방문 정보 폼
+  .visit-form {
+    .form-group-section {
+      margin-bottom: $spacing-xl;
+
+      h3 {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        font-size: $font-size-lg;
+        color: $text-color;
+        margin-bottom: $spacing-md;
+        padding-bottom: $spacing-xs;
+        border-bottom: 1px solid $border-color;
+
+        svg {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .form-row {
+      display: flex;
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+
+      @include mobile {
+        flex-direction: column;
+        gap: $spacing-sm;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+    }
+
+    .form-group {
+      margin-bottom: $spacing-md;
+
+      label {
+        display: block;
+        margin-bottom: $spacing-xs;
+        color: $text-color;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-sm;
+
+        .required {
+          color: $error-color;
+        }
+      }
+
+      input,
+      select,
+      textarea {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        font-size: $font-size-base;
+        transition: all 0.2s ease;
+
+        &:focus {
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+          outline: none;
+        }
+
+        &::placeholder {
+          color: $text-placeholder;
+        }
+
+        &.error {
+          border-color: $error-color;
+        }
+      }
+
+      .error-message {
+        color: $error-color;
+        font-size: $font-size-xs;
+        margin-top: 4px;
+      }
+
+      .input-with-icon {
+        position: relative;
+
+        svg {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $text-secondary;
+        }
+
+        input {
+          padding-left: 42px;
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      gap: $spacing-md;
+      margin-top: $spacing-xl;
+
+      @include mobile {
+        flex-direction: column;
+      }
+
+      button {
+        flex: 1;
+        padding: 14px;
+        border-radius: 8px;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &.btn-primary {
+          background-color: $primary-color;
+          color: #fff;
+          border: none;
+
+          &:hover {
+            background-color: darken($primary-color, 5%);
+          }
+
+          &:disabled {
+            background-color: lighten($primary-color, 20%);
+            cursor: not-allowed;
+          }
+        }
+
+        &.btn-outline {
+          background-color: transparent;
+          color: $primary-color;
+          border: 1px solid $primary-color;
+
+          &:hover {
+            background-color: rgba($primary-color, 0.05);
+          }
+        }
+      }
+    }
+
+    // 확인 상태 표시 스타일
+    .verification-status {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: $spacing-sm;
+      margin-bottom: $spacing-md;
+      border-radius: 8px;
+      font-size: $font-size-sm;
+      
+      &.success {
+        background-color: rgba($success-color, 0.1);
+        color: $success-color;
+        border-left: 3px solid $success-color;
+        
+        svg {
+          color: $success-color;
+        }
+      }
+      
+      &.error {
+        background-color: rgba($error-color, 0.1);
+        color: $error-color;
+        border-left: 3px solid $error-color;
+        
+        svg {
+          color: $error-color;
+        }
+      }
+    }
+    
+    // 버튼이 있는 폼 그룹
+    .action-group {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      margin-top: 24px;
+      
+      .verify-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        height: 44px;
+        margin-bottom: 4px;
+        
+        svg {
+          margin-right: 4px;
+        }
+      }
+      
+      button.btn-outline {
+        height: 44px;
+        margin-bottom: 4px;
+      }
+    }
+    
+    // 비활성화된 입력 필드
+    input:disabled {
+      background-color: rgba($border-color, 0.1);
+      cursor: not-allowed;
+    }
+  }
+}

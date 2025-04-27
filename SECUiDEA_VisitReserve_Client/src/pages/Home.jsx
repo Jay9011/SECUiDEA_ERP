@@ -120,11 +120,11 @@ const Home = () => {
                                 {t('common.welcome')}
                             </p>
                             <div className="hero-section_actions flex flex-gap-md flex-mobile-col">
-                                <Link to="/visit-reservation" className="btn btn-square-desktop btn-secondary btn-lg btn-icon btn-rounded-desktop-xs">
+                                <Link to="/visitReserve/privacyAgreement" className="btn btn-square-desktop btn-secondary btn-lg btn-icon btn-rounded-desktop-xs">
                                     <Calendar />
                                     {t('reservation.form.submit')}
                                 </Link>
-                                <Link to="/visit-history" className="btn btn-square-desktop btn-outline btn-secondary btn-lg btn-icon btn-rounded-desktop-xs text-white">
+                                <Link to="/visitReserve/visitList" className="btn btn-square-desktop btn-outline btn-secondary btn-lg btn-icon btn-rounded-desktop-xs text-white">
                                     <FileText />
                                     {t('admin.reservations')}
                                 </Link>
@@ -193,7 +193,7 @@ const Home = () => {
                             {t('reservation.form.purpose')}
                         </p>
                         <div className="flex flex-center flex-gap-md flex-mobile-col mt-lg">
-                            <Link to="/visit-reservation" className="btn btn-outline btn-lg">
+                            <Link to="/visitReserve/privacyAgreement" className="btn btn-outline btn-lg">
                                 {t('reservation.form.submit')}
                             </Link>
                             <Link to="/help" className="btn btn-light btn-lg">

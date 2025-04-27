@@ -22,7 +22,7 @@ const Footer = () => {
                         <h4>바로가기</h4>
                         <ul>
                             <li><Link to="/">홈</Link></li>
-                            <li><Link to="/visit-reservation">방문 신청</Link></li>
+                            <li><Link to="/visitReserve/privacyAgreement">방문 신청</Link></li>
                         </ul>
                     </div>
 

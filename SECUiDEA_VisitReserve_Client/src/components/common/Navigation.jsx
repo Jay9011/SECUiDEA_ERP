@@ -36,8 +36,8 @@ const Navigation = ({ isOpen, onClose }) => {
     const menuItems = useMemo(() => {
         const baseMenu = [
             { path: '/', label: '홈' },
-            { path: '/visit-reservation', label: '방문 예약' },
-            { path: '/visit-history', label: '방문 내역' },
+            { path: '/visitReserve/privacyAgreement', label: '방문 예약' },
+            { path: '/visitReserve/visitList', label: '방문 현황' },
         ];
 
         // 관리자인 경우 추가 메뉴

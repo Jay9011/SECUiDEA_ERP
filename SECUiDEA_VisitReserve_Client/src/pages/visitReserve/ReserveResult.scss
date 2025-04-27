@@ -1,0 +1,119 @@
+@import '../../styles/variables.scss';
+
+.reserve-result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: $background-color;
+}
+
+.result-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  text-align: center;
+}
+
+.result-header {
+  margin-bottom: 30px;
+  
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  .success-icon, .fail-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+    font-size: 40px;
+  }
+
+  .success-icon {
+    background-color: $success-color;
+    color: white;
+  }
+
+  .fail-icon {
+    background-color: $error-color;
+    color: white;
+  }
+}
+
+.result-info {
+  margin-bottom: 30px;
+
+  .info-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+    
+    &.error {
+      color: $error-color;
+      font-weight: 600;
+    }
+  }
+
+  .retry-message {
+    font-size: 16px;
+    color: #666;
+  }
+}
+
+.info-detail {
+  background-color: $light-gray;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  
+  p {
+    display: flex;
+    margin-bottom: 12px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .info-label {
+    width: 120px;
+    font-weight: 600;
+    color: $text-color-dark;
+  }
+  
+  .info-value {
+    flex: 1;
+    color: $text-color;
+  }
+}
+
+.notification {
+  font-size: 14px;
+  color: $text-color-light;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  
+  .warning {
+    display: block;
+    margin-top: 8px;
+    color: $warning-color;
+    font-weight: 600;
+  }
+}
+
+.result-actions {
+  margin-top: 30px;
+} 

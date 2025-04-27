@@ -12,15 +12,17 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
+import PrivacyAgreementInput from './pages/visitReserve/PrivacyAgreementInput';
+import VisitList from './pages/visitReserve/visitList';
 
 import ProtectedRoute from './components/ProtectedRoute';
 
 // 로딩 컴포넌트
-const Loading = () => <div className="loading">로딩 중...</div>;
+import LoadingOverlay from './components/common/LoadingOverlay';
 
 const App = () => {
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<LoadingOverlay />}>
       <Router basename="/visit">
         <AuthProvider>
           <Routes>
@@ -32,6 +34,12 @@ const App = () => {
 
             {/* 기본 배경의 레이아웃 */}
             <Route element={<BaseLayout className="standard-layout" />}>
+              <Route path="/visitReserve/privacyAgreement" element={<PrivacyAgreementInput />} />
+              <Route path="/visitReserve/visitList" element={
+                // <ProtectedRoute>
+                  <VisitList />
+                // </ProtectedRoute>
+              } />
               <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Route>
