@@ -6,16 +6,74 @@
   margin: 0 auto;
   padding: $spacing-md;
   
-  .visit-list-title {
+  .visit-list-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: $spacing-lg;
-    font-size: $font-size-xl;
-    color: $primary-color;
     
-    .title-icon {
-      margin-right: $spacing-sm;
+    .visit-list-title {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-xl;
       color: $primary-color;
+      margin: 0;
+      
+      .title-icon {
+        margin-right: $spacing-sm;
+        color: $primary-color;
+      }
+    }
+    
+    .actions {
+      display: flex;
+      gap: $spacing-sm;
+      
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 12px;
+        border-radius: $border-radius;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        cursor: pointer;
+        transition: all 0.2s;
+        
+        svg {
+          margin-right: 6px;
+        }
+        
+        &.btn-refresh {
+          background-color: transparent;
+          color: $primary-color;
+          border: 1px solid $primary-color;
+          
+          &:hover {
+            background-color: rgba($primary-color, 0.05);
+          }
+        }
+        
+        &.btn-mock {
+          background-color: rgba($warning-color, 0.8);
+          color: white;
+          border: none;
+          
+          &:hover {
+            background-color: $warning-color;
+          }
+        }
+        
+        &.btn-api {
+          background-color: rgba($success-color, 0.8);
+          color: white;
+          border: none;
+          
+          &:hover {
+            background-color: $success-color;
+          }
+        }
+      }
     }
   }
   
@@ -30,6 +88,42 @@
     
     svg {
       margin-right: $spacing-xs;
+    }
+  }
+  
+  .visit-list-wrapper {
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    border-radius: $border-radius;
+    background-color: rgba($primary-color, 0.02);
+    padding: $spacing-sm;
+    
+    // 스크롤바 스타일링
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background-color: rgba($border-color, 0.2);
+      border-radius: 8px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba($primary-color, 0.3);
+      border-radius: 8px;
+      
+      &:hover {
+        background-color: rgba($primary-color, 0.5);
+      }
+    }
+    
+    .end-message {
+      text-align: center;
+      padding: $spacing-md;
+      margin-top: $spacing-md;
+      color: $text-secondary;
+      font-style: italic;
+      border-top: 1px dashed rgba($border-color, 0.5);
     }
   }
   
@@ -191,26 +285,26 @@
         }
       }
     }
+  }
+  
+  .loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $spacing-md;
     
-    .loading-indicator {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: $spacing-md;
-      
-      .spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid rgba($primary-color, 0.2);
-        border-top-color: $primary-color;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-bottom: $spacing-sm;
-      }
-      
-      p {
-        color: $text-secondary;
-      }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba($primary-color, 0.2);
+      border-top-color: $primary-color;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: $spacing-sm;
+    }
+    
+    p {
+      color: $text-secondary;
     }
   }
 }
