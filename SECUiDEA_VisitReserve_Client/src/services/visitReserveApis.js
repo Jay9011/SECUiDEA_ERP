@@ -7,7 +7,7 @@ const API_BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 export async function verifyEmployee(employeeData) {
     try {
-        const response = await fetch(`${API_BASE_URL}/Visit/GetEmployeeByName?name=${employeeData.name}`, {
+        const response = await fetch(`${API_BASE_URL}/Visit/EmployeeByName?name=${employeeData.name}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export async function verifyEmployee(employeeData) {
 }
 
 export async function submitReservation(data) {
-    const response = await fetch(`${API_BASE_URL}/visit-reservation`, {
+    const response = await fetch(`${API_BASE_URL}/Visit/VisitReserve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

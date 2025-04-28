@@ -28,7 +28,7 @@ public class VisitController : BaseController
 
     #endregion
 
-    public async Task<IActionResult> GetEmployeeByName([FromQuery] string name)
+    public async Task<IActionResult> EmployeeByName([FromQuery] string name)
     {
         // 유효성 검사
         if (string.IsNullOrEmpty(name))
@@ -57,6 +57,52 @@ public class VisitController : BaseController
         {
             { "employees", new List<EmployeeDTO>() }
         }));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> VisitReserve([FromBody] VisitReserveDTO visitReserveDTO)
+    {
+        // 유효성 검사
+        if (visitReserveDTO == null || visitReserveDTO.EmployeePid == 0)
+        {
+            return BadRequest("Invalid visit reserve data.");
+        }
+
+        // 방문 시간 유효성 검사
+        DateTime visitStartDate;
+        DateTime visitEndDate;
+        string strVisitSDate = visitReserveDTO.VisitDate + " " + visitReserveDTO.VisitTime;
+        string strVisitEDate = visitReserveDTO.VisitEndDate + " " + visitReserveDTO.VisitEndTime;
+        if (!DateTime.TryParse(strVisitSDate, out visitStartDate) 
+            || !DateTime.TryParse(strVisitEDate, out visitEndDate)
+            || visitStartDate >= visitEndDate
+            )
+        {
+            return BadRequest("Invalid visit date format.");
+        }
+
+        var param = new SECUiDEA_VisitReserveParam
+        {
+            PID = visitReserveDTO.EmployeePid,
+            VisitantName = visitReserveDTO.VisitorName,
+            VisitantCompany = visitReserveDTO.VisitorCompany,
+            Mobile = visitReserveDTO.VisitorContact,
+            Email = visitReserveDTO.VisitorEmail,
+            VisitReasonText = visitReserveDTO.VisitPurpose,
+            VisitSDate = visitStartDate,
+            VisitEDate = visitEndDate,
+            LicensePlateNumber = visitReserveDTO.VisitorCarNumber,
+        };
+
+        var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReserve", param);
+        if (result.IsSuccess)
+        {
+            return Ok(BoolResultModel.Success("Visit reserved successfully.", new Dictionary<string, object>
+            {
+                {"visitInfo", param}
+            }));
+        }
+        return BadRequest(BoolResultModel.Fail("Failed to reserve visit."));
     }
 
     [Authorize]

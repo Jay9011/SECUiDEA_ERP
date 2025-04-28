@@ -37,8 +37,15 @@ function PrivacyAgreementInput() {
         return `${hours}:${minutes}`;
     };
 
+    // 종료 시간 설정 (23:59)
+    const getEndTime = () => {
+        return '23:59';
+    };
+
     const initialDate = getCurrentDate();
     const initialTime = getCurrentTime();
+    const initialEndDate = initialDate;
+    const initialEndTime = getEndTime();
 
     const [privacyAgreed, setPrivacyAgreed] = useState('');
     const [accordionExpanded, setAccordionExpanded] = useState(true);
@@ -57,6 +64,8 @@ function PrivacyAgreementInput() {
         visitPurpose: '',
         visitDate: initialDate,
         visitTime: initialTime,
+        visitEndDate: initialEndDate,
+        visitEndTime: initialEndTime,
     });
     const [errors, setErrors] = useState({});
     const [isEmployeeVerified, setIsEmployeeVerified] = useState(false);
@@ -64,6 +73,7 @@ function PrivacyAgreementInput() {
     const [verificationError, setVerificationError] = useState('');
     const [dateChanged, setDateChanged] = useState(false);
     const [timeChanged, setTimeChanged] = useState(false);
+    const [endDateChanged, setEndDateChanged] = useState(false);
 
     // 모달 상태
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
@@ -118,6 +128,28 @@ function PrivacyAgreementInput() {
             } else {
                 setDateChanged(false);
             }
+
+            // 시작 날짜가 변경되면 종료 날짜도 같이 변경
+            if (!endDateChanged) {
+                setFormData({
+                    ...formData,
+                    [name]: value,
+                    visitEndDate: value
+                });
+            } else {
+                setFormData({
+                    ...formData,
+                    [name]: value
+                });
+            }
+        } else if (name === 'visitEndDate') {
+            // 종료 날짜 변경 체크
+            if (value !== initialEndDate) {
+                setEndDateChanged(true);
+            } else {
+                setEndDateChanged(false);
+            }
+
             setFormData({
                 ...formData,
                 [name]: value
@@ -128,6 +160,17 @@ function PrivacyAgreementInput() {
                 setTimeChanged(true);
             } else {
                 setTimeChanged(false);
+            }
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        } else if (name === 'visitEndTime') {
+            // 종료 시간 변경 체크
+            if (value !== initialEndTime) {
+                setEndTimeChanged(true);
+            } else {
+                setEndTimeChanged(false);
             }
             setFormData({
                 ...formData,
@@ -226,7 +269,7 @@ function PrivacyAgreementInput() {
         }
     };
 
-    // 모달에서 직원 선택 처리
+    // 모달에서 직원 선택 처리 (둘 이상의 경우인 경우)
     const handleSelectEmployee = (employee) => {
         setFormData({
             ...formData,
@@ -248,7 +291,8 @@ function PrivacyAgreementInput() {
 
         // 필수 필드 검사
         const requiredFields = [
-            'visitorName', 'visitorContact', 'visitPurpose', 'visitDate', 'visitTime'
+            'visitorName', 'visitorContact', 'visitPurpose',
+            'visitDate', 'visitTime', 'visitEndDate', 'visitEndTime'
         ];
 
         requiredFields.forEach(field => {
@@ -262,6 +306,16 @@ function PrivacyAgreementInput() {
             newErrors.visitorEmail = '유효한 이메일 주소를 입력해주세요';
         }
 
+        // 종료 날짜/시간이 시작 날짜/시간보다 이후인지 검사
+        if (formData.visitDate && formData.visitEndDate && formData.visitTime && formData.visitEndTime) {
+            const startDateTime = new Date(`${formData.visitDate}T${formData.visitTime}`);
+            const endDateTime = new Date(`${formData.visitEndDate}T${formData.visitEndTime}`);
+
+            if (endDateTime < startDateTime) {
+                newErrors.visitEndDate = '종료 일시는 시작 일시보다 이후여야 합니다';
+            }
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -270,7 +324,6 @@ function PrivacyAgreementInput() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        // 유효성 검사 실패 시 토스트 알림 및 스크롤 이동
         if (privacyAgreed !== 'agree') {
             toast.error('개인정보 처리방침에 동의해주세요');
             scrollToRef(privacyCheckRef);
@@ -284,7 +337,6 @@ function PrivacyAgreementInput() {
         }
 
         if (!validateForm()) {
-            // 첫 번째 에러 필드로 스크롤
             const firstErrorField = Object.keys(errors)[0];
             scrollToField(firstErrorField);
 
@@ -292,7 +344,6 @@ function PrivacyAgreementInput() {
             return;
         }
 
-        // 모든 유효성 검사를 통과하면 실제 제출 처리
         handleSubmit();
     };
 
@@ -311,6 +362,8 @@ function PrivacyAgreementInput() {
                 visitPurpose: formData.visitPurpose,
                 visitDate: formData.visitDate,
                 visitTime: formData.visitTime,
+                visitEndDate: formData.visitEndDate,
+                visitEndTime: formData.visitEndTime,
             });
 
             // 성공 시 결과 페이지로 이동
@@ -601,7 +654,7 @@ function PrivacyAgreementInput() {
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="visitDate">방문 날짜 <span className="required">*</span></label>
+                                <label htmlFor="visitDate">방문 시작 날짜 <span className="required">*</span></label>
                                 <div className="input-with-icon">
                                     <Calendar size={18} />
                                     <input
@@ -619,7 +672,7 @@ function PrivacyAgreementInput() {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="visitTime">방문 시간 <span className="required">*</span></label>
+                                <label htmlFor="visitTime">방문 시작 시간 <span className="required">*</span></label>
                                 <div className="input-with-icon">
                                     <Clock size={18} />
                                     <input
@@ -633,6 +686,41 @@ function PrivacyAgreementInput() {
                                 </div>
                                 {errors.visitTime && <div className="error-message">{errors.visitTime}</div>}
                                 {!timeChanged && <div className="input-help-text">현재 시간이 기본값으로 설정되어 있습니다.</div>}
+                            </div>
+                        </div>
+
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="visitEndDate">방문 종료 날짜 <span className="required">*</span></label>
+                                <div className="input-with-icon">
+                                    <Calendar size={18} />
+                                    <input
+                                        type="date"
+                                        id="visitEndDate"
+                                        name="visitEndDate"
+                                        value={formData.visitEndDate}
+                                        onChange={handleInputChange}
+                                        min={formData.visitDate}
+                                        className={errors.visitEndDate ? 'error' : ''}
+                                    />
+                                </div>
+                                {errors.visitEndDate && <div className="error-message">{errors.visitEndDate}</div>}
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="visitEndTime">방문 종료 시간 <span className="required">*</span></label>
+                                <div className="input-with-icon">
+                                    <Clock size={18} />
+                                    <input
+                                        type="time"
+                                        id="visitEndTime"
+                                        name="visitEndTime"
+                                        value={formData.visitEndTime}
+                                        onChange={handleInputChange}
+                                        className={errors.visitEndTime ? 'error' : ''}
+                                    />
+                                </div>
+                                {errors.visitEndTime && <div className="error-message">{errors.visitEndTime}</div>}
                             </div>
                         </div>
 

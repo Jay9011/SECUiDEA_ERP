@@ -5,6 +5,8 @@ CREATE PROCEDURE SECUiDEA_GetPerson
     @Type       NVARCHAR(10)    = 'name',
     @Name       NVARCHAR(50)
 AS
+    SET NOCOUNT ON;
+    
 	SET @Type = LOWER(@Type)
 
     IF (@Type = 'name')
