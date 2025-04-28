@@ -17,6 +17,7 @@ public class EmployeeDTO
     public int PID { get; set; }
     public string Sabun { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
+    public string DepartmentName { get; set; } = string.Empty;
     public int PersonStatusID { get; set; }
     public string PersonStatusName { get; set; } = string.Empty;
 }

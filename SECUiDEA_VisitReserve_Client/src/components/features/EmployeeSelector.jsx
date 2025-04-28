@@ -8,7 +8,8 @@ const EmployeeSelector = ({ employees, onSelect, onCancel }) => {
 
   // 직원 목록 필터링
   const filteredEmployees = employees.filter(emp =>
-    emp.name.toLowerCase().includes(searchTerm.toLowerCase())
+    emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    emp.departmentName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // 직원 선택 처리
@@ -50,9 +51,8 @@ const EmployeeSelector = ({ employees, onSelect, onCancel }) => {
             >
               <div className="employee-info">
                 <div className="employee-name">{employee.name}</div>
-                <div className="employee-department">{employee.department}</div>
               </div>
-              <div className="employee-id">{employee.pid}</div>
+              <div className="employee-id">{employee.departmentName}</div>
             </div>
           ))
         ) : (
@@ -85,7 +85,7 @@ EmployeeSelector.propTypes = {
     PropTypes.shape({
       pid: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      department: PropTypes.string.isRequired
+      departmentName: PropTypes.string.isRequired
     })
   ).isRequired,
   onSelect: PropTypes.func.isRequired,

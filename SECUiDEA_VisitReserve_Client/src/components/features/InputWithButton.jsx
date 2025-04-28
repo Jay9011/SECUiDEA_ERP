@@ -13,12 +13,22 @@ function InputWithButton({
   disabled,        // 비활성화 여부
   className        // 추가 클래스명
 }) {
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !buttonProps.disabled && !disabled) {
+      e.preventDefault();
+      buttonProps.onClick && buttonProps.onClick(e);
+    }
+
+    inputProps.onKeyDown && inputProps.onKeyDown(e);
+  };
+
   return (
     <div className={`input-with-button ${className || ''}`}>
       <div className="input-button-container">
         <input
           className={error ? 'error' : ''}
           disabled={disabled}
+          onKeyDown={handleKeyDown}
           {...inputProps}
         />
         <button

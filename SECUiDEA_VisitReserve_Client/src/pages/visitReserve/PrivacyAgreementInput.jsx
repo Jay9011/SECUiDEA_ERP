@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { User, Users, Calendar, Clock, Shield, CheckCircle, Search, AlertCircle } from "lucide-react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // 컴포넌트
 import Accordion from '../../components/features/Accordion';
@@ -18,6 +20,26 @@ import { verifyEmployee, submitReservation } from '../../services/visitReserveAp
 function PrivacyAgreementInput() {
     const navigate = useNavigate();
 
+    // 참조 추가
+    const privacyCheckRef = useRef(null);
+    const employeeCheckRef = useRef(null);
+
+    // 현재 날짜와 시간 초기값 설정
+    const getCurrentDate = () => {
+        const now = new Date();
+        return now.toISOString().split('T')[0];
+    };
+
+    const getCurrentTime = () => {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
+    };
+
+    const initialDate = getCurrentDate();
+    const initialTime = getCurrentTime();
+
     const [privacyAgreed, setPrivacyAgreed] = useState('');
     const [accordionExpanded, setAccordionExpanded] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -33,17 +55,41 @@ function PrivacyAgreementInput() {
         visitorEmail: '',
         visitorCarNumber: '',
         visitPurpose: '',
-        visitDate: '',
-        visitTime: '',
+        visitDate: initialDate,
+        visitTime: initialTime,
     });
     const [errors, setErrors] = useState({});
     const [isEmployeeVerified, setIsEmployeeVerified] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
     const [verificationError, setVerificationError] = useState('');
+    const [dateChanged, setDateChanged] = useState(false);
+    const [timeChanged, setTimeChanged] = useState(false);
 
     // 모달 상태
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
     const [employeeList, setEmployeeList] = useState([]);
+
+    // 스크롤 이동 함수 추가
+    const scrollToRef = (ref) => {
+        ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    // 특정 필드로 스크롤 이동
+    const scrollToField = (fieldId) => {
+        const element = document.getElementById(fieldId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.focus();
+        }
+    };
+
+    // 전화번호 포맷팅 함수
+    const formatPhoneNumber = (value) => {
+        if (!value) return '';
+
+        // 숫자만 추출
+        return value.replace(/[^\d]/g, '');
+    };
 
     // 입력값 변경 처리
     const handleInputChange = (e) => {
@@ -59,6 +105,34 @@ function PrivacyAgreementInput() {
                 [name]: value,
                 employeePid: '' // 이름 수정 시 PID 초기화
             });
+        } else if (name === 'visitorContact') {
+            const numbersOnly = value.replace(/[^\d-]/g, '');
+            setFormData({
+                ...formData,
+                [name]: numbersOnly
+            });
+        } else if (name === 'visitDate') {
+            // 날짜가 변경되었는지 체크
+            if (value !== initialDate) {
+                setDateChanged(true);
+            } else {
+                setDateChanged(false);
+            }
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        } else if (name === 'visitTime') {
+            // 시간이 변경되었는지 체크
+            if (value !== initialTime) {
+                setTimeChanged(true);
+            } else {
+                setTimeChanged(false);
+            }
+            setFormData({
+                ...formData,
+                [name]: value
+            });
         } else {
             setFormData({
                 ...formData,
@@ -73,6 +147,17 @@ function PrivacyAgreementInput() {
                 [name]: ''
             });
         }
+    };
+
+    // 전화번호 입력 필드 포커스 아웃 이벤트 처리
+    const handlePhoneBlur = (e) => {
+        const { value } = e.target;
+        // 숫자만 추출 후 포맷팅
+        const formattedPhone = formatPhoneNumber(value);
+        setFormData({
+            ...formData,
+            visitorContact: formattedPhone
+        });
     };
 
     // 개인정보 처리방침 동의 상태 변경 처리
@@ -126,12 +211,15 @@ function PrivacyAgreementInput() {
                     setIsEmployeeVerified(true);
                 } else {
                     setVerificationError('직원 정보를 가져오는 중 오류가 발생했습니다');
+                    toast.error('직원 정보를 가져오는 중 오류가 발생했습니다');
                 }
             } else {
                 setVerificationError(result.message || '일치하는 직원 정보를 찾을 수 없습니다');
+                toast.error(result.message || '일치하는 직원 정보를 찾을 수 없습니다');
             }
         } catch (error) {
             setVerificationError('직원 정보 확인 중 오류가 발생했습니다');
+            toast.error('직원 정보 확인 중 오류가 발생했습니다');
             console.error('직원 확인 오류:', error);
         } finally {
             setIsVerifying(false);
@@ -174,26 +262,42 @@ function PrivacyAgreementInput() {
             newErrors.visitorEmail = '유효한 이메일 주소를 입력해주세요';
         }
 
-        // 연락처 형식 검사
-        if (formData.visitorContact && !/^\d{2,3}-\d{3,4}-\d{4}$/.test(formData.visitorContact)) {
-            newErrors.visitorContact = '연락처 형식이 올바르지 않습니다 (예: 010-1234-5678)';
-        }
-
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-    // 폼 제출 처리
-    const handleSubmit = async (e) => {
+    // 폼 제출 핸들러 수정
+    const handleFormSubmit = (e) => {
         e.preventDefault();
 
+        // 유효성 검사 실패 시 토스트 알림 및 스크롤 이동
         if (privacyAgreed !== 'agree') {
-            alert('개인정보 처리방침에 동의해주세요');
+            toast.error('개인정보 처리방침에 동의해주세요');
+            scrollToRef(privacyCheckRef);
             return;
         }
+
+        if (!isEmployeeVerified || !formData.employeePid) {
+            toast.error('직원 정보를 확인해주세요');
+            scrollToRef(employeeCheckRef);
+            return;
+        }
+
         if (!validateForm()) {
+            // 첫 번째 에러 필드로 스크롤
+            const firstErrorField = Object.keys(errors)[0];
+            scrollToField(firstErrorField);
+
+            toast.error('모든 필수 항목을 올바르게 입력해주세요');
             return;
         }
+
+        // 모든 유효성 검사를 통과하면 실제 제출 처리
+        handleSubmit();
+    };
+
+    // 기존 폼 제출 처리 - API 호출 부분
+    const handleSubmit = async () => {
         setLoading(true);
         try {
             // 방문 신청 API 호출
@@ -208,7 +312,8 @@ function PrivacyAgreementInput() {
                 visitDate: formData.visitDate,
                 visitTime: formData.visitTime,
             });
-            // BoolResultModel 반환값 예시: { isSuccess, message, data: { visitorName, visitorContact, visitDate, visitTime, educationWatched } }
+
+            // 성공 시 결과 페이지로 이동
             navigate('/visitReserve/ReserveResult', {
                 state: {
                     result: result.isSuccess,
@@ -220,7 +325,8 @@ function PrivacyAgreementInput() {
                 }
             });
         } catch (error) {
-            alert('방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+            toast.error('방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+            console.error('방문 신청 오류:', error);
         } finally {
             setLoading(false);
         }
@@ -228,6 +334,19 @@ function PrivacyAgreementInput() {
 
     return (
         <div className="privacy-agreement-page">
+            {/* ToastContainer 추가 */}
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
             <div className="page-header">
                 <h1>방문 예약</h1>
                 <p className="page-subtitle">방문 정보 및 개인정보를 입력해주세요</p>
@@ -290,7 +409,7 @@ function PrivacyAgreementInput() {
                             <p>연락처: 02-1234-5678, privacy@company.com</p>
                         </Accordion>
 
-                        <div className="privacy-radio-group">
+                        <div className="privacy-radio-group" ref={privacyCheckRef}>
                             <div className="radio-options flex-end">
                                 <label className="radio-option">
                                     <input
@@ -323,12 +442,12 @@ function PrivacyAgreementInput() {
                 </div>
 
                 {/* 방문 정보 폼 */}
-                <form onSubmit={handleSubmit} className="visit-form">
+                <form onSubmit={handleFormSubmit} className="visit-form">
                     {/* 방문 대상 직원 정보 */}
                     <div className="form-group-section">
                         <h3><Users size={20} /> 방문 대상 직원 정보</h3>
 
-                        <div className="form-group">
+                        <div className="form-group" ref={employeeCheckRef}>
                             <label htmlFor="employeeName">직원 이름 <span className="required">*</span></label>
                             {isEmployeeVerified ? (
                                 <InputWithButton
@@ -444,7 +563,8 @@ function PrivacyAgreementInput() {
                                     name="visitorContact"
                                     value={formData.visitorContact}
                                     onChange={handleInputChange}
-                                    placeholder="예: 010-1234-5678"
+                                    onBlur={handlePhoneBlur}
+                                    placeholder="숫자만 입력 (예: 01012345678)"
                                     className={errors.visitorContact ? 'error' : ''}
                                 />
                                 {errors.visitorContact && <div className="error-message">{errors.visitorContact}</div>}
@@ -490,10 +610,12 @@ function PrivacyAgreementInput() {
                                         name="visitDate"
                                         value={formData.visitDate}
                                         onChange={handleInputChange}
+                                        min={getCurrentDate()}
                                         className={errors.visitDate ? 'error' : ''}
                                     />
-                                    {errors.visitDate && <div className="error-message">{errors.visitDate}</div>}
                                 </div>
+                                {errors.visitDate && <div className="error-message">{errors.visitDate}</div>}
+                                {!dateChanged && <div className="input-help-text">현재 날짜가 기본값으로 설정되어 있습니다.</div>}
                             </div>
 
                             <div className="form-group">
@@ -508,8 +630,9 @@ function PrivacyAgreementInput() {
                                         onChange={handleInputChange}
                                         className={errors.visitTime ? 'error' : ''}
                                     />
-                                    {errors.visitTime && <div className="error-message">{errors.visitTime}</div>}
                                 </div>
+                                {errors.visitTime && <div className="error-message">{errors.visitTime}</div>}
+                                {!timeChanged && <div className="input-help-text">현재 시간이 기본값으로 설정되어 있습니다.</div>}
                             </div>
                         </div>
 
@@ -526,14 +649,12 @@ function PrivacyAgreementInput() {
                                 />
                             </div>
                         </div>
-
                     </div>
 
                     <div className="form-actions">
                         <button
                             type="submit"
-                            className="btn btn-primary btn-lg"
-                            disabled={privacyAgreed !== 'agree' || !isEmployeeVerified}
+                            className={`btn btn-primary btn-lg ${(privacyAgreed !== 'agree' || !isEmployeeVerified) ? 'btn-disabled' : ''}`}
                         >
                             방문 신청하기
                         </button>

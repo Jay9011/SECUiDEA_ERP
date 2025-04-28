@@ -10,7 +10,7 @@ AS
     IF (@Type = 'name')
     BEGIN
         SELECT  PID, Sabun, Name,
-                O.OrgName AS 'department',
+                O.OrgName AS DepartmentName,
                 PersonStatusID,
                 CASE PersonStatusID
                     WHEN 0 THEN 'Active'

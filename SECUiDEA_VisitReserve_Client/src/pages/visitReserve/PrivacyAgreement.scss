@@ -1,8 +1,8 @@
 @import "../../styles/abstracts/variables";
 @import "../../styles/abstracts/mixins";
 
-@import '../../components/features/EmployeeSelector.scss';
-@import '../../components/features/InputWithButton.scss';
+@import "../../components/features/EmployeeSelector.scss";
+@import "../../components/features/InputWithButton.scss";
 
 .privacy-agreement-page {
   width: 100%;
@@ -303,6 +303,13 @@
         margin-top: 4px;
       }
 
+      .input-help-text {
+        color: $text-secondary;
+        font-size: $font-size-xs;
+        margin-top: 4px;
+        font-style: italic;
+      }
+
       .input-with-icon {
         position: relative;
 
@@ -374,35 +381,35 @@
       margin-bottom: $spacing-md;
       border-radius: 8px;
       font-size: $font-size-sm;
-      
+
       &.success {
         background-color: rgba($success-color, 0.1);
         color: $success-color;
         border-left: 3px solid $success-color;
-        
+
         svg {
           color: $success-color;
         }
       }
-      
+
       &.error {
         background-color: rgba($error-color, 0.1);
         color: $error-color;
         border-left: 3px solid $error-color;
-        
+
         svg {
           color: $error-color;
         }
       }
     }
-    
+
     // 버튼이 있는 폼 그룹
     .action-group {
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
       margin-top: 24px;
-      
+
       .verify-btn {
         display: flex;
         align-items: center;
@@ -410,22 +417,55 @@
         padding: 12px 16px;
         height: 44px;
         margin-bottom: 4px;
-        
+
         svg {
           margin-right: 4px;
         }
       }
-      
+
       button.btn-outline {
         height: 44px;
         margin-bottom: 4px;
       }
     }
-    
+
     // 비활성화된 입력 필드
     input:disabled {
       background-color: rgba($border-color, 0.1);
       cursor: not-allowed;
     }
+  }
+}
+
+.btn-disabled {
+  opacity: 0.7;
+  cursor: pointer;
+  background-color: #6c757d;
+  border-color: #6c757d;
+
+  &:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+}
+
+.Toastify__toast {
+  width: 100%;
+  border-radius: 8px;
+  font-family: "Noto Sans KR", sans-serif;
+
+  &-body {
+    font-size: 14px;
+    padding: 8px 4px;
+  }
+
+  &--error {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+
+  &--success {
+    background-color: #ecfdf5;
+    color: #065f46;
   }
 }
