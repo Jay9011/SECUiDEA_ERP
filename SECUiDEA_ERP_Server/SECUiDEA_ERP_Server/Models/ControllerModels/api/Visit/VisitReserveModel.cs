@@ -3,6 +3,11 @@ using CoreDAL.ORM.Extensions;
 
 namespace SECUiDEA_ERP_Server.Models.ControllerModels.api.Visit;
 
+public class VisitReasonDTO
+{
+    public int VisitReasonID { get; set; } = 0;
+    public string VisitReasonName { get; set; } = string.Empty;
+}
 
 public class VisitantParam : SQLParam
 {
@@ -84,6 +89,7 @@ public class VisitReserveDTO
     public string VisitorCompany { get; set; } = string.Empty;
     public string VisitorContact { get; set; } = string.Empty;
     public string VisitorEmail { get; set; } = string.Empty;
+    public int VisitReasonId { get; set; } = 0;
     public string VisitPurpose { get; set; } = string.Empty;
     public string VisitDate { get; set; } = string.Empty;
     public string VisitTime { get; set; } = string.Empty;
@@ -104,6 +110,8 @@ public class SECUiDEA_VisitReserveParam : SQLParam
     public string Mobile { get; set; } = string.Empty;
     [DbParameter]
     public string Email { get; set; } = string.Empty;
+    [DbParameter]
+    public int VisitReasonID { get; set; } = 0;
     [DbParameter]
     public string VisitReasonText { get; set; } = string.Empty;
     [DbParameter]

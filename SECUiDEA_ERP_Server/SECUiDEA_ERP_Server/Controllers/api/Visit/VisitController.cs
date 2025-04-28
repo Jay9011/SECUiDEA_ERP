@@ -28,6 +28,40 @@ public class VisitController : BaseController
 
     #endregion
 
+    public async Task<IActionResult> VisitReason([FromQuery] string lan)
+    {
+        // 유효성 검사
+        if (string.IsNullOrEmpty(lan))
+        {
+            lan = "ko"; // 기본값을 한국어로 설정
+        }
+        else if (lan != "ko" && lan != "en")
+        {
+            lan = "ko"; // 지원하지 않는 언어는 기본값으로 설정
+        }
+
+        var param = new Dictionary<string, object>
+        {
+            { "Lang", lan }
+        };
+
+        var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReasonSEL", param);
+        if (result.IsSuccess && result.DataSet?.Tables.Count > 0 && result.DataSet.Tables[0].Rows.Count > 0)
+        {
+            var reasonList = result.DataSet.Tables[0].ToObject<VisitReasonDTO>();
+
+            return Ok(BoolResultModel.Success("", new Dictionary<string, object>
+            {
+                {"reasons", reasonList}
+            }));
+        }
+
+        return Ok(BoolResultModel.Success("", new Dictionary<string, object>
+        {
+            {"reasons", new List<VisitReasonDTO>()}
+        }));
+    }
+
     public async Task<IActionResult> EmployeeByName([FromQuery] string name)
     {
         // 유효성 검사
@@ -88,6 +122,7 @@ public class VisitController : BaseController
             VisitantCompany = visitReserveDTO.VisitorCompany,
             Mobile = visitReserveDTO.VisitorContact,
             Email = visitReserveDTO.VisitorEmail,
+            VisitReasonID = visitReserveDTO.VisitReasonId,
             VisitReasonText = visitReserveDTO.VisitPurpose,
             VisitSDate = visitStartDate,
             VisitEDate = visitEndDate,

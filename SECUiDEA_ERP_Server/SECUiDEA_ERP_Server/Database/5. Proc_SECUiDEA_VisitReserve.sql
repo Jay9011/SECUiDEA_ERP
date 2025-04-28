@@ -11,6 +11,7 @@ CREATE PROCEDURE SECUiDEA_VisitReserve
 ,   @Email              NVARCHAR(100)   = ''
 ,   @VisitSDate         DATETIME
 ,   @VisitEDate         DATETIME        = NULL
+,   @VisitReasonId      INT             = 0
 ,   @VisitReasonText    NVARCHAR(200)   = ''
 ,   @LicensePlateNumber NVARCHAR(50)    = ''
 -- 개인정보 동의 관련
@@ -94,13 +95,13 @@ BEGIN
         INSERT INTO VisitReserve 
             (PID, RegisterPID, 
              VisitSDate, VisitEDate, 
-             VisitStatusID, VisitReasonText, 
+             VisitStatusID, VisitReasonID, VisitReasonText, 
              VisitProtocol,
              InsertDate, UpdateID, UpdateIP)
         VALUES
             (@PID, @RegisterPID, 
              @VisitSDate, @VisitEDate, 
-             0, @VisitReasonText,
+             0, @VisitReasonId, @VisitReasonText,
              0,
              getdate(), @UpdateID, @UpdateIP)
         ;

@@ -5,6 +5,24 @@ import authService from '../utils/authService';
  */
 const API_BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
+export async function getVisitReasons(language) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/Visit/VisitReason?lan=${language}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('API 호출 실패');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('방문 목적 가져오기 중 오류:', error);
+        throw error;
+    }
+}
+
 export async function verifyEmployee(employeeData) {
     try {
         const response = await fetch(`${API_BASE_URL}/Visit/EmployeeByName?name=${employeeData.name}`, {

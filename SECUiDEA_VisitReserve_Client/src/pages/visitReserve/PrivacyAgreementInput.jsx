@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { User, Users, Calendar, Clock, Shield, CheckCircle, Search, AlertCircle } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 // 컴포넌트
 import Accordion from '../../components/features/Accordion';
@@ -15,10 +16,11 @@ import LoadingOverlay from '../../components/common/LoadingOverlay';
 // 스타일
 import './PrivacyAgreement.scss';
 
-import { verifyEmployee, submitReservation } from '../../services/visitReserveApis';
+import { verifyEmployee, submitReservation, getVisitReasons } from '../../services/visitReserveApis';
 
 function PrivacyAgreementInput() {
     const navigate = useNavigate();
+    const { i18n } = useTranslation();
 
     // 참조 추가
     const privacyCheckRef = useRef(null);
@@ -61,6 +63,7 @@ function PrivacyAgreementInput() {
         visitorContact: '',
         visitorEmail: '',
         visitorCarNumber: '',
+        visitReasonId: '',
         visitPurpose: '',
         visitDate: initialDate,
         visitTime: initialTime,
@@ -74,12 +77,35 @@ function PrivacyAgreementInput() {
     const [dateChanged, setDateChanged] = useState(false);
     const [timeChanged, setTimeChanged] = useState(false);
     const [endDateChanged, setEndDateChanged] = useState(false);
+    const [visitReasons, setVisitReasons] = useState([]);
+    const [loadingReasons, setLoadingReasons] = useState(false);
 
     // 모달 상태
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
     const [employeeList, setEmployeeList] = useState([]);
 
-    // 스크롤 이동 함수 추가
+    // 방문 목적 데이터 가져오기
+    useEffect(() => {
+        const fetchVisitReasons = async () => {
+            try {
+                setLoadingReasons(true);
+                const result = await getVisitReasons(i18n.language);
+                if (result.isSuccess && result.data && result.data.reasons) {
+                    setVisitReasons(result.data.reasons);
+                } else {
+                    console.error('방문 목적 데이터를 가져오지 못했습니다.');
+                }
+            } catch (error) {
+                console.error('방문 목적 로드 오류:', error);
+            } finally {
+                setLoadingReasons(false);
+            }
+        };
+
+        fetchVisitReasons();
+    }, [i18n.language]);
+
+    // 스크롤 이동 함수
     const scrollToRef = (ref) => {
         ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
@@ -166,12 +192,6 @@ function PrivacyAgreementInput() {
                 [name]: value
             });
         } else if (name === 'visitEndTime') {
-            // 종료 시간 변경 체크
-            if (value !== initialEndTime) {
-                setEndTimeChanged(true);
-            } else {
-                setEndTimeChanged(false);
-            }
             setFormData({
                 ...formData,
                 [name]: value
@@ -291,7 +311,7 @@ function PrivacyAgreementInput() {
 
         // 필수 필드 검사
         const requiredFields = [
-            'visitorName', 'visitorContact', 'visitPurpose',
+            'visitorName', 'visitorContact',
             'visitDate', 'visitTime', 'visitEndDate', 'visitEndTime'
         ];
 
@@ -320,7 +340,7 @@ function PrivacyAgreementInput() {
         return Object.keys(newErrors).length === 0;
     };
 
-    // 폼 제출 핸들러 수정
+    // 폼 제출 핸들러
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
@@ -354,16 +374,18 @@ function PrivacyAgreementInput() {
             // 방문 신청 API 호출
             const result = await submitReservation({
                 employeePid: formData.employeePid,
+                employeeName: formData.employeeName,
                 visitorName: formData.visitorName,
-                visitorContact: formData.visitorContact,
                 visitorCompany: formData.visitorCompany,
+                visitorContact: formData.visitorContact,
                 visitorEmail: formData.visitorEmail,
-                visitorCarNumber: formData.visitorCarNumber,
+                visitReasonId: formData.visitReasonId,
                 visitPurpose: formData.visitPurpose,
                 visitDate: formData.visitDate,
                 visitTime: formData.visitTime,
                 visitEndDate: formData.visitEndDate,
                 visitEndTime: formData.visitEndTime,
+                visitorCarNumber: formData.visitorCarNumber,
             });
 
             // 성공 시 결과 페이지로 이동
@@ -640,15 +662,33 @@ function PrivacyAgreementInput() {
 
                         <div className="form-group">
                             <label htmlFor="visitPurpose">방문 목적 <span className="required">*</span></label>
-                            <input
-                                type="text"
-                                id="visitPurpose"
-                                name="visitPurpose"
-                                value={formData.visitPurpose}
-                                onChange={handleInputChange}
-                                placeholder="방문 목적을 입력해주세요"
-                                className={errors.visitPurpose ? 'error' : ''}
-                            />
+                            <div className="form-purpose-container">
+                                <div className="form-purpose-select">
+                                    <select
+                                        id="visitReasonId"
+                                        name="visitReasonId"
+                                        onChange={handleInputChange}
+                                        disabled={loadingReasons}
+                                    >
+                                        {visitReasons.map(reason => (
+                                            <option key={reason.visitReasonID} value={reason.visitReasonID}>{reason.visitReasonName}</option>
+                                        ))}
+                                    </select>
+                                    {loadingReasons && <div className="loading-text">로딩중...</div>}
+                                </div>
+                                <div className="form-purpose-input">
+                                    <input
+                                        type="text"
+                                        id="visitPurpose"
+                                        name="visitPurpose"
+                                        value={formData.visitPurpose}
+                                        onChange={handleInputChange}
+                                        placeholder="방문의 상세 목적을 입력해주세요"
+                                        className={errors.visitPurpose ? 'error' : ''}
+                                        disabled={loadingReasons}
+                                    />
+                                </div>
+                            </div>
                             {errors.visitPurpose && <div className="error-message">{errors.visitPurpose}</div>}
                         </div>
 
