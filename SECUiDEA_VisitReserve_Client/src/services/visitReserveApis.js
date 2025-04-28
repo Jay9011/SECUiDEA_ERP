@@ -1,16 +1,18 @@
+import authService from '../utils/authService';
+
 /**
  * 방문 예약 관련 API 서비스
  */
-const API_BASE_URL = '/api';
+const API_BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 export async function verifyEmployee(employeeData) {
     try {
-        const response = await fetch(`${API_BASE_URL}/verify-employee`, {
-            method: 'POST',
+        const response = await fetch(`${API_BASE_URL}/Visit/GetEmployeeByName?name=${employeeData.name}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(employeeData),
+                'Authorization': `Bearer ${authService.getAccessToken()}`
+            }
         });
         if (!response.ok) {
             throw new Error('API 호출 실패');

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { User, Users, Calendar, Clock, Shield, CheckCircle, Search, AlertCircle } from "lucide-react";
 
 // 컴포넌트
@@ -16,8 +15,7 @@ import './PrivacyAgreement.scss';
 
 import { verifyEmployee, submitReservation } from '../../services/visitReserveApis';
 
-function PrivacyAgreementInput({ onSubmit }) {
-    const { t } = useTranslation();
+function PrivacyAgreementInput() {
     const navigate = useNavigate();
 
     const [privacyAgreed, setPrivacyAgreed] = useState('');
@@ -42,7 +40,7 @@ function PrivacyAgreementInput({ onSubmit }) {
     const [isEmployeeVerified, setIsEmployeeVerified] = useState(false);
     const [isVerifying, setIsVerifying] = useState(false);
     const [verificationError, setVerificationError] = useState('');
-    
+
     // 모달 상태
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
     const [employeeList, setEmployeeList] = useState([]);
@@ -50,12 +48,12 @@ function PrivacyAgreementInput({ onSubmit }) {
     // 입력값 변경 처리
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        
+
         // 직원 정보가 수정되면 인증 상태 초기화
         if (name === 'employeeName') {
             setIsEmployeeVerified(false);
             setVerificationError('');
-            
+
             setFormData({
                 ...formData,
                 [name]: value,
@@ -81,18 +79,21 @@ function PrivacyAgreementInput({ onSubmit }) {
     const handlePrivacyChange = (e) => {
         const value = e.target.value;
         setPrivacyAgreed(value);
-        
+
         if (value === 'agree') {    // 동의 선택 시 아코디언 접기
             setAccordionExpanded(false);
         }
     };
-    
+
     const handleAccordionToggle = (isExpanded) => {
         setAccordionExpanded(isExpanded);
     };
 
     // 직원 정보 확인 처리
     const handleVerifyEmployee = async () => {
+        // 이름 필드 앞/뒤의 공백 제거
+        formData.employeeName = formData.employeeName.trim();
+
         // 필수 필드 유효성 검사
         if (!formData.employeeName.trim()) {
             setErrors({
@@ -105,7 +106,7 @@ function PrivacyAgreementInput({ onSubmit }) {
         try {
             setIsVerifying(true);
             setVerificationError('');
-            
+
             // API 호출 - 직원 정보 확인
             const result = await verifyEmployee({
                 name: formData.employeeName
@@ -113,11 +114,9 @@ function PrivacyAgreementInput({ onSubmit }) {
 
             if (result.isSuccess) {
                 if (result.data && result.data.employees && result.data.employees.length > 1) {
-                    // 중복된 직원이 있는 경우 - 모달로 선택화면 표시
                     setEmployeeList(result.data.employees);
                     setShowEmployeeModal(true);
                 } else if (result.data && result.data.employees && result.data.employees.length === 1) {
-                    // 직원이 한 명인 경우 - 바로 선택
                     const employee = result.data.employees[0];
                     setFormData({
                         ...formData,
@@ -129,7 +128,6 @@ function PrivacyAgreementInput({ onSubmit }) {
                     setVerificationError('직원 정보를 가져오는 중 오류가 발생했습니다');
                 }
             } else {
-                // API 호출은 성공했지만 직원을 찾지 못한 경우
                 setVerificationError(result.message || '일치하는 직원 정보를 찾을 수 없습니다');
             }
         } catch (error) {
@@ -244,8 +242,8 @@ function PrivacyAgreementInput({ onSubmit }) {
                     </div>
 
                     <div className="privacy-card">
-                        <Accordion 
-                            title="개인정보 수집 및 이용 동의 (필수)" 
+                        <Accordion
+                            title="개인정보 수집 및 이용 동의 (필수)"
                             className="privacy-accordion"
                             maxHeight={400}
                             expanded={accordionExpanded}
@@ -329,28 +327,6 @@ function PrivacyAgreementInput({ onSubmit }) {
                     {/* 방문 대상 직원 정보 */}
                     <div className="form-group-section">
                         <h3><Users size={20} /> 방문 대상 직원 정보</h3>
-                        
-                        {/* 직원 확인 상태 표시 */}
-                        {isEmployeeVerified && (
-                            <div className="verification-status success">
-                                <CheckCircle size={18} />
-                                <span>직원 정보가 확인되었습니다.</span>
-                            </div>
-                        )}
-                        
-                        {verificationError && (
-                            <div className="verification-status error">
-                                <AlertCircle size={18} />
-                                <span>{verificationError}</span>
-                            </div>
-                        )}
-                        
-                        {errors.employee && !verificationError && (
-                            <div className="verification-status error">
-                                <AlertCircle size={18} />
-                                <span>{errors.employee}</span>
-                            </div>
-                        )}
 
                         <div className="form-group">
                             <label htmlFor="employeeName">직원 이름 <span className="required">*</span></label>
@@ -403,6 +379,28 @@ function PrivacyAgreementInput({ onSubmit }) {
                                 />
                             )}
                         </div>
+
+                        {/* 직원 확인 상태 표시 */}
+                        {isEmployeeVerified && (
+                            <div className="verification-status success">
+                                <CheckCircle size={18} />
+                                <span>직원 정보가 확인되었습니다.</span>
+                            </div>
+                        )}
+
+                        {verificationError && (
+                            <div className="verification-status error">
+                                <AlertCircle size={18} />
+                                <span>{verificationError}</span>
+                            </div>
+                        )}
+
+                        {errors.employee && !verificationError && (
+                            <div className="verification-status error">
+                                <AlertCircle size={18} />
+                                <span>{errors.employee}</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* 방문자 정보 */}
@@ -514,7 +512,7 @@ function PrivacyAgreementInput({ onSubmit }) {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="visitorCarNumber">차량 번호</label>
@@ -549,7 +547,7 @@ function PrivacyAgreementInput({ onSubmit }) {
                     </div>
                 </form>
             </div>
-            
+
             {/* 직원 선택 모달 */}
             <Modal
                 isOpen={showEmployeeModal}

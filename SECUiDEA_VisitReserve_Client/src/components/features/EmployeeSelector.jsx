@@ -7,7 +7,7 @@ const EmployeeSelector = ({ employees, onSelect, onCancel }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // 직원 목록 필터링
-  const filteredEmployees = employees.filter(emp => 
+  const filteredEmployees = employees.filter(emp =>
     emp.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 

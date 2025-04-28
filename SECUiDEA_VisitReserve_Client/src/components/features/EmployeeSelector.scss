@@ -5,28 +5,29 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  
+
   .search-container {
     margin-bottom: $spacing-md;
-    
+
     .search-input-wrapper {
       position: relative;
-      
+
       svg {
         position: absolute;
-        left: 12px;
         top: 50%;
-        transform: translateY(-50%);
+        left: 12px;
         color: $text-secondary;
+        transform: translateY(-50%);
       }
-      
+
       .search-input {
-        width: 100%;
         padding: 12px 12px 12px 40px;
+        width: 100%;
         border: 1px solid $border-color;
         border-radius: 8px;
+        box-sizing: border-box;
         font-size: $font-size-base;
-        
+
         &:focus {
           outline: none;
           border-color: $primary-color;
@@ -35,33 +36,33 @@
       }
     }
   }
-  
+
   .employee-list {
     max-height: 300px;
     overflow-y: auto;
     border: 1px solid $border-color;
     border-radius: 8px;
     margin-bottom: $spacing-md;
-    
+
     // 스크롤바 스타일링
     &::-webkit-scrollbar {
       width: 8px;
     }
-    
+
     &::-webkit-scrollbar-track {
       background-color: rgba($border-color, 0.2);
       border-radius: 8px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
       background-color: rgba($primary-color, 0.3);
       border-radius: 8px;
-      
+
       &:hover {
         background-color: rgba($primary-color, 0.5);
       }
     }
-    
+
     .employee-item {
       display: flex;
       justify-content: space-between;
@@ -70,36 +71,36 @@
       border-bottom: 1px solid $border-color;
       cursor: pointer;
       transition: background-color 0.2s ease;
-      
+
       &:last-child {
         border-bottom: none;
       }
-      
+
       &:hover {
         background-color: rgba($primary-color, 0.05);
       }
-      
+
       &.selected {
         background-color: rgba($primary-color, 0.1);
         border-left: 3px solid $primary-color;
       }
-      
+
       .employee-info {
         display: flex;
         flex-direction: column;
-        
+
         .employee-name {
           font-weight: $font-weight-bold;
           color: $text-color;
           margin-bottom: 2px;
         }
-        
+
         .employee-department {
           font-size: $font-size-sm;
           color: $text-secondary;
         }
       }
-      
+
       .employee-id {
         font-size: $font-size-sm;
         color: $text-secondary;
@@ -109,7 +110,7 @@
         font-family: monospace;
       }
     }
-    
+
     .no-results {
       padding: $spacing-md;
       text-align: center;
@@ -117,14 +118,14 @@
       font-style: italic;
     }
   }
-  
+
   .selector-actions {
     display: flex;
     justify-content: flex-end;
     gap: $spacing-sm;
-    
+
     button {
       min-width: 80px;
     }
   }
-} 
+}

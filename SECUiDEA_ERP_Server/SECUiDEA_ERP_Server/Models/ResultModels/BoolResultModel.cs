@@ -8,7 +8,7 @@ public class BoolResultModel
     public bool IsSuccess { get; }
 
     [JsonPropertyName("message")]
-    public string? Message { get; }
+    public string Message { get; }
 
     [JsonPropertyName("data")]
     public Dictionary<string, object>? Data { get; }
