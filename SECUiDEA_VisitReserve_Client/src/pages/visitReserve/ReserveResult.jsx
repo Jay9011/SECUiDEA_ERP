@@ -80,7 +80,7 @@ function ReserveResult() {
         if (data.required) {
           // 교육 영상 시청 이력이 존재하는 경우 (시청 이력이 없다면 2000년 이전으로 저장되어 있음)
           const educationData = data.educationData?.[0];
-          const educationDate = new Date(educationData.educationDate);
+          const educationDate = new Date(educationData.educationDate).toISOString().replace('T', ' ').substring(0, 19);
           const standardDate = new Date('2000-01-01');
 
           if (educationDate < standardDate) {
@@ -89,7 +89,7 @@ function ReserveResult() {
             showEducationAlert(
               `
               <p>마지막 교육 시청 이력이 오래되어 안전 교육 영상 시청이 필요합니다.</p>
-              <p>교육 영상 시청 이력: ${educationData.educationDate}</p>
+              <p>교육 영상 시청 이력: ${educationDate}</p>
               `
             );
           }

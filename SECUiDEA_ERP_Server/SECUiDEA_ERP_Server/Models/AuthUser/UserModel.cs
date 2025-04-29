@@ -14,6 +14,7 @@ public class Permission
 /// </summary>
 public class User
 {
+    public string Seq { get; set; } = "0";
     public string ID { get; set; }
     public string Name { get; set; } = "Unknown";
     public string UserRole { get; set; }

@@ -1,4 +1,4 @@
-import authService from '../utils/authService';
+import { api } from '../utils/api';
 
 /**
  * 방문 예약 관련 API 서비스
@@ -39,8 +39,7 @@ export async function verifyEmployee(employeeData) {
         const response = await fetch(`${API_BASE_URL}/Visit/EmployeeByName?name=${employeeData.name}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authService.getAccessToken()}`
+                'Content-Type': 'application/json'
             }
         });
         if (!response.ok) {
@@ -110,29 +109,18 @@ export async function checkEducationVideo(visitorData) {
 }
 
 /**
- * 교육 영상 시청을 위한 로그인 API
- * @param {Object} loginData - 로그인 정보
- * @see loginData.visitorName - 방문자 이름
- * @see loginData.visitorContact - 방문자 연락처
+ * 교육 완료 저장 API
  * @returns {Promise} - API 응답 객체
  */
-export async function loginForEducation(loginData) {
+export async function saveEducationCompletion() {
     try {
-        const response = await fetch(`${API_BASE_URL}/Education/Login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginData)
-        });
-
+        const response = await api.post('/Visit/EducationCompletion');
         if (!response.ok) {
-            throw new Error('교육 로그인 API 호출 실패');
+            throw new Error('교육 완료 저장 API 호출 실패');
         }
-
         return await response.json();
     } catch (error) {
-        console.error('교육 로그인 중 오류:', error);
+        console.error('교육 완료 저장 중 오류:', error);
         throw error;
     }
 }

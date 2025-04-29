@@ -68,6 +68,7 @@ public class JwtService
         {
             new Claim(ClaimTypes.NameIdentifier, user.ID),  // 사용자 ID 정보
             new Claim(ClaimTypes.Name, user.Name),          // 사용자 이름 정보
+            new Claim(ClaimTypes.Sid, user.Seq),            // 사용자 시퀀스 정보
             new Claim(ClaimTypes.Role, user.UserRole)       // 사용자 역할 정보
         };
 

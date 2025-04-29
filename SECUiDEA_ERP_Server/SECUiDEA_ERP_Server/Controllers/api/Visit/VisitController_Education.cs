@@ -68,4 +68,39 @@ public partial class VisitController : BaseController
 
         return BadRequest(BoolResultModel.Fail("Failed to Check Education."));
     }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> EducationCompletion()
+    {
+        try
+        {
+            // 사용자 ID 가져오기
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // 유효성 검사
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest(BoolResultModel.Fail("Invalid Access."));
+            }
+
+            var visitorSeq = User.FindFirstValue(ClaimTypes.Sid);
+            var param = new Dictionary<string, object>()
+            {
+                { "VisitantID", visitorSeq },
+                { "UpdateIP", GetClientIpAddress() }
+            };
+            var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_EducationREG", param);
+
+            if (result.IsSuccess && result.ReturnValue == 1)
+            {
+                return Ok(BoolResultModel.Success());
+            }
+        }
+        catch (Exception e)
+        {
+        }
+
+        return BadRequest(BoolResultModel.Fail("Failed to Education Completion."));
+    }
 }

@@ -3,8 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import Swal from 'sweetalert2';
 
+import { useAuth } from "../../context/AuthContext";
+import { saveEducationCompletion } from '../../services/visitReserveApis';
+
+import './EducationVideoPage.scss';
+
 function EducationVideoPage() {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const videoUrl = '/visit/videos/visitorSafetyVideo.mp4';
 
@@ -176,20 +182,21 @@ function EducationVideoPage() {
   // 교육 완료 처리 함수
   const handleEducationComplete = async () => {
     try {
-      // 교육 완료 처리 API 호출 - JWT를 사용하여 인증된 사용자 정보를 기반으로 처리
-      // 예시: const result = await saveEducationCompletion();
-      console.log('교육 완료 처리 - JWT 기반 인증 사용');
+      const result = await saveEducationCompletion();
 
-      // 성공 시 처리
-      Swal.fire({
-        title: '교육 완료',
-        text: '안전 교육이 완료되었습니다. 방문 신청이 접수되었습니다.',
-        icon: 'success',
-        confirmButtonText: '확인'
-      }).then(() => {
-        // 완료 후 홈으로 이동
-        navigate('/');
-      });
+      if (result.isSuccess) {
+        Swal.fire({
+          title: '교육 완료',
+          text: '안전 교육이 완료되었습니다. 방문 신청이 접수되었습니다.',
+          icon: 'success',
+          confirmButtonText: '확인'
+        }).then(() => {
+          logout();
+          navigate('/');
+        });
+      } else {
+        throw new Error(result.message);
+      }
     } catch (error) {
       console.error('교육 완료 처리 오류:', error);
       Swal.fire({
@@ -207,25 +214,6 @@ function EducationVideoPage() {
     }
   };
 
-  // 모바일 화면 대응 스타일
-  const playerContainerStyle = {
-    position: 'relative',
-    width: '100%',
-    paddingTop: '56.25%', // 16:9 비율 (모바일 대응)
-    backgroundColor: '#000',
-    maxHeight: '70vh', // 화면 높이의 최대 70%로 제한
-    overflow: 'hidden',
-    borderRadius: '4px'
-  };
-
-  const playerStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%'
-  };
-
   return (
     <div className="education-video-page">
       <h2>방문자 안전 교육</h2>
@@ -233,12 +221,12 @@ function EducationVideoPage() {
       {/* 비디오 플레이어 컨테이너 */}
       <div
         ref={playerContainerRef}
-        style={playerContainerStyle}
+        className="player-container"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
         {/* 비디오 플레이어 */}
-        <div style={playerStyle}>
+        <div className="player-wrapper">
           <ReactPlayer
             ref={playerRef}
             url={videoUrl}
@@ -272,24 +260,7 @@ function EducationVideoPage() {
         {showControls && (
           <button
             onClick={togglePlay}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '60px',
-              height: '60px',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              border: 'none',
-              borderRadius: '50%',
-              color: 'white',
-              fontSize: '24px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 10
-            }}
+            className="play-pause-button"
           >
             {isPlaying ? 'Ⅱ' : '▶'}
           </button>
@@ -297,65 +268,31 @@ function EducationVideoPage() {
 
         {/* 컨트롤 바 */}
         <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: '10px',
-            background: 'linear-gradient(transparent, rgba(0, 0, 0, 0.7))',
-            opacity: showControls ? 1 : 0,
-            transition: 'opacity 0.3s ease',
-            zIndex: 10
-          }}
+          className={`controls-bar ${showControls ? 'visible' : ''}`}
         >
           {/* 프로그레스 바 - 클릭 비활성화 */}
           <div
             ref={progressRef}
-            style={{
-              width: '100%',
-              height: '5px',
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              borderRadius: '2.5px',
-              position: 'relative',
-              cursor: 'default', // 기본 커서로 변경 (클릭 불가 표시)
-              marginBottom: '10px',
-              pointerEvents: 'none' // 클릭 이벤트 차단
-            }}
+            className="progress-bar"
           >
             <div
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                height: '100%',
-                width: `${playedFraction * 100}%`,
-                backgroundColor: '#4CAF50',
-                borderRadius: '2.5px'
-              }}
+              className="progress-fill"
+              style={{ width: `${playedFraction * 100}%` }}
             />
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="controls-row">
             {/* 재생 시간 표시 */}
-            <div style={{ color: 'white', fontSize: '12px' }}>
+            <div className="time-display">
               {formatTime(playedSeconds)} / {formatTime(videoDuration)}
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="controls-right">
               {/* 볼륨 컨트롤 */}
-              <div style={{ display: 'flex', alignItems: 'center', marginRight: '15px' }}>
+              <div className="volume-control">
                 <button
                   onClick={toggleMute}
-                  style={{
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    color: 'white',
-                    cursor: 'pointer',
-                    marginRight: '5px',
-                    padding: '5px',
-                    fontSize: '16px'
-                  }}
+                  className="volume-button"
                 >
                   {isMuted ? '🔇' : volume > 0.5 ? '🔊' : '🔉'}
                 </button>
@@ -367,24 +304,14 @@ function EducationVideoPage() {
                   step={0.01}
                   value={volume}
                   onChange={handleVolumeChange}
-                  style={{
-                    width: '60px',
-                    accentColor: '#4CAF50'
-                  }}
+                  className="volume-slider"
                 />
               </div>
 
               {/* 전체화면 버튼 */}
               <button
                 onClick={toggleFullScreen}
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  color: 'white',
-                  cursor: 'pointer',
-                  padding: '5px',
-                  fontSize: '16px'
-                }}
+                className="fullscreen-button"
               >
                 {isFullScreen ? '⊙' : '⛶'}
               </button>
@@ -393,7 +320,7 @@ function EducationVideoPage() {
         </div>
       </div>
 
-      <p style={{ marginTop: '15px' }}>
+      <p className="education-message">
         {videoEnded
           ? '교육 영상을 완료했습니다. 아래 버튼을 클릭하여 진행하세요.'
           : '교육 영상을 끝까지 시청해야 완료 버튼이 활성화됩니다.'}
@@ -402,16 +329,7 @@ function EducationVideoPage() {
       <button
         onClick={handleEducationComplete}
         disabled={!videoEnded}
-        style={{
-          marginTop: '16px',
-          opacity: videoEnded ? 1 : 0.5,
-          cursor: videoEnded ? 'pointer' : 'not-allowed',
-          padding: '10px 20px',
-          backgroundColor: videoEnded ? '#4CAF50' : '#ccc',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px'
-        }}
+        className={`education-complete-button ${videoEnded ? 'active' : ''}`}
       >
         교육 완료
       </button>

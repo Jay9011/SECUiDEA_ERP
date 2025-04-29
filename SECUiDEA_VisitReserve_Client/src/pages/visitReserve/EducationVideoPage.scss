@@ -1,0 +1,190 @@
+.education-video-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .player-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; // 16:9 비율 (모바일 대응)
+        background-color: #000;
+        max-height: 70vh; // 화면 높이의 최대 70%로 제한
+        overflow: hidden;
+        border-radius: 4px;
+    }
+
+    .player-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .play-pause-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    }
+
+    .controls-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+
+        &.visible {
+            opacity: 1;
+        }
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 5px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 2.5px;
+        position: relative;
+        cursor: default; // 기본 커서로 변경 (클릭 불가 표시)
+        margin-bottom: 10px;
+        pointer-events: none; // 클릭 이벤트 차단
+    }
+
+    .progress-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background-color: #4caf50;
+        border-radius: 2.5px;
+    }
+
+    .controls-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .time-display {
+        color: white;
+        font-size: 12px;
+    }
+
+    .controls-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .volume-control {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+    }
+
+    .volume-button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        margin-right: 5px;
+        padding: 5px;
+        font-size: 16px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .volume-slider {
+        width: 60px;
+        accent-color: #4caf50;
+
+        &::-webkit-slider-thumb {
+            cursor: pointer;
+        }
+    }
+
+    .fullscreen-button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 5px;
+        font-size: 16px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .education-message {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .education-complete-button {
+        display: block;
+        margin: 16px auto 0;
+        padding: 10px 20px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        background-color: #ccc;
+        opacity: 0.5;
+        cursor: not-allowed;
+        transition: all 0.3s ease;
+
+        &.active {
+            background-color: #4caf50;
+            opacity: 1;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #3e8e41;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .education-video-page {
+        padding: 10px;
+
+        .play-pause-button {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        .volume-slider {
+            width: 40px;
+        }
+    }
+}

@@ -149,6 +149,7 @@ public class S1UserRepository : IUserRepository
 
             var user = new User
             {
+                Seq = userEntity.Seq,
                 ID = userEntity.Id,
                 Name = userEntity.Name,
                 UserRole = userEntity.AuthType,
@@ -198,6 +199,7 @@ public class S1UserRepository : IUserRepository
 
             var user = new User
             {
+                Seq = userEntity.Seq,
                 ID = userEntity.Id,
                 Name = userEntity.Name,
                 UserRole = userEntity.AuthType,
