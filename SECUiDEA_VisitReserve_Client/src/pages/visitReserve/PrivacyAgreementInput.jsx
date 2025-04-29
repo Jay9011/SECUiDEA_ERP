@@ -85,6 +85,26 @@ function PrivacyAgreementInput() {
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
     const [employeeList, setEmployeeList] = useState([]);
 
+    // 네트워크 오류 Alert
+    const showNetworkErrorAlert = (errorMessage, retryHandler, title = '네트워크 오류') => {
+        Swal.fire({
+            title: title,
+            html: typeof errorMessage === 'string'
+                ? `<p>${errorMessage}</p><p>다시 시도하시겠습니까?</p>`
+                : errorMessage,
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonText: '다시 시도',
+            cancelButtonText: '닫기',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#6c757d'
+        }).then((result) => {
+            if (result.isConfirmed && typeof retryHandler === 'function') {
+                retryHandler();
+            }
+        });
+    };
+
     // 페이지 초기 데이터 로드
     const loadInitialData = async () => {
         const success = await fetchVisitReasons();
@@ -93,7 +113,8 @@ function PrivacyAgreementInput() {
             showNetworkErrorAlert(
                 navigator.onLine
                     ? '서버에서 데이터를 가져오지 못했습니다.'
-                    : '인터넷 연결이 오프라인 상태입니다.'
+                    : '인터넷 연결이 오프라인 상태입니다.',
+                loadInitialData
             );
         }
     };
@@ -126,26 +147,6 @@ function PrivacyAgreementInput() {
         } finally {
             setLoadingReasons(false);
         }
-    };
-
-    const showNetworkErrorAlert = (errorMessage) => {
-        Swal.fire({
-            title: '네트워크 오류',
-            html: `
-                <p>${errorMessage}</p>
-                <p>데이터를 다시 불러오시겠습니까?</p>
-            `,
-            icon: 'error',
-            showCancelButton: true,
-            confirmButtonText: '다시 연결',
-            cancelButtonText: '닫기',
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#6c757d'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                loadInitialData();
-            }
-        });
     };
 
     // 스크롤 이동 함수
@@ -329,29 +330,12 @@ function PrivacyAgreementInput() {
         } catch (error) {
             console.error('직원 확인 오류:', error);
 
-            // 네트워크 오류 발생 시 SweetAlert2로 메시지 표시
             const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
                 ? '인터넷 연결이 오프라인 상태입니다.'
                 : '직원 정보 확인 중 오류가 발생했습니다';
 
             setVerificationError(errorMessage);
-
-            // SweetAlert2로 오류 메시지와 재시도 옵션 제공
-            Swal.fire({
-                title: '네트워크 오류',
-                text: errorMessage,
-                icon: 'error',
-                showCancelButton: true,
-                confirmButtonText: '다시 시도',
-                cancelButtonText: '닫기',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#6c757d'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // 직원 확인 다시 시도
-                    handleVerifyEmployee();
-                }
-            });
+            showNetworkErrorAlert(errorMessage, handleVerifyEmployee);
         } finally {
             setIsVerifying(false);
         }
@@ -475,26 +459,11 @@ function PrivacyAgreementInput() {
         } catch (error) {
             console.error('방문 신청 오류:', error);
 
-            // 네트워크 오류 발생 시 SweetAlert2로 메시지 표시
             const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
                 ? '인터넷 연결이 오프라인 상태입니다.'
                 : '방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.';
 
-            Swal.fire({
-                title: '신청 오류',
-                text: errorMessage,
-                icon: 'error',
-                showCancelButton: true,
-                confirmButtonText: '다시 시도',
-                cancelButtonText: '닫기',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#6c757d'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // 방문 신청 다시 시도
-                    handleSubmit();
-                }
-            });
+            showNetworkErrorAlert(errorMessage, handleSubmit, '신청 오류');
         } finally {
             setLoading(false);
         }
