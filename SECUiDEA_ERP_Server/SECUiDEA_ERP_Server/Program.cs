@@ -68,7 +68,7 @@ public class Program
         {
             var jwtSettings = JwtService.GetJwtCollection(registryHelper, SECUiDEA);
             
-            options.RequireHttpsMetadata = false;   // TODO: 프로덕션 환경에서는 true로 설정 변경
+            options.RequireHttpsMetadata = false;   // TODO: 프로덕션 환경에서는 true로 설정 변경 (http 사용하려면 false로 유지)
             options.SaveToken = true;
             options.TokenValidationParameters = new TokenValidationParameters
             {

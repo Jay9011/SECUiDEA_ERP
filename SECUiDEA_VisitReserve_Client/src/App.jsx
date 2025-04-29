@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import PrivacyAgreementInput from './pages/visitReserve/PrivacyAgreementInput';
+import ReserveResult from './pages/visitReserve/ReserveResult';
 import VisitList from './pages/visitReserve/visitList';
 
 import ProtectedRoute from './components/ProtectedRoute';
@@ -35,10 +36,11 @@ const App = () => {
             {/* 기본 배경의 레이아웃 */}
             <Route element={<BaseLayout className="standard-layout" />}>
               <Route path="/visitReserve/privacyAgreement" element={<PrivacyAgreementInput />} />
+              <Route path="/visitReserve/ReserveResult" element={<ReserveResult />} />
               <Route path="/visitReserve/visitList" element={
-                // <ProtectedRoute>
+                <ProtectedRoute>
                   <VisitList />
-                // </ProtectedRoute>
+                </ProtectedRoute>
               } />
               <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />

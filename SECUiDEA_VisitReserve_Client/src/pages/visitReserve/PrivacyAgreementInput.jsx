@@ -5,6 +5,7 @@ import { User, Users, Calendar, Clock, Shield, CheckCircle, Search, AlertCircle 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
+import Swal from 'sweetalert2';
 
 // 컴포넌트
 import Accordion from '../../components/features/Accordion';
@@ -39,7 +40,7 @@ function PrivacyAgreementInput() {
         return `${hours}:${minutes}`;
     };
 
-    // 종료 시간 설정 (23:59)
+    // 종료 시간 설정 (일단 23:59로 설정)
     const getEndTime = () => {
         return '23:59';
     };
@@ -84,26 +85,68 @@ function PrivacyAgreementInput() {
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
     const [employeeList, setEmployeeList] = useState([]);
 
-    // 방문 목적 데이터 가져오기
-    useEffect(() => {
-        const fetchVisitReasons = async () => {
-            try {
-                setLoadingReasons(true);
-                const result = await getVisitReasons(i18n.language);
-                if (result.isSuccess && result.data && result.data.reasons) {
-                    setVisitReasons(result.data.reasons);
-                } else {
-                    console.error('방문 목적 데이터를 가져오지 못했습니다.');
-                }
-            } catch (error) {
-                console.error('방문 목적 로드 오류:', error);
-            } finally {
-                setLoadingReasons(false);
-            }
-        };
+    // 페이지 초기 데이터 로드
+    const loadInitialData = async () => {
+        const success = await fetchVisitReasons();
 
-        fetchVisitReasons();
-    }, [i18n.language]);
+        if (!success) {
+            showNetworkErrorAlert(
+                navigator.onLine
+                    ? '서버에서 데이터를 가져오지 못했습니다.'
+                    : '인터넷 연결이 오프라인 상태입니다.'
+            );
+        }
+    };
+
+    // 페이지 로드 시 데이터 가져오기
+    useEffect(() => {
+        loadInitialData();
+    }, [i18n.language]);    // 언어 변경 시 데이터 다시 로드
+
+    // 방문 목적 데이터 가져오기
+    const fetchVisitReasons = async () => {
+        try {
+            setLoadingReasons(true);
+            // 네트워크 연결 확인
+            if (!navigator.onLine) {
+                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+            }
+
+            const result = await getVisitReasons(i18n.language);
+            if (result.isSuccess && result.data && result.data.reasons) {
+                setVisitReasons(result.data.reasons);
+                return true;
+            } else {
+                console.error('방문 목적 데이터를 가져오지 못했습니다.');
+                return false;
+            }
+        } catch (error) {
+            console.error('방문 목적 로드 오류:', error);
+            return false;
+        } finally {
+            setLoadingReasons(false);
+        }
+    };
+
+    const showNetworkErrorAlert = (errorMessage) => {
+        Swal.fire({
+            title: '네트워크 오류',
+            html: `
+                <p>${errorMessage}</p>
+                <p>데이터를 다시 불러오시겠습니까?</p>
+            `,
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonText: '다시 연결',
+            cancelButtonText: '닫기',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#6c757d'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                loadInitialData();
+            }
+        });
+    };
 
     // 스크롤 이동 함수
     const scrollToRef = (ref) => {
@@ -123,7 +166,7 @@ function PrivacyAgreementInput() {
     const formatPhoneNumber = (value) => {
         if (!value) return '';
 
-        // 숫자만 추출
+        // 현재는 숫자만 추출
         return value.replace(/[^\d]/g, '');
     };
 
@@ -155,12 +198,11 @@ function PrivacyAgreementInput() {
                 setDateChanged(false);
             }
 
-            // 시작 날짜가 변경되면 종료 날짜도 같이 변경
             if (!endDateChanged) {
                 setFormData({
                     ...formData,
                     [name]: value,
-                    visitEndDate: value
+                    visitEndDate: value // 시작 날짜가 변경되면 종료 날짜도 같이 변경
                 });
             } else {
                 setFormData({
@@ -239,7 +281,6 @@ function PrivacyAgreementInput() {
 
     // 직원 정보 확인 처리
     const handleVerifyEmployee = async () => {
-        // 이름 필드 앞/뒤의 공백 제거
         formData.employeeName = formData.employeeName.trim();
 
         // 필수 필드 유효성 검사
@@ -254,6 +295,11 @@ function PrivacyAgreementInput() {
         try {
             setIsVerifying(true);
             setVerificationError('');
+
+            // 네트워크 연결 확인
+            if (!navigator.onLine) {
+                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+            }
 
             // API 호출 - 직원 정보 확인
             const result = await verifyEmployee({
@@ -281,9 +327,31 @@ function PrivacyAgreementInput() {
                 toast.error(result.message || '일치하는 직원 정보를 찾을 수 없습니다');
             }
         } catch (error) {
-            setVerificationError('직원 정보 확인 중 오류가 발생했습니다');
-            toast.error('직원 정보 확인 중 오류가 발생했습니다');
             console.error('직원 확인 오류:', error);
+
+            // 네트워크 오류 발생 시 SweetAlert2로 메시지 표시
+            const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
+                ? '인터넷 연결이 오프라인 상태입니다.'
+                : '직원 정보 확인 중 오류가 발생했습니다';
+
+            setVerificationError(errorMessage);
+
+            // SweetAlert2로 오류 메시지와 재시도 옵션 제공
+            Swal.fire({
+                title: '네트워크 오류',
+                text: errorMessage,
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonText: '다시 시도',
+                cancelButtonText: '닫기',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 직원 확인 다시 시도
+                    handleVerifyEmployee();
+                }
+            });
         } finally {
             setIsVerifying(false);
         }
@@ -371,6 +439,11 @@ function PrivacyAgreementInput() {
     const handleSubmit = async () => {
         setLoading(true);
         try {
+            // 네트워크 연결 확인
+            if (!navigator.onLine) {
+                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+            }
+
             // 방문 신청 API 호출
             const result = await submitReservation({
                 employeePid: formData.employeePid,
@@ -400,8 +473,28 @@ function PrivacyAgreementInput() {
                 }
             });
         } catch (error) {
-            toast.error('방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.');
             console.error('방문 신청 오류:', error);
+
+            // 네트워크 오류 발생 시 SweetAlert2로 메시지 표시
+            const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
+                ? '인터넷 연결이 오프라인 상태입니다.'
+                : '방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.';
+
+            Swal.fire({
+                title: '신청 오류',
+                text: errorMessage,
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonText: '다시 시도',
+                cancelButtonText: '닫기',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 방문 신청 다시 시도
+                    handleSubmit();
+                }
+            });
         } finally {
             setLoading(false);
         }

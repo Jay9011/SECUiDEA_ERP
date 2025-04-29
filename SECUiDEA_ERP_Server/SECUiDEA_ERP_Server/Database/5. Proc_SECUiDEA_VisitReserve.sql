@@ -27,106 +27,123 @@ AS
 BEGIN 
     SET NOCOUNT ON;
     
-    SET @Type = LOWER(@Type)
-    
-    IF (@UpdateID < 0)
-    BEGIN 
-        SET @UpdateID = 0;
-    END
-
-    DECLARE @Result INT = 0;
-    DECLARE @VisitantID INT = NULL;
-    DECLARE @VisitReserveID INT = NULL;
-    DECLARE @VisitReserveVisitantID INT = NULL;
-    DECLARE @VisitantYMD NVARCHAR(8) = NULL;
-    
-    -- Mobile 뒷자리 8자리로 VisitantYMD 설정 (Visitant 테이블 수정이 끝나 있어야 함)
-    SET @VisitantYMD = RIGHT(@Mobile, 8);
----------------------------------------------------------------------------------------------------------
--- 방문 신청
----------------------------------------------------------------------------------------------------------
-    IF (@Type = 'reg')
-    BEGIN 
-        ---------------------------------------------------------------------------------------------------------
-        -- 내방객 관련 처리
-        ---------------------------------------------------------------------------------------------------------
-        -- 내방객 정보가 이미 있는지 확인
-        SELECT @VisitantID = VisitantID
-        FROM Visitant
-        WHERE VisitantName = @VisitantName
-          AND VisitantYMD = @VisitantYMD
-        ;
-    
-        -- 내방객 정보가 없는 경우 새로 추가
-        IF (@VisitantID IS NULL)
-        BEGIN
-            INSERT INTO Visitant 
-                ([VisitantName], [VisitantYMD], [VisitantCompany], 
-                 [Address], [OfficeTel], [Mobile],
-                 [Agreement], [AgreementDate], [SignImage], 
-                 [InsertDate], [UpdateDate], [UpdateID], [UpdateIP])
-            VALUES (@VisitantName, @VisitantYMD, @VisitantCompany
-                ,   @VisitantAddress, @VisitantOfficeTel, @Mobile
-                ,   0, NULL, 0x00
-                ,   getdate(), NULL
-                ,   @UpdateID
-                ,   @UpdateIP
-            )
-            ;
-            SET @VisitantID = SCOPE_IDENTITY();
-        END
-        ELSE
+    BEGIN TRY 
+        SET @Type = LOWER(@Type)
+        
+        IF (@UpdateID < 0)
         BEGIN 
-            -- 내방객 정보가 있는 경우 업데이트
-            UPDATE  Visitant
-            SET     VisitantCompany = ISNULL(NULLIF(NULLIF(@VisitantCompany, ''), 0), VisitantCompany)
-                ,   Address = ISNULL(NULLIF(NULLIF(@VisitantAddress, ''), 0), Address)
-                ,   OfficeTel = ISNULL(NULLIF(NULLIF(@VisitantOfficeTel, ''), 0), OfficeTel)
-                ,   UpdateDate = getdate()
-                ,   UpdateID = CASE WHEN @UpdateID < 0 THEN 0 ELSE @UpdateID END
-                ,   UpdateIP = @UpdateIP
-            WHERE   VisitantID = @VisitantID;
+            SET @UpdateID = 0;
         END
-        ;
+    
+        DECLARE @Result INT = 0;
+        DECLARE @VisitantID INT = NULL;
+        DECLARE @VisitReserveID INT = NULL;
+        DECLARE @VisitReserveVisitantID INT = NULL;
+        DECLARE @VisitantYMD NVARCHAR(8) = NULL;
         
-        ---------------------------------------------------------------------------------------------------------
-        -- 방문 예약 처리
-        ---------------------------------------------------------------------------------------------------------
-        INSERT INTO VisitReserve 
-            (PID, RegisterPID, 
-             VisitSDate, VisitEDate, 
-             VisitStatusID, VisitReasonID, VisitReasonText, 
-             VisitProtocol,
-             InsertDate, UpdateID, UpdateIP)
-        VALUES
-            (@PID, @RegisterPID, 
-             @VisitSDate, @VisitEDate, 
-             0, @VisitReasonId, @VisitReasonText,
-             0,
-             getdate(), @UpdateID, @UpdateIP)
-        ;
-        SET @VisitReserveID = SCOPE_IDENTITY();
+        -- Mobile 뒷자리 8자리로 VisitantYMD 설정 (Visitant 테이블 수정이 끝나 있어야 함)
+        SET @VisitantYMD = RIGHT(@Mobile, 8);
+    ---------------------------------------------------------------------------------------------------------
+    -- 방문 신청
+    ---------------------------------------------------------------------------------------------------------
+        IF (@Type = 'reg')
+        BEGIN 
+            ---------------------------------------------------------------------------------------------------------
+            -- 내방객 관련 처리
+            ---------------------------------------------------------------------------------------------------------
+            -- 내방객 정보가 이미 있는지 확인
+            SELECT @VisitantID = VisitantID
+            FROM Visitant
+            WHERE VisitantName = @VisitantName
+              AND VisitantYMD = @VisitantYMD
+            ;
         
-        ---------------------------------------------------------------------------------------------------------
-        -- 방문 예약 - 방문자 매핑 처리
-        ---------------------------------------------------------------------------------------------------------
-        INSERT INTO VisitReserveVisitant
-            (VisitID, VisitantID, PID,
-             LicensePlateNumber,
-             VisitStatusID,
-             InsertDate, updateID, UpdateIP)
-        VALUES 
-            (@VisitReserveID, @VisitantID, 0,
-             @LicensePlateNumber,
-             0,
-             getdate(), @UpdateID, @UpdateIP
-             )
-        ;
-        SET @VisitReserveVisitantID = SCOPE_IDENTITY();
+            -- 내방객 정보가 없는 경우 새로 추가
+            IF (@VisitantID IS NULL)
+            BEGIN
+                INSERT INTO Visitant 
+                    ([VisitantName], [VisitantYMD], [VisitantCompany], 
+                     [Address], [OfficeTel], [Mobile],
+                     [Agreement], [AgreementDate], [SignImage], 
+                     [InsertDate], [UpdateDate], [UpdateID], [UpdateIP])
+                VALUES (@VisitantName, @VisitantYMD, @VisitantCompany
+                    ,   @VisitantAddress, @VisitantOfficeTel, @Mobile
+                    ,   0, NULL, 0x00
+                    ,   getdate(), NULL
+                    ,   @UpdateID
+                    ,   @UpdateIP
+                )
+                ;
+                SET @VisitantID = SCOPE_IDENTITY();
+            END
+            ELSE
+            BEGIN 
+                -- 내방객 정보가 있는 경우 업데이트
+                UPDATE  Visitant
+                SET     VisitantCompany = ISNULL(NULLIF(NULLIF(@VisitantCompany, ''), 0), VisitantCompany)
+                    ,   Address = ISNULL(NULLIF(NULLIF(@VisitantAddress, ''), 0), Address)
+                    ,   OfficeTel = ISNULL(NULLIF(NULLIF(@VisitantOfficeTel, ''), 0), OfficeTel)
+                    ,   UpdateDate = getdate()
+                    ,   UpdateID = CASE WHEN @UpdateID < 0 THEN 0 ELSE @UpdateID END
+                    ,   UpdateIP = @UpdateIP
+                WHERE   VisitantID = @VisitantID;
+            END
+            ;
+            
+            ---------------------------------------------------------------------------------------------------------
+            -- 방문 예약 처리
+            ---------------------------------------------------------------------------------------------------------
+            INSERT INTO VisitReserve 
+                (PID, RegisterPID, 
+                 VisitSDate, VisitEDate, 
+                 VisitStatusID, VisitReasonID, VisitReasonText, 
+                 VisitProtocol,
+                 InsertDate, UpdateID, UpdateIP)
+            VALUES
+                (@PID, @RegisterPID, 
+                 @VisitSDate, @VisitEDate, 
+                 0, @VisitReasonId, @VisitReasonText,
+                 0,
+                 getdate(), @UpdateID, @UpdateIP)
+            ;
+            SET @VisitReserveID = SCOPE_IDENTITY();
+            
+            ---------------------------------------------------------------------------------------------------------
+            -- 방문 예약 - 방문자 매핑 처리
+            ---------------------------------------------------------------------------------------------------------
+            INSERT INTO VisitReserveVisitant
+                (VisitID, VisitantID, PID,
+                 LicensePlateNumber,
+                 VisitStatusID,
+                 InsertDate, updateID, UpdateIP)
+            VALUES 
+                (@VisitReserveID, @VisitantID, 0,
+                 @LicensePlateNumber,
+                 0,
+                 getdate(), @UpdateID, @UpdateIP
+                 )
+            ;
+            SET @VisitReserveVisitantID = SCOPE_IDENTITY();
+            
+            SET @Result = 1;
+            SELECT  @VisitantID AS VisitantID
+                ,   @VisitReserveVisitantID AS VisitReserveVisitantID
+            
+            RETURN @Result;
+        END
+    END TRY
+    BEGIN CATCH
+        -- 오류 발생 시 처리
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        DECLARE @ErrorSeverity INT;
+        DECLARE @ErrorState INT;
         
-        SET @Result = 1;
-        SELECT @VisitantID AS VisitantID
+        SELECT @ErrorMessage = ERROR_MESSAGE(),
+               @ErrorSeverity = ERROR_SEVERITY(),
+               @ErrorState = ERROR_STATE();
         
-        RETURN @Result;
-    END
+        RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState);
+        
+        RETURN @Result; -- 오류 발생에 0 리턴되는지 확인
+    END CATCH
 END
