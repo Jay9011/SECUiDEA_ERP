@@ -27,7 +27,7 @@ public partial class VisitController : BaseController
     }
 
     #endregion
-    
+
     public async Task<IActionResult> VisitReason([FromQuery] string lan)
     {
         // 유효성 검사
@@ -52,13 +52,13 @@ public partial class VisitController : BaseController
 
             return Ok(BoolResultModel.Success("", new Dictionary<string, object>
             {
-                {"reasons", reasonList}
+                { "reasons", reasonList }
             }));
         }
 
         return Ok(BoolResultModel.Success("", new Dictionary<string, object>
         {
-            {"reasons", new List<VisitReasonDTO>()}
+            { "reasons", new List<VisitReasonDTO>() }
         }));
     }
 
@@ -83,7 +83,7 @@ public partial class VisitController : BaseController
 
             return Ok(BoolResultModel.Success("", new Dictionary<string, object>
             {
-                {"employees", employeeList}
+                { "employees", employeeList }
             }));
         }
 
@@ -155,11 +155,12 @@ public partial class VisitController : BaseController
     {
         // 사용자 ID 가져오기
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        
+
         // 사용자 권한 가져오기
         var userRoleClaimValue = User.FindFirstValue(ClaimTypes.Role);
-        
-        if (string.IsNullOrEmpty(userRoleClaimValue) || !Enum.TryParse<S1AuthType>(userRoleClaimValue, out var userRole))
+
+        if (string.IsNullOrEmpty(userRoleClaimValue) ||
+            !Enum.TryParse<S1AuthType>(userRoleClaimValue, out var userRole))
         {
             return Unauthorized(new { message = "Invalid user role" });
         }
@@ -171,8 +172,8 @@ public partial class VisitController : BaseController
         }
 
         // 여기서 Employee 이상 권한이 있는 사용자에게 필요한 데이터를 반환
-        return Ok(new 
-        { 
+        return Ok(new
+        {
             userId = userId,
             userRole = userRole.ToString(),
             message = "Employee access granted",
@@ -190,7 +191,8 @@ public partial class VisitController : BaseController
         // 사용자 권한 가져오기
         var userRoleClaimValue = User.FindFirstValue(ClaimTypes.Role);
 
-        if (string.IsNullOrEmpty(userRoleClaimValue) || !Enum.TryParse<S1AuthType>(userRoleClaimValue, out var userRole))
+        if (string.IsNullOrEmpty(userRoleClaimValue) ||
+            !Enum.TryParse<S1AuthType>(userRoleClaimValue, out var userRole))
         {
             return Unauthorized(new { message = "Invalid user role" });
         }
@@ -222,11 +224,81 @@ public partial class VisitController : BaseController
 
                 return Ok(BoolResultModel.Success("", new Dictionary<string, object>
                 {
-                    {"data", list}
+                    { "data", list }
                 }));
             }
         }
 
         return BadRequest(BoolResultModel.Fail("Failed to retrieve visit reserve list."));
+    }
+
+    [Authorize]
+    [HttpPut]
+    public async Task<IActionResult> VisitReserveStatus([FromBody] VisitStatusDTO data)
+    {
+        try
+        {
+            // 사용자 ID 가져오기
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // 사용자 권한 가져오기
+            var userRoleClaimValue = User.FindFirstValue(ClaimTypes.Role);
+
+            if (string.IsNullOrEmpty(userRoleClaimValue) ||
+                !Enum.TryParse<S1AuthType>(userRoleClaimValue, out var userRole))
+            {
+                return Unauthorized(new { message = "Invalid user role" });
+            }
+
+            // Employee 이상 권한 체크
+            if (userRole < S1AuthType.Employee)
+            {
+                return Forbid();
+            }
+
+            // 유효성 검사
+            if (data.VisitId == 0 || string.IsNullOrEmpty(data.Status))
+            {
+                return BadRequest("Visit ID and status cannot be null or empty.");
+            }
+
+            // 현재 상태 변화는 "approved"만 가능
+            if (!data.Status.Equals("approved"))
+            {
+                return BadRequest("Invalid status change. Only 'approved' is allowed.");
+            }
+
+            // Employee Seq 가져오기
+            var seq = User.FindFirstValue(ClaimTypes.Sid);
+            int seqID = 0;
+            if (string.IsNullOrEmpty(seq) || !int.TryParse(seq, out seqID))
+            {
+                return BadRequest(new { message = "Invalid user ID" });
+            }
+
+            var param = new SECUiDEA_VisitReserveParam
+            {
+                Type = "approve",
+                VisitReserveInputId = data.VisitId,
+                VisitStatus = data.Status,
+                PID = seqID
+            };
+
+            var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReserve", param);
+            if (result.IsSuccess && result.DataSet?.Tables.Count > 0 && result.DataSet.Tables[0].Rows.Count > 0)
+            {
+                if (result.ReturnValue == 1)
+                {
+                    return Ok(BoolResultModel.Success(""));
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return BadRequest("Invalid visit ID or status.");
     }
 }

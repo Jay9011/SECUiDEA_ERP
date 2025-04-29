@@ -38,7 +38,11 @@ const App = () => {
             <Route element={<BaseLayout className="standard-layout" />}>
               <Route path="/visitReserve/privacyAgreement" element={<PrivacyAgreementInput />} />
               <Route path="/visitReserve/ReserveResult" element={<ReserveResult />} />
-              <Route path="/education" element={<EducationVideoPage />} />
+              <Route path="/education" element={
+                <ProtectedRoute>
+                  <EducationVideoPage />
+                </ProtectedRoute>
+              } />
               <Route path="/visitReserve/visitList" element={
                 <ProtectedRoute>
                   <VisitList />

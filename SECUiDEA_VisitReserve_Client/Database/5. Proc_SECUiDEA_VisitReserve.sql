@@ -20,6 +20,8 @@ CREATE PROCEDURE SECUiDEA_VisitReserve
 -- 기타 정보
 ,   @VisitantAddress    NVARCHAR(200)   = ''
 ,   @VisitantOfficeTel  NVARCHAR(50)    = ''
+,   @VisitReserveInputId INT             = 0
+,   @VisitStatus        NVARCHAR(200)   = NULL
 -- 사용자 ID
 ,	@UpdateID			INT				= 0
 ,	@UpdateIP			VARCHAR(15)		= '127.0.0.1'
@@ -130,6 +132,23 @@ BEGIN
             SET @Result = 1;
             SELECT  @VisitantID AS VisitantID
                 ,   @VisitReserveVisitantID AS VisitReserveVisitantID
+            
+            RETURN @Result;
+        END
+    ---------------------------------------------------------------------------------------------------------
+    -- 방문 승인
+    ---------------------------------------------------------------------------------------------------------
+        ELSE IF (@Type = 'approve')
+        BEGIN 
+            -- 방문 예약 승인 처리
+            UPDATE  VisitReserve
+            SET     VisitAssign = 1
+                ,   VisitAssignPID = @PID
+            WHERE   VisitID = @VisitReserveInputId
+            ;
+            
+            SET @Result = 1;
+            SELECT @VisitReserveInputId AS VisitReserveID;
             
             RETURN @Result;
         END

@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Clock, CheckCircle, X, AlertCircle, Loader2 } from 'lucide-react';
+import { Clock, CheckCircle, X, AlertCircle, Loader2, BookOpen, AlertTriangle } from 'lucide-react';
 
 // 스타일
 import './VisitCard.scss';
@@ -40,6 +40,28 @@ const VisitCard = memo(({
         setIsPurposeExpanded(!isPurposeExpanded);
     };
 
+    // 교육 이수 상태 배지 렌더링 함수
+    const renderEducationBadge = () => {
+        // education 속성이 undefined인 경우 배지를 표시하지 않음
+        if (visit.education === undefined) return null;
+
+        if (visit.education) {
+            return (
+                <div className="education-badge education-completed">
+                    <BookOpen size={14} />
+                    <span>교육 이수</span>
+                </div>
+            );
+        } else {
+            return (
+                <div className="education-badge education-incomplete">
+                    <AlertTriangle size={14} />
+                    <span>교육 미이수</span>
+                </div>
+            );
+        }
+    };
+
     return (
         <div className={`visit-item ${isPending ? 'item-pending' : ''}`}>
             <div className="visit-item-header">
@@ -50,19 +72,25 @@ const VisitCard = memo(({
 
                 {isMember && visit.status === 'pending' && !isPending ? (
                     // Member이고 대기중인 상태일 때 - 클릭 가능한 버튼으로 표시 (변경 중이 아닐 때)
-                    <button
-                        className="visit-status-button status-pending"
-                        onClick={() => onStatusChange(visit.id, 'approved')}
-                        title="클릭하여 승인하기"
-                    >
-                        <Clock size={18} />
-                        <span>승인 대기</span>
-                    </button>
+                    <div className="status-container">
+                        {renderEducationBadge()}
+                        <button
+                            className="visit-status-button status-pending"
+                            onClick={() => onStatusChange(visit.id, 'approved')}
+                            title="클릭하여 승인하기"
+                        >
+                            <Clock size={18} />
+                            <span>승인 대기</span>
+                        </button>
+                    </div>
                 ) : (
                     // 그 외의 경우 또는 변경 중일 때 - 일반 상태 표시
-                    <div className={`visit-status ${statusInfo.className}`}>
-                        {statusInfo.icon}
-                        <span>{statusInfo.label}</span>
+                    <div className="status-container">
+                        {renderEducationBadge()}
+                        <div className={`visit-status ${statusInfo.className}`}>
+                            {statusInfo.icon}
+                            <span>{statusInfo.label}</span>
+                        </div>
                     </div>
                 )}
             </div>
@@ -100,6 +128,12 @@ const VisitCard = memo(({
                         <span className="value">{visit.personName}</span>
                     </div>
                 )}
+                {visit.education && visit.educationDate && (
+                    <div className="visit-detail">
+                        <span className="label">교육 이수일:</span>
+                        <span className="value">{formatDateTime(visit.educationDate)}</span>
+                    </div>
+                )}
             </div>
 
         </div>
@@ -110,7 +144,8 @@ const VisitCard = memo(({
         prevProps.visit.id === nextProps.visit.id &&
         prevProps.visit.status === nextProps.visit.status &&
         prevProps.isPending === nextProps.isPending &&
-        prevProps.isMember === nextProps.isMember
+        prevProps.isMember === nextProps.isMember &&
+        prevProps.visit.education === nextProps.visit.education
     );
 });
 
@@ -125,7 +160,9 @@ VisitCard.propTypes = {
         visitPurpose: PropTypes.string,
         visitReason: PropTypes.string,
         personName: PropTypes.string,
-        status: PropTypes.string.isRequired
+        status: PropTypes.string.isRequired,
+        education: PropTypes.bool,
+        educationDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
     }).isRequired,
     isMember: PropTypes.bool.isRequired,
     isPending: PropTypes.bool.isRequired,

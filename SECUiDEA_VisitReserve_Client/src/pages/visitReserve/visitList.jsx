@@ -126,9 +126,9 @@ const VisitList = () => {
                 throw new Error('인터넷 연결이 오프라인 상태입니다.');
             }
 
-            const endpoint = `/api/Visit/VisitReserveStatus/${visitId}`;
+            const endpoint = `/Visit/VisitReserveStatus`;
             const response = await api.put(endpoint, {
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({ visitId: visitId, status: newStatus })
             });
 
             const data = await response.json();

@@ -40,8 +40,16 @@ const Navigation = ({ isOpen, onClose }) => {
             { path: '/visitReserve/visitList', label: '방문 현황' },
         ];
 
+        // Guest인 경우 추가 메뉴
+        if (user && user.role === 'Guest') {
+            return [
+                ...baseMenu,
+                { path: '/education', label: '교육 영상' }
+            ];
+        }
+
         // 관리자인 경우 추가 메뉴
-        if (user && user.role === 'admin') {
+        if (user && user.role === 'Admin') {
             return [
                 ...baseMenu,
                 { path: '/admin/dashboard', label: '관리자 대시보드' },

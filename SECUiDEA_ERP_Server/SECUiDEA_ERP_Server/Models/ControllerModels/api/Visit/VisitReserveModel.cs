@@ -108,6 +108,8 @@ public class VisitReserveVisitantParam : SQLParam
 public class SECUiDEA_VisitReserveParam : SQLParam
 {
     [DbParameter]
+    public string Type { get; set; } = "reg";
+    [DbParameter]
     public int PID { get; set; } = 0;
     [DbParameter]
     public string VisitantName { get; set; } = string.Empty;
@@ -122,11 +124,15 @@ public class SECUiDEA_VisitReserveParam : SQLParam
     [DbParameter]
     public string VisitReasonText { get; set; } = string.Empty;
     [DbParameter]
-    public DateTime VisitSDate { get; set; } = DateTime.MinValue;
+    public DateTime VisitSDate { get; set; } = new DateTime(1990, 01, 01);
     [DbParameter]
-    public DateTime VisitEDate { get; set; } = DateTime.MinValue;
+    public DateTime VisitEDate { get; set; } = new DateTime(1990, 01, 01);
     [DbParameter]
     public string LicensePlateNumber { get; set; } = string.Empty;
+    [DbParameter]
+    public int VisitReserveInputId { get; set; } = 0;
+    [DbParameter]
+    public string VisitStatus { get; set; } = string.Empty;
 }
 
 public class VisitorEducationParam : SQLParam
