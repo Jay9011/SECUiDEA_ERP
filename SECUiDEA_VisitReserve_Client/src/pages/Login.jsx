@@ -7,7 +7,7 @@ import { AuthProvider } from '../utils/authProviders';
 import './Login.scss';
 
 const Login = () => {
-    const { loginWithProvider, isAuthenticated, lastUsedProvider } = useAuth();
+    const { loginWithProvider, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -16,7 +16,7 @@ const Login = () => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-    const provider = lastUsedProvider || AuthProvider.S1;
+    const [isGuestMode, setIsGuestMode] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -40,12 +40,27 @@ const Login = () => {
             setLoading(true);
             setError('');
 
-            await loginWithProvider(provider, id, password, rememberMe);
+            const provider = isGuestMode ? AuthProvider.S1_GUEST : AuthProvider.S1;
+
+            if (isGuestMode) {
+                // 게스트 모드일 때, 휴대전화 번호가 들어오면 뒤에서 8자리만 사용
+                await loginWithProvider(provider, id, password.slice(-8));
+            }
+            else {
+                await loginWithProvider(provider, id, password, rememberMe);
+            }
         } catch (err) {
             setError(err.message || '로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
         } finally {
             setLoading(false);
         }
+    };
+
+    // 게스트 모드 토글
+    const toggleGuestMode = () => {
+        setIsGuestMode(!isGuestMode);
+        setId('');
+        setPassword('');
     };
 
     return (
@@ -66,6 +81,20 @@ const Login = () => {
 
                     {error && <div className="error-message">{error}</div>}
 
+
+                    <div className="guest-mode-toggle">
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                checked={isGuestMode}
+                                onChange={toggleGuestMode}
+                                disabled={loading}
+                            />
+                            <span className="slider round"></span>
+                        </label>
+                        <span className="guest-mode-label">게스트 로그인</span>
+                    </div>
+
                     <form onSubmit={handleLogin}>
                         <div className="form-group">
                             <div className="input-icon">
@@ -76,7 +105,7 @@ const Login = () => {
                                 id="id"
                                 value={id}
                                 onChange={(e) => setId(e.target.value)}
-                                placeholder="아이디를 입력하세요"
+                                placeholder={isGuestMode ? "이름을 입력하세요" : "아이디를 입력하세요"}
                                 disabled={loading}
                             />
                         </div>
@@ -90,7 +119,7 @@ const Login = () => {
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="비밀번호를 입력하세요"
+                                placeholder={isGuestMode ? "휴대전화번호를 입력하세요" : "비밀번호를 입력하세요"}
                                 disabled={loading}
                             />
                         </div>

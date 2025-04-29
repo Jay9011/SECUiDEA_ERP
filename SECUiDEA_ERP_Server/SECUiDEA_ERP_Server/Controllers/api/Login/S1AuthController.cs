@@ -65,7 +65,6 @@ public class S1AuthController : JwtController
     [HttpPost]
     public async Task<IActionResult> GuestLogin([FromBody] S1UserDTO request)
     {
-        // 게스트 로그인에서는 비밀번호 그대로 사용
         string processedPassword = request.Password;
         return await ProcessLoginAsync(request, processedPassword);
     }

@@ -68,7 +68,7 @@ BEGIN
                      [InsertDate], [UpdateDate], [UpdateID], [UpdateIP])
                 VALUES (@VisitantName, @VisitantYMD, @VisitantCompany
                     ,   @VisitantAddress, @VisitantOfficeTel, @Mobile
-                    ,   0, NULL, 0x00
+                    ,   1, getdate(), 0x00
                     ,   getdate(), NULL
                     ,   @UpdateID
                     ,   @UpdateIP
@@ -83,6 +83,8 @@ BEGIN
                 SET     VisitantCompany = ISNULL(NULLIF(@VisitantCompany, ''), VisitantCompany)
                     ,   Address = ISNULL(NULLIF(@VisitantAddress, ''), Address)
                     ,   OfficeTel = ISNULL(NULLIF(@VisitantOfficeTel, ''), OfficeTel)
+                    ,   Agreement = 1
+                    ,   AgreementDate = getdate()
                     ,   UpdateDate = getdate()
                     ,   UpdateID = CASE WHEN @UpdateID < 0 THEN 0 ELSE @UpdateID END
                     ,   UpdateIP = @UpdateIP

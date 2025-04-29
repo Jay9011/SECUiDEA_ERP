@@ -26,6 +26,12 @@ export const getProviderConfig = (provider) => {
                 loginEndpoint: '/api/Login/S1Auth/Login',
                 requiresPassword: true
             };
+        case AuthProvider.S1_GUEST:
+            return {
+                name: 'S1 게스트 인증',
+                loginEndpoint: '/api/Login/S1Auth/GuestLogin',
+                requiresPassword: true
+            };
         case AuthProvider.SECUiDEA: // TODO: 추후 추가 예정
             return {
                 name: 'SECUiDEA 인증',
