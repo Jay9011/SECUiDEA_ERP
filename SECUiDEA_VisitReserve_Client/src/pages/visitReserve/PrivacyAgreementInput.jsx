@@ -86,18 +86,22 @@ function PrivacyAgreementInput() {
     const [employeeList, setEmployeeList] = useState([]);
 
     // 네트워크 오류 Alert
-    const showNetworkErrorAlert = (errorMessage, retryHandler, title = '네트워크 오류') => {
+    const showNetworkErrorAlert = (errorMessage, retryHandler, title = '네트워크 오류', options = {}) => {
+        const { showCancelButton = true, allowOutsideClick = true } = options;
+
         Swal.fire({
             title: title,
             html: typeof errorMessage === 'string'
                 ? `<p>${errorMessage}</p><p>다시 시도하시겠습니까?</p>`
                 : errorMessage,
             icon: 'error',
-            showCancelButton: true,
+            showCancelButton: showCancelButton,
             confirmButtonText: '다시 시도',
             cancelButtonText: '닫기',
             confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#6c757d'
+            cancelButtonColor: '#6c757d',
+            allowOutsideClick: allowOutsideClick,
+            allowEscapeKey: allowOutsideClick
         }).then((result) => {
             if (result.isConfirmed && typeof retryHandler === 'function') {
                 retryHandler();
@@ -114,7 +118,9 @@ function PrivacyAgreementInput() {
                 navigator.onLine
                     ? '서버에서 데이터를 가져오지 못했습니다.'
                     : '인터넷 연결이 오프라인 상태입니다.',
-                loadInitialData
+                loadInitialData,
+                '네트워크 오류',
+                { showCancelButton: false, allowOutsideClick: false }
             );
         }
     };
@@ -335,7 +341,12 @@ function PrivacyAgreementInput() {
                 : '직원 정보 확인 중 오류가 발생했습니다';
 
             setVerificationError(errorMessage);
-            showNetworkErrorAlert(errorMessage, handleVerifyEmployee);
+            showNetworkErrorAlert(
+                errorMessage,
+                handleVerifyEmployee,
+                '직원 정보 확인 오류',
+                { showCancelButton: false, allowOutsideClick: false }
+            );
         } finally {
             setIsVerifying(false);
         }
@@ -463,7 +474,12 @@ function PrivacyAgreementInput() {
                 ? '인터넷 연결이 오프라인 상태입니다.'
                 : '방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.';
 
-            showNetworkErrorAlert(errorMessage, handleSubmit, '신청 오류');
+            showNetworkErrorAlert(
+                errorMessage,
+                handleSubmit,
+                '신청 오류',
+                { showCancelButton: false, allowOutsideClick: false }
+            );
         } finally {
             setLoading(false);
         }
