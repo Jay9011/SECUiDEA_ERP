@@ -96,47 +96,56 @@ public class VisitController : BaseController
     [HttpPost]
     public async Task<IActionResult> VisitReserve([FromBody] VisitReserveDTO visitReserveDTO)
     {
-        // 유효성 검사
-        if (visitReserveDTO == null || visitReserveDTO.EmployeePid == 0)
+        try
         {
-            return BadRequest("Invalid visit reserve data.");
-        }
-
-        // 방문 시간 유효성 검사
-        DateTime visitStartDate;
-        DateTime visitEndDate;
-        string strVisitSDate = visitReserveDTO.VisitDate + " " + visitReserveDTO.VisitTime;
-        string strVisitEDate = visitReserveDTO.VisitEndDate + " " + visitReserveDTO.VisitEndTime;
-        if (!DateTime.TryParse(strVisitSDate, out visitStartDate) 
-            || !DateTime.TryParse(strVisitEDate, out visitEndDate)
-            || visitStartDate >= visitEndDate
-            )
-        {
-            return BadRequest("Invalid visit date format.");
-        }
-
-        var param = new SECUiDEA_VisitReserveParam
-        {
-            PID = visitReserveDTO.EmployeePid,
-            VisitantName = visitReserveDTO.VisitorName,
-            VisitantCompany = visitReserveDTO.VisitorCompany,
-            Mobile = visitReserveDTO.VisitorContact,
-            Email = visitReserveDTO.VisitorEmail,
-            VisitReasonID = visitReserveDTO.VisitReasonId,
-            VisitReasonText = visitReserveDTO.VisitPurpose,
-            VisitSDate = visitStartDate,
-            VisitEDate = visitEndDate,
-            LicensePlateNumber = visitReserveDTO.VisitorCarNumber,
-        };
-
-        var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReserve", param);
-        if (result.IsSuccess)
-        {
-            return Ok(BoolResultModel.Success("Visit reserved successfully.", new Dictionary<string, object>
+            // 유효성 검사
+            if (visitReserveDTO == null || visitReserveDTO.EmployeePid == 0)
             {
-                {"visitInfo", param}
-            }));
+                return BadRequest("Invalid visit reserve data.");
+            }
+
+            // 방문 시간 유효성 검사
+            DateTime visitStartDate;
+            DateTime visitEndDate;
+            string strVisitSDate = visitReserveDTO.VisitDate + " " + visitReserveDTO.VisitTime;
+            string strVisitEDate = visitReserveDTO.VisitEndDate + " " + visitReserveDTO.VisitEndTime;
+            if (!DateTime.TryParse(strVisitSDate, out visitStartDate)
+                || !DateTime.TryParse(strVisitEDate, out visitEndDate)
+                || visitStartDate >= visitEndDate
+               )
+            {
+                return BadRequest("Invalid visit date format.");
+            }
+
+            var param = new SECUiDEA_VisitReserveParam
+            {
+                PID = visitReserveDTO.EmployeePid,
+                VisitantName = visitReserveDTO.VisitorName,
+                VisitantCompany = visitReserveDTO.VisitorCompany,
+                Mobile = visitReserveDTO.VisitorContact,
+                Email = visitReserveDTO.VisitorEmail,
+                VisitReasonID = visitReserveDTO.VisitReasonId,
+                VisitReasonText = visitReserveDTO.VisitPurpose,
+                VisitSDate = visitStartDate,
+                VisitEDate = visitEndDate,
+                LicensePlateNumber = visitReserveDTO.VisitorCarNumber,
+            };
+
+            var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReserve", param);
+            if (result.IsSuccess)
+            {
+                return Ok(BoolResultModel.Success("Visit reserved successfully.", new Dictionary<string, object>
+                {
+                    { "visitInfo", param }
+                }));
+            }
         }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
         return BadRequest(BoolResultModel.Fail("Failed to reserve visit."));
     }
 

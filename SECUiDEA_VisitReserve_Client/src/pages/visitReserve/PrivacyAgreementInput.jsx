@@ -470,7 +470,7 @@ function PrivacyAgreementInput() {
             });
 
             if (result.isSuccess) {
-                const visitReason = visitReasons.find(reason => reason.visitReasonID === visitReasonId);
+                const visitReason = visitReasons.find(reason => reason.visitReasonID == visitReasonId);
 
                 // 성공 시 결과 페이지로 이동
                 navigate('/visitReserve/ReserveResult', {

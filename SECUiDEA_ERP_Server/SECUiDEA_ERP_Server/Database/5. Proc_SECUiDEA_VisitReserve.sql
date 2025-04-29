@@ -80,9 +80,9 @@ BEGIN
             BEGIN 
                 -- 내방객 정보가 있는 경우 업데이트
                 UPDATE  Visitant
-                SET     VisitantCompany = ISNULL(NULLIF(NULLIF(@VisitantCompany, ''), 0), VisitantCompany)
-                    ,   Address = ISNULL(NULLIF(NULLIF(@VisitantAddress, ''), 0), Address)
-                    ,   OfficeTel = ISNULL(NULLIF(NULLIF(@VisitantOfficeTel, ''), 0), OfficeTel)
+                SET     VisitantCompany = ISNULL(NULLIF(@VisitantCompany, ''), VisitantCompany)
+                    ,   Address = ISNULL(NULLIF(@VisitantAddress, ''), Address)
+                    ,   OfficeTel = ISNULL(NULLIF(@VisitantOfficeTel, ''), OfficeTel)
                     ,   UpdateDate = getdate()
                     ,   UpdateID = CASE WHEN @UpdateID < 0 THEN 0 ELSE @UpdateID END
                     ,   UpdateIP = @UpdateIP
