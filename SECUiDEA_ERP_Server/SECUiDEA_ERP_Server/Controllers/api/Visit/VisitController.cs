@@ -179,4 +179,54 @@ public partial class VisitController : BaseController
             timestamp = DateTime.Now
         });
     }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> VisitReserveList([FromQuery] int page, int limit)
+    {
+        // 사용자 ID 가져오기
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        // 사용자 권한 가져오기
+        var userRoleClaimValue = User.FindFirstValue(ClaimTypes.Role);
+
+        if (string.IsNullOrEmpty(userRoleClaimValue) || !Enum.TryParse<S1AuthType>(userRoleClaimValue, out var userRole))
+        {
+            return Unauthorized(new { message = "Invalid user role" });
+        }
+
+        var seq = User.FindFirstValue(ClaimTypes.Sid);
+        int seqID = 0;
+        if (string.IsNullOrEmpty(seq) || !int.TryParse(seq, out seqID))
+        {
+            return BadRequest(new { message = "Invalid user ID" });
+        }
+
+        // Guest인 경우
+        if (userRole == S1AuthType.Guest)
+        {
+            var param = new VisitReserveListParam
+            {
+                Page = page,
+                PageSize = limit,
+                RoleType = userRole.ToString(),
+                PID = seqID,
+                VisitantID = seqID,
+                Lan = "ko"
+            };
+
+            var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReserveListSEL", param);
+            if (result.IsSuccess)
+            {
+                var list = result.DataSet.Tables[0].ToObject<VisitListItemDTO>();
+
+                return Ok(BoolResultModel.Success("", new Dictionary<string, object>
+                {
+                    {"data", list}
+                }));
+            }
+        }
+
+        return BadRequest(BoolResultModel.Fail("Failed to retrieve visit reserve list."));
+    }
 }

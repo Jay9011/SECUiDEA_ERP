@@ -124,7 +124,7 @@ const Login = () => {
                             />
                         </div>
 
-                        <div className="form-options">
+                        <div className="form-options" style={{ display: "none" }}>
                             <label className="remember-me">
                                 <input
                                     type="checkbox"
