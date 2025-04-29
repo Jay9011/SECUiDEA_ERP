@@ -6,6 +6,8 @@
 export const AuthProvider = Object.freeze({
     /** S1인증 방식 */
     S1: 'S1',
+    /** S1 게스트 인증 방식 */
+    S1_GUEST: 'S1_GUEST',
     /** SECUiDEA 인증 방식 */
     SECUiDEA: 'SECUiDEA'
 });

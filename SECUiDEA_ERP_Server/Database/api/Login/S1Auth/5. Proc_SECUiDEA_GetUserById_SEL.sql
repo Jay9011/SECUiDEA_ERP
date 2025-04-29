@@ -91,6 +91,23 @@ BEGIN
         FROM EqUser
         WHERE ID = @ID
     END
+    -- 방문객 확인
+    ELSE IF exists(SELECT TOP (1) * FROM Visitant WHERE VisitantName = @ID)
+    BEGIN 
+        SET @Role = 'Guest';
+        
+        SELECT @Role AS AuthType,
+               VisitantID AS Seq,
+               VisitantName AS ID,
+               VisitantYMD AS Password,
+               VisitantName AS Name,
+               0 AS PersonStatusID,
+               (SELECT VisitSabunPW FROM SystemSetup) AS VisitSabunPW,
+               0 AS EnableSessionTimeout,
+               0 AS SessionTimeoutMinutes
+        FROM Visitant
+        WHERE VisitantName = @ID
+    END
     -- 로그인 실패
     ELSE
     BEGIN 

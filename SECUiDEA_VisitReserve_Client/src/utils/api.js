@@ -213,6 +213,23 @@ export async function S1LoginApi(id, password, rememberMe = false) {
 }
 
 /**
+ * S1 게스트 로그인 API 호출
+ * @param {string} id
+ * @param {string} password
+ * @returns {Promise} 로그인 결과 데이터
+ */
+export async function S1GuestLoginApi(id, password) {
+    const response = await fetch(`${apiBaseUrl}/Login/S1Auth/GuestLogin`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, password, rememberMe: false })
+    });
+    return response.json();
+}
+
+/**
  * 로그아웃 API 호출
  * @param {string} sessionId
  * @param {string} refreshToken

@@ -1,5 +1,5 @@
 import { setCookie, getCookie, deleteCookie, getBooleanCookie, setBooleanCookie, setDateCookie, getDateCookie } from './cookies';
-import { S1LoginApi, LogoutApi } from './api';
+import { S1LoginApi, S1GuestLoginApi, LogoutApi } from './api';
 import { AuthProvider } from './authProviders';
 
 /**
@@ -18,6 +18,8 @@ const authService = {
         switch (provider) {
             case AuthProvider.S1:
                 return await S1LoginApi(id, password, rememberMe);
+            case AuthProvider.S1_GUEST:
+                return await S1GuestLoginApi(id, password, false);
             case AuthProvider.SECUiDEA:
                 // 추후 구현
                 throw new Error('아직 구현되지 않은 로그인 방식입니다');

@@ -330,8 +330,8 @@ function PrivacyAgreementInput() {
                     toast.error('직원 정보를 가져오는 중 오류가 발생했습니다');
                 }
             } else {
-                setVerificationError(result.message || '일치하는 직원 정보를 찾을 수 없습니다');
-                toast.error(result.message || '일치하는 직원 정보를 찾을 수 없습니다');
+                setVerificationError('일치하는 직원 정보를 찾을 수 없습니다');
+                toast.error('일치하는 직원 정보를 찾을 수 없습니다');
             }
         } catch (error) {
             console.error('직원 확인 오류:', error);

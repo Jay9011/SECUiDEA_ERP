@@ -12,7 +12,7 @@ using SECUiDEA_ERP_Server.Models.ResultModels;
 namespace SECUiDEA_ERP_Server.Controllers.api.Visit;
 
 [Route("api/[controller]/[action]")]
-public class VisitController : BaseController
+public partial class VisitController : BaseController
 {
     #region 의존 주입
 
@@ -27,7 +27,7 @@ public class VisitController : BaseController
     }
 
     #endregion
-
+    
     public async Task<IActionResult> VisitReason([FromQuery] string lan)
     {
         // 유효성 검사

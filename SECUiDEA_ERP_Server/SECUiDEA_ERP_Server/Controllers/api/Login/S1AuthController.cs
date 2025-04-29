@@ -54,10 +54,28 @@ public class S1AuthController : JwtController
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] S1UserDTO request)
     {
+        // 일반 로그인에서는 비밀번호 암호화
+        string processedPassword = _cryptoSha512.Encrypt(request.Password);
+        return await ProcessLoginAsync(request, processedPassword);
+    }
+
+    /// <summary>
+    /// S1ACCESS 게스트 로그인 처리
+    /// </summary>
+    [HttpPost]
+    public async Task<IActionResult> GuestLogin([FromBody] S1UserDTO request)
+    {
+        // 게스트 로그인에서는 비밀번호 그대로 사용
+        string processedPassword = request.Password;
+        return await ProcessLoginAsync(request, processedPassword);
+    }
+
+    private async Task<IActionResult> ProcessLoginAsync(S1UserDTO request, string processedPassword)
+    {
         try
         {
             // S1ACCESS 인증 처리
-            var user = await _userRepository.AuthenticateAsync(request.Id, _cryptoSha512.Encrypt(request.Password));
+            var user = await _userRepository.AuthenticateAsync(request.Id, processedPassword);
             if (user == null)
             {
                 return Unauthorized(BoolResultModel.Fail("인증 실패: 사용자 정보가 일치하지 않습니다."));
@@ -70,7 +88,7 @@ public class S1AuthController : JwtController
                 user,
                 ipAddress,
                 request.rememberMe);
-            
+
             return Ok(BoolResultModel.Success("",
                 new Dictionary<string, object>
                 {
@@ -79,7 +97,6 @@ public class S1AuthController : JwtController
         }
         catch (Exception ex)
         {
-            // 오류 로깅 (실제 구현 시 로깅 서비스 사용)
             return StatusCode(500, BoolResultModel.Fail("서버 오류가 발생했습니다."));
         }
     }
@@ -172,7 +189,7 @@ public class S1UserRepository : IUserRepository
             {
                 return null;
             }
-
+            
             // 비밀번호 검증
             if (userEntity.Password != password)
             {
