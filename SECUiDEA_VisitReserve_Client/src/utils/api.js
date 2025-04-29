@@ -56,7 +56,7 @@ export const refreshAccessToken = async () => {
         const data = await response.json();
 
         // 새로운 토큰 저장
-        setCookie("accessToken", data.accessToken);
+        authService.setAuthCookies(data);
         // TODO: 추후 RefreshToken이나 SessionId 등 처리 필요
         return true;
     } catch (error) {
