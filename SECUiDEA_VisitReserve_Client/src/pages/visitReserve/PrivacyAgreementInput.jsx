@@ -439,34 +439,63 @@ function PrivacyAgreementInput() {
                 throw new Error('인터넷 연결이 오프라인 상태입니다.');
             }
 
+            // 방문 신청 정보
+            const employeeName = formData.employeeName;
+            const visitorName = formData.visitorName;
+            const visitorCompany = formData.visitorCompany;
+            const visitorContact = formData.visitorContact;
+            const visitDate = formData.visitDate;
+            const visitTime = formData.visitTime;
+            const visitEndDate = formData.visitEndDate;
+            const visitEndTime = formData.visitEndTime;
+            const visitReasonId = formData.visitReasonId;
+            const visitPurpose = formData.visitPurpose;
+            const visitorCarNumber = formData.visitorCarNumber;
+
             // 방문 신청 API 호출
             const result = await submitReservation({
                 employeePid: formData.employeePid,
-                employeeName: formData.employeeName,
-                visitorName: formData.visitorName,
-                visitorCompany: formData.visitorCompany,
-                visitorContact: formData.visitorContact,
+                employeeName: employeeName,
+                visitorName: visitorName,
+                visitorCompany: visitorCompany,
+                visitorContact: visitorContact,
                 visitorEmail: formData.visitorEmail,
-                visitReasonId: formData.visitReasonId,
-                visitPurpose: formData.visitPurpose,
-                visitDate: formData.visitDate,
-                visitTime: formData.visitTime,
-                visitEndDate: formData.visitEndDate,
-                visitEndTime: formData.visitEndTime,
-                visitorCarNumber: formData.visitorCarNumber,
+                visitReasonId: visitReasonId,
+                visitPurpose: visitPurpose,
+                visitDate: visitDate,
+                visitTime: visitTime,
+                visitEndDate: visitEndDate,
+                visitEndTime: visitEndTime,
+                visitorCarNumber: visitorCarNumber,
             });
 
-            // 성공 시 결과 페이지로 이동
-            navigate('/visitReserve/ReserveResult', {
-                state: {
-                    result: result.isSuccess,
-                    visitorName: result.data?.visitorName,
-                    visitorContact: result.data?.visitorContact,
-                    visitDate: result.data?.visitDate,
-                    visitTime: result.data?.visitTime,
-                    educationWatched: result.data?.educationWatched,
-                }
-            });
+            if (result.isSuccess) {
+                const visitReason = visitReasons.find(reason => reason.visitReasonID === visitReasonId);
+
+                // 성공 시 결과 페이지로 이동
+                navigate('/visitReserve/ReserveResult', {
+                    state: {
+                        employeeName: employeeName,
+                        visitorName: visitorName,
+                        visitorCompany: visitorCompany,
+                        visitorContact: visitorContact,
+                        visitDate: visitDate,
+                        visitTime: visitTime,
+                        visitEndDate: visitEndDate,
+                        visitEndTime: visitEndTime,
+                        visitReason: visitReason.visitReasonName,
+                        visitPurpose: visitPurpose,
+                        visitorCarNumber: visitorCarNumber,
+                    }
+                });
+            } else {
+                showNetworkErrorAlert(
+                    result.message || '방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.',
+                    handleSubmit,
+                    '방문 신청 오류',
+                    { showCancelButton: true, allowOutsideClick: true }
+                );
+            }
         } catch (error) {
             console.error('방문 신청 오류:', error);
 
