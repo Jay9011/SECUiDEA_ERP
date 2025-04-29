@@ -41,11 +41,17 @@ export const AuthProvider = ({ children }) => {
             return;
         }
 
+        // tokenData에 accessToken이 있는 경우 디코딩
+        if (tokenData.accessToken) {
+            const decodedToken = parseJwt(tokenData.accessToken);
+            tokenData = decodedToken;
+        }
+
         // 사용자 정보 설정
         setUser({
             id: tokenData.nameid || tokenData.id || options.userId,
             role: tokenData.role,
-            name: tokenData.name,
+            name: tokenData.name || tokenData.unique_name,
             // 추가 정보를 추출
             ...(tokenData.permissions && {
                 permissions:

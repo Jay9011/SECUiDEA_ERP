@@ -65,8 +65,7 @@ public class S1AuthController : JwtController
     [HttpPost]
     public async Task<IActionResult> GuestLogin([FromBody] S1UserDTO request)
     {
-        string processedPassword = request.Password;
-        return await ProcessLoginAsync(request, processedPassword);
+        return await ProcessLoginAsync(request, request.Password);
     }
 
     private async Task<IActionResult> ProcessLoginAsync(S1UserDTO request, string processedPassword)

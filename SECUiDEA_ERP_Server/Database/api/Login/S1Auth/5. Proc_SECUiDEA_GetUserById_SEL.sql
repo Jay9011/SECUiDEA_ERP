@@ -4,7 +4,7 @@ BEGIN
 END
 GO
 CREATE PROCEDURE [dbo].SECUiDEA_GetUserById_SEL
-    @ID         NVARCHAR(50)
+    @ID             NVARCHAR(100)
 AS 
 BEGIN 
     SET NOCOUNT ON;
@@ -13,6 +13,16 @@ BEGIN
     DECLARE @Role NVARCHAR(50) = 'Fail';
     DECLARE @EnableSessionTimeout BIT = 0;
     DECLARE @SessionTimeoutMinutes INT;
+    DECLARE @Password NVARCHAR(50);
+    
+    -- Guest의 경우에는 |를 기준으로 ID와 Password가 같이 오기에 분리해서 사용
+    DECLARE @tmpID NVARCHAR(100) = @ID;
+    DECLARE @SeparatorPosition INT = CHARINDEX('|', @ID);
+    IF @SeparatorPosition > 0
+    BEGIN
+        SET @ID = LEFT(@tmpID, @SeparatorPosition - 1);
+        SET @Password = SUBSTRING(@tmpID, @SeparatorPosition + 1, LEN(@tmpID));
+    END
     
     -- 협력 업체 확인
     IF exists(SELECT TOP(1) * FROM Person WHERE Sabun = @ID AND PersonTypeID = 2)
@@ -92,13 +102,13 @@ BEGIN
         WHERE ID = @ID
     END
     -- 방문객 확인
-    ELSE IF exists(SELECT TOP (1) * FROM Visitant WHERE VisitantName = @ID)
+    ELSE IF exists(SELECT TOP (1) * FROM Visitant WHERE VisitantName = @ID AND VisitantYMD = @Password)
     BEGIN 
         SET @Role = 'Guest';
         
         SELECT @Role AS AuthType,
                VisitantID AS Seq,
-               VisitantName AS ID,
+               VisitantName + '|' + VisitantYMD AS ID,
                VisitantYMD AS Password,
                VisitantName AS Name,
                0 AS PersonStatusID,
@@ -107,6 +117,7 @@ BEGIN
                0 AS SessionTimeoutMinutes
         FROM Visitant
         WHERE VisitantName = @ID
+          AND VisitantYMD = @Password
     END
     -- 로그인 실패
     ELSE

@@ -51,6 +51,13 @@ BEGIN
                 ,   p.Name AS PersonName
                 ,   vrv.LicensePlateNumber AS LicensePlateNumber         
                 ,   vrv.InsertDate AS RegisteredDate
+                ,   (CASE
+                            WHEN v.EducationDate IS NULL THEN 0
+                            WHEN DATEDIFF(MONTH, v.EducationDate, GETDATE()) > 3 THEN 0
+                            ELSE 1
+                        END
+                    ) AS Education
+                ,   v.EducationDate AS EducationDate
             FROM    VisitReserveVisitant vrv
             JOIN    VisitReserve vr ON vr.VisitID = vrv.VisitID
             JOIN    Visitant v ON v.VisitantID = vrv.VisitantID
@@ -92,6 +99,13 @@ BEGIN
                 ,   p.Name AS PersonName
                 ,   vrv.LicensePlateNumber AS LicensePlateNumber         
                 ,   vrv.InsertDate AS RegisteredDate
+                ,   (CASE
+                            WHEN v.EducationDate IS NULL THEN 0
+                            WHEN DATEDIFF(MONTH, v.EducationDate, GETDATE()) > 3 THEN 0
+                            ELSE 1
+                        END
+                    ) AS Education
+                ,   v.EducationDate AS EducationDate
             FROM    VisitReserveVisitant vrv
             JOIN    VisitReserve vr ON vr.VisitID = vrv.VisitID
             JOIN    Visitant v ON v.VisitantID = vrv.VisitantID

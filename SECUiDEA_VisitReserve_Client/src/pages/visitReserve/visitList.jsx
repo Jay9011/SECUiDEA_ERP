@@ -221,6 +221,18 @@ const VisitList = () => {
                     icon: <CheckCircle size={18} />,
                     className: 'status-approved'
                 };
+            case 'visited':
+                return {
+                    label: t('reservation.status.visited') || '방문 중',
+                    icon: <Clock size={18} />,
+                    className: 'status-visited'
+                };
+            case 'finished':
+                return {
+                    label: t('reservation.status.finished') || '완료 됨',
+                    icon: <CheckCircle size={18} />,
+                    className: 'status-finished'
+                };
             case 'rejected':
                 return {
                     label: t('reservation.status.rejected') || '거절됨',

@@ -23,11 +23,11 @@ const AuthSection = ({ onClose }) => {
                 <div className="user-container">
                     <div className="user-info">
                         <div className="avatar">
-                            {user.userName ? user.userName.charAt(0) : user.id.charAt(0)}
+                            {user.name ? user.name.charAt(0) : user.id.charAt(0)}
                         </div>
                         <div className="user-details">
-                            <span className="name">{user.userName || user.id}</span>
-                            <span className="role">{user.userRole || user.role || '일반 사용자'}</span>
+                            <span className="name">{user.name || user.id}</span>
+                            <span className="role">{user.role || '일반 사용자'}</span>
                         </div>
                     </div>
                     <button

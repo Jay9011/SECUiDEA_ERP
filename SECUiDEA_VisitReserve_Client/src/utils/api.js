@@ -219,12 +219,13 @@ export async function S1LoginApi(id, password, rememberMe = false) {
  * @returns {Promise} 로그인 결과 데이터
  */
 export async function S1GuestLoginApi(id, password) {
+    // S1 게스트 로그인의 경우 ID|PASSWORD 형식으로 전달
     const response = await fetch(`${apiBaseUrl}/Login/S1Auth/GuestLogin`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, password, rememberMe: false })
+        body: JSON.stringify({ id: `${id}|${password}`, password, rememberMe: false })
     });
     return response.json();
 }
