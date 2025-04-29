@@ -65,11 +65,11 @@ function EducationVideoPage() {
     setIsPlaying(!isPlaying);
   };
 
-  // 시크 이벤트 처리 (사용자가 재생 위치 변경 시도)
+  // Seek 이벤트 처리 (사용자가 재생 위치 변경 시도)
   const handleSeek = (seconds) => {
-    // 영상 처음이나 끝으로 시크하는 것 외에는 제한 (영상을 완료한 후 처음으로 돌아가기 허용)
+    // 영상 처음이나 끝으로 Seek 하는 것 외에는 제한 (영상을 완료한 후 처음으로 돌아가기 허용)
     if (seconds > 1 && seconds < videoDuration - 1 && !videoEnded) {
-      console.log('시크 시도 감지됨');
+      console.log('Seek 시도 감지됨');
       playerRef.current.seekTo(lastPlayedRef.current);
     }
   };
@@ -95,34 +95,12 @@ function EducationVideoPage() {
   // 전체화면 토글
   const toggleFullScreen = () => {
     if (!document.fullscreenElement && playerContainerRef.current) {
-      // 전체화면 진입
       playerContainerRef.current.requestFullscreen().catch(err => {
         console.error(`전체화면 모드 전환 오류: ${err.message}`);
       });
-
-      // 모바일 화면 회전 시도 (기기가 지원하는 경우)
-      if (screen.orientation && screen.orientation.lock) {
-        try {
-          screen.orientation.lock('landscape').catch(err => {
-            console.log('화면 회전을 지원하지 않습니다:', err);
-          });
-        } catch {
-          console.log('화면 회전 API를 지원하지 않습니다.');
-        }
-      }
     } else {
-      // 전체화면 종료
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      }
-
-      // 모바일 화면 회전 해제 시도
-      if (screen.orientation && screen.orientation.unlock) {
-        try {
-          screen.orientation.unlock();
-        } catch {
-          console.log('화면 회전 API를 지원하지 않습니다.');
-        }
       }
     }
   };
@@ -264,8 +242,8 @@ function EducationVideoPage() {
           <ReactPlayer
             ref={playerRef}
             url={videoUrl}
-            width="100%"
-            height="100%"
+            width={isFullScreen ? "100vw" : "100%"}
+            height={isFullScreen ? "100vh" : "100%"}
             controls={false}
             playing={isPlaying}
             volume={volume}
