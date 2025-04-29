@@ -27,8 +27,8 @@ const VisitList = () => {
     const [pendingStatusChanges, setPendingStatusChanges] = useState({});
     const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
-    // 사용자 권한 확인 (Member 또는 Guest)
-    const isMember = user?.role === 'member';
+    // 사용자 권한 확인 (Employee 또는 Guest)
+    const isMember = user?.role === 'Employee';
 
     // 네트워크 오류 Alert
     const showNetworkErrorAlert = (errorMessage, retryHandler, title = '네트워크 오류', options = {}) => {

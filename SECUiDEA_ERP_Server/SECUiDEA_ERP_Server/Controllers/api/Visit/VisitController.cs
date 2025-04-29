@@ -202,8 +202,8 @@ public partial class VisitController : BaseController
             return BadRequest(new { message = "Invalid user ID" });
         }
 
-        // Guest인 경우
-        if (userRole == S1AuthType.Guest)
+        if (userRole == S1AuthType.Guest
+            || userRole == S1AuthType.Employee)
         {
             var param = new VisitReserveListParam
             {

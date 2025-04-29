@@ -25,8 +25,8 @@ BEGIN
     
     DECLARE @Offset INT = (@Page - 1) * @PageSize;  -- 페이지네이션을 위한 Offset 계산
 
-    -- RoleType이 Member일 경우
-    IF (@RoleType = 'member')
+    -- RoleType이 Employee일 경우
+    IF (@RoleType = 'employee')
     BEGIN 
         IF (@StatusFilter = 'all')
         BEGIN 
@@ -36,7 +36,7 @@ BEGIN
                             WHEN vrv.VisitStatusID = 1 THEN 'visited'
                             WHEN vrv.VisitStatusID = 2 THEN 'finished'
                             WHEN vrv.VisitStatusID = 3 THEN 'finished'
-                            WHEN vrv.VisitStatusID = 4 AND vr.VisitAssign = 0 THEN 'cancelled' 
+                            WHEN vrv.VisitStatusID = 4 AND vr.VisitAssign = 0 THEN 'canceled' 
                             WHEN vrv.VisitStatusID = 4 AND vr.VisitAssign = 1 THEN 'rejected'
                             ELSE 'unknown'
                     END AS Status
@@ -77,7 +77,7 @@ BEGIN
                             WHEN vrv.VisitStatusID = 1 THEN 'visited'
                             WHEN vrv.VisitStatusID = 2 THEN 'finished'
                             WHEN vrv.VisitStatusID = 3 THEN 'finished'
-                            WHEN vrv.VisitStatusID = 4 AND vr.VisitAssign = 0 THEN 'cancelled' 
+                            WHEN vrv.VisitStatusID = 4 AND vr.VisitAssign = 0 THEN 'canceled' 
                             WHEN vrv.VisitStatusID = 4 AND vr.VisitAssign = 1 THEN 'rejected'
                             ELSE 'unknown'
                     END AS Status

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Clock, CheckCircle, X, AlertCircle, Loader2 } from 'lucide-react';
 
@@ -13,17 +13,31 @@ const VisitCard = memo(({
     onStatusChange,
     showContact = false
 }) => {
+    // 방문 목적 확장 상태
+    const [isPurposeExpanded, setIsPurposeExpanded] = useState(false);
+
     // 날짜 및 시간 포맷팅 함수
-    const formatDate = (dateStr) => {
+    const formatDateTime = (dateStr) => {
         if (!dateStr) return '';
         const date = new Date(dateStr);
-        return date.toLocaleDateString();
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     };
 
-    const formatTime = (dateStr) => {
-        if (!dateStr) return '';
-        const date = new Date(dateStr);
-        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // 방문 목적 표시 함수 - VisitReason과 VisitPurpose 합치기
+    const getVisitPurposeText = () => {
+        const reason = visit.visitReason || '';
+        const purpose = visit.visitPurpose || '';
+
+        if (reason && purpose) {
+            return `${reason} - ${purpose}`;
+        }
+
+        return reason || purpose || '없음';
+    };
+
+    // 방문 목적 토글 함수
+    const togglePurposeExpand = () => {
+        setIsPurposeExpanded(!isPurposeExpanded);
     };
 
     return (
@@ -55,16 +69,24 @@ const VisitCard = memo(({
 
             <div className="visit-item-details">
                 <div className="visit-detail">
-                    <span className="label">방문 일자:</span>
-                    <span className="value">{formatDate(visit.visitStartDate)}</span>
+                    <span className="label">방문 시작:</span>
+                    <span className="value">{formatDateTime(visit.visitStartDate)}</span>
                 </div>
-                <div className="visit-detail">
-                    <span className="label">방문 시간:</span>
-                    <span className="value">{formatTime(visit.visitStartDate)}</span>
-                </div>
-                <div className="visit-detail">
+                {visit.visitEndDate && (
+                    <div className="visit-detail">
+                        <span className="label">방문 종료:</span>
+                        <span className="value">{formatDateTime(visit.visitEndDate)}</span>
+                    </div>
+                )}
+                <div className="visit-detail visit-purpose-detail">
                     <span className="label">방문 목적:</span>
-                    <span className="value">{visit.visitPurpose || visit.visitReason}</span>
+                    <span
+                        className={`value purpose-text ${isPurposeExpanded ? 'expanded' : ''}`}
+                        onClick={togglePurposeExpand}
+                        title={getVisitPurposeText()}
+                    >
+                        {getVisitPurposeText()}
+                    </span>
                 </div>
                 {showContact && (
                     <div className="visit-detail">
@@ -74,7 +96,7 @@ const VisitCard = memo(({
                 )}
                 {visit.personName && (
                     <div className="visit-detail">
-                        <span className="label">담당자:</span>
+                        <span className="label">방문 대상자:</span>
                         <span className="value">{visit.personName}</span>
                     </div>
                 )}

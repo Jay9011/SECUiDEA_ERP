@@ -7,23 +7,28 @@
     border-radius: $border-radius;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.5s ease;
 
     // 상태 변경 중인 아이템 스타일
     &.item-pending {
         background-color: rgba($primary-color, 0.02);
 
         &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg,
-                    rgba($primary-color, 0.2),
-                    rgba($primary-color, 0.8),
-                    rgba($primary-color, 0.2));
+            background: linear-gradient(
+                90deg,
+                rgba($primary-color, 0.2),
+                rgba($primary-color, 0.8),
+                rgba($primary-color, 0.2)
+            );
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite linear;
         }
@@ -133,6 +138,46 @@
                 color: $text-color;
             }
         }
+
+        // 방문 목적 상세 스타일
+        .visit-purpose-detail {
+            grid-column: 1 / -1; // 방문 목적은 전체 너비 사용
+
+            .purpose-text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                position: relative;
+                padding-right: 24px; // 확장 아이콘을 위한 공간
+
+                &:hover {
+                    color: $primary-color;
+                }
+
+                &::after {
+                    content: "▼";
+                    position: absolute;
+                    right: 4px;
+                    font-size: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: $text-secondary;
+                    transition: transform 0.3s ease;
+                }
+
+                &.expanded {
+                    white-space: normal;
+                    overflow: visible;
+                    text-overflow: clip;
+
+                    &::after {
+                        transform: translateY(-50%) rotate(180deg);
+                    }
+                }
+            }
+        }
     }
 
     .visit-actions {
@@ -202,7 +247,7 @@
         overflow: hidden;
 
         &::after {
-            content: '';
+            content: "";
             display: inline-block;
             width: 8px;
             height: 8px;
@@ -243,27 +288,24 @@
 }
 
 @keyframes blink {
-
     0%,
     100% {
         opacity: 1;
     }
 
     50% {
-        opacity: 0.4;
+        opacity: 0.5;
     }
 }
 
 @keyframes approved-animation {
     0% {
-        transform: scale(0.8);
-        opacity: 0;
+        transform: scale(0.95);
+        opacity: 0.7;
     }
-
-    60% {
-        transform: scale(1.1);
+    50% {
+        transform: scale(1.05);
     }
-
     100% {
         transform: scale(1);
         opacity: 1;
@@ -271,50 +313,23 @@
 }
 
 @keyframes rejected-animation {
-    0% {
-        transform: translateX(-10px);
-        opacity: 0;
-    }
-
-    60% {
-        transform: translateX(5px);
-    }
-
+    0%,
     100% {
         transform: translateX(0);
-        opacity: 1;
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    75% {
+        transform: translateX(3px);
     }
 }
 
 @keyframes canceled-animation {
     0% {
-        transform: translateY(10px);
-        opacity: 0;
+        opacity: 0.7;
     }
-
-    60% {
-        transform: translateY(-5px);
-    }
-
     100% {
-        transform: translateY(0);
         opacity: 1;
-    }
-}
-
-@keyframes pulse {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-
-    50% {
-        opacity: 0.15;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(0.5);
     }
 }
