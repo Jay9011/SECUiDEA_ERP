@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './BackgroundVideo.scss';
 
 const BackgroundVideo = ({ className = '' }) => {
     const [videoError, setVideoError] = useState(false);
+    const { t } = useTranslation('visit');
 
     const handleVideoError = () => {
         setVideoError(true);
@@ -19,7 +21,7 @@ const BackgroundVideo = ({ className = '' }) => {
                     onError={handleVideoError}
                 >
                     <source src="/visit/videos/background.mp4" type="video/mp4" />
-                    브라우저가 비디오 태그를 지원하지 않습니다.
+                    {t('components.backgroundVideo.browserNotSupported')}
                 </video>
             )}
             <div className="video-overlay"></div>

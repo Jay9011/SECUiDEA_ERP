@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Clock, CheckCircle, X, AlertCircle, Loader2, BookOpen, AlertTriangle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 // 스타일
 import './VisitCard.scss';
@@ -13,6 +14,8 @@ const VisitCard = memo(({
     onStatusChange,
     showContact = false
 }) => {
+    const { t } = useTranslation('visit');
+
     // 방문 목적 확장 상태
     const [isPurposeExpanded, setIsPurposeExpanded] = useState(false);
 
@@ -32,7 +35,7 @@ const VisitCard = memo(({
             return `${reason} - ${purpose}`;
         }
 
-        return reason || purpose || '없음';
+        return reason || purpose || t('components.visitCard.noPurpose');
     };
 
     // 방문 목적 토글 함수
@@ -49,14 +52,14 @@ const VisitCard = memo(({
             return (
                 <div className="education-badge education-completed">
                     <BookOpen size={14} />
-                    <span>교육 이수</span>
+                    <span>{t('components.visitCard.educationCompleted')}</span>
                 </div>
             );
         } else {
             return (
                 <div className="education-badge education-incomplete">
                     <AlertTriangle size={14} />
-                    <span>교육 미이수</span>
+                    <span>{t('components.visitCard.educationIncomplete')}</span>
                 </div>
             );
         }
@@ -77,10 +80,10 @@ const VisitCard = memo(({
                         <button
                             className="visit-status-button status-pending"
                             onClick={() => onStatusChange(visit.id, 'approved')}
-                            title="클릭하여 승인하기"
+                            title={t('components.visitCard.clickToApprove')}
                         >
                             <Clock size={18} />
-                            <span>승인 대기</span>
+                            <span>{t('components.visitCard.pendingApproval')}</span>
                         </button>
                     </div>
                 ) : (
@@ -97,17 +100,17 @@ const VisitCard = memo(({
 
             <div className="visit-item-details">
                 <div className="visit-detail">
-                    <span className="label">방문 시작:</span>
+                    <span className="label">{t('components.visitCard.visitStart')}:</span>
                     <span className="value">{formatDateTime(visit.visitStartDate)}</span>
                 </div>
                 {visit.visitEndDate && (
                     <div className="visit-detail">
-                        <span className="label">방문 종료:</span>
+                        <span className="label">{t('components.visitCard.visitEnd')}:</span>
                         <span className="value">{formatDateTime(visit.visitEndDate)}</span>
                     </div>
                 )}
                 <div className="visit-detail visit-purpose-detail">
-                    <span className="label">방문 목적:</span>
+                    <span className="label">{t('components.visitCard.visitPurpose')}:</span>
                     <span
                         className={`value purpose-text ${isPurposeExpanded ? 'expanded' : ''}`}
                         onClick={togglePurposeExpand}
@@ -118,19 +121,19 @@ const VisitCard = memo(({
                 </div>
                 {showContact && (
                     <div className="visit-detail">
-                        <span className="label">연락처:</span>
+                        <span className="label">{t('components.visitCard.contact')}:</span>
                         <span className="value">{visit.visitorContact}</span>
                     </div>
                 )}
                 {visit.personName && (
                     <div className="visit-detail">
-                        <span className="label">방문 대상자:</span>
+                        <span className="label">{t('components.visitCard.visitHost')}:</span>
                         <span className="value">{visit.personName}</span>
                     </div>
                 )}
                 {visit.education && visit.educationDate && (
                     <div className="visit-detail">
-                        <span className="label">교육 이수일:</span>
+                        <span className="label">{t('components.visitCard.educationDate')}:</span>
                         <span className="value">{formatDateTime(visit.educationDate)}</span>
                     </div>
                 )}

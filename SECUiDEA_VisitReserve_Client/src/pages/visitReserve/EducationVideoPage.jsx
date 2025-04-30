@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import Swal from 'sweetalert2';
+import { useTranslation } from 'react-i18next';
 
 import { useAuth } from "../../context/AuthContext";
 import { saveEducationCompletion } from '../../services/visitReserveApis';
@@ -11,6 +12,7 @@ import './EducationVideoPage.scss';
 function EducationVideoPage() {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { t } = useTranslation('visit');
 
   const videoUrl = '/visit/videos/visitorSafetyVideo.mp4';
 
@@ -62,6 +64,7 @@ function EducationVideoPage() {
     setVideoEnded(true);
     setIsPlaying(false);
     if (watchingIntervalRef.current) {
+      handleEducationComplete();
       clearInterval(watchingIntervalRef.current);
     }
   };
@@ -186,10 +189,10 @@ function EducationVideoPage() {
 
       if (result.isSuccess) {
         Swal.fire({
-          title: '교육 완료',
-          text: '안전 교육이 완료되었습니다. 방문 신청이 접수되었습니다.',
+          title: t('visitReserve.education.successTitle'),
+          text: t('visitReserve.education.successMessage'),
           icon: 'success',
-          confirmButtonText: '확인'
+          confirmButtonText: t('visitReserve.education.confirm')
         }).then(() => {
           logout();
           navigate('/');
@@ -200,12 +203,12 @@ function EducationVideoPage() {
     } catch (error) {
       console.error('교육 완료 처리 오류:', error);
       Swal.fire({
-        title: '오류',
-        text: '교육 완료 처리 중 오류가 발생했습니다.',
+        title: t('visitReserve.education.errorTitle'),
+        text: t('visitReserve.education.errorMessage'),
         icon: 'error',
-        confirmButtonText: '다시 시도',
+        confirmButtonText: t('visitReserve.education.retryButton'),
         showCancelButton: true,
-        cancelButtonText: '취소'
+        cancelButtonText: t('visitReserve.education.cancelButton')
       }).then((result) => {
         if (result.isConfirmed) {
           handleEducationComplete();
@@ -216,7 +219,7 @@ function EducationVideoPage() {
 
   return (
     <div className="education-video-page">
-      <h2>방문자 안전 교육</h2>
+      <h2>{t('visitReserve.education.title')}</h2>
 
       {/* 비디오 플레이어 컨테이너 */}
       <div
@@ -322,8 +325,8 @@ function EducationVideoPage() {
 
       <p className="education-message">
         {videoEnded
-          ? '교육 영상을 완료했습니다. 아래 버튼을 클릭하여 진행하세요.'
-          : '교육 영상을 끝까지 시청해야 완료 버튼이 활성화됩니다.'}
+          ? t('visitReserve.education.completed')
+          : t('visitReserve.education.inProgress')}
       </p>
 
       <button
@@ -331,7 +334,7 @@ function EducationVideoPage() {
         disabled={!videoEnded}
         className={`education-complete-button ${videoEnded ? 'active' : ''}`}
       >
-        교육 완료
+        {t('visitReserve.education.completeButton')}
       </button>
     </div>
   );

@@ -9,6 +9,41 @@
         "loading": "Loading...",
         "processingRequest": "Processing..."
     },
+    "components": {
+        "visitCard": {
+            "noPurpose": "None",
+            "educationCompleted": "Education Completed",
+            "educationIncomplete": "Education Incomplete",
+            "clickToApprove": "Click to Approve",
+            "pendingApproval": "Pending Approval",
+            "visitStart": "Visit Start",
+            "visitEnd": "Visit End",
+            "visitPurpose": "Visit Purpose",
+            "contact": "Contact",
+            "visitHost": "Visit Host",
+            "educationDate": "Education Date"
+        },
+        "backgroundVideo": {
+            "browserNotSupported": "Your browser does not support the video tag."
+        },
+        "footer": {
+            "title": "Visit Reservation System",
+            "description": "Integrated management system for external visitor applications and approvals.",
+            "support": "Customer Support",
+            "email": "Email",
+            "shortcuts": "Quick Links",
+            "resources": "Resources",
+            "privacy": "Privacy Policy",
+            "allRightsReserved": "All rights reserved."
+        },
+        "authSection": {
+            "admin": "Administrator",
+            "user": "User",
+            "logout": "Logout",
+            "login": "Login",
+            "logoutError": "An error occurred during logout"
+        }
+    },
     "reservation": {
         "title": "Visit Reservation",
         "form": {

@@ -90,6 +90,11 @@ function PrivacyAgreementInput() {
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
     const [employeeList, setEmployeeList] = useState([]);
 
+    // 페이지 로드 시 데이터 가져오기
+    useEffect(() => {
+        loadInitialData();
+    }, [i18n.language]);    // 언어 변경 시 데이터 다시 로드
+
     // 페이지 이동 시 모달과 알림 정리
     useEffect(() => {
         return () => {
@@ -123,11 +128,6 @@ function PrivacyAgreementInput() {
         }
     };
 
-    // 페이지 로드 시 데이터 가져오기
-    useEffect(() => {
-        loadInitialData();
-    }, [i18n.language]);    // 언어 변경 시 데이터 다시 로드
-
     // 방문 목적 데이터 가져오기
     const fetchVisitReasons = async () => {
         try {
@@ -140,6 +140,10 @@ function PrivacyAgreementInput() {
             const result = await getVisitReasons(i18n.language);
             if (result.isSuccess && result.data && result.data.reasons) {
                 setVisitReasons(result.data.reasons);
+                setFormData({
+                    ...formData,
+                    visitReasonId: result.data.reasons[0].visitReasonID
+                });
                 return true;
             } else {
                 console.error('방문 목적 데이터를 가져오지 못했습니다.');
