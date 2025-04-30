@@ -140,5 +140,158 @@
             "userManagement": "User Management"
         },
         "systemTitle": "Visit Reservation System"
+    },
+    "visitReserve": {
+        "common": {
+            "networkError": "Network Error",
+            "retry": "Retry",
+            "cancel": "Cancel",
+            "close": "Close",
+            "offlineError": "Your internet connection is offline.",
+            "retryQuestion": "Would you like to try again?",
+            "loading": "Loading...",
+            "processingRequest": "Processing..."
+        },
+        "visitList": {
+            "title": "Visit Status",
+            "refresh": "Refresh",
+            "loading": "Loading...",
+            "noVisits": "No visits found.",
+            "allVisitsLoaded": "All visits have been loaded.",
+            "loadingError": "An error occurred while loading visits.",
+            "status": {
+                "pending": "Pending Approval",
+                "approved": "Approved",
+                "rejected": "Rejected",
+                "canceled": "Canceled",
+                "loading": "Processing",
+                "visited": "In Progress",
+                "finished": "Completed"
+            },
+            "statusChangeError": "An error occurred while changing the status."
+        },
+        "privacyAgreement": {
+            "title": "Visit Reservation",
+            "subtitle": "Please enter visit information and personal details",
+            "privacyPolicy": {
+                "title": "Privacy Policy",
+                "description": "Please review the privacy policy below for your visit application",
+                "accordionTitle": "Consent to Collection and Use of Personal Information (Required)",
+                "fullContent": "<p>[Company Name] collects and uses personal information as follows for the visit reservation service.</p><h4>1. Collection Items</h4><ul><li>Required: Name, Contact information, Affiliation, Purpose of visit, Visit date and time</li><li>Optional: Email</li></ul><h4>2. Purpose of Collection and Use</h4><ul><li>Visitor access management and security</li><li>Visit reservation confirmation and notification of changes</li></ul><h4>3. Retention and Use Period</h4><p>Stored for 1 year from the date of visit, then deleted</p><h4>4. Right to Refuse Consent and Consequences</h4><p>If you do not consent to the collection of personal information, you will not be able to use the visit reservation service.</p><h4>5. Provision of Personal Information to Third Parties</h4><p>Personal information collected will not be provided to third parties except in the following cases:</p><ul><li>When the data subject consents</li><li>When required by law</li><li>When necessary for the performance of a contract for service provision</li></ul><h4>6. Rights, Obligations, and Methods of Exercise of Data Subjects</h4><p>Data subjects may exercise the following rights in accordance with the Personal Information Protection Act and related laws:</p><ul><li>Request for access, correction, deletion, or processing suspension of personal information</li><li>Request for correction in case of errors in personal information</li><li>Withdrawal of consent to the collection of personal information</li></ul><h4>7. Personal Information Protection Officer</h4><p>Personal Information Protection Officer: John Doe</p><p>Contact: 02-1234-5678, privacy@company.com</p>",
+                "options": {
+                    "agree": "I agree",
+                    "disagree": "I do not agree"
+                },
+                "disagreeNotice": "If you do not agree to the collection of personal information, you cannot use the visit reservation service."
+            },
+            "employeeInfo": {
+                "title": "Host Employee Information",
+                "employeeName": "Employee Name",
+                "placeholder": "Enter host employee name",
+                "verifyButton": "Verify Employee",
+                "verifying": "Verifying...",
+                "verified": "Employee information verified successfully.",
+                "reenter": "Re-enter"
+            },
+            "visitorInfo": {
+                "title": "Visitor Information",
+                "name": "Visitor Name",
+                "namePlaceholder": "Enter visitor name",
+                "company": "Company",
+                "companyPlaceholder": "Enter company name",
+                "contact": "Contact",
+                "contactPlaceholder": "Numbers only (e.g. 01012345678)",
+                "email": "Email",
+                "emailPlaceholder": "example@email.com",
+                "purpose": "Visit Purpose",
+                "purposePlaceholder": "Enter detailed purpose of visit",
+                "visitDate": "Visit Start Date",
+                "visitTime": "Visit Start Time",
+                "visitEndDate": "Visit End Date",
+                "visitEndTime": "Visit End Time",
+                "carNumber": "Vehicle Number",
+                "carNumberPlaceholder": "Vehicle number (e.g. 12AB3456)",
+                "defaultDateNotice": "Current date is set as default.",
+                "defaultTimeNotice": "Current time is set as default.",
+                "required": "Required"
+            },
+            "actions": {
+                "submit": "Submit Visit Request",
+                "cancel": "Cancel"
+            },
+            "formErrors": {
+                "privacyNotAgreed": "Please agree to the privacy policy.",
+                "employeeNotVerified": "Please verify employee information.",
+                "requiredField": "This field is required.",
+                "invalidEmail": "Invalid email format.",
+                "invalidPhone": "Invalid phone number format.",
+                "invalidDate": "Invalid date.",
+                "invalidTime": "Invalid time.",
+                "endDateBeforeStartDate": "End date must be after start date."
+            },
+            "errorMessages": {
+                "submitError": "An error occurred while submitting your visit request. Please try again.",
+                "verificationError": "Unable to verify employee information."
+            },
+            "employeeSelector": {
+                "title": "Select Host Employee",
+                "placeholder": "Search by name",
+                "noResults": "No results found.",
+                "select": "Select",
+                "cancel": "Cancel"
+            }
+        },
+        "reserveResult": {
+            "title": "Visit Request Completed",
+            "subtitle": "Your visit request has been successfully processed.",
+            "detailTitle": "Visit Request Details",
+            "targetSection": {
+                "title": "Visit Target",
+                "employeeName": "Employee Name"
+            },
+            "visitorSection": {
+                "title": "Visitor Information",
+                "name": "Visitor Name",
+                "company": "Company",
+                "contact": "Contact",
+                "carNumber": "Vehicle Number"
+            },
+            "scheduleSection": {
+                "title": "Visit Schedule",
+                "visitDate": "Visit Date",
+                "endDate": "End Date"
+            },
+            "purposeSection": {
+                "title": "Visit Purpose",
+                "type": "Visit Type",
+                "details": "Visit Details"
+            },
+            "education": {
+                "title": "Safety Education Video Required",
+                "message": "You need to watch a safety education video before your visit.",
+                "question": "Would you like to watch it now?",
+                "expired": "Your last education record is too old. You need to watch the safety education video again.",
+                "history": "Education video viewing history:",
+                "watch": "Watch Now",
+                "later": "Later",
+                "error": "An error occurred while checking education video status."
+            },
+            "actions": {
+                "home": "Home"
+            }
+        },
+        "education": {
+            "title": "Visitor Safety Education",
+            "inProgress": "You must watch the entire education video to enable the completion button.",
+            "completed": "You have completed the education video. Click the button below to proceed.",
+            "completeButton": "Complete Education",
+            "successTitle": "Education Completed",
+            "successMessage": "Safety education has been completed. Your visit request has been received.",
+            "errorTitle": "Error",
+            "errorMessage": "An error occurred while processing education completion.",
+            "retryButton": "Retry",
+            "cancelButton": "Cancel",
+            "confirm": "Confirm"
+        }
     }
 }

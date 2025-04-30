@@ -5,6 +5,7 @@ import { CheckCircle, Calendar, Clock, User, Briefcase, Phone, Car, FileText } f
 import Swal from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
 import { AuthProvider } from '../../utils/authProviders';
+import { useTranslation } from 'react-i18next';
 
 // API
 import { checkEducationVideo } from '../../services/visitReserveApis';
@@ -13,6 +14,7 @@ import { checkEducationVideo } from '../../services/visitReserveApis';
 import './ReserveResult.scss';
 
 function ReserveResult() {
+  const { t } = useTranslation('visit');
   const { loginWithProvider } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,18 +37,18 @@ function ReserveResult() {
 
   const videoRef = useRef(null);
 
-  const showNetworkErrorAlert = (errorMessage, retryHandler, title = '네트워크 오류', options = {}) => {
+  const showNetworkErrorAlert = (errorMessage, retryHandler, title = t('visitReserve.common.networkError'), options = {}) => {
     const { showCancelButton = true, allowOutsideClick = true } = options;
 
     Swal.fire({
       title: title,
       html: typeof errorMessage === 'string'
-        ? `<p>${errorMessage}</p><p>다시 시도하시겠습니까?</p>`
+        ? `<p>${errorMessage}</p><p>${t('visitReserve.common.retryQuestion')}</p>`
         : errorMessage,
       icon: 'error',
       showCancelButton: showCancelButton,
-      confirmButtonText: '다시 시도',
-      cancelButtonText: '닫기',
+      confirmButtonText: t('visitReserve.common.retry'),
+      cancelButtonText: t('visitReserve.common.close'),
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#6c757d',
       allowOutsideClick: allowOutsideClick,
@@ -65,7 +67,7 @@ function ReserveResult() {
       setLoading(true);
 
       if (!navigator.onLine) {
-        throw new Error('인터넷 연결이 오프라인 상태입니다.');
+        throw new Error(t('visitReserve.common.offlineError'));
       }
 
       // 교육 영상 시청 여부 확인 API 호출
@@ -89,8 +91,8 @@ function ReserveResult() {
           } else {
             showEducationAlert(
               `
-              <p>마지막 교육 시청 이력이 오래되어 안전 교육 영상 시청이 필요합니다.</p>
-              <p>교육 영상 시청 이력: ${educationDateText}</p>
+              <p>${t('visitReserve.reserveResult.education.expired')}</p>
+              <p>${t('visitReserve.reserveResult.education.history')} ${educationDateText}</p>
               `
             );
           }
@@ -101,14 +103,14 @@ function ReserveResult() {
     } catch (error) {
       console.error('교육 영상 확인 오류:', error);
 
-      const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
-        ? '인터넷 연결이 오프라인 상태입니다.'
-        : '교육 영상 확인 중 오류가 발생했습니다.';
+      const errorMessage = error.message === t('visitReserve.common.offlineError')
+        ? t('visitReserve.common.offlineError')
+        : t('visitReserve.reserveResult.education.error');
 
       showNetworkErrorAlert(
         errorMessage,
         checkEducationVideoStatus,
-        '교육 영상 확인 오류',
+        t('visitReserve.common.networkError'),
         { showCancelButton: false, allowOutsideClick: false }
       );
     } finally {
@@ -119,15 +121,15 @@ function ReserveResult() {
   // 교육 영상 시청 알림 표시
   const showEducationAlert = (html) => {
     Swal.fire({
-      title: '안전 교육 영상 시청 필요',
+      title: t('visitReserve.reserveResult.education.title'),
       html: html || `
-        <p>방문 전 안전 교육 영상 시청이 필요합니다.</p>
-        <p>지금 시청하시겠습니까?</p>
+        <p>${t('visitReserve.reserveResult.education.message')}</p>
+        <p>${t('visitReserve.reserveResult.education.question')}</p>
       `,
       icon: 'info',
       showCancelButton: true,
-      confirmButtonText: '시청하러 가기',
-      cancelButtonText: '다음에 하기',
+      confirmButtonText: t('visitReserve.reserveResult.education.watch'),
+      cancelButtonText: t('visitReserve.reserveResult.education.later'),
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#6c757d',
     }).then((result) => {
@@ -143,7 +145,7 @@ function ReserveResult() {
       setLoading(true);
 
       if (!navigator.onLine) {
-        throw new Error('인터넷 연결이 오프라인 상태입니다.');
+        throw new Error(t('visitReserve.common.offlineError'));
       }
 
       // 로그인 API 호출
@@ -155,14 +157,14 @@ function ReserveResult() {
     } catch (error) {
       console.error('로그인 오류:', error);
 
-      const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
-        ? '인터넷 연결이 오프라인 상태입니다.'
-        : '로그인 중 오류가 발생했습니다.';
+      const errorMessage = error.message === t('visitReserve.common.offlineError')
+        ? t('visitReserve.common.offlineError')
+        : t('visitReserve.reserveResult.education.error');
 
       showNetworkErrorAlert(
         errorMessage,
         handleLoginForEducation,
-        '로그인 오류',
+        t('visitReserve.common.networkError'),
         { showCancelButton: false, allowOutsideClick: false }
       );
     } finally {
@@ -185,8 +187,8 @@ function ReserveResult() {
   return (
     <div className="reserve-result-page">
       <div className="page-header">
-        <h1>방문 신청 완료</h1>
-        <p className="page-subtitle">방문 신청이 성공적으로 처리되었습니다.</p>
+        <h1>{t('visitReserve.reserveResult.title')}</h1>
+        <p className="page-subtitle">{t('visitReserve.reserveResult.subtitle')}</p>
       </div>
 
       <div className="video-section">
@@ -204,18 +206,18 @@ function ReserveResult() {
       <div className="result-card">
         <div className="card-header">
           <CheckCircle size={32} className="success-icon" />
-          <h2>방문 신청 상세 정보</h2>
+          <h2>{t('visitReserve.reserveResult.detailTitle')}</h2>
         </div>
 
         <div className="card-content">
           <div className="info-section">
-            <h3>방문 대상</h3>
+            <h3>{t('visitReserve.reserveResult.targetSection.title')}</h3>
 
             <div className="info-row">
               <div className="info-item">
                 <div className="info-label">
                   <User size={18} />
-                  <span>직원 이름</span>
+                  <span>{t('visitReserve.reserveResult.targetSection.employeeName')}</span>
                 </div>
                 <div className="info-value">{employeeName || '-'}</div>
               </div>
@@ -223,13 +225,13 @@ function ReserveResult() {
           </div>
 
           <div className="info-section">
-            <h3>방문자 정보</h3>
+            <h3>{t('visitReserve.reserveResult.visitorSection.title')}</h3>
 
             <div className="info-row">
               <div className="info-item">
                 <div className="info-label">
                   <User size={18} />
-                  <span>방문자 이름</span>
+                  <span>{t('visitReserve.reserveResult.visitorSection.name')}</span>
                 </div>
                 <div className="info-value">{visitorName || '-'}</div>
               </div>
@@ -237,7 +239,7 @@ function ReserveResult() {
               <div className="info-item">
                 <div className="info-label">
                   <Briefcase size={18} />
-                  <span>회사명</span>
+                  <span>{t('visitReserve.reserveResult.visitorSection.company')}</span>
                 </div>
                 <div className="info-value">{visitorCompany || '-'}</div>
               </div>
@@ -247,7 +249,7 @@ function ReserveResult() {
               <div className="info-item">
                 <div className="info-label">
                   <Phone size={18} />
-                  <span>연락처</span>
+                  <span>{t('visitReserve.reserveResult.visitorSection.contact')}</span>
                 </div>
                 <div className="info-value">{visitorContact || '-'}</div>
               </div>
@@ -255,7 +257,7 @@ function ReserveResult() {
               <div className="info-item">
                 <div className="info-label">
                   <Car size={18} />
-                  <span>차량 번호</span>
+                  <span>{t('visitReserve.reserveResult.visitorSection.carNumber')}</span>
                 </div>
                 <div className="info-value">{visitorCarNumber || '-'}</div>
               </div>
@@ -263,13 +265,13 @@ function ReserveResult() {
           </div>
 
           <div className="info-section">
-            <h3>방문 일정</h3>
+            <h3>{t('visitReserve.reserveResult.scheduleSection.title')}</h3>
 
             <div className="info-row">
               <div className="info-item">
                 <div className="info-label">
                   <Calendar size={18} />
-                  <span>방문 날짜</span>
+                  <span>{t('visitReserve.reserveResult.scheduleSection.visitDate')}</span>
                 </div>
                 <div className="info-value">
                   {visitDate ? `${visitDate} ${visitTime || ''}` : '-'}
@@ -279,7 +281,7 @@ function ReserveResult() {
               <div className="info-item">
                 <div className="info-label">
                   <Calendar size={18} />
-                  <span>종료 날짜</span>
+                  <span>{t('visitReserve.reserveResult.scheduleSection.endDate')}</span>
                 </div>
                 <div className="info-value">
                   {visitEndDate ? `${visitEndDate} ${visitEndTime || ''}` : '-'}
@@ -289,13 +291,13 @@ function ReserveResult() {
           </div>
 
           <div className="info-section">
-            <h3>방문 목적</h3>
+            <h3>{t('visitReserve.reserveResult.purposeSection.title')}</h3>
 
             <div className="info-row">
               <div className="info-item">
                 <div className="info-label">
                   <FileText size={18} />
-                  <span>방문 유형</span>
+                  <span>{t('visitReserve.reserveResult.purposeSection.type')}</span>
                 </div>
                 <div className="info-value">{visitReason || '-'}</div>
               </div>
@@ -305,7 +307,7 @@ function ReserveResult() {
               <div className="info-item">
                 <div className="info-label">
                   <FileText size={18} />
-                  <span>방문 세부 목적</span>
+                  <span>{t('visitReserve.reserveResult.purposeSection.details')}</span>
                 </div>
                 <div className="info-value">{visitPurpose || '-'}</div>
               </div>
@@ -319,7 +321,7 @@ function ReserveResult() {
             onClick={() => window.location.href = '/'}
             disabled={loading}
           >
-            {loading ? '처리 중...' : '홈으로'}
+            {loading ? t('visitReserve.common.processingRequest') : t('visitReserve.reserveResult.actions.home')}
           </button>
         </div>
       </div>

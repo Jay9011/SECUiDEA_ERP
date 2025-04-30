@@ -15,13 +15,13 @@ import InputWithButton from '../../components/features/InputWithButton';
 import LoadingOverlay from '../../components/common/LoadingOverlay';
 
 // 스타일
-import './PrivacyAgreement.scss';
+import './PrivacyAgreementInput.scss';
 
 import { verifyEmployee, submitReservation, getVisitReasons } from '../../services/visitReserveApis';
 
 function PrivacyAgreementInput() {
     const navigate = useNavigate();
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation('visit');
 
     // 참조 추가
     const privacyCheckRef = useRef(null);
@@ -86,18 +86,18 @@ function PrivacyAgreementInput() {
     const [employeeList, setEmployeeList] = useState([]);
 
     // 네트워크 오류 Alert
-    const showNetworkErrorAlert = (errorMessage, retryHandler, title = '네트워크 오류', options = {}) => {
+    const showNetworkErrorAlert = (errorMessage, retryHandler, title = t('visitReserve.common.networkError'), options = {}) => {
         const { showCancelButton = true, allowOutsideClick = true } = options;
 
         Swal.fire({
             title: title,
             html: typeof errorMessage === 'string'
-                ? `<p>${errorMessage}</p><p>다시 시도하시겠습니까?</p>`
+                ? `<p>${errorMessage}</p><p>${t('visitReserve.common.retryQuestion')}</p>`
                 : errorMessage,
             icon: 'error',
             showCancelButton: showCancelButton,
-            confirmButtonText: '다시 시도',
-            cancelButtonText: '닫기',
+            confirmButtonText: t('visitReserve.common.retry'),
+            cancelButtonText: t('visitReserve.common.close'),
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#6c757d',
             allowOutsideClick: allowOutsideClick,
@@ -116,10 +116,10 @@ function PrivacyAgreementInput() {
         if (!success) {
             showNetworkErrorAlert(
                 navigator.onLine
-                    ? '서버에서 데이터를 가져오지 못했습니다.'
-                    : '인터넷 연결이 오프라인 상태입니다.',
+                    ? t('visitReserve.privacyAgreement.errorMessages.submitError')
+                    : t('visitReserve.common.offlineError'),
                 loadInitialData,
-                '네트워크 오류',
+                t('visitReserve.common.networkError'),
                 { showCancelButton: false, allowOutsideClick: false }
             );
         }
@@ -136,7 +136,7 @@ function PrivacyAgreementInput() {
             setLoadingReasons(true);
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+                throw new Error(t('visitReserve.common.offlineError'));
             }
 
             const result = await getVisitReasons(i18n.language);
@@ -294,7 +294,7 @@ function PrivacyAgreementInput() {
         if (!formData.employeeName.trim()) {
             setErrors({
                 ...errors,
-                employeeName: '직원 이름을 입력해주세요'
+                employeeName: t('visitReserve.privacyAgreement.formErrors.requiredField')
             });
             return;
         }
@@ -305,7 +305,7 @@ function PrivacyAgreementInput() {
 
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+                throw new Error(t('visitReserve.common.offlineError'));
             }
 
             // API 호출 - 직원 정보 확인
@@ -326,25 +326,25 @@ function PrivacyAgreementInput() {
                     });
                     setIsEmployeeVerified(true);
                 } else {
-                    setVerificationError('직원 정보를 가져오는 중 오류가 발생했습니다');
-                    toast.error('직원 정보를 가져오는 중 오류가 발생했습니다');
+                    setVerificationError(t('visitReserve.privacyAgreement.errorMessages.verificationError'));
+                    toast.error(t('visitReserve.privacyAgreement.errorMessages.verificationError'));
                 }
             } else {
-                setVerificationError('일치하는 직원 정보를 찾을 수 없습니다');
-                toast.error('일치하는 직원 정보를 찾을 수 없습니다');
+                setVerificationError(t('visitReserve.privacyAgreement.errorMessages.verificationError'));
+                toast.error(t('visitReserve.privacyAgreement.errorMessages.verificationError'));
             }
         } catch (error) {
             console.error('직원 확인 오류:', error);
 
-            const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
-                ? '인터넷 연결이 오프라인 상태입니다.'
-                : '직원 정보 확인 중 오류가 발생했습니다';
+            const errorMessage = error.message === t('visitReserve.common.offlineError')
+                ? t('visitReserve.common.offlineError')
+                : t('visitReserve.privacyAgreement.errorMessages.verificationError');
 
             setVerificationError(errorMessage);
             showNetworkErrorAlert(
                 errorMessage,
                 handleVerifyEmployee,
-                '직원 정보 확인 오류',
+                t('visitReserve.common.networkError'),
                 { showCancelButton: false, allowOutsideClick: false }
             );
         } finally {
@@ -369,7 +369,7 @@ function PrivacyAgreementInput() {
 
         // 직원 확인 여부 검사
         if (!isEmployeeVerified || !formData.employeePid) {
-            newErrors.employee = '직원 정보를 확인해주세요';
+            newErrors.employee = t('visitReserve.privacyAgreement.formErrors.employeeNotVerified');
         }
 
         // 필수 필드 검사
@@ -380,13 +380,13 @@ function PrivacyAgreementInput() {
 
         requiredFields.forEach(field => {
             if (!formData[field]) {
-                newErrors[field] = '필수 입력 항목입니다';
+                newErrors[field] = t('visitReserve.privacyAgreement.formErrors.requiredField');
             }
         });
 
         // 이메일 형식 검사
         if (formData.visitorEmail && !/\S+@\S+\.\S+/.test(formData.visitorEmail)) {
-            newErrors.visitorEmail = '유효한 이메일 주소를 입력해주세요';
+            newErrors.visitorEmail = t('visitReserve.privacyAgreement.formErrors.invalidEmail');
         }
 
         // 종료 날짜/시간이 시작 날짜/시간보다 이후인지 검사
@@ -395,7 +395,7 @@ function PrivacyAgreementInput() {
             const endDateTime = new Date(`${formData.visitEndDate}T${formData.visitEndTime}`);
 
             if (endDateTime < startDateTime) {
-                newErrors.visitEndDate = '종료 일시는 시작 일시보다 이후여야 합니다';
+                newErrors.visitEndDate = t('visitReserve.privacyAgreement.formErrors.endDateBeforeStartDate');
             }
         }
 
@@ -408,13 +408,13 @@ function PrivacyAgreementInput() {
         e.preventDefault();
 
         if (privacyAgreed !== 'agree') {
-            toast.error('개인정보 처리방침에 동의해주세요');
+            toast.error(t('visitReserve.privacyAgreement.formErrors.privacyNotAgreed'));
             scrollToRef(privacyCheckRef);
             return;
         }
 
         if (!isEmployeeVerified || !formData.employeePid) {
-            toast.error('직원 정보를 확인해주세요');
+            toast.error(t('visitReserve.privacyAgreement.formErrors.employeeNotVerified'));
             scrollToRef(employeeCheckRef);
             return;
         }
@@ -423,7 +423,7 @@ function PrivacyAgreementInput() {
             const firstErrorField = Object.keys(errors)[0];
             scrollToField(firstErrorField);
 
-            toast.error('모든 필수 항목을 올바르게 입력해주세요');
+            toast.error(t('visitReserve.privacyAgreement.formErrors.requiredField'));
             return;
         }
 
@@ -436,7 +436,7 @@ function PrivacyAgreementInput() {
         try {
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+                throw new Error(t('visitReserve.common.offlineError'));
             }
 
             // 방문 신청 정보
@@ -490,23 +490,23 @@ function PrivacyAgreementInput() {
                 });
             } else {
                 showNetworkErrorAlert(
-                    result.message || '방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.',
+                    result.message || t('visitReserve.privacyAgreement.errorMessages.submitError'),
                     handleSubmit,
-                    '방문 신청 오류',
+                    t('visitReserve.common.networkError'),
                     { showCancelButton: true, allowOutsideClick: true }
                 );
             }
         } catch (error) {
             console.error('방문 신청 오류:', error);
 
-            const errorMessage = error.message === '인터넷 연결이 오프라인 상태입니다.'
-                ? '인터넷 연결이 오프라인 상태입니다.'
-                : '방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.';
+            const errorMessage = error.message === t('visitReserve.common.offlineError')
+                ? t('visitReserve.common.offlineError')
+                : t('visitReserve.privacyAgreement.errorMessages.submitError');
 
             showNetworkErrorAlert(
                 errorMessage,
                 handleSubmit,
-                '신청 오류',
+                t('visitReserve.common.networkError'),
                 { showCancelButton: false, allowOutsideClick: false }
             );
         } finally {
@@ -530,65 +530,32 @@ function PrivacyAgreementInput() {
             />
 
             <div className="page-header">
-                <h1>방문 예약</h1>
-                <p className="page-subtitle">방문 정보 및 개인정보를 입력해주세요</p>
+                <h1>{t('visitReserve.privacyAgreement.title')}</h1>
+                <p className="page-subtitle">{t('visitReserve.privacyAgreement.subtitle')}</p>
             </div>
 
             <div className="form-section">
                 {/* 개인정보 처리방침 섹션 */}
                 <div className="privacy-agreement-section">
                     <div className="section-header">
-                        <h2><Shield size={20} /> 개인정보 처리방침</h2>
-                        <p>방문 신청을 위해 아래 개인정보 처리방침을 확인해주세요</p>
+                        <h2><Shield size={20} /> {t('visitReserve.privacyAgreement.privacyPolicy.title')}</h2>
+                        <p>{t('visitReserve.privacyAgreement.privacyPolicy.description')}</p>
                     </div>
 
                     <div className="privacy-card">
                         <Accordion
-                            title="개인정보 수집 및 이용 동의 (필수)"
+                            title={t('visitReserve.privacyAgreement.privacyPolicy.accordionTitle')}
                             className="privacy-accordion"
                             maxHeight={400}
                             expanded={accordionExpanded}
                             onToggle={handleAccordionToggle}
                         >
-                            <p>주식회사 [회사명]은(는) 방문 예약 서비스 제공을 위해 아래와 같이 개인정보를 수집 및 이용합니다.</p>
-
-                            <h4>1. 수집항목</h4>
-                            <ul>
-                                <li>필수항목: 성명, 연락처, 소속, 방문목적, 방문일시</li>
-                                <li>선택항목: 이메일</li>
-                            </ul>
-
-                            <h4>2. 수집 및 이용목적</h4>
-                            <ul>
-                                <li>방문자 출입관리 및 보안유지</li>
-                                <li>방문 예약 확인 및 변경 안내</li>
-                            </ul>
-
-                            <h4>3. 보유 및 이용기간</h4>
-                            <p>방문일로부터 1년간 보관 후 파기</p>
-
-                            <h4>4. 동의 거부권 및 불이익</h4>
-                            <p>개인정보 수집에 동의하지 않을 경우 방문 예약 서비스 이용이 제한됩니다.</p>
-
-                            <h4>5. 개인정보의 제3자 제공</h4>
-                            <p>수집한 개인정보는 아래의 경우를 제외하고 제3자에게 제공하지 않습니다.</p>
-                            <ul>
-                                <li>정보주체의 동의가 있는 경우</li>
-                                <li>법령에 의해 제공이 요구되는 경우</li>
-                                <li>서비스 제공에 관한 계약 이행을 위해 필요한 경우</li>
-                            </ul>
-
-                            <h4>6. 정보주체의 권리, 의무 및 행사방법</h4>
-                            <p>정보주체는 개인정보 보호법 등 관계법령에 따라 다음과 같은 권리를 행사할 수 있습니다.</p>
-                            <ul>
-                                <li>개인정보 열람, 정정·삭제, 처리정지 요구</li>
-                                <li>개인정보의 오류 등이 있는 경우 정정 요구</li>
-                                <li>개인정보 수집에 대한 동의 철회</li>
-                            </ul>
-
-                            <h4>7. 개인정보 보호책임자</h4>
-                            <p>개인정보 보호책임자: 홍길동</p>
-                            <p>연락처: 02-1234-5678, privacy@company.com</p>
+                            <div
+                                className="privacy-policy-content"
+                                dangerouslySetInnerHTML={{
+                                    __html: t('visitReserve.privacyAgreement.privacyPolicy.fullContent')
+                                }}
+                            />
                         </Accordion>
 
                         <div className="privacy-radio-group" ref={privacyCheckRef}>
@@ -601,7 +568,7 @@ function PrivacyAgreementInput() {
                                         checked={privacyAgreed === 'agree'}
                                         onChange={handlePrivacyChange}
                                     />
-                                    <span>동의합니다</span>
+                                    <span>{t('visitReserve.privacyAgreement.privacyPolicy.options.agree')}</span>
                                 </label>
                                 <label className="radio-option">
                                     <input
@@ -611,12 +578,12 @@ function PrivacyAgreementInput() {
                                         checked={privacyAgreed === 'disagree'}
                                         onChange={handlePrivacyChange}
                                     />
-                                    <span>동의하지 않습니다</span>
+                                    <span>{t('visitReserve.privacyAgreement.privacyPolicy.options.disagree')}</span>
                                 </label>
                             </div>
                             {privacyAgreed === 'disagree' && (
                                 <div className="privacy-disagree-notice">
-                                    개인정보 수집에 동의하지 않을 경우 방문 예약 서비스를 이용하실 수 없습니다.
+                                    {t('visitReserve.privacyAgreement.privacyPolicy.disagreeNotice')}
                                 </div>
                             )}
                         </div>
@@ -627,10 +594,10 @@ function PrivacyAgreementInput() {
                 <form onSubmit={handleFormSubmit} className="visit-form">
                     {/* 방문 대상 직원 정보 */}
                     <div className="form-group-section">
-                        <h3><Users size={20} /> 방문 대상 직원 정보</h3>
+                        <h3><Users size={20} /> {t('visitReserve.privacyAgreement.employeeInfo.title')}</h3>
 
                         <div className="form-group" ref={employeeCheckRef}>
-                            <label htmlFor="employeeName">직원 이름 <span className="required">*</span></label>
+                            <label htmlFor="employeeName">{t('visitReserve.privacyAgreement.employeeInfo.employeeName')} <span className="required">*</span></label>
                             {isEmployeeVerified ? (
                                 <InputWithButton
                                     inputProps={{
@@ -648,7 +615,7 @@ function PrivacyAgreementInput() {
                                             setVerificationError('');
                                         },
                                     }}
-                                    buttonContent="다시 입력"
+                                    buttonContent={t('visitReserve.privacyAgreement.employeeInfo.reenter')}
                                     className="verified-employee"
                                 />
                             ) : (
@@ -659,7 +626,7 @@ function PrivacyAgreementInput() {
                                         name: "employeeName",
                                         value: formData.employeeName,
                                         onChange: handleInputChange,
-                                        placeholder: "방문 대상 직원 이름",
+                                        placeholder: t('visitReserve.privacyAgreement.employeeInfo.placeholder'),
                                     }}
                                     buttonProps={{
                                         className: "btn-primary verify-btn",
@@ -668,11 +635,11 @@ function PrivacyAgreementInput() {
                                     }}
                                     buttonContent={
                                         isVerifying ? (
-                                            <span>확인 중...</span>
+                                            <span>{t('visitReserve.privacyAgreement.employeeInfo.verifying')}</span>
                                         ) : (
                                             <>
                                                 <Search size={18} />
-                                                <span>직원 확인</span>
+                                                <span>{t('visitReserve.privacyAgreement.employeeInfo.verifyButton')}</span>
                                             </>
                                         )
                                     }
@@ -685,7 +652,7 @@ function PrivacyAgreementInput() {
                         {isEmployeeVerified && (
                             <div className="verification-status success">
                                 <CheckCircle size={18} />
-                                <span>직원 정보가 확인되었습니다.</span>
+                                <span>{t('visitReserve.privacyAgreement.employeeInfo.verified')}</span>
                             </div>
                         )}
 
@@ -706,39 +673,39 @@ function PrivacyAgreementInput() {
 
                     {/* 방문자 정보 */}
                     <div className="form-group-section">
-                        <h3><User size={20} /> 방문자 정보</h3>
+                        <h3><User size={20} /> {t('visitReserve.privacyAgreement.visitorInfo.title')}</h3>
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="visitorName">방문자 이름 <span className="required">*</span></label>
+                                <label htmlFor="visitorName">{t('visitReserve.privacyAgreement.visitorInfo.name')} <span className="required">*</span></label>
                                 <input
                                     type="text"
                                     id="visitorName"
                                     name="visitorName"
                                     value={formData.visitorName}
                                     onChange={handleInputChange}
-                                    placeholder="방문자 이름"
+                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.namePlaceholder')}
                                     className={errors.visitorName ? 'error' : ''}
                                 />
                                 {errors.visitorName && <div className="error-message">{errors.visitorName}</div>}
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="visitorCompany">소속 회사</label>
+                                <label htmlFor="visitorCompany">{t('visitReserve.privacyAgreement.visitorInfo.company')}</label>
                                 <input
                                     type="text"
                                     id="visitorCompany"
                                     name="visitorCompany"
                                     value={formData.visitorCompany}
                                     onChange={handleInputChange}
-                                    placeholder="소속 회사명"
+                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.companyPlaceholder')}
                                 />
                             </div>
                         </div>
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="visitorContact">연락처 <span className="required">*</span></label>
+                                <label htmlFor="visitorContact">{t('visitReserve.privacyAgreement.visitorInfo.contact')} <span className="required">*</span></label>
                                 <input
                                     type="text"
                                     id="visitorContact"
@@ -746,21 +713,21 @@ function PrivacyAgreementInput() {
                                     value={formData.visitorContact}
                                     onChange={handleInputChange}
                                     onBlur={handlePhoneBlur}
-                                    placeholder="숫자만 입력 (예: 01012345678)"
+                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.contactPlaceholder')}
                                     className={errors.visitorContact ? 'error' : ''}
                                 />
                                 {errors.visitorContact && <div className="error-message">{errors.visitorContact}</div>}
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="visitorEmail">이메일</label>
+                                <label htmlFor="visitorEmail">{t('visitReserve.privacyAgreement.visitorInfo.email')}</label>
                                 <input
                                     type="email"
                                     id="visitorEmail"
                                     name="visitorEmail"
                                     value={formData.visitorEmail}
                                     onChange={handleInputChange}
-                                    placeholder="example@email.com"
+                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.emailPlaceholder')}
                                     className={errors.visitorEmail ? 'error' : ''}
                                 />
                                 {errors.visitorEmail && <div className="error-message">{errors.visitorEmail}</div>}
@@ -768,7 +735,7 @@ function PrivacyAgreementInput() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="visitPurpose">방문 목적 <span className="required">*</span></label>
+                            <label htmlFor="visitPurpose">{t('visitReserve.privacyAgreement.visitorInfo.purpose')} <span className="required">*</span></label>
                             <div className="form-purpose-container">
                                 <div className="form-purpose-select">
                                     <select
@@ -781,7 +748,7 @@ function PrivacyAgreementInput() {
                                             <option key={reason.visitReasonID} value={reason.visitReasonID}>{reason.visitReasonName}</option>
                                         ))}
                                     </select>
-                                    {loadingReasons && <div className="loading-text">로딩중...</div>}
+                                    {loadingReasons && <div className="loading-text">{t('visitReserve.common.loading')}</div>}
                                 </div>
                                 <div className="form-purpose-input">
                                     <input
@@ -790,7 +757,7 @@ function PrivacyAgreementInput() {
                                         name="visitPurpose"
                                         value={formData.visitPurpose}
                                         onChange={handleInputChange}
-                                        placeholder="방문의 상세 목적을 입력해주세요"
+                                        placeholder={t('visitReserve.privacyAgreement.visitorInfo.purposePlaceholder')}
                                         className={errors.visitPurpose ? 'error' : ''}
                                         disabled={loadingReasons}
                                     />
@@ -801,7 +768,7 @@ function PrivacyAgreementInput() {
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="visitDate">방문 시작 날짜 <span className="required">*</span></label>
+                                <label htmlFor="visitDate">{t('visitReserve.privacyAgreement.visitorInfo.visitDate')} <span className="required">*</span></label>
                                 <div className="input-with-icon">
                                     <Calendar size={18} />
                                     <input
@@ -815,11 +782,11 @@ function PrivacyAgreementInput() {
                                     />
                                 </div>
                                 {errors.visitDate && <div className="error-message">{errors.visitDate}</div>}
-                                {!dateChanged && <div className="input-help-text">현재 날짜가 기본값으로 설정되어 있습니다.</div>}
+                                {!dateChanged && <div className="input-help-text">{t('visitReserve.privacyAgreement.visitorInfo.defaultDateNotice')}</div>}
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="visitTime">방문 시작 시간 <span className="required">*</span></label>
+                                <label htmlFor="visitTime">{t('visitReserve.privacyAgreement.visitorInfo.visitTime')} <span className="required">*</span></label>
                                 <div className="input-with-icon">
                                     <Clock size={18} />
                                     <input
@@ -832,13 +799,13 @@ function PrivacyAgreementInput() {
                                     />
                                 </div>
                                 {errors.visitTime && <div className="error-message">{errors.visitTime}</div>}
-                                {!timeChanged && <div className="input-help-text">현재 시간이 기본값으로 설정되어 있습니다.</div>}
+                                {!timeChanged && <div className="input-help-text">{t('visitReserve.privacyAgreement.visitorInfo.defaultTimeNotice')}</div>}
                             </div>
                         </div>
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="visitEndDate">방문 종료 날짜 <span className="required">*</span></label>
+                                <label htmlFor="visitEndDate">{t('visitReserve.privacyAgreement.visitorInfo.visitEndDate')} <span className="required">*</span></label>
                                 <div className="input-with-icon">
                                     <Calendar size={18} />
                                     <input
@@ -855,7 +822,7 @@ function PrivacyAgreementInput() {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="visitEndTime">방문 종료 시간 <span className="required">*</span></label>
+                                <label htmlFor="visitEndTime">{t('visitReserve.privacyAgreement.visitorInfo.visitEndTime')} <span className="required">*</span></label>
                                 <div className="input-with-icon">
                                     <Clock size={18} />
                                     <input
@@ -873,14 +840,14 @@ function PrivacyAgreementInput() {
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="visitorCarNumber">차량 번호</label>
+                                <label htmlFor="visitorCarNumber">{t('visitReserve.privacyAgreement.visitorInfo.carNumber')}</label>
                                 <input
                                     type="text"
                                     id="visitorCarNumber"
                                     name="visitorCarNumber"
                                     value={formData.visitorCarNumber}
                                     onChange={handleInputChange}
-                                    placeholder="차량 번호 (예: 12가3456)"
+                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.carNumberPlaceholder')}
                                 />
                             </div>
                         </div>
@@ -891,14 +858,14 @@ function PrivacyAgreementInput() {
                             type="submit"
                             className={`btn btn-primary btn-lg ${(privacyAgreed !== 'agree' || !isEmployeeVerified) ? 'btn-disabled' : ''}`}
                         >
-                            방문 신청하기
+                            {t('visitReserve.privacyAgreement.actions.submit')}
                         </button>
                         <button
                             type="button"
                             className="btn btn-outline btn-lg"
                             onClick={() => navigate('/')}
                         >
-                            취소
+                            {t('visitReserve.privacyAgreement.actions.cancel')}
                         </button>
                     </div>
                 </form>
@@ -908,7 +875,7 @@ function PrivacyAgreementInput() {
             <Modal
                 isOpen={showEmployeeModal}
                 onClose={() => setShowEmployeeModal(false)}
-                title="방문 대상 직원 선택"
+                title={t('visitReserve.privacyAgreement.employeeSelector.title')}
                 size="medium"
                 closeOnClickOutside={false}
             >

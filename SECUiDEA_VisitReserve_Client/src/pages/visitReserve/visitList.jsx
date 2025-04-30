@@ -15,7 +15,7 @@ import './visitList.scss';
 
 // 방문 현황 목록 컴포넌트
 const VisitList = () => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('visit');
     const { user } = useAuth();
     const [visits, setVisits] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -31,18 +31,18 @@ const VisitList = () => {
     const isMember = user?.role === 'Employee';
 
     // 네트워크 오류 Alert
-    const showNetworkErrorAlert = (errorMessage, retryHandler, title = '네트워크 오류', options = {}) => {
+    const showNetworkErrorAlert = (errorMessage, retryHandler, title = t('visitReserve.common.networkError'), options = {}) => {
         const { showCancelButton = true, allowOutsideClick = true } = options;
 
         Swal.fire({
             title: title,
             html: typeof errorMessage === 'string'
-                ? `<p>${errorMessage}</p><p>다시 시도하시겠습니까?</p>`
+                ? `<p>${errorMessage}</p><p>${t('visitReserve.common.retryQuestion')}</p>`
                 : errorMessage,
             icon: 'error',
             showCancelButton: showCancelButton,
-            confirmButtonText: '다시 시도',
-            cancelButtonText: '닫기',
+            confirmButtonText: t('visitReserve.common.retry'),
+            cancelButtonText: t('visitReserve.common.close'),
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#6c757d',
             allowOutsideClick: allowOutsideClick,
@@ -64,7 +64,7 @@ const VisitList = () => {
         try {
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+                throw new Error(t('visitReserve.common.offlineError'));
             }
 
             const endpoint = `/Visit/VisitReserveList?page=${page}&limit=10`;
@@ -72,7 +72,7 @@ const VisitList = () => {
             const data = await response.json();
 
             if (!data.isSuccess) {
-                throw new Error(data.message || '서버에서 데이터를 가져오는데 실패했습니다.');
+                throw new Error(data.message || t('visitReserve.visitList.loadingError'));
             }
 
             const newVisits = data.data.data || [];
@@ -89,9 +89,9 @@ const VisitList = () => {
         } catch (err) {
             console.error('방문 내역 로딩 오류:', err);
 
-            const errorMessage = err.message === '인터넷 연결이 오프라인 상태입니다.'
-                ? '인터넷 연결이 오프라인 상태입니다.'
-                : '방문 내역을 불러오는 중 오류가 발생했습니다.';
+            const errorMessage = err.message === t('visitReserve.common.offlineError')
+                ? t('visitReserve.common.offlineError')
+                : t('visitReserve.visitList.loadingError');
 
             setError(errorMessage);
 
@@ -100,7 +100,7 @@ const VisitList = () => {
                 showNetworkErrorAlert(
                     errorMessage,
                     fetchVisits,
-                    '데이터 로딩 오류',
+                    t('visitReserve.common.networkError'),
                     { showCancelButton: true, allowOutsideClick: true }
                 );
             }
@@ -108,7 +108,7 @@ const VisitList = () => {
             setLoading(false);
             isLoadingRef.current = false;
         }
-    }, [API_BASE_URL, isMember, page, visits.length]);
+    }, [API_BASE_URL, isMember, page, visits.length, t]);
 
     // 방문 신청 상태 변경
     const handleStatusChange = useCallback(async (visitId, newStatus) => {
@@ -123,7 +123,7 @@ const VisitList = () => {
         try {
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error('인터넷 연결이 오프라인 상태입니다.');
+                throw new Error(t('visitReserve.common.offlineError'));
             }
 
             const endpoint = `/Visit/VisitReserveStatus`;
@@ -134,7 +134,7 @@ const VisitList = () => {
             const data = await response.json();
 
             if (!data.isSuccess) {
-                throw new Error(data.message || '상태 변경에 실패했습니다.');
+                throw new Error(data.message || t('visitReserve.visitList.statusChangeError'));
             }
 
             // 성공적으로 상태가 변경된 경우 UI 업데이트
@@ -146,9 +146,9 @@ const VisitList = () => {
         } catch (err) {
             console.error('상태 변경 오류:', err);
 
-            const errorMessage = err.message === '인터넷 연결이 오프라인 상태입니다.'
-                ? '인터넷 연결이 오프라인 상태입니다.'
-                : '상태 변경 중 오류가 발생했습니다.';
+            const errorMessage = err.message === t('visitReserve.common.offlineError')
+                ? t('visitReserve.common.offlineError')
+                : t('visitReserve.visitList.statusChangeError');
 
             setError(errorMessage);
 
@@ -156,7 +156,7 @@ const VisitList = () => {
             showNetworkErrorAlert(
                 errorMessage,
                 () => handleStatusChange(visitId, newStatus),
-                '상태 변경 오류',
+                t('visitReserve.common.networkError'),
                 { showCancelButton: true, allowOutsideClick: true }
             );
 
@@ -170,7 +170,7 @@ const VisitList = () => {
                 return newState;
             });
         }
-    }, [isMember, pendingStatusChanges]);
+    }, [isMember, pendingStatusChanges, t]);
 
     // 페이지 로드 시 데이터 가져오기
     useEffect(() => {
@@ -211,37 +211,37 @@ const VisitList = () => {
         switch (status) {
             case 'pending':
                 return {
-                    label: '승인 대기',
+                    label: t('visitReserve.visitList.status.pending'),
                     icon: <Clock size={18} />,
                     className: 'status-pending'
                 };
             case 'approved':
                 return {
-                    label: '승인 완료',
+                    label: t('visitReserve.visitList.status.approved'),
                     icon: <CheckCircle size={18} />,
                     className: 'status-approved'
                 };
             case 'visited':
                 return {
-                    label: '방문 중',
+                    label: t('visitReserve.visitList.status.visited'),
                     icon: <Clock size={18} />,
                     className: 'status-visited'
                 };
             case 'finished':
                 return {
-                    label: '완료 됨',
+                    label: t('visitReserve.visitList.status.finished'),
                     icon: <CheckCircle size={18} />,
                     className: 'status-finished'
                 };
             case 'rejected':
                 return {
-                    label: '거절됨',
+                    label: t('visitReserve.visitList.status.rejected'),
                     icon: <X size={18} />,
                     className: 'status-rejected'
                 };
             case 'canceled':
                 return {
-                    label: '취소됨',
+                    label: t('visitReserve.visitList.status.canceled'),
                     icon: <AlertCircle size={18} />,
                     className: 'status-canceled'
                 };
@@ -256,7 +256,7 @@ const VisitList = () => {
 
     // 로딩 중 상태 정보
     const loadingStatusInfo = {
-        label: '요청 중',
+        label: t('visitReserve.visitList.status.loading'),
         icon: <Loader2 size={18} className="spin" />,
         className: 'status-loading'
     };
@@ -266,18 +266,18 @@ const VisitList = () => {
             <div className="visit-list-header">
                 <h2 className="visit-list-title">
                     <Calendar size={24} className="title-icon" />
-                    방문 현황
+                    {t('visitReserve.visitList.title')}
                 </h2>
 
                 <div className="actions">
                     <button
                         className="btn btn-refresh"
                         onClick={handleRefresh}
-                        title="새로고침"
+                        title={t('visitReserve.visitList.refresh')}
                         disabled={isLoadingRef.current}
                     >
                         <RefreshCw size={16} className={loading ? 'spin' : ''} />
-                        새로고침
+                        {t('visitReserve.visitList.refresh')}
                     </button>
                 </div>
             </div>
@@ -300,7 +300,7 @@ const VisitList = () => {
                 {visits.length === 0 && loading ? (
                     <div className="loading-indicator">
                         <div className="spinner"></div>
-                        <p>불러오는 중...</p>
+                        <p>{t('visitReserve.visitList.loading')}</p>
                     </div>
                 ) : (
                     <InfiniteScroll
@@ -311,12 +311,12 @@ const VisitList = () => {
                         loader={
                             <div className="loading-indicator">
                                 <div className="spinner"></div>
-                                <p>불러오는 중...</p>
+                                <p>{t('visitReserve.visitList.loading')}</p>
                             </div>
                         }
                         endMessage={
                             <div className="end-message">
-                                <p>모든 방문 내역을 불러왔습니다.</p>
+                                <p>{t('visitReserve.visitList.allVisitsLoaded')}</p>
                             </div>
                         }
                         scrollableTarget="scrollableDiv"
@@ -324,7 +324,7 @@ const VisitList = () => {
                     >
                         {visits.length === 0 && !loading ? (
                             <div className="no-visits">
-                                <p>방문 내역이 없습니다.</p>
+                                <p>{t('visitReserve.visitList.noVisits')}</p>
                             </div>
                         ) : (
                             <div className="visit-list">
