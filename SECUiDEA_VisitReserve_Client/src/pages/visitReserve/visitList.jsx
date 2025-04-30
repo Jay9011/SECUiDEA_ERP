@@ -211,37 +211,37 @@ const VisitList = () => {
         switch (status) {
             case 'pending':
                 return {
-                    label: t('reservation.status.pending') || '승인 대기',
+                    label: '승인 대기',
                     icon: <Clock size={18} />,
                     className: 'status-pending'
                 };
             case 'approved':
                 return {
-                    label: t('reservation.status.approved') || '승인 완료',
+                    label: '승인 완료',
                     icon: <CheckCircle size={18} />,
                     className: 'status-approved'
                 };
             case 'visited':
                 return {
-                    label: t('reservation.status.visited') || '방문 중',
+                    label: '방문 중',
                     icon: <Clock size={18} />,
                     className: 'status-visited'
                 };
             case 'finished':
                 return {
-                    label: t('reservation.status.finished') || '완료 됨',
+                    label: '완료 됨',
                     icon: <CheckCircle size={18} />,
                     className: 'status-finished'
                 };
             case 'rejected':
                 return {
-                    label: t('reservation.status.rejected') || '거절됨',
+                    label: '거절됨',
                     icon: <X size={18} />,
                     className: 'status-rejected'
                 };
             case 'canceled':
                 return {
-                    label: t('reservation.status.canceled') || '취소됨',
+                    label: '취소됨',
                     icon: <AlertCircle size={18} />,
                     className: 'status-canceled'
                 };
