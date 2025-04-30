@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
+    const { t } = useTranslation('visit');
+
     return (
         <div className="error-layout_content">
-            <div className="error-layout_code">404</div>
-            <h1 className="error-layout_title">페이지를 찾을 수 없습니다</h1>
+            <div className="error-layout_code">{t('notFound.code')}</div>
+            <h1 className="error-layout_title">{t('notFound.title')}</h1>
             <p className="error-layout_text">
-                요청하신 페이지가 존재하지 않거나, 이동되었거나, 일시적으로 사용할 수 없습니다.
+                {t('notFound.description')}
             </p>
             <div className="error-layout_actions">
                 <Link to="/" className="btn-primary">
-                    홈으로 돌아가기
+                    {t('notFound.actions.home')}
                 </Link>
                 <Link to="/help" className="btn-outline">
-                    도움말
+                    {t('notFound.actions.help')}
                 </Link>
             </div>
         </div>

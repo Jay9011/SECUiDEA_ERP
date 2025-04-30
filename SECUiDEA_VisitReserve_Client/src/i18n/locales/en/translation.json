@@ -11,47 +11,5 @@
         "submit": "Submit",
         "welcome": "Welcome",
         "more": "Learn More"
-    },
-    "reservation": {
-        "title": "Visit Reservation",
-        "form": {
-            "visitor": "Visitor",
-            "name": "Name",
-            "phone": "Phone Number",
-            "email": "Email",
-            "purpose": "Purpose of Visit",
-            "date": "Visit Date",
-            "time": "Visit Time",
-            "host": "Host",
-            "company": "Company",
-            "department": "Department",
-            "numberOfPeople": "Number of Visitors",
-            "submit": "Submit Reservation"
-        },
-        "status": {
-            "pending": "Pending Approval",
-            "approved": "Approved",
-            "rejected": "Rejected",
-            "canceled": "Canceled"
-        },
-        "message": {
-            "success": "Reservation has been successfully created.",
-            "error": "An error occurred while creating the reservation.",
-            "confirm": "Are you sure you want to confirm this reservation?"
-        }
-    },
-    "admin": {
-        "title": "Admin Panel",
-        "dashboard": "Dashboard",
-        "reservations": "Reservation Management",
-        "users": "User Management",
-        "settings": "Settings"
-    },
-    "error": {
-        "required": "This field is required.",
-        "invalidEmail": "Invalid email format.",
-        "invalidPhone": "Invalid phone number format.",
-        "serverError": "A server error has occurred.",
-        "notFound": "Page not found."
     }
 }

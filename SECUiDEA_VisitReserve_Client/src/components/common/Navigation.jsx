@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useTranslation } from 'react-i18next';
 
 // 컴포넌트
 import AuthSection from "./AuthSection";
@@ -27,6 +28,7 @@ const Navigation = ({ isOpen, onClose }) => {
     const { user } = useAuth();
     const location = useLocation();
     const [activeLink, setActiveLink] = useState('');
+    const { t } = useTranslation('visit');
 
     useEffect(() => {
         setActiveLink(location.pathname);
@@ -35,16 +37,16 @@ const Navigation = ({ isOpen, onClose }) => {
     // 사용자 권한에 따른 메뉴 필터링
     const menuItems = useMemo(() => {
         const baseMenu = [
-            { path: '/', label: '홈' },
-            { path: '/visitReserve/privacyAgreement', label: '방문 예약' },
-            { path: '/visitReserve/visitList', label: '방문 현황' },
+            { path: '/', label: t('navigation.menu.home') },
+            { path: '/visitReserve/privacyAgreement', label: t('navigation.menu.reservation') },
+            { path: '/visitReserve/visitList', label: t('navigation.menu.visitStatus') },
         ];
 
         // Guest인 경우 추가 메뉴
         if (user && user.role === 'Guest') {
             return [
                 ...baseMenu,
-                { path: '/education', label: '교육 영상' }
+                { path: '/education', label: t('navigation.menu.education') }
             ];
         }
 
@@ -52,13 +54,13 @@ const Navigation = ({ isOpen, onClose }) => {
         if (user && user.role === 'Admin') {
             return [
                 ...baseMenu,
-                { path: '/admin/dashboard', label: '관리자 대시보드' },
-                { path: '/admin/users', label: '사용자 관리' }
+                { path: '/admin/dashboard', label: t('navigation.menu.adminDashboard') },
+                { path: '/admin/users', label: t('navigation.menu.userManagement') }
             ];
         }
 
         return baseMenu;
-    }, [user]);
+    }, [user, t]);
 
     return (
         <>
@@ -72,7 +74,7 @@ const Navigation = ({ isOpen, onClose }) => {
                         className="navigation_logo"
                         onClick={onClose}
                         textComponent="span"
-                        textContent="방문 예약 시스템"
+                        textContent={t('navigation.systemTitle')}
                     />
 
                     <div className="navigation_auth">

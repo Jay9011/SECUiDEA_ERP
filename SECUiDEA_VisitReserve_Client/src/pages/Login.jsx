@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ShieldHalf, Lock, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { AuthProvider } from '../utils/authProviders';
 import './Login.scss';
@@ -12,6 +13,7 @@ const Login = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const sessionExpired = searchParams.get('expired') === 'true';
+    const { t } = useTranslation('visit');
 
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
@@ -32,7 +34,7 @@ const Login = () => {
         e.preventDefault();
 
         if (!id || !password) {
-            setError('아이디와 비밀번호를 입력해주세요.');
+            setError(t('login.error.emptyFields'));
             return;
         }
 
@@ -50,7 +52,7 @@ const Login = () => {
                 await loginWithProvider(provider, id, password, rememberMe);
             }
         } catch (err) {
-            setError(err.message || '로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+            setError(err.message || t('login.error.loginFailed'));
         } finally {
             setLoading(false);
         }
@@ -70,12 +72,12 @@ const Login = () => {
                     <div className="login-logo">
                         <ShieldHalf size={40} />
                     </div>
-                    <h2>방문 예약 시스템</h2>
-                    <p className="login-subtitle">계정에 로그인하세요</p>
+                    <h2>{t('login.title')}</h2>
+                    <p className="login-subtitle">{t('login.subtitle')}</p>
 
                     {sessionExpired && (
                         <div className="session-expired-alert">
-                            세션이 만료되었습니다. 다시 로그인해주세요.
+                            {t('login.sessionExpired')}
                         </div>
                     )}
 
@@ -92,7 +94,7 @@ const Login = () => {
                             />
                             <span className="slider round"></span>
                         </label>
-                        <span className="guest-mode-label">게스트 로그인</span>
+                        <span className="guest-mode-label">{t('login.guestMode')}</span>
                     </div>
 
                     <form onSubmit={handleLogin}>
@@ -105,7 +107,7 @@ const Login = () => {
                                 id="id"
                                 value={id}
                                 onChange={(e) => setId(e.target.value)}
-                                placeholder={isGuestMode ? "이름을 입력하세요" : "아이디를 입력하세요"}
+                                placeholder={isGuestMode ? t('login.userName') : t('login.userId')}
                                 disabled={loading}
                             />
                         </div>
@@ -119,7 +121,7 @@ const Login = () => {
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder={isGuestMode ? "휴대전화번호를 입력하세요" : "비밀번호를 입력하세요"}
+                                placeholder={isGuestMode ? t('login.phoneNumber') : t('login.password')}
                                 disabled={loading}
                             />
                         </div>
@@ -133,9 +135,9 @@ const Login = () => {
                                     onChange={(e) => setRememberMe(e.target.checked)}
                                     disabled={loading}
                                 />
-                                <span>로그인 상태 유지</span>
+                                <span>{t('login.rememberMe')}</span>
                             </label>
-                            <a href="#" className="forgot-password">비밀번호 찾기</a>
+                            <a href="#" className="forgot-password">{t('login.forgotPassword')}</a>
                         </div>
 
                         <button
@@ -143,7 +145,7 @@ const Login = () => {
                             className="login-btn"
                             disabled={loading}
                         >
-                            {loading ? '로그인 중...' : '로그인'}
+                            {loading ? t('login.loggingIn') : t('login.loginButton')}
                         </button>
                     </form>
                 </div>

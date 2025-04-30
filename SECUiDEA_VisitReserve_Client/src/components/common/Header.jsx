@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import LogoComponent from "./Logo";
 
 // 스타일
 import './Header.scss';
 
 const Header = ({ onToggleNav }) => {
+    const { t } = useTranslation('visit');
+
     return (
         <header className="header">
             <div className="header_container">
@@ -19,7 +22,7 @@ const Header = ({ onToggleNav }) => {
                     <LogoComponent
                         className="header_logo"
                         textComponent="h1"
-                        textContent="방문 예약 시스템"
+                        textContent={t('navigation.systemTitle')}
                     />
                 </div>
 

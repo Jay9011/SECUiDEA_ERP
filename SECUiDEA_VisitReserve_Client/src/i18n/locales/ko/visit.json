@@ -1,54 +1,144 @@
 {
-    "공통": {
-        "환영": "환영합니다",
-        "더보기": "자세히 알아보기",
-        "확인": "확인",
-        "취소": "취소",
-        "저장": "저장",
-        "제출": "제출",
-        "뒤로": "뒤로",
-        "다음": "다음"
-    },
-    "방문": {
-        "제목": "방문 예약",
-        "양식": {
-            "방문자": "방문자",
-            "이름": "이름",
-            "전화번호": "전화번호",
-            "이메일": "이메일",
-            "목적": "방문 목적",
-            "날짜": "방문 일자",
-            "시간": "방문 시간",
-            "접견자": "접견자",
-            "회사": "회사명",
-            "부서": "부서",
-            "인원수": "방문자 수",
-            "신청": "예약 신청"
+    "reservation": {
+        "title": "방문 예약",
+        "form": {
+            "visitor": "방문자",
+            "name": "이름",
+            "phone": "전화번호",
+            "email": "이메일",
+            "purpose": "방문 목적",
+            "date": "방문 일자",
+            "time": "방문 시간",
+            "host": "접견자",
+            "company": "회사명",
+            "department": "부서",
+            "numberOfPeople": "방문자 수",
+            "submit": "예약 신청"
         },
-        "상태": {
-            "대기중": "승인 대기",
-            "승인됨": "승인 완료",
-            "거절됨": "거절됨",
-            "취소됨": "취소됨"
+        "status": {
+            "pending": "승인 대기",
+            "approved": "승인 완료",
+            "rejected": "거절됨",
+            "canceled": "취소됨"
         },
-        "메시지": {
-            "성공": "예약이 성공적으로 생성되었습니다. {{예약번호}}",
-            "오류": "예약 생성 중 오류가 발생했습니다: {{오류내용}}",
-            "확인": "예약을 확정하시겠습니까?"
+        "message": {
+            "success": "예약이 성공적으로 생성되었습니다.",
+            "error": "예약 생성 중 오류가 발생했습니다.",
+            "confirm": "예약을 확정하시겠습니까?"
         }
     },
-    "관리": {
-        "제목": "관리자 페이지",
-        "대시보드": "대시보드",
-        "예약관리": "예약 관리",
-        "사용자관리": "사용자 관리",
-        "설정": "설정"
+    "admin": {
+        "title": "관리자 페이지",
+        "dashboard": "대시보드",
+        "reservations": "예약 관리",
+        "users": "사용자 관리",
+        "settings": "설정"
     },
-    "오류": {
-        "필수항목": "필수 항목입니다.",
-        "이메일형식": "유효하지 않은 이메일 형식입니다.",
-        "전화번호형식": "유효하지 않은 전화번호 형식입니다.",
-        "서버오류": "서버 오류가 발생했습니다.",
-        "페이지없음": "페이지를 찾을 수 없습니다."
+    "error": {
+        "required": "필수 항목입니다.",
+        "invalidEmail": "유효하지 않은 이메일 형식입니다.",
+        "invalidPhone": "유효하지 않은 전화번호 형식입니다.",
+        "serverError": "서버 오류가 발생했습니다.",
+        "notFound": "페이지를 찾을 수 없습니다."
+    },
+    "home": {
+        "title": "방문 예약 시스템",
+        "subtitle": "빠르고 편리한 방문 예약 시스템",
+        "applyVisit": "방문 신청하기",
+        "viewVisitHistory": "방문 내역 보기",
+        "process": {
+            "title": "간편한 3단계 방문신청",
+            "subtitle": "빠르고 쉬운 방문 신청 절차",
+            "step1": {
+                "title": "방문 일정 등록",
+                "description": "방문 일정과 방문자 정보를 온라인으로 간편하게 등록하세요."
+            },
+            "step2": {
+                "title": "관리자 승인",
+                "description": "담당자가 방문 신청을 검토하고 신속하게 승인합니다."
+            },
+            "step3": {
+                "title": "방문 완료",
+                "description": "승인된 방문자는 정해진 시간에 방문하여 출입 절차를 진행합니다."
+            },
+            "learnMore": "방문 절차 자세히 알아보기"
+        },
+        "cta": {
+            "title": "지금 바로 방문 예약을 시작하세요!",
+            "subtitle": "빠르고 쉬운 방문 신청 절차를 따라 예약하세요.",
+            "applyVisit": "방문 신청하기",
+            "learnMore": "자세히 알아보기"
+        }
+    },
+    "login": {
+        "title": "방문 예약 시스템",
+        "subtitle": "계정에 로그인하세요",
+        "sessionExpired": "세션이 만료되었습니다. 다시 로그인해주세요.",
+        "guestMode": "게스트 로그인",
+        "userId": "아이디를 입력하세요",
+        "userName": "이름을 입력하세요",
+        "password": "비밀번호를 입력하세요",
+        "phoneNumber": "휴대전화번호를 입력하세요",
+        "rememberMe": "로그인 상태 유지",
+        "forgotPassword": "비밀번호 찾기",
+        "loginButton": "로그인",
+        "loggingIn": "로그인 중...",
+        "error": {
+            "emptyFields": "아이디와 비밀번호를 입력해주세요.",
+            "loginFailed": "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요."
+        }
+    },
+    "about": {
+        "title": "About",
+        "subtitle": "방문 예약 시스템에 대한 정보와 저작권 고지",
+        "introduction": {
+            "title": "방문 예약 시스템 소개",
+            "description": "방문 예약 시스템은 외부인 방문 신청 및 승인을 위한 통합 관리 시스템입니다."
+        },
+        "copyright": {
+            "title": "방문 예약 시스템 저작권 고지",
+            "lucide": {
+                "title": "Lucide License",
+                "license": "ISC License",
+                "text": [
+                    "Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.",
+                    "Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.",
+                    "THE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE."
+                ]
+            },
+            "notoSansKr": {
+                "title": "Noto Sans KR License",
+                "license": "SIL Open Font License 1.1",
+                "text": "Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'"
+            },
+            "nanumFont": {
+                "title": "Nanum Font",
+                "license": "SIL Open Font License 1.1",
+                "text": "Copyright (c) 2010, NAVER Corporation (https://www.navercorp.com/) with Reserved Font Name Nanum, Naver Nanum, NanumGothic, Naver NanumGothic, NanumMyeongjo, Naver NanumMyeongjo, NanumBrush, Naver NanumBrush, NanumPen, Naver NanumPen, Naver NanumGothicEco, NanumGothicEco, Naver NanumMyeongjoEco, NanumMyeongjoEco, Naver NanumGothicLight, NanumGothicLight, NanumBarunGothic, Naver NanumBarunGothic, NanumSquareRound, NanumBarunPen, MaruBuri, NanumSquareNeo"
+            }
+        },
+        "actions": {
+            "home": "홈으로"
+        }
+    },
+    "notFound": {
+        "code": "404",
+        "title": "페이지를 찾을 수 없습니다",
+        "description": "요청하신 페이지가 존재하지 않거나, 이동되었거나, 일시적으로 사용할 수 없습니다.",
+        "actions": {
+            "home": "홈으로 돌아가기",
+            "help": "도움말"
+        }
+    },
+    "navigation": {
+        "menu": {
+            "home": "홈",
+            "reservation": "방문 예약",
+            "visitStatus": "방문 현황",
+            "education": "교육 영상",
+            "adminDashboard": "관리자 대시보드",
+            "userManagement": "사용자 관리"
+        },
+        "systemTitle": "방문 예약 시스템"
     }
 }
