@@ -1,4 +1,14 @@
 {
+    "common": {
+        "networkError": "Network Error",
+        "retry": "Retry",
+        "cancel": "Cancel",
+        "close": "Close",
+        "offlineError": "Your internet connection is offline.",
+        "retryQuestion": "Would you like to try again?",
+        "loading": "Loading...",
+        "processingRequest": "Processing..."
+    },
     "reservation": {
         "title": "Visit Reservation",
         "form": {
@@ -142,16 +152,7 @@
         "systemTitle": "Visit Reservation System"
     },
     "visitReserve": {
-        "common": {
-            "networkError": "Network Error",
-            "retry": "Retry",
-            "cancel": "Cancel",
-            "close": "Close",
-            "offlineError": "Your internet connection is offline.",
-            "retryQuestion": "Would you like to try again?",
-            "loading": "Loading...",
-            "processingRequest": "Processing..."
-        },
+        "common": {},
         "visitList": {
             "title": "Visit Status",
             "refresh": "Refresh",

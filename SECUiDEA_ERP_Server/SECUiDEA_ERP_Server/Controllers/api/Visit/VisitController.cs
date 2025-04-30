@@ -42,7 +42,7 @@ public partial class VisitController : BaseController
 
         var param = new Dictionary<string, object>
         {
-            { "Lang", lan }
+            { "Lan", lan }
         };
 
         var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReasonSEL", param);

@@ -10,6 +10,9 @@ import { useTranslation } from 'react-i18next';
 // API
 import { checkEducationVideo } from '../../services/visitReserveApis';
 
+// 커스텀 훅
+import useNetworkErrorAlert from '../../hooks/useNetworkErrorAlert';
+
 // 스타일
 import './ReserveResult.scss';
 
@@ -18,6 +21,7 @@ function ReserveResult() {
   const { loginWithProvider } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const { showNetworkErrorAlert } = useNetworkErrorAlert();
   const state = location.state || {};
   const [loading, setLoading] = useState(false);
 
@@ -37,28 +41,18 @@ function ReserveResult() {
 
   const videoRef = useRef(null);
 
-  const showNetworkErrorAlert = (errorMessage, retryHandler, title = t('visitReserve.common.networkError'), options = {}) => {
-    const { showCancelButton = true, allowOutsideClick = true } = options;
+  // 페이지 이동 시 모달과 알림 정리
+  useEffect(() => {
+    return () => {
+      // 컴포넌트 언마운트 시 실행
+      Swal.close();
+    };
+  }, []);
 
-    Swal.fire({
-      title: title,
-      html: typeof errorMessage === 'string'
-        ? `<p>${errorMessage}</p><p>${t('visitReserve.common.retryQuestion')}</p>`
-        : errorMessage,
-      icon: 'error',
-      showCancelButton: showCancelButton,
-      confirmButtonText: t('visitReserve.common.retry'),
-      cancelButtonText: t('visitReserve.common.close'),
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#6c757d',
-      allowOutsideClick: allowOutsideClick,
-      allowEscapeKey: allowOutsideClick
-    }).then((result) => {
-      if (result.isConfirmed && typeof retryHandler === 'function') {
-        retryHandler();
-      }
-    });
-  };
+  // 라우트 변경 감지하여 알림창 닫기
+  useEffect(() => {
+    Swal.close();
+  }, [location]);
 
   const checkEducationVideoStatus = async () => {
     if (!visitorName || !visitorContact) return;
@@ -67,7 +61,7 @@ function ReserveResult() {
       setLoading(true);
 
       if (!navigator.onLine) {
-        throw new Error(t('visitReserve.common.offlineError'));
+        throw new Error(t('common.offlineError'));
       }
 
       // 교육 영상 시청 여부 확인 API 호출
@@ -103,14 +97,14 @@ function ReserveResult() {
     } catch (error) {
       console.error('교육 영상 확인 오류:', error);
 
-      const errorMessage = error.message === t('visitReserve.common.offlineError')
-        ? t('visitReserve.common.offlineError')
+      const errorMessage = error.message === t('common.offlineError')
+        ? t('common.offlineError')
         : t('visitReserve.reserveResult.education.error');
 
       showNetworkErrorAlert(
         errorMessage,
         checkEducationVideoStatus,
-        t('visitReserve.common.networkError'),
+        t('common.networkError'),
         { showCancelButton: false, allowOutsideClick: false }
       );
     } finally {
@@ -145,7 +139,7 @@ function ReserveResult() {
       setLoading(true);
 
       if (!navigator.onLine) {
-        throw new Error(t('visitReserve.common.offlineError'));
+        throw new Error(t('common.offlineError'));
       }
 
       // 로그인 API 호출
@@ -157,14 +151,14 @@ function ReserveResult() {
     } catch (error) {
       console.error('로그인 오류:', error);
 
-      const errorMessage = error.message === t('visitReserve.common.offlineError')
-        ? t('visitReserve.common.offlineError')
+      const errorMessage = error.message === t('common.offlineError')
+        ? t('common.offlineError')
         : t('visitReserve.reserveResult.education.error');
 
       showNetworkErrorAlert(
         errorMessage,
         handleLoginForEducation,
-        t('visitReserve.common.networkError'),
+        t('common.networkError'),
         { showCancelButton: false, allowOutsideClick: false }
       );
     } finally {
@@ -321,7 +315,7 @@ function ReserveResult() {
             onClick={() => window.location.href = '/'}
             disabled={loading}
           >
-            {loading ? t('visitReserve.common.processingRequest') : t('visitReserve.reserveResult.actions.home')}
+            {loading ? t('common.processingRequest') : t('visitReserve.reserveResult.actions.home')}
           </button>
         </div>
       </div>

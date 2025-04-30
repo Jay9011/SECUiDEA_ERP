@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { User, Users, Calendar, Clock, Shield, CheckCircle, Search, AlertCircle } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +14,9 @@ import EmployeeSelector from '../../components/features/EmployeeSelector';
 import InputWithButton from '../../components/features/InputWithButton';
 import LoadingOverlay from '../../components/common/LoadingOverlay';
 
+// 커스텀 훅
+import useNetworkErrorAlert from '../../hooks/useNetworkErrorAlert';
+
 // 스타일
 import './PrivacyAgreementInput.scss';
 
@@ -21,7 +24,9 @@ import { verifyEmployee, submitReservation, getVisitReasons } from '../../servic
 
 function PrivacyAgreementInput() {
     const navigate = useNavigate();
+    const location = useLocation();
     const { t, i18n } = useTranslation('visit');
+    const { showNetworkErrorAlert } = useNetworkErrorAlert();
 
     // 참조 추가
     const privacyCheckRef = useRef(null);
@@ -85,29 +90,22 @@ function PrivacyAgreementInput() {
     const [showEmployeeModal, setShowEmployeeModal] = useState(false);
     const [employeeList, setEmployeeList] = useState([]);
 
-    // 네트워크 오류 Alert
-    const showNetworkErrorAlert = (errorMessage, retryHandler, title = t('visitReserve.common.networkError'), options = {}) => {
-        const { showCancelButton = true, allowOutsideClick = true } = options;
+    // 페이지 이동 시 모달과 알림 정리
+    useEffect(() => {
+        return () => {
+            // 컴포넌트 언마운트 시 실행
+            Swal.close();
+            toast.dismiss();
+            setShowEmployeeModal(false);
+            setLoading(false);
+        };
+    }, []);
 
-        Swal.fire({
-            title: title,
-            html: typeof errorMessage === 'string'
-                ? `<p>${errorMessage}</p><p>${t('visitReserve.common.retryQuestion')}</p>`
-                : errorMessage,
-            icon: 'error',
-            showCancelButton: showCancelButton,
-            confirmButtonText: t('visitReserve.common.retry'),
-            cancelButtonText: t('visitReserve.common.close'),
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#6c757d',
-            allowOutsideClick: allowOutsideClick,
-            allowEscapeKey: allowOutsideClick
-        }).then((result) => {
-            if (result.isConfirmed && typeof retryHandler === 'function') {
-                retryHandler();
-            }
-        });
-    };
+    // 라우트 변경 감지하여 알림창 닫기
+    useEffect(() => {
+        Swal.close();
+        toast.dismiss();
+    }, [location]);
 
     // 페이지 초기 데이터 로드
     const loadInitialData = async () => {
@@ -117,9 +115,9 @@ function PrivacyAgreementInput() {
             showNetworkErrorAlert(
                 navigator.onLine
                     ? t('visitReserve.privacyAgreement.errorMessages.submitError')
-                    : t('visitReserve.common.offlineError'),
+                    : t('common.offlineError'),
                 loadInitialData,
-                t('visitReserve.common.networkError'),
+                t('common.networkError'),
                 { showCancelButton: false, allowOutsideClick: false }
             );
         }
@@ -136,7 +134,7 @@ function PrivacyAgreementInput() {
             setLoadingReasons(true);
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error(t('visitReserve.common.offlineError'));
+                throw new Error(t('common.offlineError'));
             }
 
             const result = await getVisitReasons(i18n.language);
@@ -305,7 +303,7 @@ function PrivacyAgreementInput() {
 
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error(t('visitReserve.common.offlineError'));
+                throw new Error(t('common.offlineError'));
             }
 
             // API 호출 - 직원 정보 확인
@@ -336,15 +334,15 @@ function PrivacyAgreementInput() {
         } catch (error) {
             console.error('직원 확인 오류:', error);
 
-            const errorMessage = error.message === t('visitReserve.common.offlineError')
-                ? t('visitReserve.common.offlineError')
+            const errorMessage = error.message === t('common.offlineError')
+                ? t('common.offlineError')
                 : t('visitReserve.privacyAgreement.errorMessages.verificationError');
 
             setVerificationError(errorMessage);
             showNetworkErrorAlert(
                 errorMessage,
                 handleVerifyEmployee,
-                t('visitReserve.common.networkError'),
+                t('common.networkError'),
                 { showCancelButton: false, allowOutsideClick: false }
             );
         } finally {
@@ -436,7 +434,7 @@ function PrivacyAgreementInput() {
         try {
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error(t('visitReserve.common.offlineError'));
+                throw new Error(t('common.offlineError'));
             }
 
             // 방문 신청 정보
@@ -492,21 +490,21 @@ function PrivacyAgreementInput() {
                 showNetworkErrorAlert(
                     result.message || t('visitReserve.privacyAgreement.errorMessages.submitError'),
                     handleSubmit,
-                    t('visitReserve.common.networkError'),
+                    t('common.networkError'),
                     { showCancelButton: true, allowOutsideClick: true }
                 );
             }
         } catch (error) {
             console.error('방문 신청 오류:', error);
 
-            const errorMessage = error.message === t('visitReserve.common.offlineError')
-                ? t('visitReserve.common.offlineError')
+            const errorMessage = error.message === t('common.offlineError')
+                ? t('common.offlineError')
                 : t('visitReserve.privacyAgreement.errorMessages.submitError');
 
             showNetworkErrorAlert(
                 errorMessage,
                 handleSubmit,
-                t('visitReserve.common.networkError'),
+                t('common.networkError'),
                 { showCancelButton: false, allowOutsideClick: false }
             );
         } finally {
@@ -748,7 +746,7 @@ function PrivacyAgreementInput() {
                                             <option key={reason.visitReasonID} value={reason.visitReasonID}>{reason.visitReasonName}</option>
                                         ))}
                                     </select>
-                                    {loadingReasons && <div className="loading-text">{t('visitReserve.common.loading')}</div>}
+                                    {loadingReasons && <div className="loading-text">{t('common.loading')}</div>}
                                 </div>
                                 <div className="form-purpose-input">
                                     <input

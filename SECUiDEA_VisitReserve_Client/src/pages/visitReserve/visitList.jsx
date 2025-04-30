@@ -2,10 +2,12 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Clock, CheckCircle, X, AlertCircle, Calendar, RefreshCw, Loader2 } from 'lucide-react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../utils/api';
+import useNetworkErrorAlert from '../../hooks/useNetworkErrorAlert';
 
 // 컴포넌트
 import VisitCard from '../../components/cards/VisitCard';
@@ -16,11 +18,12 @@ import './visitList.scss';
 // 방문 현황 목록 컴포넌트
 const VisitList = () => {
     const { t } = useTranslation('visit');
+    const location = useLocation();
     const { user } = useAuth();
+    const { showNetworkErrorAlert } = useNetworkErrorAlert();
     const [visits, setVisits] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const isLoadingRef = useRef(false); // useRef를 사용하여 로딩 상태 추적 (리렌더링 방지)
 
@@ -30,29 +33,22 @@ const VisitList = () => {
     // 사용자 권한 확인 (Employee 또는 Guest)
     const isMember = user?.role === 'Employee';
 
-    // 네트워크 오류 Alert
-    const showNetworkErrorAlert = (errorMessage, retryHandler, title = t('visitReserve.common.networkError'), options = {}) => {
-        const { showCancelButton = true, allowOutsideClick = true } = options;
+    // 페이징 관련
+    const [page, setPage] = useState(1);
+    const limit = 10;
 
-        Swal.fire({
-            title: title,
-            html: typeof errorMessage === 'string'
-                ? `<p>${errorMessage}</p><p>${t('visitReserve.common.retryQuestion')}</p>`
-                : errorMessage,
-            icon: 'error',
-            showCancelButton: showCancelButton,
-            confirmButtonText: t('visitReserve.common.retry'),
-            cancelButtonText: t('visitReserve.common.close'),
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#6c757d',
-            allowOutsideClick: allowOutsideClick,
-            allowEscapeKey: allowOutsideClick
-        }).then((result) => {
-            if (result.isConfirmed && typeof retryHandler === 'function') {
-                retryHandler();
-            }
-        });
-    };
+    // 페이지 이동 시 모달과 알림 정리
+    useEffect(() => {
+        return () => {
+            // 컴포넌트 언마운트 시 실행
+            Swal.close();
+        };
+    }, []);
+
+    // 라우트 변경 감지하여 알림창 닫기
+    useEffect(() => {
+        Swal.close();
+    }, [location]);
 
     // 방문 내역 데이터 가져오기
     const fetchVisits = useCallback(async () => {
@@ -64,10 +60,10 @@ const VisitList = () => {
         try {
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error(t('visitReserve.common.offlineError'));
+                throw new Error(t('common.offlineError'));
             }
 
-            const endpoint = `/Visit/VisitReserveList?page=${page}&limit=10`;
+            const endpoint = `/Visit/VisitReserveList?page=${page}&limit=${limit}`;
             const response = await api.get(endpoint);
             const data = await response.json();
 
@@ -85,12 +81,17 @@ const VisitList = () => {
                     const filteredNewVisits = newVisits.filter(v => !existingIds.has(v.id));
                     return [...prevVisits, ...filteredNewVisits];
                 });
+
+                // 만약 마지막으로 불러온 데이터의 양이 limit보다 적으면 더 이상 데이터가 없음
+                if (newVisits.length < limit) {
+                    setHasMore(false);
+                }
             }
         } catch (err) {
             console.error('방문 내역 로딩 오류:', err);
 
-            const errorMessage = err.message === t('visitReserve.common.offlineError')
-                ? t('visitReserve.common.offlineError')
+            const errorMessage = err.message === t('common.offlineError')
+                ? t('common.offlineError')
                 : t('visitReserve.visitList.loadingError');
 
             setError(errorMessage);
@@ -100,7 +101,7 @@ const VisitList = () => {
                 showNetworkErrorAlert(
                     errorMessage,
                     fetchVisits,
-                    t('visitReserve.common.networkError'),
+                    t('common.networkError'),
                     { showCancelButton: true, allowOutsideClick: true }
                 );
             }
@@ -123,7 +124,7 @@ const VisitList = () => {
         try {
             // 네트워크 연결 확인
             if (!navigator.onLine) {
-                throw new Error(t('visitReserve.common.offlineError'));
+                throw new Error(t('common.offlineError'));
             }
 
             const endpoint = `/Visit/VisitReserveStatus`;
@@ -146,8 +147,8 @@ const VisitList = () => {
         } catch (err) {
             console.error('상태 변경 오류:', err);
 
-            const errorMessage = err.message === t('visitReserve.common.offlineError')
-                ? t('visitReserve.common.offlineError')
+            const errorMessage = err.message === t('common.offlineError')
+                ? t('common.offlineError')
                 : t('visitReserve.visitList.statusChangeError');
 
             setError(errorMessage);
@@ -156,7 +157,7 @@ const VisitList = () => {
             showNetworkErrorAlert(
                 errorMessage,
                 () => handleStatusChange(visitId, newStatus),
-                t('visitReserve.common.networkError'),
+                t('common.networkError'),
                 { showCancelButton: true, allowOutsideClick: true }
             );
 
@@ -179,6 +180,13 @@ const VisitList = () => {
         }
     }, [fetchVisits]);
 
+    // 다음 페이지 자동 로드 - useEffect로 page 변경 시 자동 로드
+    useEffect(() => {
+        if (page > 1) {
+            fetchVisits();
+        }
+    }, [page, fetchVisits]);
+
     // 추가 데이터 로드
     const loadMoreData = useCallback(() => {
         // 로딩 중이 아닐 때만 다음 페이지 로드
@@ -199,49 +207,42 @@ const VisitList = () => {
         }
     }, []);
 
-    // 다음 페이지 자동 로드 - useEffect로 page 변경 시 자동 로드
-    useEffect(() => {
-        if (page > 1) {
-            fetchVisits();
-        }
-    }, [page, fetchVisits]);
-
     // 방문 상태에 따른 스타일 및 아이콘 반환
     const getStatusInfo = useCallback((status) => {
         switch (status) {
             case 'pending':
                 return {
-                    label: t('visitReserve.visitList.status.pending'),
+                    label: t('visitReserve.visitList.status.pending') || '대기',
                     icon: <Clock size={18} />,
                     className: 'status-pending'
                 };
             case 'approved':
                 return {
-                    label: t('visitReserve.visitList.status.approved'),
+                    label: t('visitReserve.visitList.status.approved') || '승인',
                     icon: <CheckCircle size={18} />,
                     className: 'status-approved'
                 };
             case 'visited':
                 return {
-                    label: t('visitReserve.visitList.status.visited'),
+                    label: t('visitReserve.visitList.status.visited') || '방문',
                     icon: <Clock size={18} />,
                     className: 'status-visited'
                 };
             case 'finished':
                 return {
-                    label: t('visitReserve.visitList.status.finished'),
+                    label: t('visitReserve.visitList.status.finished') || '완료',
                     icon: <CheckCircle size={18} />,
                     className: 'status-finished'
                 };
             case 'rejected':
                 return {
-                    label: t('visitReserve.visitList.status.rejected'),
+                    label: t('visitReserve.visitList.status.rejected') || '거절',
                     icon: <X size={18} />,
                     className: 'status-rejected'
                 };
             case 'canceled':
                 return {
-                    label: t('visitReserve.visitList.status.canceled'),
+                    label: t('visitReserve.visitList.status.canceled') || '취소',
                     icon: <AlertCircle size={18} />,
                     className: 'status-canceled'
                 };
