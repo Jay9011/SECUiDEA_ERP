@@ -36,7 +36,7 @@ const Navigation = ({ isOpen, onClose }) => {
 
     // 사용자 권한에 따른 메뉴 필터링
     const menuItems = useMemo(() => {
-        const baseMenu = [
+        let baseMenu = [
             { path: '/', label: t('navigation.menu.home') },
             { path: '/visitReserve/privacyAgreement', label: t('navigation.menu.reservation') },
             { path: '/visitReserve/visitList', label: t('navigation.menu.visitStatus') },
@@ -47,6 +47,15 @@ const Navigation = ({ isOpen, onClose }) => {
             return [
                 ...baseMenu,
                 { path: '/education', label: t('navigation.menu.education') }
+            ];
+        }
+
+        // Employee인 경우
+        if (user && user.role === 'Employee') {
+            // 제거할 메뉴들
+            baseMenu = baseMenu.filter(item => item.path !== '/visitReserve/privacyAgreement');
+            return [
+                ...baseMenu
             ];
         }
 
