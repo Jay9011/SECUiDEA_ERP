@@ -42,6 +42,7 @@ BEGIN
         DECLARE @VisitReserveID INT = NULL;
         DECLARE @VisitReserveVisitantID INT = NULL;
         DECLARE @VisitantYMD NVARCHAR(8) = NULL;
+        DECLARE @EmployeePhone NVARCHAR(50) = NULL;
         
         -- Mobile 뒷자리 8자리로 VisitantYMD 설정 (Visitant 테이블 수정이 끝나 있어야 함)
         SET @VisitantYMD = RIGHT(@Mobile, 8);
@@ -129,9 +130,19 @@ BEGIN
             ;
             SET @VisitReserveVisitantID = SCOPE_IDENTITY();
             
+            ----------------------------------------------------------------------------------------------------------
+            -- 접견인 정보 확인
+            ----------------------------------------------------------------------------------------------------------
+            -- 접견인 정보 조회
+            SELECT  @EmployeePhone = Mobile
+            FROM    Person
+            WHERE   PID = @PID
+            
             SET @Result = 1;
             SELECT  @VisitantID AS VisitantID
+                ,   @VisitReserveID AS VisitReserveID
                 ,   @VisitReserveVisitantID AS VisitReserveVisitantID
+                ,   @EmployeePhone AS EmployeePhone
             
             RETURN @Result;
         END
@@ -147,9 +158,35 @@ BEGIN
             WHERE   VisitID = @VisitReserveInputId
             ;
             
-            SET @Result = 1;
-            SELECT @VisitReserveInputId AS VisitReserveID;
+            ----------------------------------------------------------------------------------------------------------
+            -- 방문자 정보 확인
+            ----------------------------------------------------------------------------------------------------------
+            SELECT  @VisitantID = VisitantID
+                ,   @VisitReserveID = VisitID
+                ,   @VisitReserveVisitantID = VisitReserveVisitantID
+            FROM    VisitReserveVisitant
+            WHERE   VisitID = @VisitReserveInputId
+                
+            -- 방문자 정보 조회
+            SELECT  VisitantName
+                ,   Mobile
+            FROM    Visitant
+            WHERE   VisitantID = @VisitantID
             
+            -- 방문 예약일 정보 조회
+            SELECT  VisitSDate
+                ,   VisitEDate
+            FROM    VisitReserve
+            WHERE   VisitID = @VisitReserveInputId
+            
+            -- 방문 신청 정보 조회
+            SELECT  VisitantID
+                ,   VisitID
+                ,   VisitReserveVisitantID
+            FROM    VisitReserveVisitant
+            WHERE   VisitID = @VisitReserveInputId
+            
+            SET @Result = 1;
             RETURN @Result;
         END
     END TRY

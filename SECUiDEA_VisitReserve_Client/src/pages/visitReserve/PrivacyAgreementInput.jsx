@@ -21,6 +21,7 @@ import useNetworkErrorAlert from '../../hooks/useNetworkErrorAlert';
 import './PrivacyAgreementInput.scss';
 
 import { verifyEmployee, submitReservation, getVisitReasons } from '../../services/visitReserveApis';
+import { sendTemplateMessage } from '../../services/aligoService';
 
 function PrivacyAgreementInput() {
     const navigate = useNavigate();
@@ -432,7 +433,7 @@ function PrivacyAgreementInput() {
         handleSubmit();
     };
 
-    // 기존 폼 제출 처리 - API 호출 부분
+    // 폼 제출 처리
     const handleSubmit = async () => {
         setLoading(true);
         try {
@@ -455,7 +456,7 @@ function PrivacyAgreementInput() {
             const visitorCarNumber = formData.visitorCarNumber;
 
             // 방문 신청 API 호출
-            const result = await submitReservation({
+            await submitReservation({
                 employeePid: formData.employeePid,
                 employeeName: employeeName,
                 visitorName: visitorName,
@@ -469,35 +470,91 @@ function PrivacyAgreementInput() {
                 visitEndDate: visitEndDate,
                 visitEndTime: visitEndTime,
                 visitorCarNumber: visitorCarNumber,
-            });
+            }).then(response => {
+                if (response.isSuccess && response.data?.ApiKey) {
+                    // 카카오 알림톡 발송
+                    sendTemplateMessage(response.data.ApiKey, 'VisitReserve', visitorContact, visitorName).then(() => response);
 
-            if (result.isSuccess) {
-                const visitReason = visitReasons.find(reason => reason.visitReasonID == visitReasonId);
+                    // 접견인에게 알림톡 발송
+                    if (response.data.EmployeePhone && response.data.visitReserveVisitantId) {
+                        const templateVariables = {
+                            '방문자회사': visitorCompany,
+                            '방문자이름': visitorName,
+                            '방문일': visitDate,
+                            '신청시간': new Date().toISOString().replace('T', ' ').substring(0, 19)
+                        };
 
-                // 성공 시 결과 페이지로 이동
-                navigate('/visitReserve/ReserveResult', {
-                    state: {
-                        employeeName: employeeName,
-                        visitorName: visitorName,
-                        visitorCompany: visitorCompany,
-                        visitorContact: visitorContact,
-                        visitDate: visitDate,
-                        visitTime: visitTime,
-                        visitEndDate: visitEndDate,
-                        visitEndTime: visitEndTime,
-                        visitReason: visitReason.visitReasonName,
-                        visitPurpose: visitPurpose,
-                        visitorCarNumber: visitorCarNumber,
+                        const queryVariables = {
+                            '방문승인URL': `?uid=${response.data.visitReserveVisitantId}`
+                        };
+
+                        return sendTemplateMessage(response.data.ApiKey, 'RequestApprove', response.data.EmployeePhone, employeeName, templateVariables, queryVariables).then(() => response);
+                    } else {
+                        setLoading(false);
+
+                        // Swal 다이얼로그를 표시하고 Promise 체인 내에서 직접 페이지 이동 처리
+                        return Swal.fire({
+                            title: t('common.kakaoMessageError'),
+                            text: t('visitReserve.privacyAgreement.errorMessages.employeePhoneNotExists'),
+                            icon: 'warning',
+                            confirmButtonText: t('common.ok'),
+                            focusConfirm: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const visitReason = visitReasons.find(reason => reason.visitReasonID == visitReasonId);
+
+                                navigate('/visitReserve/ReserveResult', {
+                                    state: {
+                                        employeeName: employeeName,
+                                        visitorName: visitorName,
+                                        visitorCompany: visitorCompany,
+                                        visitorContact: visitorContact,
+                                        visitDate: visitDate,
+                                        visitTime: visitTime,
+                                        visitEndDate: visitEndDate,
+                                        visitEndTime: visitEndTime,
+                                        visitReason: visitReason.visitReasonName,
+                                        visitPurpose: visitPurpose,
+                                        visitorCarNumber: visitorCarNumber,
+                                    }
+                                });
+                            }
+
+                            return response;
+                        });
                     }
-                });
-            } else {
-                showNetworkErrorAlert(
-                    result.message || t('visitReserve.privacyAgreement.errorMessages.submitError'),
-                    handleSubmit,
-                    t('common.networkError'),
-                    { showCancelButton: true, allowOutsideClick: true }
-                );
-            }
+                } else {
+                    showNetworkErrorAlert(
+                        response.message || t('visitReserve.privacyAgreement.errorMessages.submitError'),
+                        handleSubmit,
+                        t('common.networkError'),
+                        { showCancelButton: true, allowOutsideClick: true }
+                    );
+
+                    return response;
+                }
+            }).then(response => {
+                if (response.isSuccess) {
+                    const visitReason = visitReasons.find(reason => reason.visitReasonID == visitReasonId);
+
+                    // 성공 시 결과 페이지로 이동
+                    navigate('/visitReserve/ReserveResult', {
+                        state: {
+                            employeeName: employeeName,
+                            visitorName: visitorName,
+                            visitorCompany: visitorCompany,
+                            visitorContact: visitorContact,
+                            visitDate: visitDate,
+                            visitTime: visitTime,
+                            visitEndDate: visitEndDate,
+                            visitEndTime: visitEndTime,
+                            visitReason: visitReason.visitReasonName,
+                            visitPurpose: visitPurpose,
+                            visitorCarNumber: visitorCarNumber,
+                        }
+                    });
+                }
+            });
         } catch (error) {
             console.error('방문 신청 오류:', error);
 

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AligoService" Version="2.0.0" />
+    <PackageReference Include="AligoService" Version="2.1.0" />
     <PackageReference Include="CoreDAL" Version="1.1.1-beta" />
     <PackageReference Include="CryptoManager" Version="1.0.4" />
     <PackageReference Include="FileIOHelper" Version="1.1.1" />

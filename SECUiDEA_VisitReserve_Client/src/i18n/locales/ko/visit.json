@@ -1,13 +1,15 @@
 {
     "common": {
         "networkError": "네트워크 오류",
+        "ok": "확인",
         "retry": "다시 시도",
         "cancel": "취소",
         "close": "닫기",
         "offlineError": "인터넷 연결이 오프라인 상태입니다.",
         "retryQuestion": "다시 시도하시겠습니까?",
         "loading": "로딩 중...",
-        "processingRequest": "처리 중..."
+        "processingRequest": "처리 중...",
+        "kakaoMessageError": "카카오 알림톡 전송 오류"
     },
     "components": {
         "visitCard": {
@@ -204,7 +206,8 @@
                 "visited": "방문 중",
                 "finished": "완료 됨"
             },
-            "statusChangeError": "상태 변경 중 오류가 발생했습니다."
+            "statusChangeError": "상태 변경 중 오류가 발생했습니다.",
+            "visitantPhoneNotExists": "방문자 연락처가 존재하지 않습니다. 방문자에게 직접 연락해주세요."
         },
         "privacyAgreement": {
             "title": "방문 예약",
@@ -267,7 +270,9 @@
             },
             "errorMessages": {
                 "submitError": "방문 신청 중 오류가 발생했습니다. 다시 시도해주세요.",
-                "verificationError": "직원 정보를 확인할 수 없습니다."
+                "verificationError": "직원 정보를 확인할 수 없습니다.",
+                "sendKakaoMessageError": "카카오 알림톡 발송 중 오류가 발생했습니다. 다시 시도해주세요.",
+                "employeePhoneNotExists": "접견인 연락처가 존재하지 않습니다. 관리자에게 문의해 주세요."
             },
             "employeeSelector": {
                 "title": "방문 대상 직원 선택",

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../utils/api';
 import useNetworkErrorAlert from '../../hooks/useNetworkErrorAlert';
+import { sendTemplateMessage } from '../../services/aligoService';
 
 // 컴포넌트
 import VisitCard from '../../components/cards/VisitCard';
@@ -138,7 +139,36 @@ const VisitList = () => {
                 throw new Error(data.message || t('visitReserve.visitList.statusChangeError'));
             }
 
-            // 성공적으로 상태가 변경된 경우 UI 업데이트
+            // 성공적으로 상태가 변경된 경우 UI 업데이트와 카카오 알림톡 발송
+            if (newStatus === 'approved'
+                && data.data?.ApiKey
+                && data.data?.visitants?.length > 0
+                && data.data?.visitants[0]?.mobile
+            ) {
+                const templateVariables = {
+                    "방문자이름": data.data.visitants[0].visitantName,
+                    "방문일": data.data.visitReserves[0].visitSDate,
+                    "승인시간": new Date().toISOString().replace('T', ' ').substring(0, 19)
+                };
+
+                await sendTemplateMessage(data.data.ApiKey, 'ApprovedMsg', data.data.visitants[0].mobile, data.data.visitants[0].visitantName, templateVariables)
+                    .then(async (response) => {
+                        const data = await response.json();
+                        if (!data.isSuccess) {
+                            Swal.fire({
+                                title: t('common.kakaoMessageError'),
+                                text: t('visitReserve.visitList.visitantPhoneNotExists'),
+                                icon: 'warning',
+                                confirmButtonText: t('common.ok')
+                            })
+                        }
+                    })
+                    .catch(error => {
+                        console.error('카카오 알림톡 발송 오류:', error);
+                        throw error;
+                    });
+            }
+
             setVisits(prevVisits =>
                 prevVisits.map(visit =>
                     visit.id === visitId ? { ...visit, status: newStatus } : visit

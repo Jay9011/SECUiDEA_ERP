@@ -11,6 +11,7 @@ using SECUiDEA_ERP_Server.Models.CommonModels;
 using SECUiDEA_ERP_Server.Models.ControllerModels;
 using SECUiDEA_ERP_Server.Models.ControllerModels.Aligo;
 using System.Security.Claims;
+using SECUiDEA_ERP_Server.Models.ResultModels;
 
 namespace SECUiDEA_ERP_Server.Controllers.api.Aligo;
 
@@ -43,7 +44,21 @@ public class AligoController : BaseController
 
         AligoAcountDTO aligoAcountDto = await GetAligoAccountInfo(_secuidea);
         AligoTemplateDTO aligoTemplateDto = await GetAligoTemplateInfo(_secuidea, request.Gubun);
+
+        // 만약 둘 중 하나가 null이라면 에러 처리
+        if (aligoAcountDto == null || aligoTemplateDto == null)
+        {
+            return BadRequest("Aligo account or template information is missing.");
+        }
+
         IAligoClient aligoClient = AligoClientFactory.Create(aligoAcountDto.APIKey, aligoAcountDto.UserID, aligoTemplateDto.SenderKey);
+
+        // AligoTemplateDTO의 Path가 null 혹은 빈 값이 아니라면 도메인 + Path를 사용
+        string domain = aligoAcountDto.Url;
+        if (!string.IsNullOrEmpty(aligoTemplateDto.Path))
+        {
+            domain = $"{domain}{aligoTemplateDto.Path}";
+        }
 
         // 템플릿 정보 조회
         var templateResult = await aligoClient.TemplateService.GetTemplatesAsync(aligoTemplateDto.TPL_CODE);
@@ -60,7 +75,21 @@ public class AligoController : BaseController
                 receiver.TemplateContent = tplContent;
                 receiver.FailoverSubject = tplName;
                 receiver.FailoverMessage = tplContent;
+
                 // variables는 클라이언트 측에서 세팅
+
+                // queryVariables가 1개 이상이라면 해당 값에 도메인 추가 (queryVariables도 클라이언트 측에서 세팅)
+                if (receiver.QueryVariables != null && receiver.QueryVariables.Count > 0)
+                {
+                    foreach (var queryVariable in receiver.QueryVariables)
+                    {
+                        var key = queryVariable.Key;
+                        var value = $"{domain}{queryVariable.Value}";
+
+                        // 도메인 추가
+                        receiver.QueryVariables[key] = value;
+                    }
+                }
             }
 
             // 메시지 전송 요청 생성
@@ -74,7 +103,7 @@ public class AligoController : BaseController
             aligoClient.MessageService.SendMessageAsync(sendRequest);
         }
 
-        return Ok("Success to send message");
+        return Ok(BoolResultModel.Success("Success to send message"));
     }
 
 }

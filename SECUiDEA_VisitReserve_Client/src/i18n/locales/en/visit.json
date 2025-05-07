@@ -1,13 +1,15 @@
 {
     "common": {
         "networkError": "Network Error",
+        "ok": "OK",
         "retry": "Retry",
         "cancel": "Cancel",
         "close": "Close",
         "offlineError": "Your internet connection is offline.",
         "retryQuestion": "Would you like to try again?",
         "loading": "Loading...",
-        "processingRequest": "Processing..."
+        "processingRequest": "Processing...",
+        "kakaoMessageError": "Kakao sending error"
     },
     "components": {
         "visitCard": {
@@ -204,7 +206,8 @@
                 "visited": "In Progress",
                 "finished": "Completed"
             },
-            "statusChangeError": "An error occurred while changing the status."
+            "statusChangeError": "An error occurred while changing the status.",
+            "visitantPhoneNotExists": "The visitor's phone number does not exist. Please contact the visitor directly."
         },
         "privacyAgreement": {
             "title": "Visit Reservation",
@@ -267,7 +270,9 @@
             },
             "errorMessages": {
                 "submitError": "An error occurred while submitting your visit request. Please try again.",
-                "verificationError": "Unable to verify employee information."
+                "verificationError": "Unable to verify employee information.",
+                "sendKakaoMessageError": "An error occurred while sending the Kakao message. Please try again.",
+                "employeePhoneNotExists": "The host employee's phone number does not exist. Please contact the administrator."
             },
             "employeeSelector": {
                 "title": "Select Host Employee",

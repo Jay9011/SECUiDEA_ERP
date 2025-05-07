@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using System.Security.Claims;
@@ -139,11 +140,26 @@ public partial class VisitController : JwtController
             };
 
             var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReserve", param);
-            if (result.IsSuccess)
+            if (result.IsSuccess && result.ReturnValue == 1)
             {
+                // 결과에서 방문 정보 조회
+                int visitantId = 0;
+                int visitReserveId = 0;
+                int visitReserveVisitantId = 0;
+                string? EmployeePhone = "";
+
+                var dr = result.DataSet?.Tables[0].Rows[0];
+                visitantId = dr.Field<int>("VisitantID");
+                visitReserveId = dr.Field<int>("VisitReserveID");
+                visitReserveVisitantId = dr.Field<int>("VisitReserveVisitantID");
+                EmployeePhone = dr.Field<string>("EmployeePhone");
+
                 return Ok(BoolResultModel.Success("Visit reserved successfully.", new Dictionary<string, object>
                 {
-                    { "visitInfo", param },
+                    { "visitantId", visitantId },
+                    { "visitReserveId", visitReserveId },
+                    { "visitReserveVisitantId", visitReserveVisitantId },
+                    { "EmployeePhone", EmployeePhone ?? "" },
                     { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Kakao, StringClass.SECUIDEA, "VisitReserve")}
                 }));
             }
@@ -295,9 +311,25 @@ public partial class VisitController : JwtController
             var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_VisitReserve", param);
             if (result.IsSuccess && result.DataSet?.Tables.Count > 0 && result.DataSet.Tables[0].Rows.Count > 0)
             {
-                if (result.ReturnValue == 1)
+                if (result.IsSuccess && result.ReturnValue == 1)
                 {
-                    return Ok(BoolResultModel.Success(""));
+                    // 결과에서 방문 정보 조회
+                    // Table[0]은 Visitant 정보
+                    var visitants = result.DataSet.Tables[0].ToObject<VisitantParam>();
+
+                    // Table[1]은 VisitReserve 정보
+                    var visitReserves = result.DataSet.Tables[1].ToObject<VisitReserveParam>();
+
+                    // Table[2]는 VisitReserveVisitant 정보
+                    var visitReserveVisitants = result.DataSet.Tables[2].ToObject<VisitReserveVisitantParam>();
+
+                    return Ok(BoolResultModel.Success("Visit reserved successfully.", new Dictionary<string, object>
+                    {
+                        { "visitants", visitants },
+                        { "visitReserves", visitReserves },
+                        { "visitReserveVisitants", visitReserveVisitants },
+                        { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Kakao, StringClass.SECUIDEA, "VisitReserveStatus")}
+                    }));
                 }
             }
         }
