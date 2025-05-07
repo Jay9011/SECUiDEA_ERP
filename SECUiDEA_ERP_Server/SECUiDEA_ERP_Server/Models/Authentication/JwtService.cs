@@ -10,7 +10,7 @@ using SECUiDEA_ERP_Server.Models.CommonModels;
 
 namespace SECUiDEA_ERP_Server.Models.Authentication;
 
-public class JwtService
+public partial class JwtService
 {
     public JwtSettings GetSettings => _jwtSettings;
     private readonly JwtSettings _jwtSettings;

@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AligoService.ImplementClasses;
+using AligoService.Interface;
+using CoreDAL.Configuration.Interface;
+using CoreDAL.ORM.Extensions;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.AspNetCore.Mvc;
 using SECUiDEA_ERP_Server.Models.Authentication;
 using SECUiDEA_ERP_Server.Models.CommonModels;
+using SECUiDEA_ERP_Server.Models.ControllerModels;
 
 namespace SECUiDEA_ERP_Server.Controllers.BaseControllers;
 
@@ -109,5 +115,43 @@ public class BaseController : Controller
             Request.Body.Position = 0;
             return null;
         }
+    }
+
+    /// <summary>
+    /// Aligo 계정 정보를 DB에서 조회
+    /// </summary>
+    /// <param name="_database"></param>
+    /// <returns></returns>
+    protected async Task<AligoAcountDTO> GetAligoAccountInfo(IDatabaseSetup _database)
+    {
+        var param = new Dictionary<string, object>()
+        {
+            { "Type", "A" }
+        };
+
+        var result = await _database.DAL.ExecuteProcedureAsync(_database, "SECUiDEA_AligoAccount", param);
+
+        if (result.IsSuccess && result is { ReturnValue: 1, DataSet.Tables.Count: > 0 } && result.DataSet.Tables[0].Rows.Count > 0)
+        {
+            return result.DataSet.Tables[0].Rows[0].ToObject<AligoAcountDTO>();
+        }
+
+        return null;
+    }
+
+    protected async Task<AligoTemplateDTO> GetAligoTemplateInfo(IDatabaseSetup _database, string gubun)
+    {
+        var param = new Dictionary<string, object>()
+        {
+            { "Type", "T" },
+            { "Gubun", gubun }
+        };
+        var result = await _database.DAL.ExecuteProcedureAsync(_database, "SECUiDEA_AligoAccount", param);
+        if (result.IsSuccess && result is { ReturnValue: 1, DataSet.Tables.Count: > 0 } && result.DataSet.Tables[0].Rows.Count > 0)
+        {
+            return result.DataSet.Tables[0].Rows[0].ToObject<AligoTemplateDTO>();
+        }
+
+        return null;
     }
 }

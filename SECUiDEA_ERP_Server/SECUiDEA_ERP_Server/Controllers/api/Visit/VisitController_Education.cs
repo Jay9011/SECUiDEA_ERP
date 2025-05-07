@@ -11,7 +11,7 @@ using SECUiDEA_ERP_Server.Models.ResultModels;
 
 namespace SECUiDEA_ERP_Server.Controllers.api.Visit;
 
-public partial class VisitController : BaseController
+public partial class VisitController : JwtController
 {
 
     [HttpPost]

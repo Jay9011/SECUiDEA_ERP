@@ -51,4 +51,10 @@ public static class StringClass
     public const string CryptoS1Aes = "S1AES";
     public const string CryptoS1Sha512 = "S1SHA512";
     public const string CryptoSecuidea = "SECUiDEAAes";
+
+    // API 키 관련
+    public const double DefaultApiExpiryMinutes = 1; // 기본 JWT 유효기간 (분 단위)
+
+    // 카카오 알림톡 관련
+    public const string Issuer_Kakao = "Kakao";
 }

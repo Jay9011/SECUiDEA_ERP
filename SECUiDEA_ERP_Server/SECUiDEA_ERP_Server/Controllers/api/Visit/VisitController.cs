@@ -2,28 +2,35 @@
 using Microsoft.AspNetCore.Authorization;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using System.Security.Claims;
+using AligoService;
+using AligoService.Interface;
+using AligoService.Model.Messages;
 using SECUiDEA_ERP_Server.Controllers.BaseControllers;
 using CoreDAL.Configuration.Interface;
 using CoreDAL.ORM.Extensions;
 using SECUiDEA_ERP_Server.Models.CommonModels;
+using SECUiDEA_ERP_Server.Models.ControllerModels;
 using SECUiDEA_ERP_Server.Models.ControllerModels.api.Visit;
 using SECUiDEA_ERP_Server.Models.ResultModels;
+using SECUiDEA_ERP_Server.Models.Authentication;
 
 namespace SECUiDEA_ERP_Server.Controllers.api.Visit;
 
 [Route("api/[controller]/[action]")]
-public partial class VisitController : BaseController
+public partial class VisitController : JwtController
 {
     #region 의존 주입
 
     private readonly IDatabaseSetupContainer _dbContainer;
     private readonly IDatabaseSetup _s1Access;
+    private readonly IDatabaseSetup _secuidea;
 
-    public VisitController(IDatabaseSetupContainer dbContainer)
+    public VisitController(IDatabaseSetupContainer dbContainer, JwtService jwtService) : base(jwtService)
     {
         _dbContainer = dbContainer;
 
         _s1Access = _dbContainer.GetSetup(StringClass.S1Access);
+        _secuidea = _dbContainer.GetSetup(StringClass.SECUIDEA);
     }
 
     #endregion
@@ -136,7 +143,8 @@ public partial class VisitController : BaseController
             {
                 return Ok(BoolResultModel.Success("Visit reserved successfully.", new Dictionary<string, object>
                 {
-                    { "visitInfo", param }
+                    { "visitInfo", param },
+                    { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Kakao, StringClass.SECUIDEA, "VisitReserve")}
                 }));
             }
         }
