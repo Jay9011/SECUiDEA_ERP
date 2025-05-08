@@ -37,7 +37,8 @@ export const getColorVariables = () => {
         borderColor: getCssVariable('--border-color'),
         success: getCssVariable('--success-color'),
         warning: getCssVariable('--warning-color'),
-        error: getCssVariable('--error-color')
+        error: getCssVariable('--error-color'),
+        info: getCssVariable('--info-color')
     };
 };
 

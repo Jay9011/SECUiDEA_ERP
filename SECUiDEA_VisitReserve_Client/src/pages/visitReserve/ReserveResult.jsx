@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
 import { AuthProvider } from '../../utils/authProviders';
 import { useTranslation } from 'react-i18next';
+import { getColorVariables } from '../../utils/cssVariables';
 
 // API
 import { checkEducationVideo } from '../../services/visitReserveApis';
@@ -114,6 +115,8 @@ function ReserveResult() {
 
   // 교육 영상 시청 알림 표시
   const showEducationAlert = (html) => {
+    const colors = getColorVariables();
+
     Swal.fire({
       title: t('visitReserve.reserveResult.education.title'),
       html: html || `
@@ -121,11 +124,12 @@ function ReserveResult() {
         <p>${t('visitReserve.reserveResult.education.question')}</p>
       `,
       icon: 'info',
+      iconColor: colors.info,
       showCancelButton: true,
       confirmButtonText: t('visitReserve.reserveResult.education.watch'),
       cancelButtonText: t('visitReserve.reserveResult.education.later'),
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#6c757d',
+      confirmButtonColor: colors.primary,
+      cancelButtonColor: colors.secondary,
     }).then((result) => {
       if (result.isConfirmed) {
         handleLoginForEducation();

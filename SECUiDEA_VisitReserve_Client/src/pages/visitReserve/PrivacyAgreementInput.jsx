@@ -19,7 +19,9 @@ import useNetworkErrorAlert from '../../hooks/useNetworkErrorAlert';
 
 // 스타일
 import './PrivacyAgreementInput.scss';
+import { getColorVariables } from '../../utils/cssVariables';
 
+// API
 import { verifyEmployee, submitReservation, getVisitReasons } from '../../services/visitReserveApis';
 import { sendTemplateMessage } from '../../services/aligoService';
 
@@ -442,6 +444,9 @@ function PrivacyAgreementInput() {
                 throw new Error(t('common.offlineError'));
             }
 
+            // 색상 변수 가져오기
+            const colors = getColorVariables();
+
             // 방문 신청 정보
             const employeeName = formData.employeeName;
             const visitorName = formData.visitorName;
@@ -485,7 +490,8 @@ function PrivacyAgreementInput() {
                         };
 
                         const queryVariables = {
-                            '방문승인URL': `?uid=${response.data.visitReserveVisitantId}`
+                            // '방문승인URL': `?uid=${response.data.visitReserveVisitantId}`
+                            '방문승인URL': `/`
                         };
 
                         return sendTemplateMessage(response.data.ApiKey, 'RequestApprove', response.data.EmployeePhone, employeeName, templateVariables, queryVariables).then(() => response);
@@ -497,7 +503,9 @@ function PrivacyAgreementInput() {
                             title: t('common.kakaoMessageError'),
                             text: t('visitReserve.privacyAgreement.errorMessages.employeePhoneNotExists'),
                             icon: 'warning',
+                            iconColor: colors.warning,
                             confirmButtonText: t('common.ok'),
+                            confirmButtonColor: colors.primary,
                             focusConfirm: true
                         }).then((result) => {
                             if (result.isConfirmed) {

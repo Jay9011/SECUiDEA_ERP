@@ -185,6 +185,7 @@ function EducationVideoPage() {
 
   // 교육 완료 처리 함수
   const handleEducationComplete = async () => {
+    const colors = getColorVariables();
     try {
       const result = await saveEducationCompletion();
 
@@ -193,8 +194,9 @@ function EducationVideoPage() {
           title: t('visitReserve.education.successTitle'),
           text: t('visitReserve.education.successMessage'),
           icon: 'success',
+          iconColor: colors.success,
           confirmButtonText: t('visitReserve.education.confirm'),
-          confirmButtonColor: getColorVariables().success
+          confirmButtonColor: colors.success
         }).then(() => {
           logout();
           navigate('/');
@@ -208,11 +210,12 @@ function EducationVideoPage() {
         title: t('visitReserve.education.errorTitle'),
         text: t('visitReserve.education.errorMessage'),
         icon: 'error',
+        iconColor: colors.error,
         confirmButtonText: t('visitReserve.education.retryButton'),
-        confirmButtonColor: getColorVariables().primary,
+        confirmButtonColor: colors.primary,
         showCancelButton: true,
         cancelButtonText: t('visitReserve.education.cancelButton'),
-        cancelButtonColor: getColorVariables().textSecondary
+        cancelButtonColor: colors.textSecondary
       }).then((result) => {
         if (result.isConfirmed) {
           handleEducationComplete();

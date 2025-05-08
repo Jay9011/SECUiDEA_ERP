@@ -35,6 +35,7 @@ const useNetworkErrorAlert = () => {
                 ? `<p>${errorMessage}</p><p>${t('common.retryQuestion')}</p>`
                 : errorMessage,
             icon: 'error',
+            iconColor: colors.error,
             showCancelButton: showCancelButton,
             confirmButtonText: t('common.retry'),
             cancelButtonText: t('common.close'),

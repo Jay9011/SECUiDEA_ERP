@@ -3,6 +3,7 @@ import LogoComponent from "./Logo";
 
 // 스타일
 import './Header.scss';
+import { getColorVariables } from '../../utils/cssVariables';
 
 const Header = ({ onToggleNav }) => {
     const { t } = useTranslation('visit');
@@ -23,6 +24,7 @@ const Header = ({ onToggleNav }) => {
                         className="header_logo"
                         textComponent="h1"
                         textContent={t('navigation.systemTitle')}
+                        logoColor={getColorVariables().primary}
                     />
                 </div>
 

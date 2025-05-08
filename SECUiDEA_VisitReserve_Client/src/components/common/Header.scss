@@ -112,25 +112,34 @@
       font-size: $font-size-base;
       font-weight: $font-weight-bold;
     }
+
+    span,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: $primary-color;
+    }
+
+    &:hover {
+      span,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: $secondary-color;
+      }
+    }
   }
 
   &_actions {
     @include flex-center;
-
-    .user-info {
-      display: flex;
-      align-items: center;
-
-      .avatar {
-        @include flex-center;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        color: $light-text;
-        background-color: $secondary-color;
-        font-weight: $font-weight-bold;
-      }
-    }
   }
 }
 
@@ -179,28 +188,6 @@
   &_bottom {
     margin-top: auto;
     padding-top: $spacing-xl;
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      margin-bottom: $spacing-lg;
-      gap: $spacing-md;
-      color: $light-text;
-
-      .avatar {
-        @include flex-center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: $light-text;
-        color: $primary-color;
-        font-weight: $font-weight-bold;
-      }
-
-      .name {
-        font-weight: $font-weight-medium;
-      }
-    }
 
     .logout-btn {
       width: 100%;

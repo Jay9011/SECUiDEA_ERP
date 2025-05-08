@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from 'react-i18next';
-
+import { getColorVariables } from '../../utils/cssVariables';
 // 컴포넌트
 import AuthSection from "./AuthSection";
 import LogoComponent from "./Logo";
@@ -84,6 +84,8 @@ const Navigation = ({ isOpen, onClose }) => {
                         onClick={onClose}
                         textComponent="span"
                         textContent={t('navigation.systemTitle')}
+                        logoColor={getColorVariables().lightText}
+                        rotation3d="rotate3d-y-continuous"
                     />
 
                     <div className="navigation_auth">

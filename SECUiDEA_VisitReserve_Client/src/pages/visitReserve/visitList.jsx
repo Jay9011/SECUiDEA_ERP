@@ -154,14 +154,17 @@ const VisitList = () => {
 
                 await sendTemplateMessage(data.data.ApiKey, 'ApprovedMsg', data.data.visitants[0].mobile, data.data.visitants[0].visitantName, templateVariables)
                     .then(async (response) => {
+                        const colors = getColorVariables();
+
                         const data = await response.json();
                         if (!data.isSuccess) {
                             Swal.fire({
                                 title: t('common.kakaoMessageError'),
                                 text: t('visitReserve.visitList.visitantPhoneNotExists'),
                                 icon: 'warning',
+                                iconColor: colors.warning,
                                 confirmButtonText: t('common.ok'),
-                                confirmButtonColor: getColorVariables().warning
+                                confirmButtonColor: colors.warning
                             })
                         }
                     })

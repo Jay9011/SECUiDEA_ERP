@@ -1,22 +1,23 @@
 // 주요 색상
-$primary-color: #2c3e50;
-$secondary-color: #3498db;
+$primary-color: #5f4664;
+$secondary-color: #9e7ea4;
 $danger-color: #c0392b;
-$accent-color: #e74c3c;
+$accent-color: #b83160;
 $background-color: #f8f9fa;
-$light-gray: #f8f9fa;
-$text-color: #333333;
+$light-gray: #f0edf2;
+$text-color: #2b2331;
 $text-color-light: #ffffff;
-$text-color-dark: #2c3e50;
+$text-color-dark: #2c2534;
 $light-text: #ffffff;
-$text-primary: #333333;
-$text-secondary: #666666;
-$text-placeholder: #aaa;
+$text-primary: #2b2331;
+$text-secondary: #645668;
+$text-placeholder: #a899af;
 $primary-color-text: #ffffff;
-$border-color: #e1e4e8;
-$success-color: #2ecc71;
-$warning-color: #f39c12;
-$error-color: #e74c3c;
+$border-color: #e1d9e6;
+$success-color: #4a9071;
+$warning-color: #e0b54e;
+$error-color: #b83160;
+$info-color: #4a6cf7;
 
 // CSS 변수 정의 (루트 레벨에 적용)
 :root {
@@ -38,6 +39,7 @@ $error-color: #e74c3c;
     --success-color: #{$success-color};
     --warning-color: #{$warning-color};
     --error-color: #{$error-color};
+    --info-color: #{$info-color};
 }
 
 // 폰트
