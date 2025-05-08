@@ -95,9 +95,6 @@ public class Program
          * ================================================
          */
         var app = builder.Build();
-
-        // 항상 개발자 오류 페이지를 표시하도록 설정
-        app.UseDeveloperExceptionPage();
         
         app.UseHttpsRedirection();
         app.UseStaticFiles();

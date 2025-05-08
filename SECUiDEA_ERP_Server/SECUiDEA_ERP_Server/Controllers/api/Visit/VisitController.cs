@@ -257,7 +257,7 @@ public partial class VisitController : JwtController
     }
 
     [Authorize]
-    [HttpPut]
+    [HttpPost]
     public async Task<IActionResult> VisitReserveStatus([FromBody] VisitStatusDTO data)
     {
         try

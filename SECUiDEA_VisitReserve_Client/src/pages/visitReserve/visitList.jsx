@@ -130,7 +130,7 @@ const VisitList = () => {
             }
 
             const endpoint = `/Visit/VisitReserveStatus`;
-            const response = await api.put(endpoint, {
+            const response = await api.post(endpoint, {
                 body: JSON.stringify({ visitId: visitId, status: newStatus })
             });
 
@@ -148,7 +148,7 @@ const VisitList = () => {
             ) {
                 const templateVariables = {
                     "방문자이름": data.data.visitants[0].visitantName,
-                    "방문일": data.data.visitReserves[0].visitSDate,
+                    "방문일": data.data.visitReserves[0].visitSDate.replace('T', ' ').substring(0, 19),
                     "승인시간": new Date().toISOString().replace('T', ' ').substring(0, 19)
                 };
 

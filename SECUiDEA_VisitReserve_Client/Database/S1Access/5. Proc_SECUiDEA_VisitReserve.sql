@@ -3,13 +3,13 @@
 GO
 CREATE PROCEDURE SECUiDEA_VisitReserve
     @Type               NVARCHAR(50)    = 'reg'
-,   @VisitantName       NVARCHAR(50)
-,   @Mobile             VARCHAR(68)
+,   @VisitantName       NVARCHAR(50)    = NULL
+,   @Mobile             VARCHAR(68)     = NULL
 ,   @PID                INT             = 0
 ,   @RegisterPID        INT             = NULL
 ,   @VisitantCompany    NVARCHAR(50)    = ''
 ,   @Email              NVARCHAR(100)   = ''
-,   @VisitSDate         DATETIME
+,   @VisitSDate         DATETIME        = NULL
 ,   @VisitEDate         DATETIME        = NULL
 ,   @VisitReasonId      INT             = 0
 ,   @VisitReasonText    NVARCHAR(200)   = ''
@@ -169,7 +169,7 @@ BEGIN
                 
             -- 방문자 정보 조회
             SELECT  VisitantName
-                ,   REPLACE(REPLACE(REPLACE(Mobile, '-', ''), '+', ''), ' ', '')
+                ,   REPLACE(REPLACE(REPLACE(Mobile, '-', ''), '+', ''), ' ', '') AS Mobile
             FROM    Visitant
             WHERE   VisitantID = @VisitantID
             
