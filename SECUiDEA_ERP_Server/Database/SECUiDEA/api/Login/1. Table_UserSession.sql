@@ -1,6 +1,4 @@
-﻿USE [SECUiDEA]
-GO
-IF exists(SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserSessions]') AND type IN (N'U'))
+﻿IF exists(SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UserSessions]') AND type IN (N'U'))
     DROP TABLE [dbo].[UserSessions]
 GO
 CREATE TABLE UserSessions

@@ -134,7 +134,7 @@ BEGIN
             -- 접견인 정보 확인
             ----------------------------------------------------------------------------------------------------------
             -- 접견인 정보 조회
-            SELECT  @EmployeePhone = Mobile
+            SELECT  @EmployeePhone = REPLACE(REPLACE(REPLACE(Mobile, '-', ''), '+', ''), ' ', '')
             FROM    Person
             WHERE   PID = @PID
             
@@ -169,7 +169,7 @@ BEGIN
                 
             -- 방문자 정보 조회
             SELECT  VisitantName
-                ,   Mobile
+                ,   REPLACE(REPLACE(REPLACE(Mobile, '-', ''), '+', ''), ' ', '')
             FROM    Visitant
             WHERE   VisitantID = @VisitantID
             

@@ -1,6 +1,4 @@
-﻿USE [SECUiDEA]
-GO
-IF exists(SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Auth_SessionInsert]') AND type IN (N'P', N'PC'))
+﻿IF exists(SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Auth_SessionInsert]') AND type IN (N'P', N'PC'))
     DROP PROCEDURE [dbo].[Auth_SessionInsert]
 GO
 CREATE PROCEDURE Auth_SessionInsert

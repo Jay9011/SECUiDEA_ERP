@@ -138,14 +138,8 @@ public class Program
                 visitApp.UseRouting();
                 visitApp.UseEndpoints(endpoints =>
                 {
-                    endpoints.MapControllerRoute(
-                        name: "visit",
-                        pattern: "{controller=Visit}/{action=Index}/{id?}",
-                        defaults: new { controller = "Visit" }
-                    );
-
-                    // 컨트롤러에서 처리되지 않는 경로에 대한 폴백
-                    endpoints.MapFallbackToFile("/visit/index.html");
+                    // SPA 방식으로 운영되는 React 앱이므로 컨트롤러 라우팅은 제거하고 폴백만 설정
+                    endpoints.MapFallbackToController("Index", "Visit");
                 });
             });
         
