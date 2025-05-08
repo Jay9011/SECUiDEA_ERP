@@ -96,16 +96,9 @@ public class Program
          */
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-        else
-        {
-            app.UseExceptionHandler("/Home/Error");
-            app.UseHsts();
-        }
-
+        // 항상 개발자 오류 페이지를 표시하도록 설정
+        app.UseDeveloperExceptionPage();
+        
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
@@ -114,35 +107,12 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
 
-        // 루트 경로(/)에서 /visit/ 경로로 리다이렉트하는 미들웨어 추가 (추후 변경 필요)
-        app.Use(async (context, next) =>
-        {
-            if (context.Request.Path.Value == "/")
-            {
-                context.Response.Redirect("/visit/");
-                return;
-            }
-            
-            await next();
-        });
-
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
-        app.MapWhen(
-            ctx => ctx.Request.Path.StartsWithSegments("/visit"),
-            visitApp =>
-            {
-                visitApp.UseStaticFiles();
-                visitApp.UseRouting();
-                visitApp.UseEndpoints(endpoints =>
-                {
-                    // SPA 방식으로 운영되는 React 앱이므로 컨트롤러 라우팅은 제거하고 폴백만 설정
-                    endpoints.MapFallbackToController("Index", "Visit");
-                });
-            });
-        
+        // SPA 라우팅 설정
+        app.MapFallbackToFile("/visit/{**path}", "/visit/index.html");
         app.MapFallbackToFile("/index.html");
 
         app.Services.GetRequiredService<SessionService>();
