@@ -18,6 +18,28 @@ $success-color: #2ecc71;
 $warning-color: #f39c12;
 $error-color: #e74c3c;
 
+// CSS 변수 정의 (루트 레벨에 적용)
+:root {
+    --primary-color: #{$primary-color};
+    --secondary-color: #{$secondary-color};
+    --danger-color: #{$danger-color};
+    --accent-color: #{$accent-color};
+    --background-color: #{$background-color};
+    --light-gray: #{$light-gray};
+    --text-color: #{$text-color};
+    --text-color-light: #{$text-color-light};
+    --text-color-dark: #{$text-color-dark};
+    --light-text: #{$light-text};
+    --text-primary: #{$text-primary};
+    --text-secondary: #{$text-secondary};
+    --text-placeholder: #{$text-placeholder};
+    --primary-color-text: #{$primary-color-text};
+    --border-color: #{$border-color};
+    --success-color: #{$success-color};
+    --warning-color: #{$warning-color};
+    --error-color: #{$error-color};
+}
+
 // 폰트
 $font-family-sans: "NotoSans", "NanumGothic", sans-serif;
 $font-size-base: 16px;

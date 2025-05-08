@@ -4,6 +4,7 @@ import { Clock, CheckCircle, X, AlertCircle, Calendar, RefreshCw, Loader2 } from
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { getColorVariables } from '../../utils/cssVariables';
 
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../utils/api';
@@ -159,7 +160,8 @@ const VisitList = () => {
                                 title: t('common.kakaoMessageError'),
                                 text: t('visitReserve.visitList.visitantPhoneNotExists'),
                                 icon: 'warning',
-                                confirmButtonText: t('common.ok')
+                                confirmButtonText: t('common.ok'),
+                                confirmButtonColor: getColorVariables().warning
                             })
                         }
                     })

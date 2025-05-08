@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import Swal from 'sweetalert2';
 import { useTranslation } from 'react-i18next';
+import { getColorVariables } from '../../utils/cssVariables';
 
 import { useAuth } from "../../context/AuthContext";
 import { saveEducationCompletion } from '../../services/visitReserveApis';
@@ -192,7 +193,8 @@ function EducationVideoPage() {
           title: t('visitReserve.education.successTitle'),
           text: t('visitReserve.education.successMessage'),
           icon: 'success',
-          confirmButtonText: t('visitReserve.education.confirm')
+          confirmButtonText: t('visitReserve.education.confirm'),
+          confirmButtonColor: getColorVariables().success
         }).then(() => {
           logout();
           navigate('/');
@@ -207,8 +209,10 @@ function EducationVideoPage() {
         text: t('visitReserve.education.errorMessage'),
         icon: 'error',
         confirmButtonText: t('visitReserve.education.retryButton'),
+        confirmButtonColor: getColorVariables().primary,
         showCancelButton: true,
-        cancelButtonText: t('visitReserve.education.cancelButton')
+        cancelButtonText: t('visitReserve.education.cancelButton'),
+        cancelButtonColor: getColorVariables().textSecondary
       }).then((result) => {
         if (result.isConfirmed) {
           handleEducationComplete();

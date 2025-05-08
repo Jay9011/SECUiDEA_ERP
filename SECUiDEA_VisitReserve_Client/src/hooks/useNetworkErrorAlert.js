@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import Swal from 'sweetalert2';
+import { getColorVariables } from '../utils/cssVariables';
 
 /**
  * 네트워크 오류 알림을 표시하는 커스텀 훅
@@ -25,6 +26,8 @@ const useNetworkErrorAlert = () => {
         options = {}
     ) => {
         const { showCancelButton = true, allowOutsideClick = true } = options;
+        // 실시간으로 CSS 변수 값을 가져옴
+        const colors = getColorVariables();
 
         Swal.fire({
             title: title,
@@ -35,8 +38,8 @@ const useNetworkErrorAlert = () => {
             showCancelButton: showCancelButton,
             confirmButtonText: t('common.retry'),
             cancelButtonText: t('common.close'),
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#6c757d',
+            confirmButtonColor: colors.primary,
+            cancelButtonColor: colors.textSecondary,
             allowOutsideClick: allowOutsideClick,
             allowEscapeKey: allowOutsideClick
         }).then((result) => {
