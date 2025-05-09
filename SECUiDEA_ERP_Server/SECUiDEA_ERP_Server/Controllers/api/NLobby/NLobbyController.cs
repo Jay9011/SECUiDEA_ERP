@@ -20,7 +20,7 @@ public class NLobbyController : BaseController
 
     private const string NLobby = "NLobby";
     private const string GetAuthToken = "GetAuthToken";
-    private const string S1TokenID = "apiuser";
+    private const string S1TokenID = "APIUser";
     private const string S1TokenEmail = "api@api.com";
     private const string SetHRPerson = "SetHRPerson";
 
@@ -129,7 +129,7 @@ public class NLobbyController : BaseController
 
         IAPIRequest request = new APIRequest
         {
-            Body = RequestBody.CreateFormData(form)
+            Body = RequestBody.CreateJson(form)
         };
 
         return await _coreApi.PostAsync<TokenResponseModel>(GetAuthToken, request);
