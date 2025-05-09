@@ -8,8 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="AligoService" Version="2.1.0" />
+    <PackageReference Include="APIClient" Version="1.1.0" />
     <PackageReference Include="CoreDAL" Version="1.1.1-beta" />
-    <PackageReference Include="CryptoManager" Version="1.0.4" />
+    <PackageReference Include="CryptoManager" Version="1.1.1" />
     <PackageReference Include="FileIOHelper" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.15" />
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.8.0" />

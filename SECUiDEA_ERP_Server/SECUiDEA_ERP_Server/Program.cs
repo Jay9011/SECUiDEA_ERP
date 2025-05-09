@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using APIClient.Configuration;
 using CoreDAL.Configuration;
 using CoreDAL.Configuration.Interface;
 using CryptoManager;
@@ -31,11 +32,16 @@ public class Program
         builder.Services.AddMemoryCache();
 
         var dbSetupFilePath = Path.Combine(builder.Environment.ContentRootPath, "Upload", "Data", "dbSetup.ini");
+        var apiSetupFilePath = Path.Combine(builder.Environment.ContentRootPath, "Upload", "Data", "apiSetup.ini");
 
         IIOHelper dbSetupFileHelper = new IniFileHelper(dbSetupFilePath);
         builder.Services.AddKeyedSingleton<IIOHelper>(StringClass.IoDbSetupFile, dbSetupFileHelper);
+        
         IIOHelper registryHelper = new RegistryHelper(StringClass.SECUiDEAJWT);
         builder.Services.AddKeyedSingleton<IIOHelper>(StringClass.IoRegistry, registryHelper);
+        
+        IIOHelper apiSetupFileHelper = new IniFileHelper(apiSetupFilePath);
+        builder.Services.AddKeyedSingleton<IIOHelper>(StringClass.IoApiSetupFile, apiSetupFileHelper);
 
         ICryptoManager S1AES = new S1AES();
         ICryptoManager S1SHA512 = new S1SHA512();
@@ -55,7 +61,6 @@ public class Program
          * 의존 주입 시작
          * ================================================
          */
-        
         // JWT 초기 설정
         JwtService.JwtConfigSetup(registryHelper, SECUiDEA);
 
@@ -83,12 +88,19 @@ public class Program
             };
         });
 
+        // API Client 초기 설정
+        var apiSetupContainer = new APISetupContainer(new Dictionary<string, IIOHelper>
+        {
+            [StringClass.Nlobby] = apiSetupFileHelper
+        });
+
         builder.Services.AddSingleton<IRefreshTokenRepository, RefreshTokenRepository>();
         builder.Services.AddSingleton<UserRepositoryFactory>();
         builder.Services.AddSingleton<JwtService>();
         builder.Services.AddSingleton<SessionService>();
         builder.Services.AddSingleton<UserAuthService>();
 
+        builder.Services.AddSingleton<APISetupContainer>(apiSetupContainer);
 
         /* ================================================
          * 의존 주입 종료

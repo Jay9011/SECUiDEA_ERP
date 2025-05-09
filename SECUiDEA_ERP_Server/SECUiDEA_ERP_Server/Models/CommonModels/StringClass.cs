@@ -41,6 +41,7 @@ public static class StringClass
 
     // 설정 파일 관련
     public const string IoDbSetupFile = "dbSetupFile";
+    public const string IoApiSetupFile = "apiSetupFile";
     public const string IoRegistry = "registry";
     public const string S1Access = "S1ACCESS";
     public const string SECUIDEA = "SECUiDEA";
@@ -57,4 +58,7 @@ public static class StringClass
 
     // 카카오 알림톡 관련
     public const string Issuer_Kakao = "Kakao";
+
+    // API 라우팅 관련
+    public const string Nlobby = "nlobby";
 }
