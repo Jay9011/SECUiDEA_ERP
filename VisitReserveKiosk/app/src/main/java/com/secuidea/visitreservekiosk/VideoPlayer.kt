@@ -1,6 +1,8 @@
 package com.secuidea.visitreservekiosk
 
 import android.net.Uri
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -16,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
@@ -30,13 +33,11 @@ fun VideoPlayer(videoUri: Uri, modifier: Modifier = Modifier) {
     // ExoPlayer 인스턴스 생성
     val exoPlayer = remember {
         ExoPlayer.Builder(context).build().apply {
-            // 비디오 반복 재생 설정
-            repeatMode = Player.REPEAT_MODE_ALL
-            // 자동 재생 설정
-            playWhenReady = true
-            // 비디오 소스 설정
-            setMediaItem(MediaItem.fromUri(videoUri))
-            // 비디오 준비
+            val mediaItem = MediaItem.fromUri(videoUri)
+            setMediaItem(mediaItem)
+            repeatMode = Player.REPEAT_MODE_ALL // 비디오 반복 재생
+            playWhenReady = true // 준비되면 자동 재생
+            videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
             prepare()
         }
     }
@@ -52,11 +53,10 @@ fun VideoPlayer(videoUri: Uri, modifier: Modifier = Modifier) {
         )
     }
 
-    // PlayerView를 사용하여 비디오 표시
+    // PlayerView를 사용하여 동영상 표시
     DisposableEffect(key1 = Unit) {
         onDispose {
-            // 컴포저블이 화면에서 제거될 때 ExoPlayer 해제
-            exoPlayer.release()
+            exoPlayer.release() // 컴포넌트가 해제될 때 플레이어 리소스 해제
         }
     }
 
@@ -65,9 +65,14 @@ fun VideoPlayer(videoUri: Uri, modifier: Modifier = Modifier) {
         AndroidView(
                 factory = { ctx ->
                     PlayerView(ctx).apply {
+                        layoutParams =
+                                FrameLayout.LayoutParams(
+                                        ViewGroup.LayoutParams.MATCH_PARENT,
+                                        ViewGroup.LayoutParams.MATCH_PARENT
+                                )
                         player = exoPlayer
-                        useController = false // 컨트롤러 숨김
-                        setShowBuffering(PlayerView.SHOW_BUFFERING_NEVER) // 버퍼링 표시 숨김
+                        useController = false // 컨트롤러 숨기기
+                        setShowBuffering(PlayerView.SHOW_BUFFERING_NEVER)
                         resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL // 화면에 꽉 차게 표시
                     }
                 },

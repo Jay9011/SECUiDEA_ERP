@@ -43,6 +43,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.secuidea.visitreservekiosk.language.AppStrings
+import com.secuidea.visitreservekiosk.language.LocaleHelper
 import com.secuidea.visitreservekiosk.ui.theme.PrimaryColor
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 import java.io.File
@@ -82,6 +84,7 @@ fun MainScreen(defaultVideoUri: Uri? = null) {
     // 상태 정의
     var videoUri by remember { mutableStateOf(defaultVideoUri) }
     val buttonScale by animateFloatAsState(targetValue = 1f, label = "buttonScale")
+    val currentLanguage by remember { LocaleHelper.currentLanguage }
 
     // 앱이 시작될 때 외부 저장소에서 동영상 확인
     DisposableEffect(Unit) {
@@ -101,9 +104,26 @@ fun MainScreen(defaultVideoUri: Uri? = null) {
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // 상단 메뉴바 (언어 변경 버튼 포함)
+            Row(
+                    modifier = Modifier.fillMaxWidth().padding(8.dp),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+            ) {
+                // 언어 전환 버튼
+                Button(
+                        onClick = { LocaleHelper.toggleLanguage() },
+                        colors =
+                                ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                                ),
+                        shape = RoundedCornerShape(3.dp)
+                ) { Text(text = AppStrings.changeLanguageButton) }
+            }
+
             // 브랜드 이름
             Box(
-                    modifier = Modifier.fillMaxWidth().weight(.625f).padding(vertical = 16.dp),
+                    modifier = Modifier.fillMaxWidth().weight(.5f).padding(vertical = 16.dp),
                     contentAlignment = Alignment.BottomCenter
             ) {
                 Column(
@@ -113,7 +133,7 @@ fun MainScreen(defaultVideoUri: Uri? = null) {
                 ) {
                     Text(text = "ASMK 로고")
                     Text(
-                            text = "ASMK 방문 예약 시스템",
+                            text = AppStrings.appTitle,
                             style = MaterialTheme.typography.displayLarge.copy(color = PrimaryColor)
                     )
                 }
@@ -150,7 +170,7 @@ fun MainScreen(defaultVideoUri: Uri? = null) {
                         verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                            text = "ASMK 방문을 환영합니다",
+                            text = AppStrings.welcomeTitle,
                             style = MaterialTheme.typography.displayLarge,
                             color = MaterialTheme.colorScheme.onBackground,
                             textAlign = TextAlign.Center
@@ -159,7 +179,7 @@ fun MainScreen(defaultVideoUri: Uri? = null) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                            text = "Welcome to ASMK!",
+                            text = AppStrings.welcomeSubtitle,
                             style = MaterialTheme.typography.displayMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center
@@ -167,61 +187,29 @@ fun MainScreen(defaultVideoUri: Uri? = null) {
 
                     Spacer(modifier = Modifier.height(32.dp))
 
-                    // 하단 버튼
-                    Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    // 방문 신청 버튼
+                    Button(
+                            onClick = { /* 방문 신청 로직 구현 */},
+                            colors = ButtonDefaults.buttonColors(containerColor = PrimaryColor),
+                            modifier = Modifier.fillMaxWidth(0.7f).height(64.dp),
+                            shape = RoundedCornerShape(8.dp),
+                            contentPadding = ButtonDefaults.ButtonWithIconContentPadding
                     ) {
-                        // 한국어 버튼
-                        Button(
-                                onClick = { /* 한국어 버튼 클릭 이벤트 */},
-                                colors = ButtonDefaults.buttonColors(containerColor = PrimaryColor),
-                                modifier = Modifier.weight(1f).height(56.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                contentPadding = ButtonDefaults.ButtonWithIconContentPadding
+                        Row(
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Row(
-                                    horizontalArrangement = Arrangement.Center,
-                                    verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                        painter = painterResource(android.R.drawable.ic_menu_edit),
-                                        contentDescription = "방문 신청",
-                                        tint = Color.White,
-                                        modifier = Modifier.padding(end = 8.dp).size(20.dp)
-                                )
-                                Text(
-                                        text = "방문 신청",
-                                        style = MaterialTheme.typography.labelLarge,
-                                        maxLines = 1
-                                )
-                            }
-                        }
-
-                        // 영어 버튼
-                        Button(
-                                onClick = { /* 영어 버튼 클릭 이벤트 */},
-                                colors = ButtonDefaults.buttonColors(containerColor = PrimaryColor),
-                                modifier = Modifier.weight(1f).height(56.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                contentPadding = ButtonDefaults.ButtonWithIconContentPadding
-                        ) {
-                            Row(
-                                    horizontalArrangement = Arrangement.Center,
-                                    verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                        painter = painterResource(android.R.drawable.ic_menu_edit),
-                                        contentDescription = "Visit Request",
-                                        tint = Color.White,
-                                        modifier = Modifier.padding(end = 8.dp).size(20.dp)
-                                )
-                                Text(
-                                        text = "Visit Request",
-                                        style = MaterialTheme.typography.labelLarge,
-                                        maxLines = 1
-                                )
-                            }
+                            Icon(
+                                    painter = painterResource(android.R.drawable.ic_menu_edit),
+                                    contentDescription = null,
+                                    tint = Color.White,
+                                    modifier = Modifier.padding(end = 8.dp).size(24.dp)
+                            )
+                            Text(
+                                    text = AppStrings.visitRequestButton,
+                                    style = MaterialTheme.typography.titleLarge,
+                                    maxLines = 1
+                            )
                         }
                     }
                 }
