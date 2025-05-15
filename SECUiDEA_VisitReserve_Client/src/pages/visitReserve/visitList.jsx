@@ -133,7 +133,7 @@ const VisitList = () => {
             const response = await api.post(endpoint, {
                 body: JSON.stringify({ visitId: visitId, status: newStatus })
             });
-
+            ``
             const data = await response.json();
 
             if (!data.isSuccess) {
