@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -47,6 +48,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.secuidea.visitreservekiosk.language.AppStrings
 import com.secuidea.visitreservekiosk.language.LocaleHelper
 import com.secuidea.visitreservekiosk.ui.theme.PrimaryColor
+import com.secuidea.visitreservekiosk.ui.theme.SecondaryColor
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 import java.io.File
 
@@ -76,11 +78,7 @@ class MainActivity : ComponentActivity() {
                     defaultVideoUri = Uri.parse(defaultVideoUri),
                     onVisitRequestClick = {
                         // 방문 신청 화면으로 이동
-                        val intent =
-                            Intent(
-                                this,
-                                PrivacyAgreementActivity::class.java
-                            )
+                        val intent = Intent(this, PrivacyAgreementActivity::class.java)
                         startActivity(intent)
                     }
                 )
@@ -127,23 +125,25 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                 // 언어 전환 버튼
                 Button(
                     onClick = { LocaleHelper.toggleLanguage() },
-                    colors =
-                        ButtonDefaults.buttonColors(
-                            containerColor =
-                                MaterialTheme.colorScheme
-                                    .primaryContainer
-                        ),
-                    shape = RoundedCornerShape(3.dp)
-                ) { Text(text = AppStrings.changeLanguageButton) }
+                    modifier = Modifier
+                        .width(180.dp)
+                        .height(80.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = SecondaryColor),
+                    shape = RoundedCornerShape(13.dp),
+                ) {
+                    Text(
+                        text = AppStrings.changeLanguageButton,
+                        style = MaterialTheme.typography.displaySmall
+                    )
+                }
             }
 
             // 브랜드 이름
             Box(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .weight(.5f)
-                        .padding(vertical = 16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(.5f)
+                    .padding(vertical = 16.dp),
                 contentAlignment = Alignment.BottomCenter
             ) {
                 Column(
@@ -156,20 +156,17 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                     Text(text = "ASMK 로고")
                     Text(
                         text = AppStrings.appTitle,
-                        style =
-                            MaterialTheme.typography.displayLarge.copy(
-                                color = PrimaryColor
-                            )
+                        style = MaterialTheme.typography.displayLarge,
+                        color = PrimaryColor
                     )
                 }
             }
 
             // 동영상 영역
             Box(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(16f / 9f), // 16:9 비율 유지
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(16f / 9f), // 16:9 비율 유지
                 contentAlignment = Alignment.Center
             ) {
                 // 동영상 플레이어
@@ -193,19 +190,15 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                 contentAlignment = Alignment.Center
             ) {
                 Column(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                horizontal = 24.dp,
-                                vertical = 24.dp
-                            ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp, vertical = 24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
                         text = AppStrings.welcomeTitle,
-                        style = MaterialTheme.typography.displayLarge,
+                        style = MaterialTheme.typography.displayMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center
                     )
@@ -214,7 +207,7 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
 
                     Text(
                         text = AppStrings.welcomeSubtitle,
-                        style = MaterialTheme.typography.displayMedium,
+                        style = MaterialTheme.typography.displaySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
@@ -224,44 +217,28 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                     // 방문 신청 버튼
                     Button(
                         onClick = onVisitRequestClick,
-                        colors =
-                            ButtonDefaults.buttonColors(
-                                containerColor = PrimaryColor
-                            ),
-                        modifier =
-                            Modifier
-                                .fillMaxWidth(0.7f)
-                                .height(64.dp),
-                        shape = RoundedCornerShape(8.dp),
-                        contentPadding =
-                            ButtonDefaults.ButtonWithIconContentPadding
+                        colors = ButtonDefaults.buttonColors(containerColor = PrimaryColor),
+                        modifier = Modifier
+                            .fillMaxWidth(0.7f)
+                            .height(120.dp),
+                        shape = RoundedCornerShape(22.dp),
+                        contentPadding = ButtonDefaults.ButtonWithIconContentPadding
                     ) {
                         Row(
                             horizontalArrangement = Arrangement.Center,
-                            verticalAlignment =
-                                Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                painter =
-                                    painterResource(
-                                        android.R
-                                            .drawable
-                                            .ic_menu_edit
-                                    ),
+                                painter = painterResource(android.R.drawable.ic_menu_edit),
                                 contentDescription = null,
                                 tint = Color.White,
-                                modifier =
-                                    Modifier
-                                        .padding(end = 8.dp)
-                                        .size(24.dp)
+                                modifier = Modifier
+                                    .padding(end = 8.dp)
+                                    .size(48.dp)
                             )
                             Text(
-                                text =
-                                    AppStrings
-                                        .visitRequestButton,
-                                style =
-                                    MaterialTheme.typography
-                                        .titleLarge,
+                                text = AppStrings.visitRequestButton,
+                                style = MaterialTheme.typography.displayMedium,
                                 maxLines = 1
                             )
                         }
@@ -272,7 +249,11 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    widthDp = 1080,
+    heightDp = 1920
+)
 @Composable
 fun MainScreenPreview() {
     VisitReserveKioskTheme { MainScreen() }

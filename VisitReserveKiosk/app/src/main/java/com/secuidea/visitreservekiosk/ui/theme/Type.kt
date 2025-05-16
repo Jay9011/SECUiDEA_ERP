@@ -18,8 +18,8 @@ val KioskTypography =
                         TextStyle(
                                 fontFamily = SansSerifFontFamily,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 24.sp,
-                                lineHeight = 32.sp,
+                                fontSize = 72.sp,
+                                lineHeight = 85.sp,
                                 letterSpacing = (-0.2).sp
                         ),
                 // 중간 제목 (영어 환영 메시지용)
@@ -27,8 +27,17 @@ val KioskTypography =
                         TextStyle(
                                 fontFamily = SansSerifFontFamily,
                                 fontWeight = FontWeight.Medium,
-                                fontSize = 18.sp,
-                                lineHeight = 24.sp,
+                                fontSize = 48.sp,
+                                lineHeight = 52.sp,
+                                letterSpacing = 0.sp
+                        ),
+                // 작은 제목
+                displaySmall =
+                        TextStyle(
+                                fontFamily = SansSerifFontFamily,
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 36.sp,
+                                lineHeight = 48.sp,
                                 letterSpacing = 0.sp
                         ),
                 // 버튼 텍스트

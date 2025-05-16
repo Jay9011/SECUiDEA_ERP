@@ -134,11 +134,11 @@ fun PrivacyAgreementScreen(
                                 .padding(bottom = 16.dp)
                         )
                         // 개인정보 처리방침 동의 라디오 버튼
-                        Column(modifier = Modifier.fillMaxWidth()) {
+                        Row(modifier = Modifier.fillMaxWidth()) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
-                                    .fillMaxWidth()
+                                    .fillMaxWidth(.5f)
                                     .padding(vertical = 8.dp)
                             ) {
                                 RadioButton(
@@ -705,7 +705,11 @@ fun PrivacyAgreementScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    widthDp = 1080,
+    heightDp = 1920
+)
 @Composable
 fun PrivacyAgreementScreenPreview() {
     VisitReserveKioskTheme { PrivacyAgreementScreen(onBackClick = {}) }
