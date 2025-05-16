@@ -1071,7 +1071,7 @@ fun PrivacyAgreementScreen(
                                 title = { Text(text = AppStrings.selectEmployeeTitle) },
                                 text = {
                                         Column {
-                                                employeeList.forEach { employee ->
+                                                employeeList.orEmpty().forEach { employee ->
                                                         Surface(
                                                                 modifier =
                                                                         Modifier.fillMaxWidth()
@@ -1124,14 +1124,11 @@ fun PrivacyAgreementScreen(
                                                                                                         .typography
                                                                                                         .titleMedium
                                                                                 )
-                                                                                if (employee.department
-                                                                                                .isNotEmpty()
+                                                                                if (employee.departmentName.isNotEmpty()
                                                                                 ) {
                                                                                         Text(
-                                                                                                text =
-                                                                                                        employee.department,
-                                                                                                style =
-                                                                                                        MaterialTheme
+                                                                                                text = employee.departmentName,
+                                                                                                style = MaterialTheme
                                                                                                                 .typography
                                                                                                                 .bodyMedium
                                                                                         )

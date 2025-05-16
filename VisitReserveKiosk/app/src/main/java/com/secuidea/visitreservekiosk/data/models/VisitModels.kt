@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter
 
 /** 방문 신청 폼 상태 */
 data class VisitFormState(
-    val employeePid: String = "",
+    val employeePid: Int = 0,
     val employeeName: String = "",
     val visitorName: String = "",
     val visitorCompany: String = "",
@@ -38,7 +38,7 @@ data class VisitFormErrors(
 data class VisitReason(val visitReasonID: String, val visitReasonName: String)
 
 /** 직원 정보 모델 */
-data class Employee(val pid: String, val name: String, val department: String = "")
+data class Employee(val pid: Int, val sabun: String? = "", val name: String, val departmentName: String = "", val personStatusId: Int, val personStatusName: String? = "")
 
 /** 현재 날짜 문자열 반환 */
 fun getCurrentDate(): String {
@@ -52,7 +52,7 @@ fun getCurrentTime(): String {
 
 /** 방문 신청 요청 모델 */
 data class VisitReservationRequest(
-    val employeePid: String,
+    val employeePid: Int,
     val employeeName: String,
     val visitorName: String,
     val visitorCompany: String,

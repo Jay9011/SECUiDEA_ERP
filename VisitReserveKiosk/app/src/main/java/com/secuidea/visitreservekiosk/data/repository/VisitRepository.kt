@@ -50,11 +50,6 @@ class VisitRepository {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
-                    if (!body.isSuccess) {
-                        throw ApiException.createResponseError(
-                                body.message ?: "응답 처리 중 오류가 발생했습니다."
-                        )
-                    }
                     return body
                 } else {
                     throw ApiException.createResponseError("응답이 없습니다.")

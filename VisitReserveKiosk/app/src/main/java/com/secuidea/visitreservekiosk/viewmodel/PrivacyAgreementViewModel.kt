@@ -65,7 +65,7 @@ class PrivacyAgreementViewModel : ViewModel() {
 
     // 직원 이름 업데이트
     fun updateEmployeeName(name: String) {
-        _formState.value = _formState.value.copy(employeeName = name, employeePid = "")
+        _formState.value = _formState.value.copy(employeeName = name, employeePid = 0)
         _isEmployeeVerified.value = false
         _verificationError.value = ""
 
@@ -88,7 +88,9 @@ class PrivacyAgreementViewModel : ViewModel() {
         launchSafeApiCall(_apiError, _isLoading) {
             val response = repository.verifyEmployee(name)
             val employees = response.data?.employees ?: emptyList()
-            if (employees.isEmpty()) {
+            if (employees == null) {
+                _verificationError.value = "서버 응답 오류: 직원 목록이 없습니다."
+            } else if (employees.isEmpty()) {
                 _verificationError.value = "해당 이름의 직원을 찾을 수 없습니다."
             } else if (employees.size == 1) {
                 // 직원이 한 명인 경우 바로 선택
@@ -123,7 +125,7 @@ class PrivacyAgreementViewModel : ViewModel() {
     // 직원 확인 상태 초기화
     fun resetEmployeeVerification() {
         _isEmployeeVerified.value = false
-        _formState.value = _formState.value.copy(employeePid = "")
+        _formState.value = _formState.value.copy(employeePid = 0)
     }
 
     // 폼 필드 업데이트
@@ -189,7 +191,7 @@ class PrivacyAgreementViewModel : ViewModel() {
         var isValid = true
 
         // 직원 확인 여부 검사
-        if (!_isEmployeeVerified.value || _formState.value.employeePid.isEmpty()) {
+        if (!_isEmployeeVerified.value || _formState.value.employeePid == 0) {
             updateFieldError("employee", "직원 확인이 필요합니다.")
             isValid = false
         }
