@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -47,6 +49,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.secuidea.visitreservekiosk.language.AppStrings
 import com.secuidea.visitreservekiosk.language.LocaleHelper
+import com.secuidea.visitreservekiosk.ui.screen.ApiSettingsActivity
 import com.secuidea.visitreservekiosk.ui.theme.PrimaryColor
 import com.secuidea.visitreservekiosk.ui.theme.SecondaryColor
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
@@ -80,6 +83,11 @@ class MainActivity : ComponentActivity() {
                         // 방문 신청 화면으로 이동
                         val intent = Intent(this, PrivacyAgreementActivity::class.java)
                         startActivity(intent)
+                    },
+                    onAdminSettingsClick = {
+                        // API 설정 화면으로 이동
+                        val intent = Intent(this, ApiSettingsActivity::class.java)
+                        startActivity(intent)
                     }
                 )
             }
@@ -88,13 +96,20 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {}) {
+fun MainScreen(
+    defaultVideoUri: Uri? = null,
+    onVisitRequestClick: () -> Unit = {},
+    onAdminSettingsClick: () -> Unit = {}
+) {
     val context = LocalContext.current
 
     // 상태 정의
     var videoUri by remember { mutableStateOf(defaultVideoUri) }
     val buttonScale by animateFloatAsState(targetValue = 1f, label = "buttonScale")
     val currentLanguage by remember { LocaleHelper.currentLanguage }
+
+    // 숨겨진 버튼 터치 카운터
+    var secretTapCount by remember { mutableIntStateOf(0) }
 
     // 앱이 시작될 때 외부 저장소에서 동영상 확인
     DisposableEffect(Unit) {
@@ -119,15 +134,31 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                horizontalArrangement = Arrangement.End,
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // 숨겨진 관리자 설정 영역 (상단 좌측)
+                Box(
+                    modifier =
+                        Modifier
+                            .size(100.dp)
+                            .clickable {
+                                secretTapCount++
+                                if (secretTapCount >= 5) {
+                                    secretTapCount = 0
+                                    onAdminSettingsClick()
+                                }
+                            }
+                ) {
+                    // 빈 박스
+                }
+
                 // 언어 전환 버튼
                 Button(
                     onClick = { LocaleHelper.toggleLanguage() },
                     modifier = Modifier
-                        .width(180.dp)
-                        .height(80.dp),
+                        .width(136.dp)
+                        .height(60.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = SecondaryColor),
                     shape = RoundedCornerShape(13.dp),
                 ) {
@@ -190,9 +221,10 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                 contentAlignment = Alignment.Center
             ) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp, vertical = 24.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 24.dp, vertical = 24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
@@ -220,7 +252,7 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                         colors = ButtonDefaults.buttonColors(containerColor = PrimaryColor),
                         modifier = Modifier
                             .fillMaxWidth(0.7f)
-                            .height(120.dp),
+                            .height(72.dp),
                         shape = RoundedCornerShape(22.dp),
                         contentPadding = ButtonDefaults.ButtonWithIconContentPadding
                     ) {
@@ -234,7 +266,7 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
                                 tint = Color.White,
                                 modifier = Modifier
                                     .padding(end = 8.dp)
-                                    .size(48.dp)
+                                    .size(32.dp)
                             )
                             Text(
                                 text = AppStrings.visitRequestButton,
@@ -249,11 +281,7 @@ fun MainScreen(defaultVideoUri: Uri? = null, onVisitRequestClick: () -> Unit = {
     }
 }
 
-@Preview(
-    showBackground = true,
-    widthDp = 1080,
-    heightDp = 1920
-)
+@Preview(showBackground = true, widthDp = 720, heightDp = 1280)
 @Composable
 fun MainScreenPreview() {
     VisitReserveKioskTheme { MainScreen() }

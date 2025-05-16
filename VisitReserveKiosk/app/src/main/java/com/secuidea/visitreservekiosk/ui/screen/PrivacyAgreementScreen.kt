@@ -705,11 +705,7 @@ fun PrivacyAgreementScreen(
     }
 }
 
-@Preview(
-    showBackground = true,
-    widthDp = 1080,
-    heightDp = 1920
-)
+@Preview(showBackground = true, widthDp = 720, heightDp = 1280)
 @Composable
 fun PrivacyAgreementScreenPreview() {
     VisitReserveKioskTheme { PrivacyAgreementScreen(onBackClick = {}) }

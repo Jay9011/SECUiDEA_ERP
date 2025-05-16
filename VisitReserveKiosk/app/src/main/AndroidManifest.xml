@@ -33,6 +33,9 @@
             android:name=".PrivacyAgreementActivity"
             android:exported="false"
             android:theme="@style/Theme.VisitReserveKiosk" />
+        <activity
+            android:name=".ui.screen.ApiSettingsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -110,7 +110,7 @@ fun ApiSettingsScreen(onBackClick: () -> Unit) {
                         // 성공 메시지 표시
                         scope.launch { snackbarHostState.showSnackbar("API URL이 변경되었습니다") }
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(.8f)
             ) { Text("저장") }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -124,7 +124,7 @@ fun ApiSettingsScreen(onBackClick: () -> Unit) {
 
                         scope.launch { snackbarHostState.showSnackbar("기본 URL로 재설정되었습니다") }
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(.8f),
                     colors =
                             ButtonDefaults.buttonColors(
                                     containerColor = MaterialTheme.colorScheme.secondary
@@ -134,7 +134,7 @@ fun ApiSettingsScreen(onBackClick: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 720, heightDp = 1280)
 @Composable
 fun ApiSettingsScreenPreview() {
     VisitReserveKioskTheme { ApiSettingsScreen(onBackClick = {}) }
