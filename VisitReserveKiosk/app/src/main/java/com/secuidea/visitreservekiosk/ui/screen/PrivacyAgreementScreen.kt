@@ -45,7 +45,7 @@ import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 import com.secuidea.visitreservekiosk.viewmodel.PrivacyAgreementViewModel
 
 // 비활성 타임아웃 시간(초)
-private const val INACTIVITY_TIMEOUT_SECONDS = 30
+private const val INACTIVITY_TIMEOUT_SECONDS = 60
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
@@ -1188,7 +1188,15 @@ fun PrivacyAgreementScreen(
                                 },
                                 title = { Text(text = AppStrings.selectEmployeeTitle) },
                                 text = {
-                                        Column {
+                                        Column(
+                                                modifier =
+                                                        Modifier.detectUserActivity(
+                                                                        resetInactivityTimer
+                                                                )
+                                                                .verticalScroll(
+                                                                        rememberScrollState()
+                                                                )
+                                        ) {
                                                 employeeList.orEmpty().forEach { employee ->
                                                         Surface(
                                                                 modifier =
@@ -1198,8 +1206,7 @@ fun PrivacyAgreementScreen(
                                                                                                 4.dp
                                                                                 ),
                                                                 onClick = {
-                                                                        resetInactivityTimer() // 활동
-                                                                        // 감지
+                                                                        resetInactivityTimer() // 여기서만 감지
                                                                         viewModel.selectEmployee(
                                                                                 employee
                                                                         )
@@ -1269,7 +1276,8 @@ fun PrivacyAgreementScreen(
                                                         viewModel.hideEmployeeModal()
                                                 }
                                         ) { Text(AppStrings.cancelButtonLabel) }
-                                }
+                                },
+                                modifier = Modifier.detectUserActivity(resetInactivityTimer)
                         )
                 }
 
