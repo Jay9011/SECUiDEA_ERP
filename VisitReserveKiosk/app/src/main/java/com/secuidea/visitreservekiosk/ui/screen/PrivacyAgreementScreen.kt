@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
@@ -37,9 +38,14 @@ import com.secuidea.visitreservekiosk.language.LocaleHelper
 import com.secuidea.visitreservekiosk.ui.components.AccordionCard
 import com.secuidea.visitreservekiosk.ui.components.ErrorDialog
 import com.secuidea.visitreservekiosk.ui.components.HtmlContent
+import com.secuidea.visitreservekiosk.ui.components.InactivityTimer
 import com.secuidea.visitreservekiosk.ui.components.LoadingOverlay
+import com.secuidea.visitreservekiosk.ui.components.detectUserActivity
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 import com.secuidea.visitreservekiosk.viewmodel.PrivacyAgreementViewModel
+
+// 비활성 타임아웃 시간(초)
+private const val INACTIVITY_TIMEOUT_SECONDS = 30
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
@@ -68,6 +74,12 @@ fun PrivacyAgreementScreen(
         // 포커스 관리자 추가
         val focusManager = LocalFocusManager.current
 
+        // 비활성 타이머 관리
+        var lastActivityTimestamp by remember { mutableStateOf(System.currentTimeMillis()) }
+
+        // 사용자 활동 감지 함수
+        val resetInactivityTimer = { lastActivityTimestamp = System.currentTimeMillis() }
+
         // 페이지 로드 시 방문 목적 데이터 가져오기
         LaunchedEffect(Unit) { viewModel.loadVisitReasons() }
 
@@ -79,6 +91,8 @@ fun PrivacyAgreementScreen(
                                 scrollState.animateScrollTo(position)
                         }
                 }
+                // 사용자 활동 감지
+                resetInactivityTimer()
         }
 
         Scaffold(
@@ -92,6 +106,14 @@ fun PrivacyAgreementScreen(
                                                         contentDescription = "뒤로 가기"
                                                 )
                                         }
+                                },
+                                actions = {
+                                        // 타이머 표시
+                                        InactivityTimer(
+                                                timeoutSeconds = INACTIVITY_TIMEOUT_SECONDS,
+                                                onTimeout = onBackClick,
+                                                resetTrigger = lastActivityTimestamp
+                                        )
                                 }
                         )
                 },
@@ -104,6 +126,8 @@ fun PrivacyAgreementScreen(
                                         .padding(paddingValues)
                                         .imePadding() // 키보드 패딩 추가
                                         .navigationBarsPadding() // 네비게이션 바 패딩 추가
+                                        // 사용자 활동 감지
+                                        .detectUserActivity(resetInactivityTimer)
                 ) {
                         Column(
                                 modifier =
@@ -174,6 +198,11 @@ fun PrivacyAgreementScreen(
                                                                                         .padding(
                                                                                                 16.dp
                                                                                         )
+                                                                                        // 스크롤 시 활동
+                                                                                        // 감지
+                                                                                        .detectUserActivity(
+                                                                                                resetInactivityTimer
+                                                                                        )
                                                                 ) {
                                                                         // HTML 콘텐츠 표시 (파일이 없으면
                                                                         // AppStrings의 내용 사용)
@@ -194,6 +223,8 @@ fun PrivacyAgreementScreen(
                                                         expanded = accordionExpanded,
                                                         onExpandChange = { expanded ->
                                                                 accordionExpanded = expanded
+                                                                // 아코디언 상태 변경 시 활동 감지
+                                                                resetInactivityTimer()
                                                         }
                                                 )
                                                 // 개인정보 처리방침 동의 라디오 버튼
@@ -214,6 +245,8 @@ fun PrivacyAgreementScreen(
                                                                                         true,
                                                                         onClick = {
                                                                                 privacyAgreed = true
+                                                                                // 라디오 버튼 클릭 시 활동 감지
+                                                                                resetInactivityTimer()
                                                                         }
                                                                 )
                                                                 Text(
@@ -248,6 +281,8 @@ fun PrivacyAgreementScreen(
                                                                         onClick = {
                                                                                 privacyAgreed =
                                                                                         false
+                                                                                // 라디오 버튼 클릭 시 활동 감지
+                                                                                resetInactivityTimer()
                                                                         }
                                                                 )
                                                                 Text(
@@ -332,7 +367,16 @@ fun PrivacyAgreementScreen(
                                                                                         .employeeNameLabel
                                                                         )
                                                                 },
-                                                                modifier = Modifier.fillMaxWidth(),
+                                                                modifier =
+                                                                        Modifier.fillMaxWidth()
+                                                                                .detectUserActivity(
+                                                                                        resetInactivityTimer
+                                                                                )
+                                                                                .onFocusChanged {
+                                                                                        if (it.isFocused
+                                                                                        )
+                                                                                                resetInactivityTimer()
+                                                                                },
                                                                 enabled = false,
                                                                 singleLine = true,
                                                                 trailingIcon = {
@@ -393,6 +437,11 @@ fun PrivacyAgreementScreen(
                                                         OutlinedTextField(
                                                                 value = formState.employeeName,
                                                                 onValueChange = {
+                                                                        resetInactivityTimer() // 입력
+                                                                        // 시
+                                                                        // 활동
+                                                                        // 감지
+                                                                        // 추가
                                                                         viewModel
                                                                                 .updateEmployeeName(
                                                                                         it
@@ -404,7 +453,16 @@ fun PrivacyAgreementScreen(
                                                                                         .employeeNameLabel
                                                                         )
                                                                 },
-                                                                modifier = Modifier.fillMaxWidth(),
+                                                                modifier =
+                                                                        Modifier.fillMaxWidth()
+                                                                                .detectUserActivity(
+                                                                                        resetInactivityTimer
+                                                                                )
+                                                                                .onFocusChanged {
+                                                                                        if (it.isFocused
+                                                                                        )
+                                                                                                resetInactivityTimer()
+                                                                                },
                                                                 isError =
                                                                         formErrors.employeeName
                                                                                 .isNotEmpty(),
@@ -418,6 +476,7 @@ fun PrivacyAgreementScreen(
                                                                 keyboardActions =
                                                                         KeyboardActions(
                                                                                 onDone = {
+                                                                                        resetInactivityTimer() // 키보드 액션 시 활동 감지 추가
                                                                                         if (formState
                                                                                                         .employeeName
                                                                                                         .isNotBlank()
@@ -604,6 +663,7 @@ fun PrivacyAgreementScreen(
                                                                                 formState
                                                                                         .visitorName,
                                                                         onValueChange = {
+                                                                                resetInactivityTimer() // 입력 시 활동 감지 추가
                                                                                 viewModel
                                                                                         .updateFormField(
                                                                                                 "visitorName",
@@ -611,7 +671,15 @@ fun PrivacyAgreementScreen(
                                                                                         )
                                                                         },
                                                                         modifier =
-                                                                                Modifier.fillMaxWidth(),
+                                                                                Modifier.fillMaxWidth()
+                                                                                        .detectUserActivity(
+                                                                                                resetInactivityTimer
+                                                                                        )
+                                                                                        .onFocusChanged {
+                                                                                                if (it.isFocused
+                                                                                                )
+                                                                                                        resetInactivityTimer()
+                                                                                        },
                                                                         isError =
                                                                                 formErrors
                                                                                         .visitorName
@@ -626,6 +694,7 @@ fun PrivacyAgreementScreen(
                                                                         keyboardActions =
                                                                                 KeyboardActions(
                                                                                         onNext = {
+                                                                                                resetInactivityTimer() // 키보드 액션 시 활동 감지 추가
                                                                                                 focusManager
                                                                                                         .moveFocus(
                                                                                                                 FocusDirection
@@ -683,6 +752,7 @@ fun PrivacyAgreementScreen(
                                                                                 formState
                                                                                         .visitorCompany,
                                                                         onValueChange = {
+                                                                                resetInactivityTimer() // 입력 시 활동 감지 추가
                                                                                 viewModel
                                                                                         .updateFormField(
                                                                                                 "visitorCompany",
@@ -690,7 +760,15 @@ fun PrivacyAgreementScreen(
                                                                                         )
                                                                         },
                                                                         modifier =
-                                                                                Modifier.fillMaxWidth(),
+                                                                                Modifier.fillMaxWidth()
+                                                                                        .detectUserActivity(
+                                                                                                resetInactivityTimer
+                                                                                        )
+                                                                                        .onFocusChanged {
+                                                                                                if (it.isFocused
+                                                                                                )
+                                                                                                        resetInactivityTimer()
+                                                                                        },
                                                                         singleLine = true,
                                                                         keyboardOptions =
                                                                                 KeyboardOptions(
@@ -701,6 +779,7 @@ fun PrivacyAgreementScreen(
                                                                         keyboardActions =
                                                                                 KeyboardActions(
                                                                                         onNext = {
+                                                                                                resetInactivityTimer() // 키보드 액션 시 활동 감지 추가
                                                                                                 focusManager
                                                                                                         .moveFocus(
                                                                                                                 FocusDirection
@@ -764,6 +843,7 @@ fun PrivacyAgreementScreen(
                                                                                         .visitorContact,
                                                                         onValueChange = { newValue
                                                                                 ->
+                                                                                resetInactivityTimer() // 입력 시 활동 감지 추가
                                                                                 // 숫자만 허용
                                                                                 if (newValue.all {
                                                                                                 it.isDigit()
@@ -778,7 +858,15 @@ fun PrivacyAgreementScreen(
                                                                                 }
                                                                         },
                                                                         modifier =
-                                                                                Modifier.fillMaxWidth(),
+                                                                                Modifier.fillMaxWidth()
+                                                                                        .detectUserActivity(
+                                                                                                resetInactivityTimer
+                                                                                        )
+                                                                                        .onFocusChanged {
+                                                                                                if (it.isFocused
+                                                                                                )
+                                                                                                        resetInactivityTimer()
+                                                                                        },
                                                                         isError =
                                                                                 formErrors
                                                                                         .visitorContact
@@ -795,6 +883,7 @@ fun PrivacyAgreementScreen(
                                                                         keyboardActions =
                                                                                 KeyboardActions(
                                                                                         onNext = {
+                                                                                                resetInactivityTimer() // 키보드 액션 시 활동 감지 추가
                                                                                                 focusManager
                                                                                                         .moveFocus(
                                                                                                                 FocusDirection
@@ -856,6 +945,7 @@ fun PrivacyAgreementScreen(
                                                                                 formState
                                                                                         .visitorCarNumber,
                                                                         onValueChange = {
+                                                                                resetInactivityTimer() // 입력 시 활동 감지 추가
                                                                                 viewModel
                                                                                         .updateFormField(
                                                                                                 "visitorCarNumber",
@@ -863,7 +953,15 @@ fun PrivacyAgreementScreen(
                                                                                         )
                                                                         },
                                                                         modifier =
-                                                                                Modifier.fillMaxWidth(),
+                                                                                Modifier.fillMaxWidth()
+                                                                                        .detectUserActivity(
+                                                                                                resetInactivityTimer
+                                                                                        )
+                                                                                        .onFocusChanged {
+                                                                                                if (it.isFocused
+                                                                                                )
+                                                                                                        resetInactivityTimer()
+                                                                                        },
                                                                         singleLine = true,
                                                                         keyboardOptions =
                                                                                 KeyboardOptions(
@@ -874,6 +972,7 @@ fun PrivacyAgreementScreen(
                                                                         keyboardActions =
                                                                                 KeyboardActions(
                                                                                         onNext = {
+                                                                                                resetInactivityTimer() // 키보드 액션 시 활동 감지 추가
                                                                                                 focusManager
                                                                                                         .moveFocus(
                                                                                                                 FocusDirection
@@ -996,6 +1095,7 @@ fun PrivacyAgreementScreen(
                                                                                 formState
                                                                                         .visitPurpose,
                                                                         onValueChange = {
+                                                                                resetInactivityTimer() // 입력 시 활동 감지 추가
                                                                                 viewModel
                                                                                         .updateFormField(
                                                                                                 "visitPurpose",
@@ -1009,7 +1109,15 @@ fun PrivacyAgreementScreen(
                                                                                 )
                                                                         },
                                                                         modifier =
-                                                                                Modifier.weight(1f),
+                                                                                Modifier.weight(1f)
+                                                                                        .detectUserActivity(
+                                                                                                resetInactivityTimer
+                                                                                        )
+                                                                                        .onFocusChanged {
+                                                                                                if (it.isFocused
+                                                                                                )
+                                                                                                        resetInactivityTimer()
+                                                                                        },
                                                                         singleLine = true,
                                                                         keyboardOptions =
                                                                                 KeyboardOptions(
@@ -1020,6 +1128,7 @@ fun PrivacyAgreementScreen(
                                                                         keyboardActions =
                                                                                 KeyboardActions(
                                                                                         onDone = {
+                                                                                                resetInactivityTimer() // 키보드 액션 시 활동 감지 추가
                                                                                                 focusManager
                                                                                                         .clearFocus()
                                                                                         }
@@ -1037,7 +1146,10 @@ fun PrivacyAgreementScreen(
                                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                                 ) {
                                         Button(
-                                                onClick = onBackClick,
+                                                onClick = {
+                                                        resetInactivityTimer() // 활동 감지
+                                                        onBackClick()
+                                                },
                                                 modifier = Modifier.weight(1f),
                                                 colors =
                                                         ButtonDefaults.buttonColors(
@@ -1051,7 +1163,10 @@ fun PrivacyAgreementScreen(
                                         ) { Text(text = AppStrings.cancelButtonLabel) }
 
                                         Button(
-                                                onClick = { viewModel.submitForm() },
+                                                onClick = {
+                                                        resetInactivityTimer() // 활동 감지
+                                                        viewModel.submitForm()
+                                                },
                                                 modifier = Modifier.weight(1f),
                                                 enabled = isEmployeeVerified
                                         ) { Text(text = AppStrings.submitButtonLabel) }
@@ -1067,7 +1182,10 @@ fun PrivacyAgreementScreen(
                 // 직원 선택 모달
                 if (showEmployeeModal) {
                         AlertDialog(
-                                onDismissRequest = { viewModel.hideEmployeeModal() },
+                                onDismissRequest = {
+                                        resetInactivityTimer() // 활동 감지
+                                        viewModel.hideEmployeeModal()
+                                },
                                 title = { Text(text = AppStrings.selectEmployeeTitle) },
                                 text = {
                                         Column {
@@ -1080,6 +1198,8 @@ fun PrivacyAgreementScreen(
                                                                                                 4.dp
                                                                                 ),
                                                                 onClick = {
+                                                                        resetInactivityTimer() // 활동
+                                                                        // 감지
                                                                         viewModel.selectEmployee(
                                                                                 employee
                                                                         )
@@ -1124,11 +1244,14 @@ fun PrivacyAgreementScreen(
                                                                                                         .typography
                                                                                                         .titleMedium
                                                                                 )
-                                                                                if (employee.departmentName.isNotEmpty()
+                                                                                if (employee.departmentName
+                                                                                                .isNotEmpty()
                                                                                 ) {
                                                                                         Text(
-                                                                                                text = employee.departmentName,
-                                                                                                style = MaterialTheme
+                                                                                                text =
+                                                                                                        employee.departmentName,
+                                                                                                style =
+                                                                                                        MaterialTheme
                                                                                                                 .typography
                                                                                                                 .bodyMedium
                                                                                         )
@@ -1140,9 +1263,12 @@ fun PrivacyAgreementScreen(
                                         }
                                 },
                                 confirmButton = {
-                                        TextButton(onClick = { viewModel.hideEmployeeModal() }) {
-                                                Text(AppStrings.cancelButtonLabel)
-                                        }
+                                        TextButton(
+                                                onClick = {
+                                                        resetInactivityTimer() // 활동 감지
+                                                        viewModel.hideEmployeeModal()
+                                                }
+                                        ) { Text(AppStrings.cancelButtonLabel) }
                                 }
                         )
                 }
@@ -1152,8 +1278,12 @@ fun PrivacyAgreementScreen(
                         ErrorDialog(
                                 title = error.title,
                                 message = error.message,
-                                onDismiss = { viewModel.clearApiError() },
+                                onDismiss = {
+                                        resetInactivityTimer() // 활동 감지
+                                        viewModel.clearApiError()
+                                },
                                 onNavigateToHome = {
+                                        resetInactivityTimer() // 활동 감지
                                         viewModel.clearApiError()
                                         onBackClick()
                                 }
