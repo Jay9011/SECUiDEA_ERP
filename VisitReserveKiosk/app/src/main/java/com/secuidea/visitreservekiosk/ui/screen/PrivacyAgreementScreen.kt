@@ -1,5 +1,6 @@
 package com.secuidea.visitreservekiosk.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.imePadding
@@ -14,8 +15,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -104,13 +107,6 @@ fun PrivacyAgreementScreen(
                                         modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
                                 )
 
-                                Text(
-                                        text = AppStrings.privacyAgreementSubtitle,
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        textAlign = TextAlign.Center,
-                                        modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp)
-                                )
-
                                 // 개인정보 처리방침 섹션
                                 Card(
                                         modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
@@ -153,18 +149,40 @@ fun PrivacyAgreementScreen(
                                                                 val htmlFilePath =
                                                                         "privacy_policy_$language.html"
 
-                                                                // HTML 콘텐츠 표시 (파일이 없으면 AppStrings의
-                                                                // 내용 사용)
-                                                                HtmlContent(
-                                                                        filePath = htmlFilePath,
-                                                                        fallbackContent =
-                                                                                AppStrings
-                                                                                        .privacyPolicyContent,
+                                                                // 스크롤 가능한 Box로 감싸고 높이 제한
+                                                                Box(
                                                                         modifier =
-                                                                                Modifier.padding(
-                                                                                        16.dp
-                                                                                )
-                                                                )
+                                                                                Modifier.fillMaxWidth()
+                                                                                        .height(
+                                                                                                LocalConfiguration
+                                                                                                        .current
+                                                                                                        .screenHeightDp
+                                                                                                        .dp /
+                                                                                                        3
+                                                                                        ) // 화면 높이의
+                                                                                        // 1/3
+                                                                                        .background(
+                                                                                                Color.White
+                                                                                        ) // 배경색 하얀색
+                                                                                        .verticalScroll(
+                                                                                                rememberScrollState()
+                                                                                        )
+                                                                                        .padding(
+                                                                                                16.dp
+                                                                                        )
+                                                                ) {
+                                                                        // HTML 콘텐츠 표시 (파일이 없으면
+                                                                        // AppStrings의 내용 사용)
+                                                                        HtmlContent(
+                                                                                filePath =
+                                                                                        htmlFilePath,
+                                                                                fallbackContent =
+                                                                                        AppStrings
+                                                                                                .privacyPolicyContent,
+                                                                                modifier =
+                                                                                        Modifier.fillMaxWidth()
+                                                                        )
+                                                                }
                                                         },
                                                         modifier =
                                                                 Modifier.fillMaxWidth()

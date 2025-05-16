@@ -50,6 +50,7 @@ fun HtmlContent(
                     settings.loadWithOverviewMode = true
                     settings.useWideViewPort = true
                     settings.setSupportZoom(true)
+                    setBackgroundColor(android.graphics.Color.WHITE)
                 }
             },
             update = { webView ->
