@@ -106,12 +106,6 @@ fun PrivacyAgreementScreen(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.padding(bottom = 8.dp)
                         ) {
-                            Icon(
-                                Icons.Default.Create,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = AppStrings.privacyPolicyTitle,
                                 style = MaterialTheme.typography.titleLarge,
@@ -139,7 +133,6 @@ fun PrivacyAgreementScreen(
                                 .fillMaxWidth()
                                 .padding(bottom = 16.dp)
                         )
-
                         // 개인정보 처리방침 동의 라디오 버튼
                         Column(modifier = Modifier.fillMaxWidth()) {
                             Row(

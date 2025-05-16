@@ -74,17 +74,17 @@ object AppStrings {
         get() =
             if (LocaleHelper.isKorean())
                 """
-            1. 수집항목: 이름, 연락처, 회사명, 이메일, 차량번호
-            2. 수집목적: 방문자 확인 및 출입 관리
-            3. 보유기간: 방문일로부터 1년간 보관 후 파기
-            4. 동의를 거부할 권리가 있으나, 동의 거부 시 방문 신청이 제한됩니다.
+1. 수집항목: 이름, 연락처, 회사명, 이메일, 차량번호
+2. 수집목적: 방문자 확인 및 출입 관리
+3. 보유기간: 방문일로부터 1년간 보관 후 파기
+4. 동의를 거부할 권리가 있으나, 동의 거부 시 방문 신청이 제한됩니다.
                 """
             else
                 """
-            1. Collection items: Name, Contact, Company name, Email, Vehicle number
-            2. Purpose of collection: Visitor verification and access management
-            3. Retention period: Stored for 1 year from the date of visit and then destroyed
-            4. You have the right to refuse consent, but if you refuse consent, your visit request will be restricted.
+1. Collection items: Name, Contact, Company name, Email, Vehicle number
+2. Purpose of collection: Visitor verification and access management
+3. Retention period: Stored for 1 year from the date of visit and then destroyed
+4. You have the right to refuse consent, but if you refuse consent, your visit request will be restricted.
                 """
 
     val privacyAgreeOption: String
