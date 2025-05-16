@@ -22,10 +22,10 @@ data class ApiResponse<T>(val success: Boolean, val data: T?, val message: Strin
 /** 방문 신청 데이터 클래스 */
 // TODO: 현재 임시 데이터로, 수정 필요
 data class VisitRequest(
-    val visitorName: String,
-    val purpose: String,
-    val visitDate: String,
-    val contactNumber: String
+        val visitorName: String,
+        val purpose: String,
+        val visitDate: String,
+        val contactNumber: String
 )
 
 /** Retrofit API 인터페이스 */
@@ -35,15 +35,13 @@ interface ApiInterface {
     suspend fun getVisitReasons(@Query("lan") lan: String): Response<VisitReasonsResponse>
 
     // 직원 확인 API
-    @POST("api/visit/verify-employee")
-    suspend fun verifyEmployee(
-        @Body request: VerifyEmployeeRequest
-    ): Response<VerifyEmployeeResponse>
+    @GET("api/visit/EmployeeByName")
+    suspend fun verifyEmployee(@Query("name") name: String): Response<VerifyEmployeeResponse>
 
     // 방문 신청 API
     @POST("api/visit/reserve")
     suspend fun submitVisitReservation(
-        @Body request: VisitReservationRequest
+            @Body request: VisitReservationRequest
     ): Response<VisitReservationResponse>
 }
 
@@ -70,21 +68,22 @@ object ApiService {
 
     /** OkHttpClient 생성 */
     private fun createOkHttpClient(): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        val interceptor =
+                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
         // 안전하지 않은 TrustManager 생성
         val trustManager = createUnsafeTrustManager()
         val sslSocketFactory = createUnsafeSSLSocketFactory(trustManager)
 
         return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            // SSL 검증 무시 설정
-            .sslSocketFactory(sslSocketFactory, trustManager)
-            .hostnameVerifier { _, _ -> true }
-            .build()
+                .addInterceptor(interceptor)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                // SSL 검증 무시 설정
+                .sslSocketFactory(sslSocketFactory, trustManager)
+                .hostnameVerifier { _, _ -> true }
+                .build()
     }
 
     /** Retrofit 인스턴스 생성 */
@@ -92,10 +91,10 @@ object ApiService {
         val gson = GsonBuilder().setLenient().create()
 
         return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .client(createOkHttpClient())
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
+                .baseUrl(baseUrl)
+                .client(createOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
     }
 
     /** API 인터페이스 가져오기 */

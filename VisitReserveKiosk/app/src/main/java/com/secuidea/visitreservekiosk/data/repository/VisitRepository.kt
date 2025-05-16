@@ -21,7 +21,7 @@ class VisitRepository {
                 if (body != null) {
                     if (!body.isSuccess) {
                         throw ApiException.createResponseError(
-                            body.message ?: "응답 처리 중 오류가 발생했습니다."
+                                body.message ?: "응답 처리 중 오류가 발생했습니다."
                         )
                     }
                     return body
@@ -45,14 +45,14 @@ class VisitRepository {
      */
     suspend fun verifyEmployee(name: String): VerifyEmployeeResponse {
         try {
-            val request = VerifyEmployeeRequest(name = name)
-            val response = apiInterface.verifyEmployee(request)
+            // GET 방식으로 직원 이름을 쿼리 파라미터로 전달
+            val response = apiInterface.verifyEmployee(name)
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
                     if (!body.isSuccess) {
                         throw ApiException.createResponseError(
-                            body.message ?: "응답 처리 중 오류가 발생했습니다."
+                                body.message ?: "응답 처리 중 오류가 발생했습니다."
                         )
                     }
                     return body
@@ -82,7 +82,7 @@ class VisitRepository {
                 if (body != null) {
                     if (!body.isSuccess) {
                         throw ApiException.createResponseError(
-                            body.message ?: "응답 처리 중 오류가 발생했습니다."
+                                body.message ?: "응답 처리 중 오류가 발생했습니다."
                         )
                     }
                     return body
