@@ -264,28 +264,20 @@ fun PrivacyAgreementScreen(
                                                                                 )
                                                                 )
                                                         }
-
-                                                        if (privacyAgreed == false) {
-                                                                Text(
-                                                                        text =
-                                                                                AppStrings
-                                                                                        .privacyDisagreeNotice,
-                                                                        style =
-                                                                                MaterialTheme
-                                                                                        .typography
-                                                                                        .bodyMedium,
-                                                                        color =
-                                                                                MaterialTheme
-                                                                                        .colorScheme
-                                                                                        .error,
-                                                                        modifier =
-                                                                                Modifier.padding(
-                                                                                        top = 8.dp
-                                                                                )
-                                                                )
-                                                        }
                                                 }
                                         }
+                                }
+
+                                // 안내문구는 Card 바깥에!
+                                if (privacyAgreed == false) {
+                                        Text(
+                                                text = AppStrings.privacyDisagreeNotice,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                color = MaterialTheme.colorScheme.error,
+                                                modifier =
+                                                        Modifier.fillMaxWidth()
+                                                                .padding(bottom = 16.dp)
+                                        )
                                 }
 
                                 // 방문 대상 직원 정보
