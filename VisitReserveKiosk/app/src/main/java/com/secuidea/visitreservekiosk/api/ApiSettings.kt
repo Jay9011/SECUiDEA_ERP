@@ -8,7 +8,7 @@ import androidx.preference.PreferenceManager
 /** API 설정을 관리하는 싱글톤 클래스 */
 object ApiSettings {
     private const val KEY_BASE_URL = "api_base_url"
-    private const val DEFAULT_BASE_URL = "https://127.0.0.1:2453/" // 기본 URL
+    private const val DEFAULT_BASE_URL = "https://10.0.2.2:7151/" // 기본 URL
 
     // 현재 BaseURL을 상태로 관리
     val currentBaseUrl = mutableStateOf(DEFAULT_BASE_URL)
