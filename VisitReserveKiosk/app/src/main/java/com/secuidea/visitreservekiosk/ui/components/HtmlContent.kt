@@ -1,20 +1,19 @@
 package com.secuidea.visitreservekiosk.ui.components
 
 import android.content.Context
-import android.text.method.LinkMovementMethod
-import android.widget.TextView
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.text.HtmlCompat
 import java.io.File
 import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
- * HTML 콘텐츠를 표시하는 컴포넌트
+ * HTML 콘텐츠를 표시하는 컴포넌트 - WebView 사용
  *
  * @param htmlContent HTML 문자열 (직접 전달 시)
  * @param filePath HTML 파일 경로 (파일에서 읽을 경우)
@@ -42,15 +41,64 @@ fun HtmlContent(
         }
     }
 
-    // HTML 렌더링
+    // WebView로 HTML 렌더링
     AndroidView(
             factory = { ctx ->
-                TextView(ctx).apply {
-                    movementMethod = LinkMovementMethod.getInstance() // 링크 클릭 가능하도록 설정
+                WebView(ctx).apply {
+                    webViewClient = WebViewClient()
+                    settings.javaScriptEnabled = false
+                    settings.loadWithOverviewMode = true
+                    settings.useWideViewPort = true
+                    settings.setSupportZoom(true)
                 }
             },
-            update = { textView ->
-                textView.text = HtmlCompat.fromHtml(content, HtmlCompat.FROM_HTML_MODE_COMPACT)
+            update = { webView ->
+                // HTML 헤더와 베이스 스타일 추가
+                val htmlWithBase =
+                        if (!content.trim().startsWith("<!DOCTYPE html>") &&
+                                        !content.trim().startsWith("<html")
+                        ) {
+                            """
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <style>
+                            body { 
+                                font-family: Arial, sans-serif; 
+                                line-height: 1.6;
+                                padding: 8px;
+                                color: #333;
+                            }
+                            h1 { font-size: 20px; margin-top: 16px; }
+                            h2 { font-size: 18px; margin-top: 14px; }
+                            p { margin-bottom: 12px; }
+                            ul { padding-left: 20px; }
+                            li { margin-bottom: 8px; }
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin: 20px 0;
+                            }
+                            th, td {
+                                border: 1px solid #ddd;
+                                padding: 10px;
+                                text-align: left;
+                            }
+                            .indent { margin-left: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                    $content
+                    </body>
+                    </html>
+                    """
+                        } else {
+                            content
+                        }
+
+                webView.loadDataWithBaseURL(null, htmlWithBase, "text/html", "UTF-8", null)
             },
             modifier = modifier
     )
@@ -66,6 +114,24 @@ fun HtmlContent(
 suspend fun loadHtmlFromFile(context: Context, filePath: String): String? {
     return withContext(Dispatchers.IO) {
         try {
+            // 리소스에서 파일 찾기 (raw 폴더)
+            try {
+                val resourceId =
+                        context.resources.getIdentifier(
+                                filePath.substringBeforeLast("."),
+                                "raw",
+                                context.packageName
+                        )
+
+                if (resourceId != 0) {
+                    context.resources.openRawResource(resourceId).use { inputStream ->
+                        return@withContext inputStream.bufferedReader().use { it.readText() }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
             // 내부 저장소에서 파일 찾기
             val internalFile = File(context.filesDir, filePath)
             if (internalFile.exists()) {
