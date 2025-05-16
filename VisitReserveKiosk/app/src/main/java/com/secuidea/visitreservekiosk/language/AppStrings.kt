@@ -19,8 +19,8 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-                if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 버튼을 눌러주세요"
-                else "Please press the button below to request a visit"
+            if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 버튼을 눌러주세요"
+            else "Please press the button below to request a visit"
 
     val visitRequestButton: String
         @Composable
@@ -45,8 +45,8 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-                if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 정보를 입력해주세요"
-                else "Please fill in the information below to request a visit"
+            if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 정보를 입력해주세요"
+            else "Please fill in the information below to request a visit"
 
     val privacyPolicyTitle: String
         @Composable
@@ -57,35 +57,35 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-                if (LocaleHelper.isKorean()) "아래 내용을 읽고 개인정보 수집 및 이용에 동의해주세요."
-                else
-                        "Please read the following and agree to the collection and use of personal information."
+            if (LocaleHelper.isKorean()) "아래 내용을 읽고 개인정보 수집 및 이용에 동의해주세요."
+            else
+                "Please read the following and agree to the collection and use of personal information."
 
     val privacyPolicyAccordionTitle: String
         @Composable
         @ReadOnlyComposable
         get() =
-                if (LocaleHelper.isKorean()) "개인정보 수집 및 이용 동의"
-                else "Consent to collection and use of personal information"
+            if (LocaleHelper.isKorean()) "개인정보 수집 및 이용 동의"
+            else "Consent to collection and use of personal information"
 
     val privacyPolicyContent: String
         @Composable
         @ReadOnlyComposable
         get() =
-                if (LocaleHelper.isKorean())
-                        """
+            if (LocaleHelper.isKorean())
+                """
             1. 수집항목: 이름, 연락처, 회사명, 이메일, 차량번호
             2. 수집목적: 방문자 확인 및 출입 관리
             3. 보유기간: 방문일로부터 1년간 보관 후 파기
             4. 동의를 거부할 권리가 있으나, 동의 거부 시 방문 신청이 제한됩니다.
-            """
-                else
-                        """
+                """
+            else
+                """
             1. Collection items: Name, Contact, Company name, Email, Vehicle number
             2. Purpose of collection: Visitor verification and access management
             3. Retention period: Stored for 1 year from the date of visit and then destroyed
             4. You have the right to refuse consent, but if you refuse consent, your visit request will be restricted.
-            """
+                """
 
     val privacyAgreeOption: String
         @Composable @ReadOnlyComposable get() = if (LocaleHelper.isKorean()) "동의합니다" else "I agree"
@@ -99,9 +99,9 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-                if (LocaleHelper.isKorean()) "개인정보 수집에 동의하지 않으면 방문 신청을 진행할 수 없습니다."
-                else
-                        "If you do not agree to the collection of personal information, you cannot proceed with the visit request."
+            if (LocaleHelper.isKorean()) "개인정보 수집에 동의하지 않으면 방문 신청을 진행할 수 없습니다."
+            else
+                "If you do not agree to the collection of personal information, you cannot proceed with the visit request."
 
     val employeeInfoTitle: String
         @Composable
@@ -181,4 +181,32 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() = if (LocaleHelper.isKorean()) "직원 선택" else "Select Employee"
+
+    // 에러 다이얼로그 문자열
+    val errorDialogTitle: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "오류 발생" else "Error Occurred"
+
+    val apiErrorDefaultMessage: String
+        @Composable
+        @ReadOnlyComposable
+        get() =
+            if (LocaleHelper.isKorean()) "요청을 처리하는 중 오류가 발생했습니다."
+            else "An error occurred while processing your request."
+
+    val contactAdminMessage: String
+        @Composable
+        @ReadOnlyComposable
+        get() =
+            if (LocaleHelper.isKorean()) "관리자에게 문의해 주세요."
+            else "Please contact the administrator."
+
+    val dismissButtonLabel: String
+        @Composable @ReadOnlyComposable get() = if (LocaleHelper.isKorean()) "닫기" else "Dismiss"
+
+    val goToHomeButtonLabel: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "첫 화면으로 돌아가기" else "Return to Home"
 }

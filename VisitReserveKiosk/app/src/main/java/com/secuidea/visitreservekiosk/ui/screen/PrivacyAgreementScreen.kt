@@ -21,9 +21,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.secuidea.visitreservekiosk.MainScreen
 import com.secuidea.visitreservekiosk.language.AppStrings
 import com.secuidea.visitreservekiosk.ui.components.AccordionCard
+import com.secuidea.visitreservekiosk.ui.components.ErrorDialog
 import com.secuidea.visitreservekiosk.ui.components.LoadingOverlay
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 import com.secuidea.visitreservekiosk.viewmodel.PrivacyAgreementViewModel
@@ -44,6 +44,7 @@ fun PrivacyAgreementScreen(
     val verificationError by viewModel.verificationError.collectAsState()
     val showEmployeeModal by viewModel.showEmployeeModal.collectAsState()
     val employeeList by viewModel.employeeList.collectAsState()
+    val apiError by viewModel.apiError.collectAsState()
 
     // 페이지 로드 시 방문 목적 데이터 가져오기
     LaunchedEffect(Unit) { viewModel.loadVisitReasons() }
@@ -54,20 +55,15 @@ fun PrivacyAgreementScreen(
                 title = { Text(text = AppStrings.privacyAgreementTitle) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(
-                            Icons.Default.ArrowBack,
-                            contentDescription = "뒤로 가기"
-                        )
+                        Icon(Icons.Default.ArrowBack, contentDescription = "뒤로 가기")
                     }
                 }
             )
         }
     ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -101,14 +97,11 @@ fun PrivacyAgreementScreen(
                         .fillMaxWidth()
                         .padding(bottom = 24.dp),
                     shape = RoundedCornerShape(12.dp),
-                    elevation =
-                        CardDefaults.cardElevation(defaultElevation = 4.dp)
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp)
-                    ) {
+                    Column(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.padding(bottom = 8.dp)
@@ -205,11 +198,9 @@ fun PrivacyAgreementScreen(
                         shape = RoundedCornerShape(12.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                        ) {
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier.padding(bottom = 16.dp)
@@ -219,9 +210,7 @@ fun PrivacyAgreementScreen(
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.primary
                                 )
-                                Spacer(
-                                    modifier = Modifier.width(8.dp)
-                                )
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     text = AppStrings.employeeInfoTitle,
                                     style = MaterialTheme.typography.titleLarge,
@@ -235,9 +224,7 @@ fun PrivacyAgreementScreen(
                                 OutlinedTextField(
                                     value = formState.employeeName,
                                     onValueChange = {},
-                                    label = {
-                                        Text(AppStrings.employeeNameLabel)
-                                    },
+                                    label = { Text(AppStrings.employeeNameLabel) },
                                     modifier = Modifier.fillMaxWidth(),
                                     enabled = false,
                                     trailingIcon = {
@@ -291,31 +278,22 @@ fun PrivacyAgreementScreen(
                                                 Icons.Default.Search,
                                                 contentDescription = null
                                             )
-                                            Spacer(
-                                                modifier = Modifier.width(4.dp)
-                                            )
-                                            Text(
-                                                AppStrings.verifyButtonLabel
-                                            )
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text(AppStrings.verifyButtonLabel)
                                         }
                                     }
                                 )
 
-                                if (formErrors.employeeName.isNotEmpty()
-                                ) {
+                                if (formErrors.employeeName.isNotEmpty()) {
                                     Text(
                                         text = formErrors.employeeName,
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.error,
-                                        modifier = Modifier.padding(
-                                            start = 8.dp,
-                                            top = 4.dp
-                                        )
+                                        modifier = Modifier.padding(start = 8.dp, top = 4.dp)
                                     )
                                 }
 
-                                if (verificationError.isNotEmpty()
-                                ) {
+                                if (verificationError.isNotEmpty()) {
                                     Row(
                                         verticalAlignment = Alignment.CenterVertically,
                                         modifier = Modifier
@@ -348,11 +326,9 @@ fun PrivacyAgreementScreen(
                         shape = RoundedCornerShape(12.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                        ) {
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier.padding(bottom = 16.dp)
@@ -362,9 +338,7 @@ fun PrivacyAgreementScreen(
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.primary
                                 )
-                                Spacer(
-                                    modifier = Modifier.width(8.dp)
-                                )
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     text = AppStrings.visitorInfoTitle,
                                     style = MaterialTheme.typography.titleLarge,
@@ -375,7 +349,9 @@ fun PrivacyAgreementScreen(
                             // 방문자 이름
                             OutlinedTextField(
                                 value = formState.visitorName,
-                                onValueChange = { viewModel.updateFormField("visitorName", it) },
+                                onValueChange = {
+                                    viewModel.updateFormField("visitorName", it)
+                                },
                                 label = { Text(AppStrings.visitorNameLabel) },
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -387,17 +363,16 @@ fun PrivacyAgreementScreen(
                                     text = formErrors.visitorName,
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.padding(
-                                        start = 8.dp,
-                                        bottom = 8.dp
-                                    )
+                                    modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
                                 )
                             }
 
                             // 방문자 회사
                             OutlinedTextField(
                                 value = formState.visitorCompany,
-                                onValueChange = { viewModel.updateFormField("visitorCompany", it) },
+                                onValueChange = {
+                                    viewModel.updateFormField("visitorCompany", it)
+                                },
                                 label = { Text(AppStrings.visitorCompanyLabel) },
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -407,30 +382,30 @@ fun PrivacyAgreementScreen(
                             // 방문자 연락처
                             OutlinedTextField(
                                 value = formState.visitorContact,
-                                onValueChange = { viewModel.updateFormField("visitorContact", it) },
+                                onValueChange = {
+                                    viewModel.updateFormField("visitorContact", it)
+                                },
                                 label = { Text(AppStrings.visitorContactLabel) },
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(bottom = 16.dp),
                                 isError = formErrors.visitorContact.isNotEmpty()
                             )
-                            if (formErrors.visitorContact.isNotEmpty()
-                            ) {
+                            if (formErrors.visitorContact.isNotEmpty()) {
                                 Text(
                                     text = formErrors.visitorContact,
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.padding(
-                                        start = 8.dp,
-                                        bottom = 8.dp
-                                    )
+                                    modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
                                 )
                             }
 
                             // 방문자 이메일
                             OutlinedTextField(
                                 value = formState.visitorEmail,
-                                onValueChange = { viewModel.updateFormField("visitorEmail", it) },
+                                onValueChange = {
+                                    viewModel.updateFormField("visitorEmail", it)
+                                },
                                 label = { Text(AppStrings.visitorEmailLabel) },
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -442,10 +417,7 @@ fun PrivacyAgreementScreen(
                                     text = formErrors.visitorEmail,
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.padding(
-                                        start = 8.dp,
-                                        bottom = 8.dp
-                                    )
+                                    modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
                                 )
                             }
 
@@ -453,26 +425,21 @@ fun PrivacyAgreementScreen(
                             Text(
                                 text = AppStrings.visitPurposeLabel,
                                 style = MaterialTheme.typography.bodyLarge,
-                                modifier = Modifier.padding(
-                                    bottom = 8.dp
-                                )
+                                modifier = Modifier.padding(bottom = 8.dp)
                             )
 
                             // 방문 목적 선택
                             if (visitReasons.isNotEmpty()) {
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(
-                                            bottom = 16.dp
-                                        )
-                                ) {
+                                Row(modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 16.dp)) {
                                     // 방문 목적 드롭다운
                                     var expanded by remember { mutableStateOf(false) }
-                                    val selectedReason = visitReasons.find {
-                                        it.visitReasonID == formState.visitReasonId
-                                    }
-                                        ?: visitReasons.firstOrNull()
+                                    val selectedReason =
+                                        visitReasons.find {
+                                            it.visitReasonID == formState.visitReasonId
+                                        }
+                                            ?: visitReasons.firstOrNull()
 
                                     ExposedDropdownMenuBox(
                                         expanded = expanded,
@@ -483,7 +450,7 @@ fun PrivacyAgreementScreen(
                                     ) {
                                         OutlinedTextField(
                                             value = selectedReason?.visitReasonName ?: "",
-                                            onValueChange = { },
+                                            onValueChange = {},
                                             readOnly = true,
                                             trailingIcon = {
                                                 ExposedDropdownMenuDefaults.TrailingIcon(
@@ -501,9 +468,7 @@ fun PrivacyAgreementScreen(
                                         ) {
                                             visitReasons.forEach { reason ->
                                                 DropdownMenuItem(
-                                                    text = {
-                                                        Text(reason.visitReasonName)
-                                                    },
+                                                    text = { Text(reason.visitReasonName) },
                                                     onClick = {
                                                         viewModel.updateFormField(
                                                             "visitReasonId",
@@ -520,36 +485,32 @@ fun PrivacyAgreementScreen(
                                     OutlinedTextField(
                                         value = formState.visitPurpose,
                                         onValueChange = {
-                                            viewModel.updateFormField(
-                                                "visitPurpose",
-                                                it
-                                            )
+                                            viewModel.updateFormField("visitPurpose", it)
                                         },
-                                        placeholder = { Text(AppStrings.visitPurposeDetailPlaceholder) },
+                                        placeholder = {
+                                            Text(AppStrings.visitPurposeDetailPlaceholder)
+                                        },
                                         modifier = Modifier.weight(1f)
                                     )
                                 }
                             }
 
                             // 방문 날짜/시간
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(bottom = 16.dp)
-                            ) {
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp)) {
                                 // 방문 시작 날짜
                                 OutlinedTextField(
                                     value = formState.visitDate,
-                                    onValueChange = { viewModel.updateFormField("visitDate", it) },
+                                    onValueChange = {
+                                        viewModel.updateFormField("visitDate", it)
+                                    },
                                     label = { Text(AppStrings.visitDateLabel) },
                                     modifier = Modifier
                                         .weight(1f)
                                         .padding(end = 8.dp),
                                     leadingIcon = {
-                                        Icon(
-                                            Icons.Default.DateRange,
-                                            contentDescription = null
-                                        )
+                                        Icon(Icons.Default.DateRange, contentDescription = null)
                                     },
                                     isError = formErrors.visitDate.isNotEmpty()
                                 )
@@ -557,22 +518,26 @@ fun PrivacyAgreementScreen(
                                 // 방문 시작 시간
                                 OutlinedTextField(
                                     value = formState.visitTime,
-                                    onValueChange = { viewModel.updateFormField("visitTime", it) },
+                                    onValueChange = {
+                                        viewModel.updateFormField("visitTime", it)
+                                    },
                                     label = { Text(AppStrings.visitTimeLabel) },
                                     modifier = Modifier.weight(1f),
                                     leadingIcon = {
-                                        Icon(
-                                            Icons.Default.DateRange,
-                                            contentDescription = null
-                                        )
+                                        Icon(Icons.Default.DateRange, contentDescription = null)
                                     },
                                     isError = formErrors.visitTime.isNotEmpty()
                                 )
                             }
 
-                            if (formErrors.visitDate.isNotEmpty() || formErrors.visitTime.isNotEmpty()) {
+                            if (formErrors.visitDate.isNotEmpty() ||
+                                formErrors.visitTime.isNotEmpty()
+                            ) {
                                 Text(
-                                    text = formErrors.visitDate.ifEmpty { formErrors.visitTime },
+                                    text =
+                                        formErrors.visitDate.ifEmpty {
+                                            formErrors.visitTime
+                                        },
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.error,
                                     modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
@@ -580,31 +545,21 @@ fun PrivacyAgreementScreen(
                             }
 
                             // 방문 종료 날짜/시간
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(bottom = 16.dp)
-                            ) {
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp)) {
                                 // 방문 종료 날짜
                                 OutlinedTextField(
                                     value = formState.visitEndDate,
                                     onValueChange = {
-                                        viewModel.updateFormField(
-                                            "visitEndDate",
-                                            it
-                                        )
+                                        viewModel.updateFormField("visitEndDate", it)
                                     },
-                                    label = {
-                                        Text(AppStrings.visitEndDateLabel)
-                                    },
+                                    label = { Text(AppStrings.visitEndDateLabel) },
                                     modifier = Modifier
                                         .weight(1f)
                                         .padding(end = 8.dp),
                                     leadingIcon = {
-                                        Icon(
-                                            Icons.Default.DateRange,
-                                            contentDescription = null
-                                        )
+                                        Icon(Icons.Default.DateRange, contentDescription = null)
                                     },
                                     isError = formErrors.visitEndDate.isNotEmpty()
                                 )
@@ -613,26 +568,25 @@ fun PrivacyAgreementScreen(
                                 OutlinedTextField(
                                     value = formState.visitEndTime,
                                     onValueChange = {
-                                        viewModel.updateFormField(
-                                            "visitEndTime",
-                                            it
-                                        )
+                                        viewModel.updateFormField("visitEndTime", it)
                                     },
                                     label = { Text(AppStrings.visitEndTimeLabel) },
                                     modifier = Modifier.weight(1f),
                                     leadingIcon = {
-                                        Icon(
-                                            Icons.Default.DateRange,
-                                            contentDescription = null
-                                        )
+                                        Icon(Icons.Default.DateRange, contentDescription = null)
                                     },
                                     isError = formErrors.visitEndTime.isNotEmpty()
                                 )
                             }
 
-                            if (formErrors.visitEndDate.isNotEmpty() || formErrors.visitEndTime.isNotEmpty()) {
+                            if (formErrors.visitEndDate.isNotEmpty() ||
+                                formErrors.visitEndTime.isNotEmpty()
+                            ) {
                                 Text(
-                                    text = formErrors.visitEndDate.ifEmpty { formErrors.visitEndTime },
+                                    text =
+                                        formErrors.visitEndDate.ifEmpty {
+                                            formErrors.visitEndTime
+                                        },
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.error,
                                     modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
@@ -643,10 +597,7 @@ fun PrivacyAgreementScreen(
                             OutlinedTextField(
                                 value = formState.visitorCarNumber,
                                 onValueChange = {
-                                    viewModel.updateFormField(
-                                        "visitorCarNumber",
-                                        it
-                                    )
+                                    viewModel.updateFormField("visitorCarNumber", it)
                                 },
                                 label = { Text(AppStrings.visitorCarNumberLabel) },
                                 modifier = Modifier
@@ -666,10 +617,13 @@ fun PrivacyAgreementScreen(
                         Button(
                             onClick = onBackClick,
                             modifier = Modifier.weight(1f),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                            colors =
+                                ButtonDefaults.buttonColors(
+                                    containerColor =
+                                        MaterialTheme.colorScheme.surfaceVariant,
+                                    contentColor =
+                                        MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                         ) { Text(text = AppStrings.cancelButtonLabel) }
 
                         Button(
@@ -695,9 +649,10 @@ fun PrivacyAgreementScreen(
                         Column {
                             employeeList.forEach { employee ->
                                 Surface(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(vertical = 4.dp),
+                                    modifier =
+                                        Modifier
+                                            .fillMaxWidth()
+                                            .padding(vertical = 4.dp),
                                     onClick = { viewModel.selectEmployee(employee) },
                                     color = MaterialTheme.colorScheme.surfaceVariant,
                                     shape = RoundedCornerShape(8.dp)
@@ -722,7 +677,9 @@ fun PrivacyAgreementScreen(
                                             if (employee.department.isNotEmpty()) {
                                                 Text(
                                                     text = employee.department,
-                                                    style = MaterialTheme.typography.bodyMedium
+                                                    style =
+                                                        MaterialTheme.typography
+                                                            .bodyMedium
                                                 )
                                             }
                                         }
@@ -732,10 +689,22 @@ fun PrivacyAgreementScreen(
                         }
                     },
                     confirmButton = {
-                        TextButton(onClick = { viewModel.hideEmployeeModal() })
-                        {
+                        TextButton(onClick = { viewModel.hideEmployeeModal() }) {
                             Text(AppStrings.cancelButtonLabel)
                         }
+                    }
+                )
+            }
+
+            // API 에러 다이얼로그
+            apiError?.let { error ->
+                ErrorDialog(
+                    title = error.title,
+                    message = error.message,
+                    onDismiss = { viewModel.clearApiError() },
+                    onNavigateToHome = {
+                        viewModel.clearApiError()
+                        onBackClick()
                     }
                 )
             }
@@ -746,5 +715,5 @@ fun PrivacyAgreementScreen(
 @Preview(showBackground = true)
 @Composable
 fun PrivacyAgreementScreenPreview() {
-    VisitReserveKioskTheme { PrivacyAgreementScreen(onBackClick={}); }
+    VisitReserveKioskTheme { PrivacyAgreementScreen(onBackClick = {}) }
 }

@@ -1,14 +1,14 @@
 package com.secuidea.visitreservekiosk.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.secuidea.visitreservekiosk.api.ApiErrorHandler.launchSafeApiCall
+import com.secuidea.visitreservekiosk.api.ApiException
 import com.secuidea.visitreservekiosk.data.models.*
 import com.secuidea.visitreservekiosk.data.repository.VisitRepository
 import com.secuidea.visitreservekiosk.language.LocaleHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 class PrivacyAgreementViewModel : ViewModel() {
     private val repository = VisitRepository()
@@ -45,25 +45,18 @@ class PrivacyAgreementViewModel : ViewModel() {
     private val _employeeList = MutableStateFlow<List<Employee>>(emptyList())
     val employeeList: StateFlow<List<Employee>> = _employeeList.asStateFlow()
 
+    // API 에러 상태
+    private val _apiError = MutableStateFlow<ApiException?>(null)
+    val apiError: StateFlow<ApiException?> = _apiError.asStateFlow()
+
     // 방문 목적 목록 로드
     fun loadVisitReasons() {
-        viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val language = LocaleHelper.getLanguage()
-                val response = repository.getVisitReasons(language)
-                if (response.isSuccess && response.data != null) {
-                    _visitReasons.value = response.data.reasons
-                    if (response.data.reasons.isNotEmpty()) {
-                        updateFormField("visitReasonId", response.data.reasons[0].visitReasonID)
-                    }
-                } else {
-
-                }
-            } catch (e: Exception) {
-                // 에러 처리
-            } finally {
-                _isLoading.value = false
+        launchSafeApiCall(_apiError, _isLoading) {
+            val language = LocaleHelper.getLanguage()
+            val response = repository.getVisitReasons(language)
+            _visitReasons.value = response.data?.reasons ?: emptyList()
+            if (response.data?.reasons?.isNotEmpty() == true) {
+                updateFormField("visitReasonId", response.data.reasons[0].visitReasonID)
             }
         }
     }
@@ -88,37 +81,26 @@ class PrivacyAgreementViewModel : ViewModel() {
             return
         }
 
-        viewModelScope.launch {
-            _isLoading.value = true
-            _verificationError.value = ""
+        _verificationError.value = ""
 
-            try {
-                val response = repository.verifyEmployee(name)
-                if (response.isSuccess && response.data != null) {
-                    val employees = response.data.employees
-                    if (employees.isEmpty()) {
-                        _verificationError.value = "해당 이름의 직원을 찾을 수 없습니다."
-                    } else if (employees.size == 1) {
-                        // 직원이 한 명인 경우 바로 선택
-                        val employee = employees[0]
-                        _formState.value =
-                            _formState.value.copy(
-                                employeeName = employee.name,
-                                employeePid = employee.pid
-                            )
-                        _isEmployeeVerified.value = true
-                    } else {
-                        // 직원이 여러 명인 경우 모달로 선택
-                        _employeeList.value = employees
-                        _showEmployeeModal.value = true
-                    }
-                } else {
-                    _verificationError.value = response.message ?: "직원 확인에 실패했습니다."
-                }
-            } catch (e: Exception) {
-                _verificationError.value = "네트워크 오류: ${e.message}"
-            } finally {
-                _isLoading.value = false
+        launchSafeApiCall(_apiError, _isLoading) {
+            val response = repository.verifyEmployee(name)
+            val employees = response.data?.employees ?: emptyList()
+            if (employees.isEmpty()) {
+                _verificationError.value = "해당 이름의 직원을 찾을 수 없습니다."
+            } else if (employees.size == 1) {
+                // 직원이 한 명인 경우 바로 선택
+                val employee = employees[0]
+                _formState.value =
+                    _formState.value.copy(
+                        employeeName = employee.name,
+                        employeePid = employee.pid
+                    )
+                _isEmployeeVerified.value = true
+            } else {
+                // 직원이 여러 명인 경우 모달로 선택
+                _employeeList.value = employees
+                _showEmployeeModal.value = true
             }
         }
     }
@@ -283,39 +265,32 @@ class PrivacyAgreementViewModel : ViewModel() {
         }
 
         val form = _formState.value
-        val request = VisitReservationRequest(
-            employeePid = form.employeePid,
-            employeeName = form.employeeName,
-            visitorName = form.visitorName,
-            visitorCompany = form.visitorCompany,
-            visitorContact = form.visitorContact,
-            visitorEmail = form.visitorEmail,
-            visitReasonId = form.visitReasonId,
-            visitPurpose = form.visitPurpose,
-            visitDate = form.visitDate,
-            visitTime = form.visitTime,
-            visitEndDate = form.visitEndDate,
-            visitEndTime = form.visitEndTime,
-            visitorCarNumber = form.visitorCarNumber
-        )
+        val request =
+            VisitReservationRequest(
+                employeePid = form.employeePid,
+                employeeName = form.employeeName,
+                visitorName = form.visitorName,
+                visitorCompany = form.visitorCompany,
+                visitorContact = form.visitorContact,
+                visitorEmail = form.visitorEmail,
+                visitReasonId = form.visitReasonId,
+                visitPurpose = form.visitPurpose,
+                visitDate = form.visitDate,
+                visitTime = form.visitTime,
+                visitEndDate = form.visitEndDate,
+                visitEndTime = form.visitEndTime,
+                visitorCarNumber = form.visitorCarNumber
+            )
 
-        viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val response = repository.submitVisitReservation(request)
-                if (response.isSuccess) {
-                    // 성공 처리 (결과 화면으로 이동)
-                    // TODO: 결과 화면 이동 처리
-                } else {
-                    // 실패 처리
-                    // TODO: 에러 메시지 표시
-                }
-            } catch (e: Exception) {
-                // 예외 처리
-                // TODO: 에러 메시지 표시
-            } finally {
-                _isLoading.value = false
-            }
+        launchSafeApiCall(_apiError, _isLoading) {
+            val response = repository.submitVisitReservation(request)
+            // 성공 처리 (결과 화면으로 이동)
+            // TODO: 결과 화면 이동 처리
         }
+    }
+
+    // API 에러 처리 완료
+    fun clearApiError() {
+        _apiError.value = null
     }
 }
