@@ -36,7 +36,9 @@ class PrivacyAgreementActivity : ComponentActivity() {
                 Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
-                ) { PrivacyAgreementScreen(onBackClick = { finish() }) }
+                ) { PrivacyAgreementScreen(onBackClick = { finish() }, onNavigateToResult = { 
+                // TODO: 결과화면
+                }) }
             }
         }
     }

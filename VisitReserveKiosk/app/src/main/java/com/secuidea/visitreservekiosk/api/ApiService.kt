@@ -39,10 +39,17 @@ interface ApiInterface {
     suspend fun verifyEmployee(@Query("name") name: String): Response<VerifyEmployeeResponse>
 
     // 방문 신청 API
-    @POST("api/visit/reserve")
+    @POST("api/visit/VisitReserve")
     suspend fun submitVisitReservation(
             @Body request: VisitReservationRequest
     ): Response<VisitReservationResponse>
+
+    // 카카오 알림톡 발송 API
+    @POST("api/Aligo/SendRequest")
+    suspend fun sendMessage(
+            @Body request: KakaoMessageRequest,
+            @retrofit2.http.Header("X-API-KEY") apiKey: String
+    ): Response<KakaoMessageResponse>
 }
 
 /** API 서비스 싱글톤 클래스 */

@@ -51,6 +51,7 @@ private const val INACTIVITY_TIMEOUT_SECONDS = 60
 @Composable
 fun PrivacyAgreementScreen(
         onBackClick: () -> Unit,
+        onNavigateToResult: () -> Unit,
         viewModel: PrivacyAgreementViewModel = viewModel()
 ) {
         val scrollState = rememberScrollState()
@@ -64,6 +65,7 @@ fun PrivacyAgreementScreen(
         val showEmployeeModal by viewModel.showEmployeeModal.collectAsState()
         val employeeList by viewModel.employeeList.collectAsState()
         val apiError by viewModel.apiError.collectAsState()
+        val reservationSuccess by viewModel.reservationSuccess.collectAsState()
 
         // 직원 정보 카드로 스크롤하기 위한 참조 추가
         val employeeCardRef = remember { mutableStateOf<Int?>(null) }
@@ -82,6 +84,13 @@ fun PrivacyAgreementScreen(
 
         // 페이지 로드 시 방문 목적 데이터 가져오기
         LaunchedEffect(Unit) { viewModel.loadVisitReasons() }
+
+        // 예약 성공 시 결과 화면 이동
+        LaunchedEffect(reservationSuccess) {
+                if (reservationSuccess) {
+                        onNavigateToResult()
+                }
+        }
 
         // 개인정보 동의 시 직원 정보 카드로 스크롤하고 아코디언 접기
         LaunchedEffect(privacyAgreed) {
@@ -1303,5 +1312,5 @@ fun PrivacyAgreementScreen(
 @Preview(showBackground = true, widthDp = 720, heightDp = 1280)
 @Composable
 fun PrivacyAgreementScreenPreview() {
-        VisitReserveKioskTheme { PrivacyAgreementScreen(onBackClick = {}) }
+        VisitReserveKioskTheme { PrivacyAgreementScreen(onBackClick = {}, onNavigateToResult = {}) }
 }

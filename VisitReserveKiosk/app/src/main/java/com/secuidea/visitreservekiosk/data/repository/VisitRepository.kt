@@ -93,4 +93,63 @@ class VisitRepository {
             throw ApiException.createNetworkError(e)
         }
     }
+
+    /**
+     * 카카오 알림톡 발송
+     * @param apiKey API 키
+     * @param request 알림톡 요청 데이터
+     * @throws ApiException API 호출 중 오류가 발생한 경우
+     */
+    suspend fun sendMessage(apiKey: String, request: KakaoMessageRequest): KakaoMessageResponse {
+        try {
+            val response = apiInterface.sendMessage(request, apiKey)
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    return body
+                } else {
+                    throw ApiException.createResponseError("응답이 없습니다.")
+                }
+            } else {
+                throw ApiException.createServerError(response.code(), response.message())
+            }
+        } catch (e: ApiException) {
+            throw e
+        } catch (e: Exception) {
+            throw ApiException.createNetworkError(e)
+        }
+    }
+
+    /**
+     * 템플릿 메시지 발송
+     * @param apiKey API 키
+     * @param gubun 구분값
+     * @param phoneNumber 수신자 전화번호
+     * @param userName 수신자 이름
+     * @param templateVariables 템플릿 변수
+     * @param queryVariables 쿼리 변수
+     */
+    suspend fun sendTemplateMessage(
+            apiKey: String,
+            gubun: String,
+            phoneNumber: String,
+            userName: String,
+            templateVariables: Map<String, String> = mapOf(),
+            queryVariables: Map<String, String> = mapOf()
+    ): KakaoMessageResponse {
+        // 수신자 정보 생성
+        val receiver =
+                ReceiverInfo(
+                        phone = phoneNumber,
+                        name = userName,
+                        variables = templateVariables,
+                        queryVariables = queryVariables
+                )
+
+        // 요청 모델 생성
+        val requestModel = KakaoMessageRequest(gubun = gubun, receiverList = listOf(receiver))
+
+        // API 호출
+        return sendMessage(apiKey, requestModel)
+    }
 }

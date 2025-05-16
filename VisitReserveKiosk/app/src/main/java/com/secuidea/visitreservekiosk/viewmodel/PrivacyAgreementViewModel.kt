@@ -51,6 +51,10 @@ class PrivacyAgreementViewModel : ViewModel() {
     private val _apiError = MutableStateFlow<ApiException?>(null)
     val apiError: StateFlow<ApiException?> = _apiError.asStateFlow()
 
+    // 예약 성공 시 결과 화면 이동 신호
+    private val _reservationSuccess = MutableStateFlow(false)
+    val reservationSuccess: StateFlow<Boolean> = _reservationSuccess.asStateFlow()
+
     // 방문 목적 목록 로드
     fun loadVisitReasons() {
         launchSafeApiCall(_apiError, _isLoading) {
@@ -256,8 +260,54 @@ class PrivacyAgreementViewModel : ViewModel() {
 
         launchSafeApiCall(_apiError, _isLoading) {
             val response = repository.submitVisitReservation(request)
-            // 성공 처리 (결과 화면으로 이동)
-            // TODO: 결과 화면 이동 처리
+            if (response.isSuccess && response.data != null) {
+                val apiKey = response.data.ApiKey
+                val visitReserveVisitantId = response.data.visitReserveVisitantId
+                val employeePhone = response.data.EmployeePhone
+                val visitorName = updatedForm.visitorName
+                val visitorCompany = updatedForm.visitorCompany
+                val employeeName = updatedForm.employeeName
+                val visitDate = updatedForm.visitDate
+
+                // 1. 방문자에게 알림톡 발송
+                repository.sendTemplateMessage(
+                        apiKey = apiKey,
+                        gubun = "VisitReserve",
+                        phoneNumber = updatedForm.visitorContact,
+                        userName = visitorName
+                )
+
+                // 2. 접견인(직원)에게 알림톡 발송 (전화번호가 있을 때만)
+                if (!employeePhone.isNullOrBlank() && !visitReserveVisitantId.isNullOrBlank()) {
+                    val templateVariables =
+                            mapOf(
+                                    "방문자회사" to visitorCompany,
+                                    "방문자이름" to visitorName,
+                                    "방문일" to visitDate,
+                                    "신청시간" to
+                                            SimpleDateFormat(
+                                                            "yyyy-MM-dd HH:mm:ss",
+                                                            Locale.getDefault()
+                                                    )
+                                                    .format(Date())
+                            )
+                    val queryVariables =
+                            mapOf(
+                                    "방문승인URL" to "/" // 실제 URL 필요시 수정
+                            )
+                    repository.sendTemplateMessage(
+                            apiKey = apiKey,
+                            gubun = "RequestApprove",
+                            phoneNumber = employeePhone,
+                            userName = employeeName,
+                            templateVariables = templateVariables,
+                            queryVariables = queryVariables
+                    )
+                }
+
+                // 예약 성공 신호
+                _reservationSuccess.value = true
+            }
         }
     }
 
