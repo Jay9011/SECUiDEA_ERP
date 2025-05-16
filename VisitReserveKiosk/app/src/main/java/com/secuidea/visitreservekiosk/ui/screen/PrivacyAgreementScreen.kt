@@ -23,8 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.secuidea.visitreservekiosk.language.AppStrings
+import com.secuidea.visitreservekiosk.language.LocaleHelper
 import com.secuidea.visitreservekiosk.ui.components.AccordionCard
 import com.secuidea.visitreservekiosk.ui.components.ErrorDialog
+import com.secuidea.visitreservekiosk.ui.components.HtmlContent
 import com.secuidea.visitreservekiosk.ui.components.LoadingOverlay
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 import com.secuidea.visitreservekiosk.viewmodel.PrivacyAgreementViewModel
@@ -145,14 +147,19 @@ fun PrivacyAgreementScreen(
                                                                 AppStrings
                                                                         .privacyPolicyAccordionTitle,
                                                         content = {
-                                                                Text(
-                                                                        text =
+                                                                // HTML 파일에서 개인정보 처리방침 불러오기
+                                                                val language =
+                                                                        LocaleHelper.getLanguage()
+                                                                val htmlFilePath =
+                                                                        "privacy_policy_$language.html"
+
+                                                                // HTML 콘텐츠 표시 (파일이 없으면 AppStrings의
+                                                                // 내용 사용)
+                                                                HtmlContent(
+                                                                        filePath = htmlFilePath,
+                                                                        fallbackContent =
                                                                                 AppStrings
                                                                                         .privacyPolicyContent,
-                                                                        style =
-                                                                                MaterialTheme
-                                                                                        .typography
-                                                                                        .bodySmall,
                                                                         modifier =
                                                                                 Modifier.padding(
                                                                                         16.dp

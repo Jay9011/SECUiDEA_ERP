@@ -1,5 +1,6 @@
 package com.secuidea.visitreservekiosk
 
+import android.content.Context
 import android.net.Uri
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -24,23 +25,59 @@ import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
+import java.io.File
 
+/**
+ * 비디오 플레이어 컴포넌트
+ *
+ * @param videoResId 리소스 ID (R.raw.video)
+ * @param videoFileName 파일 이름 (local_video.mp4)
+ * @param modifier Modifier
+ */
 @Composable
-fun VideoPlayer(videoUri: Uri, modifier: Modifier = Modifier) {
+fun VideoPlayer(
+        videoResId: Int? = null,
+        videoFileName: String? = null,
+        modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
     var isBuffering by remember { mutableStateOf(true) }
+    var videoUri by remember { mutableStateOf<Uri?>(null) }
+
+    // 비디오 URI 결정
+    LaunchedEffect(videoResId, videoFileName) {
+        videoUri =
+                when {
+                    // 1. 파일 이름이 제공된 경우 로컬 스토리지에서 찾기
+                    !videoFileName.isNullOrEmpty() -> {
+                        findVideoFileUri(context, videoFileName)
+                    }
+                    // 2. 리소스 ID가 제공된 경우
+                    videoResId != null -> {
+                        Uri.parse("android.resource://${context.packageName}/$videoResId")
+                    }
+                    // 3. 기본값 (예제 비디오 또는 null)
+                    else -> null
+                }
+    }
+
+    // 비디오 URI가 없으면 표시하지 않음
+    if (videoUri == null) {
+        return
+    }
 
     // ExoPlayer 인스턴스 생성
-    val exoPlayer = remember {
-        ExoPlayer.Builder(context).build().apply {
-            val mediaItem = MediaItem.fromUri(videoUri)
-            setMediaItem(mediaItem)
-            repeatMode = Player.REPEAT_MODE_ALL // 비디오 반복 재생
-            playWhenReady = true // 준비되면 자동 재생
-            videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
-            prepare()
-        }
-    }
+    val exoPlayer =
+            remember(videoUri) {
+                ExoPlayer.Builder(context).build().apply {
+                    val mediaItem = MediaItem.fromUri(videoUri!!)
+                    setMediaItem(mediaItem)
+                    repeatMode = Player.REPEAT_MODE_ALL // 비디오 반복 재생
+                    playWhenReady = true // 준비되면 자동 재생
+                    videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
+                    prepare()
+                }
+            }
 
     // 버퍼링 상태 리스너 추가
     LaunchedEffect(exoPlayer) {
@@ -54,7 +91,7 @@ fun VideoPlayer(videoUri: Uri, modifier: Modifier = Modifier) {
     }
 
     // PlayerView를 사용하여 동영상 표시
-    DisposableEffect(key1 = Unit) {
+    DisposableEffect(key1 = videoUri) {
         onDispose {
             exoPlayer.release() // 컴포넌트가 해제될 때 플레이어 리소스 해제
         }
@@ -87,4 +124,37 @@ fun VideoPlayer(videoUri: Uri, modifier: Modifier = Modifier) {
             )
         }
     }
+}
+
+/**
+ * 로컬 스토리지에서 비디오 파일을 찾아 URI를 반환하는 함수
+ *
+ * @param context Context
+ * @param fileName 파일 이름
+ * @return 비디오 파일 URI 또는 null (파일이 없는 경우)
+ */
+private fun findVideoFileUri(context: Context, fileName: String): Uri? {
+    // 내부 저장소 확인
+    val internalFile = File(context.filesDir, fileName)
+    if (internalFile.exists()) {
+        return Uri.fromFile(internalFile)
+    }
+
+    // 외부 저장소 확인
+    val externalFile = File(context.getExternalFilesDir(null), fileName)
+    if (externalFile.exists()) {
+        return Uri.fromFile(externalFile)
+    }
+
+    // 추가 외부 저장소 확인 (SD 카드 등)
+    context.getExternalFilesDirs(null).forEach { extDir ->
+        if (extDir != null && extDir != context.getExternalFilesDir(null)) {
+            val file = File(extDir, fileName)
+            if (file.exists()) {
+                return Uri.fromFile(file)
+            }
+        }
+    }
+
+    return null
 }
