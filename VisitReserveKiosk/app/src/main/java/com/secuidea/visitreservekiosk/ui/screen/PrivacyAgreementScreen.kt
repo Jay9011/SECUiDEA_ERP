@@ -19,9 +19,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -55,12 +58,16 @@ fun PrivacyAgreementScreen(
         // 직원 정보 카드로 스크롤하기 위한 참조 추가
         val employeeCardRef = remember { mutableStateOf<Int?>(null) }
 
+        // 아코디언 확장 상태 관리
+        var accordionExpanded by remember { mutableStateOf(true) }
+
         // 페이지 로드 시 방문 목적 데이터 가져오기
         LaunchedEffect(Unit) { viewModel.loadVisitReasons() }
 
-        // 개인정보 동의 시 직원 정보 카드로 스크롤
+        // 개인정보 동의 시 직원 정보 카드로 스크롤하고 아코디언 접기
         LaunchedEffect(privacyAgreed) {
                 if (privacyAgreed == true) {
+                        accordionExpanded = false // 아코디언 접기
                         employeeCardRef.value?.let { position ->
                                 scrollState.animateScrollTo(position)
                         }
@@ -98,15 +105,6 @@ fun PrivacyAgreementScreen(
                                                 .verticalScroll(scrollState),
                                 horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                                // 페이지 헤더
-                                Text(
-                                        text = AppStrings.privacyAgreementTitle,
-                                        style = MaterialTheme.typography.headlineMedium,
-                                        fontWeight = FontWeight.Bold,
-                                        textAlign = TextAlign.Center,
-                                        modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
-                                )
-
                                 // 개인정보 처리방침 섹션
                                 Card(
                                         modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
@@ -159,11 +157,10 @@ fun PrivacyAgreementScreen(
                                                                                                         .screenHeightDp
                                                                                                         .dp /
                                                                                                         3
-                                                                                        ) // 화면 높이의
-                                                                                        // 1/3
+                                                                                        )
                                                                                         .background(
                                                                                                 Color.White
-                                                                                        ) // 배경색 하얀색
+                                                                                        )
                                                                                         .verticalScroll(
                                                                                                 rememberScrollState()
                                                                                         )
@@ -187,7 +184,10 @@ fun PrivacyAgreementScreen(
                                                         modifier =
                                                                 Modifier.fillMaxWidth()
                                                                         .padding(bottom = 16.dp),
-                                                        initiallyExpanded = true
+                                                        expanded = accordionExpanded,
+                                                        onExpandChange = { expanded ->
+                                                                accordionExpanded = expanded
+                                                        }
                                                 )
                                                 // 개인정보 처리방침 동의 라디오 버튼
                                                 Row(modifier = Modifier.fillMaxWidth()) {
@@ -539,108 +539,279 @@ fun PrivacyAgreementScreen(
                                                         )
                                                 }
 
-                                                // 방문자 이름
-                                                OutlinedTextField(
-                                                        value = formState.visitorName,
-                                                        onValueChange = {
-                                                                viewModel.updateFormField(
-                                                                        "visitorName",
-                                                                        it
-                                                                )
-                                                        },
-                                                        label = {
-                                                                Text(AppStrings.visitorNameLabel)
-                                                        },
+                                                // 방문자 이름과 회사명을 한 줄에 배치
+                                                Row(
                                                         modifier =
                                                                 Modifier.fillMaxWidth()
                                                                         .padding(bottom = 16.dp),
-                                                        isError =
-                                                                formErrors.visitorName.isNotEmpty()
-                                                )
-                                                if (formErrors.visitorName.isNotEmpty()) {
-                                                        Text(
-                                                                text = formErrors.visitorName,
-                                                                style =
-                                                                        MaterialTheme.typography
-                                                                                .bodySmall,
-                                                                color =
-                                                                        MaterialTheme.colorScheme
-                                                                                .error,
-                                                                modifier =
-                                                                        Modifier.padding(
-                                                                                start = 8.dp,
-                                                                                bottom = 8.dp
-                                                                        )
-                                                        )
-                                                }
-
-                                                // 방문자 회사
-                                                OutlinedTextField(
-                                                        value = formState.visitorCompany,
-                                                        onValueChange = {
-                                                                viewModel.updateFormField(
-                                                                        "visitorCompany",
-                                                                        it
+                                                        horizontalArrangement =
+                                                                Arrangement.spacedBy(8.dp)
+                                                ) {
+                                                        // 방문자 이름 (필수)
+                                                        Column(modifier = Modifier.weight(1f)) {
+                                                                // 필수 항목 표시
+                                                                Text(
+                                                                        text =
+                                                                                buildAnnotatedString {
+                                                                                        withStyle(
+                                                                                                style =
+                                                                                                        SpanStyle(
+                                                                                                                color =
+                                                                                                                        Color.Red
+                                                                                                        )
+                                                                                        ) {
+                                                                                                append(
+                                                                                                        "* "
+                                                                                                )
+                                                                                        }
+                                                                                        append(
+                                                                                                AppStrings
+                                                                                                        .visitorNameLabel
+                                                                                        )
+                                                                                },
+                                                                        style =
+                                                                                MaterialTheme
+                                                                                        .typography
+                                                                                        .bodySmall,
+                                                                        modifier =
+                                                                                Modifier.padding(
+                                                                                        bottom =
+                                                                                                4.dp
+                                                                                )
                                                                 )
-                                                        },
-                                                        label = {
-                                                                Text(AppStrings.visitorCompanyLabel)
-                                                        },
-                                                        modifier =
-                                                                Modifier.fillMaxWidth()
-                                                                        .padding(bottom = 16.dp)
-                                                )
 
-                                                // 방문자 연락처
-                                                OutlinedTextField(
-                                                        value = formState.visitorContact,
-                                                        onValueChange = { newValue ->
-                                                                // 숫자만 허용
-                                                                if (newValue.all { it.isDigit() } ||
-                                                                                newValue.isEmpty()
+                                                                OutlinedTextField(
+                                                                        value =
+                                                                                formState
+                                                                                        .visitorName,
+                                                                        onValueChange = {
+                                                                                viewModel
+                                                                                        .updateFormField(
+                                                                                                "visitorName",
+                                                                                                it
+                                                                                        )
+                                                                        },
+                                                                        modifier =
+                                                                                Modifier.fillMaxWidth(),
+                                                                        isError =
+                                                                                formErrors
+                                                                                        .visitorName
+                                                                                        .isNotEmpty()
+                                                                )
+
+                                                                if (formErrors.visitorName
+                                                                                .isNotEmpty()
                                                                 ) {
-                                                                        viewModel.updateFormField(
-                                                                                "visitorContact",
-                                                                                newValue
+                                                                        Text(
+                                                                                text =
+                                                                                        formErrors
+                                                                                                .visitorName,
+                                                                                style =
+                                                                                        MaterialTheme
+                                                                                                .typography
+                                                                                                .bodySmall,
+                                                                                color =
+                                                                                        MaterialTheme
+                                                                                                .colorScheme
+                                                                                                .error,
+                                                                                modifier =
+                                                                                        Modifier.padding(
+                                                                                                start =
+                                                                                                        8.dp,
+                                                                                                top =
+                                                                                                        4.dp
+                                                                                        )
                                                                         )
                                                                 }
-                                                        },
-                                                        label = {
-                                                                Text(AppStrings.visitorContactLabel)
-                                                        },
+                                                        }
+
+                                                        // 방문자 회사
+                                                        Column(modifier = Modifier.weight(1f)) {
+                                                                Text(
+                                                                        text =
+                                                                                AppStrings
+                                                                                        .visitorCompanyLabel,
+                                                                        style =
+                                                                                MaterialTheme
+                                                                                        .typography
+                                                                                        .bodySmall,
+                                                                        modifier =
+                                                                                Modifier.padding(
+                                                                                        bottom =
+                                                                                                4.dp
+                                                                                )
+                                                                )
+
+                                                                OutlinedTextField(
+                                                                        value =
+                                                                                formState
+                                                                                        .visitorCompany,
+                                                                        onValueChange = {
+                                                                                viewModel
+                                                                                        .updateFormField(
+                                                                                                "visitorCompany",
+                                                                                                it
+                                                                                        )
+                                                                        },
+                                                                        modifier =
+                                                                                Modifier.fillMaxWidth()
+                                                                )
+                                                        }
+                                                }
+
+                                                // 연락처와 차량 번호를 한 줄에 배치
+                                                Row(
                                                         modifier =
                                                                 Modifier.fillMaxWidth()
                                                                         .padding(bottom = 16.dp),
-                                                        isError =
-                                                                formErrors.visitorContact
-                                                                        .isNotEmpty(),
-                                                        keyboardOptions =
-                                                                KeyboardOptions(
-                                                                        keyboardType =
-                                                                                KeyboardType.Number
-                                                                ),
-                                                        placeholder = { Text("숫자만 입력 가능합니다") }
-                                                )
-                                                if (formErrors.visitorContact.isNotEmpty()) {
-                                                        Text(
-                                                                text = formErrors.visitorContact,
-                                                                style =
-                                                                        MaterialTheme.typography
-                                                                                .bodySmall,
-                                                                color =
-                                                                        MaterialTheme.colorScheme
-                                                                                .error,
-                                                                modifier =
-                                                                        Modifier.padding(
-                                                                                start = 8.dp,
-                                                                                bottom = 8.dp
+                                                        horizontalArrangement =
+                                                                Arrangement.spacedBy(8.dp)
+                                                ) {
+                                                        // 방문자 연락처 (필수)
+                                                        Column(modifier = Modifier.weight(1f)) {
+                                                                // 필수 항목 표시
+                                                                Text(
+                                                                        text =
+                                                                                buildAnnotatedString {
+                                                                                        withStyle(
+                                                                                                style =
+                                                                                                        SpanStyle(
+                                                                                                                color =
+                                                                                                                        Color.Red
+                                                                                                        )
+                                                                                        ) {
+                                                                                                append(
+                                                                                                        "* "
+                                                                                                )
+                                                                                        }
+                                                                                        append(
+                                                                                                AppStrings
+                                                                                                        .visitorContactLabel
+                                                                                        )
+                                                                                },
+                                                                        style =
+                                                                                MaterialTheme
+                                                                                        .typography
+                                                                                        .bodySmall,
+                                                                        modifier =
+                                                                                Modifier.padding(
+                                                                                        bottom =
+                                                                                                4.dp
+                                                                                )
+                                                                )
+
+                                                                OutlinedTextField(
+                                                                        value =
+                                                                                formState
+                                                                                        .visitorContact,
+                                                                        onValueChange = { newValue
+                                                                                ->
+                                                                                // 숫자만 허용
+                                                                                if (newValue.all {
+                                                                                                it.isDigit()
+                                                                                        } ||
+                                                                                                newValue.isEmpty()
+                                                                                ) {
+                                                                                        viewModel
+                                                                                                .updateFormField(
+                                                                                                        "visitorContact",
+                                                                                                        newValue
+                                                                                                )
+                                                                                }
+                                                                        },
+                                                                        modifier =
+                                                                                Modifier.fillMaxWidth(),
+                                                                        isError =
+                                                                                formErrors
+                                                                                        .visitorContact
+                                                                                        .isNotEmpty(),
+                                                                        keyboardOptions =
+                                                                                KeyboardOptions(
+                                                                                        keyboardType =
+                                                                                                KeyboardType
+                                                                                                        .Number
+                                                                                ),
+                                                                        placeholder = {
+                                                                                Text("숫자만 입력 가능합니다")
+                                                                        }
+                                                                )
+
+                                                                if (formErrors.visitorContact
+                                                                                .isNotEmpty()
+                                                                ) {
+                                                                        Text(
+                                                                                text =
+                                                                                        formErrors
+                                                                                                .visitorContact,
+                                                                                style =
+                                                                                        MaterialTheme
+                                                                                                .typography
+                                                                                                .bodySmall,
+                                                                                color =
+                                                                                        MaterialTheme
+                                                                                                .colorScheme
+                                                                                                .error,
+                                                                                modifier =
+                                                                                        Modifier.padding(
+                                                                                                start =
+                                                                                                        8.dp,
+                                                                                                top =
+                                                                                                        4.dp
+                                                                                        )
                                                                         )
-                                                        )
+                                                                }
+                                                        }
+
+                                                        // 차량 번호
+                                                        Column(modifier = Modifier.weight(1f)) {
+                                                                Text(
+                                                                        text =
+                                                                                AppStrings
+                                                                                        .visitorCarNumberLabel,
+                                                                        style =
+                                                                                MaterialTheme
+                                                                                        .typography
+                                                                                        .bodySmall,
+                                                                        modifier =
+                                                                                Modifier.padding(
+                                                                                        bottom =
+                                                                                                4.dp
+                                                                                )
+                                                                )
+
+                                                                OutlinedTextField(
+                                                                        value =
+                                                                                formState
+                                                                                        .visitorCarNumber,
+                                                                        onValueChange = {
+                                                                                viewModel
+                                                                                        .updateFormField(
+                                                                                                "visitorCarNumber",
+                                                                                                it
+                                                                                        )
+                                                                        },
+                                                                        modifier =
+                                                                                Modifier.fillMaxWidth()
+                                                                )
+                                                        }
                                                 }
 
                                                 // 방문 목적
                                                 Text(
-                                                        text = AppStrings.visitPurposeLabel,
+                                                        text =
+                                                                buildAnnotatedString {
+                                                                        withStyle(
+                                                                                style =
+                                                                                        SpanStyle(
+                                                                                                color =
+                                                                                                        Color.Red
+                                                                                        )
+                                                                        ) { append("* ") }
+                                                                        append(
+                                                                                AppStrings
+                                                                                        .visitPurposeLabel
+                                                                        )
+                                                                },
                                                         style = MaterialTheme.typography.bodyLarge,
                                                         modifier = Modifier.padding(bottom = 8.dp)
                                                 )
@@ -753,26 +924,6 @@ fun PrivacyAgreementScreen(
                                                                 )
                                                         }
                                                 }
-
-                                                // 차량 번호
-                                                OutlinedTextField(
-                                                        value = formState.visitorCarNumber,
-                                                        onValueChange = {
-                                                                viewModel.updateFormField(
-                                                                        "visitorCarNumber",
-                                                                        it
-                                                                )
-                                                        },
-                                                        label = {
-                                                                Text(
-                                                                        AppStrings
-                                                                                .visitorCarNumberLabel
-                                                                )
-                                                        },
-                                                        modifier =
-                                                                Modifier.fillMaxWidth()
-                                                                        .padding(bottom = 16.dp)
-                                                )
                                         }
                                 }
 

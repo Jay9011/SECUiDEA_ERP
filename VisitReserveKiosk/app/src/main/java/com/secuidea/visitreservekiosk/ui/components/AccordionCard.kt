@@ -24,9 +24,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -39,9 +36,9 @@ fun AccordionCard(
         title: String,
         content: @Composable () -> Unit,
         modifier: Modifier = Modifier,
-        initiallyExpanded: Boolean = false
+        expanded: Boolean,
+        onExpandChange: (Boolean) -> Unit
 ) {
-        var expanded by remember { mutableStateOf(initiallyExpanded) }
         val rotationState by
                 animateFloatAsState(targetValue = if (expanded) 180f else 0f, label = "rotation")
 
@@ -54,7 +51,9 @@ fun AccordionCard(
                         // 아코디언 헤더
                         Surface(
                                 modifier =
-                                        Modifier.fillMaxWidth().clickable { expanded = !expanded },
+                                        Modifier.fillMaxWidth().clickable {
+                                                onExpandChange(!expanded)
+                                        },
                                 color = MaterialTheme.colorScheme.surfaceVariant
                         ) {
                                 Row(
