@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -14,16 +15,19 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,7 +41,7 @@ import com.secuidea.visitreservekiosk.ui.components.LoadingOverlay
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 import com.secuidea.visitreservekiosk.viewmodel.PrivacyAgreementViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun PrivacyAgreementScreen(
         onBackClick: () -> Unit,
@@ -60,6 +64,9 @@ fun PrivacyAgreementScreen(
 
         // 아코디언 확장 상태 관리
         var accordionExpanded by remember { mutableStateOf(true) }
+
+        // 포커스 관리자 추가
+        val focusManager = LocalFocusManager.current
 
         // 페이지 로드 시 방문 목적 데이터 가져오기
         LaunchedEffect(Unit) { viewModel.loadVisitReasons() }
@@ -335,6 +342,7 @@ fun PrivacyAgreementScreen(
                                                                 },
                                                                 modifier = Modifier.fillMaxWidth(),
                                                                 enabled = false,
+                                                                singleLine = true,
                                                                 trailingIcon = {
                                                                         IconButton(
                                                                                 onClick = {
@@ -408,6 +416,25 @@ fun PrivacyAgreementScreen(
                                                                 isError =
                                                                         formErrors.employeeName
                                                                                 .isNotEmpty(),
+                                                                singleLine = true,
+                                                                keyboardOptions =
+                                                                        KeyboardOptions(
+                                                                                imeAction =
+                                                                                        ImeAction
+                                                                                                .Done
+                                                                        ),
+                                                                keyboardActions =
+                                                                        KeyboardActions(
+                                                                                onDone = {
+                                                                                        if (formState
+                                                                                                        .employeeName
+                                                                                                        .isNotBlank()
+                                                                                        ) {
+                                                                                                viewModel
+                                                                                                        .verifyEmployee()
+                                                                                        }
+                                                                                }
+                                                                        ),
                                                                 trailingIcon = {
                                                                         Button(
                                                                                 onClick = {
@@ -596,7 +623,24 @@ fun PrivacyAgreementScreen(
                                                                         isError =
                                                                                 formErrors
                                                                                         .visitorName
-                                                                                        .isNotEmpty()
+                                                                                        .isNotEmpty(),
+                                                                        singleLine = true,
+                                                                        keyboardOptions =
+                                                                                KeyboardOptions(
+                                                                                        imeAction =
+                                                                                                ImeAction
+                                                                                                        .Next
+                                                                                ),
+                                                                        keyboardActions =
+                                                                                KeyboardActions(
+                                                                                        onNext = {
+                                                                                                focusManager
+                                                                                                        .moveFocus(
+                                                                                                                FocusDirection
+                                                                                                                        .Right
+                                                                                                        )
+                                                                                        }
+                                                                                )
                                                                 )
 
                                                                 if (formErrors.visitorName
@@ -654,7 +698,29 @@ fun PrivacyAgreementScreen(
                                                                                         )
                                                                         },
                                                                         modifier =
-                                                                                Modifier.fillMaxWidth()
+                                                                                Modifier.fillMaxWidth(),
+                                                                        singleLine = true,
+                                                                        keyboardOptions =
+                                                                                KeyboardOptions(
+                                                                                        imeAction =
+                                                                                                ImeAction
+                                                                                                        .Next
+                                                                                ),
+                                                                        keyboardActions =
+                                                                                KeyboardActions(
+                                                                                        onNext = {
+                                                                                                focusManager
+                                                                                                        .moveFocus(
+                                                                                                                FocusDirection
+                                                                                                                        .Down
+                                                                                                        )
+                                                                                                focusManager
+                                                                                                        .moveFocus(
+                                                                                                                FocusDirection
+                                                                                                                        .Left
+                                                                                                        )
+                                                                                        }
+                                                                                )
                                                                 )
                                                         }
                                                 }
@@ -729,8 +795,22 @@ fun PrivacyAgreementScreen(
                                                                                 KeyboardOptions(
                                                                                         keyboardType =
                                                                                                 KeyboardType
-                                                                                                        .Number
+                                                                                                        .Number,
+                                                                                        imeAction =
+                                                                                                ImeAction
+                                                                                                        .Next
                                                                                 ),
+                                                                        keyboardActions =
+                                                                                KeyboardActions(
+                                                                                        onNext = {
+                                                                                                focusManager
+                                                                                                        .moveFocus(
+                                                                                                                FocusDirection
+                                                                                                                        .Right
+                                                                                                        )
+                                                                                        }
+                                                                                ),
+                                                                        singleLine = true,
                                                                         placeholder = {
                                                                                 Text("숫자만 입력 가능합니다")
                                                                         }
@@ -791,7 +871,24 @@ fun PrivacyAgreementScreen(
                                                                                         )
                                                                         },
                                                                         modifier =
-                                                                                Modifier.fillMaxWidth()
+                                                                                Modifier.fillMaxWidth(),
+                                                                        singleLine = true,
+                                                                        keyboardOptions =
+                                                                                KeyboardOptions(
+                                                                                        imeAction =
+                                                                                                ImeAction
+                                                                                                        .Next
+                                                                                ),
+                                                                        keyboardActions =
+                                                                                KeyboardActions(
+                                                                                        onNext = {
+                                                                                                focusManager
+                                                                                                        .moveFocus(
+                                                                                                                FocusDirection
+                                                                                                                        .Down
+                                                                                                        )
+                                                                                        }
+                                                                                )
                                                                 )
                                                         }
                                                 }
@@ -920,7 +1017,21 @@ fun PrivacyAgreementScreen(
                                                                                 )
                                                                         },
                                                                         modifier =
-                                                                                Modifier.weight(1f)
+                                                                                Modifier.weight(1f),
+                                                                        singleLine = true,
+                                                                        keyboardOptions =
+                                                                                KeyboardOptions(
+                                                                                        imeAction =
+                                                                                                ImeAction
+                                                                                                        .Done
+                                                                                ),
+                                                                        keyboardActions =
+                                                                                KeyboardActions(
+                                                                                        onDone = {
+                                                                                                focusManager
+                                                                                                        .clearFocus()
+                                                                                        }
+                                                                                )
                                                                 )
                                                         }
                                                 }
