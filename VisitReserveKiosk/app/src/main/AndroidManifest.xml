@@ -34,6 +34,10 @@
             android:exported="false"
             android:theme="@style/Theme.VisitReserveKiosk" />
         <activity
+            android:name=".VisitResultActivity"
+            android:exported="false"
+            android:theme="@style/Theme.VisitReserveKiosk" />
+        <activity
             android:name=".ui.screen.ApiSettingsActivity"
             android:exported="false" />
     </application>

@@ -51,7 +51,7 @@ private const val INACTIVITY_TIMEOUT_SECONDS = 60
 @Composable
 fun PrivacyAgreementScreen(
         onBackClick: () -> Unit,
-        onNavigateToResult: () -> Unit,
+        onNavigateToResult: (String, String) -> Unit,
         viewModel: PrivacyAgreementViewModel = viewModel()
 ) {
         val scrollState = rememberScrollState()
@@ -88,7 +88,7 @@ fun PrivacyAgreementScreen(
         // 예약 성공 시 결과 화면 이동
         LaunchedEffect(reservationSuccess) {
                 if (reservationSuccess) {
-                        onNavigateToResult()
+                        onNavigateToResult(formState.visitorName, formState.visitDate)
                 }
         }
 
@@ -1312,5 +1312,7 @@ fun PrivacyAgreementScreen(
 @Preview(showBackground = true, widthDp = 720, heightDp = 1280)
 @Composable
 fun PrivacyAgreementScreenPreview() {
-        VisitReserveKioskTheme { PrivacyAgreementScreen(onBackClick = {}, onNavigateToResult = {}) }
+        VisitReserveKioskTheme {
+                PrivacyAgreementScreen(onBackClick = {}, onNavigateToResult = { _, _ -> })
+        }
 }

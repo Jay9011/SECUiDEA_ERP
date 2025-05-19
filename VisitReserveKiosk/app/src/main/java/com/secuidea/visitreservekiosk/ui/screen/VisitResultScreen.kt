@@ -1,0 +1,102 @@
+package com.secuidea.visitreservekiosk.ui.screen
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.secuidea.visitreservekiosk.R
+import com.secuidea.visitreservekiosk.VideoPlayer
+import com.secuidea.visitreservekiosk.ui.components.InactivityTimer
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () -> Unit) {
+    // 컨테이너 레이아웃
+    Box(modifier = Modifier.fillMaxSize()) {
+        // 1. 배경 비디오
+        VideoPlayer(
+                videoResId = R.raw.outro,
+                videoFileName = "outro.mp4",
+                modifier = Modifier.fillMaxSize()
+        )
+
+        // 2. 결과 화면 UI - 배경 없이 표시
+        Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                containerColor = Color.Transparent, // 배경을 투명하게 설정
+                contentColor = MaterialTheme.colorScheme.onBackground,
+                topBar = {
+                    TopAppBar(
+                            title = { Text("방문 신청 완료") },
+                            actions = {
+                                // 타이머 표시
+                                InactivityTimer(
+                                    timeoutSeconds = 30,
+                                    onTimeout = onBackClick
+                                )
+                            }
+                    )
+                }
+        ) { padding ->
+            // 결과 카드
+            Box(
+                    modifier = Modifier.fillMaxSize().padding(padding),
+                    contentAlignment = Alignment.Center
+            ) {
+                Card(
+                        modifier = Modifier.fillMaxWidth(0.85f).padding(16.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+                        colors =
+                                CardDefaults.cardColors(
+                                        containerColor = Color.White.copy(alpha = 0.9f) // 약간 투명하게
+                                )
+                ) {
+                    Column(
+                            modifier = Modifier.padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                                Icons.Default.CheckCircle,
+                                contentDescription = null,
+                                tint = Color(0xFF4CAF50),
+                                modifier = Modifier.size(80.dp)
+                        )
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        Text("감사합니다, $visitorName 님!", style = MaterialTheme.typography.titleLarge)
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Text("방문일: $visitDate", style = MaterialTheme.typography.bodyLarge)
+
+                        Spacer(modifier = Modifier.height(24.dp))
+
+                        Text(
+                                "귀하의 방문 신청이 정상적으로 접수되었습니다.\n담당자가 확인 후 연락드릴 예정입니다.",
+                                style = MaterialTheme.typography.bodyMedium
+                        )
+
+                        Spacer(modifier = Modifier.height(32.dp))
+
+                        Button(
+                                onClick = onBackClick,
+                                colors =
+                                        ButtonDefaults.buttonColors(
+                                                containerColor = MaterialTheme.colorScheme.primary
+                                        ),
+                                modifier = Modifier.width(200.dp)
+                        ) { Text("처음으로") }
+                    }
+                }
+            }
+        }
+    }
+}

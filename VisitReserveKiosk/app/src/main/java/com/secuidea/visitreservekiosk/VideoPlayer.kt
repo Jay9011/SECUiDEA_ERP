@@ -48,15 +48,15 @@ fun VideoPlayer(
     LaunchedEffect(videoResId, videoFileName) {
         videoUri =
                 when {
-                    // 1. 파일 이름이 제공된 경우 로컬 스토리지에서 찾기
-                    !videoFileName.isNullOrEmpty() -> {
+                    // 1. 파일 이름이 제공되고, 실제 파일이 존재할 때
+                    !videoFileName.isNullOrEmpty() && findVideoFileUri(context, videoFileName) != null -> {
                         findVideoFileUri(context, videoFileName)
                     }
-                    // 2. 리소스 ID가 제공된 경우
-                    videoResId != null -> {
+                    // 2. 리소스 ID가 제공되고, 리소스가 실제로 존재할 때
+                    videoResId != null && resourceExists(context, videoResId) -> {
                         Uri.parse("android.resource://${context.packageName}/$videoResId")
                     }
-                    // 3. 기본값 (예제 비디오 또는 null)
+                    // 3. 둘 다 없으면 null
                     else -> null
                 }
     }
@@ -124,6 +124,17 @@ fun VideoPlayer(
             )
         }
     }
+}
+
+private fun resourceExists(context: Context, resId: Int): Boolean {
+    try {
+        context.resources.getResourceName(resId)
+        return true
+    } catch (e: Exception) {
+        return false
+    }
+
+    return false
 }
 
 /**

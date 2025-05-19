@@ -1,5 +1,6 @@
 package com.secuidea.visitreservekiosk
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -36,9 +37,20 @@ class PrivacyAgreementActivity : ComponentActivity() {
                 Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
-                ) { PrivacyAgreementScreen(onBackClick = { finish() }, onNavigateToResult = { 
-                // TODO: 결과화면
-                }) }
+                ) {
+                    PrivacyAgreementScreen(
+                            onBackClick = { finish() },
+                            onNavigateToResult = { visitorName, visitDate ->
+                                val intent =
+                                        Intent(this, VisitResultActivity::class.java).apply {
+                                            putExtra("visitorName", visitorName)
+                                            putExtra("visitDate", visitDate)
+                                        }
+                                startActivity(intent)
+                                finish()
+                            }
+                    )
+                }
             }
         }
     }
