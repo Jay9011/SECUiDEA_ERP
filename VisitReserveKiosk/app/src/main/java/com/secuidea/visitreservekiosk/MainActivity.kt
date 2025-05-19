@@ -1,6 +1,7 @@
 package com.secuidea.visitreservekiosk
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -44,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.media3.exoplayer.ExoPlayer
 import com.secuidea.visitreservekiosk.language.AppStrings
 import com.secuidea.visitreservekiosk.language.LocaleHelper
 import com.secuidea.visitreservekiosk.ui.screen.ApiSettingsActivity
@@ -69,6 +71,17 @@ class MainActivity : ComponentActivity() {
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         enableEdgeToEdge()
+
+        // intro, outro 비디오 미리 준비
+        val introUri =
+                findVideoFileUri(this, "intro.mp4")
+                        ?: Uri.parse("android.resource://${packageName}/${R.raw.intro}")
+        val outroUri =
+                findVideoFileUri(this, "outro.mp4")
+                        ?: Uri.parse("android.resource://${packageName}/${R.raw.outro}")
+        VideoPlayerManager.prepareIntroPlayer(this, introUri)
+        VideoPlayerManager.prepareOutroPlayer(this, outroUri)
+
         setContent {
             VisitReserveKioskTheme {
                 MainScreen(
@@ -81,15 +94,26 @@ class MainActivity : ComponentActivity() {
                             // API 설정 화면으로 이동
                             val intent = Intent(this, ApiSettingsActivity::class.java)
                             startActivity(intent)
-                        }
+                        },
+                        introPlayer = VideoPlayerManager.introPlayer
                 )
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // 앱 종료 시 모든 ExoPlayer 인스턴스 해제
+        VideoPlayerManager.releaseAll()
+    }
 }
 
 @Composable
-fun MainScreen(onVisitRequestClick: () -> Unit = {}, onAdminSettingsClick: () -> Unit = {}) {
+fun MainScreen(
+        onVisitRequestClick: () -> Unit = {},
+        onAdminSettingsClick: () -> Unit = {},
+        introPlayer: ExoPlayer? = null
+) {
     val context = LocalContext.current
 
     // 상태 정의
@@ -159,14 +183,9 @@ fun MainScreen(onVisitRequestClick: () -> Unit = {}, onAdminSettingsClick: () ->
 
             // 동영상 영역
             Box(
-                    modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f), // 16:9 비율 유지
+                    modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f),
                     contentAlignment = Alignment.Center
-            ) {
-                // 동영상 플레이어 - 리소스 ID와 파일 이름을 모두 지정
-                // 1. 먼저 로컬 스토리지에서 "intro.mp4" 파일을 찾음
-                // 2. 없으면 R.raw.intro 리소스를 사용
-                VideoPlayer(videoResId = R.raw.intro, videoFileName = "intro.mp4")
-            }
+            ) { VideoPlayer(exoPlayer = introPlayer) }
 
             // 하단 환영 메시지 및 버튼
             Box(
