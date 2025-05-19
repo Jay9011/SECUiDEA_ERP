@@ -5,6 +5,7 @@ import com.secuidea.visitreservekiosk.api.ApiErrorHandler.launchSafeApiCall
 import com.secuidea.visitreservekiosk.api.ApiException
 import com.secuidea.visitreservekiosk.data.models.*
 import com.secuidea.visitreservekiosk.data.repository.VisitRepository
+import com.secuidea.visitreservekiosk.language.AppStrings
 import com.secuidea.visitreservekiosk.language.LocaleHelper
 import java.text.SimpleDateFormat
 import java.util.*
@@ -55,10 +56,14 @@ class PrivacyAgreementViewModel : ViewModel() {
     private val _reservationSuccess = MutableStateFlow(false)
     val reservationSuccess: StateFlow<Boolean> = _reservationSuccess.asStateFlow()
 
+    // 현재 언어
+    private val currentLanguage: String
+        get() = LocaleHelper.getLanguage()
+
     // 방문 목적 목록 로드
     fun loadVisitReasons() {
         launchSafeApiCall(_apiError, _isLoading) {
-            val language = LocaleHelper.getLanguage()
+            val language = currentLanguage
             val response = repository.getVisitReasons(language)
             _visitReasons.value = response.data?.reasons ?: emptyList()
             if (response.data?.reasons?.isNotEmpty() == true) {
@@ -83,7 +88,13 @@ class PrivacyAgreementViewModel : ViewModel() {
     fun verifyEmployee() {
         val name = _formState.value.employeeName.trim()
         if (name.isEmpty()) {
-            updateFieldError("employeeName", "직원 이름을 입력해주세요.")
+            updateFieldError(
+                    "employeeName",
+                    AppStrings.ErrorMessages.getLocalizedMessage(
+                            "employeeNameRequired",
+                            currentLanguage
+                    )
+            )
             return
         }
 
@@ -93,9 +104,17 @@ class PrivacyAgreementViewModel : ViewModel() {
             val response = repository.verifyEmployee(name)
             val employees = response.data?.employees ?: emptyList()
             if (employees == null) {
-                _verificationError.value = "서버 응답 오류: 직원 목록이 없습니다."
+                _verificationError.value =
+                        AppStrings.ErrorMessages.getLocalizedMessage(
+                                "serverResponseError",
+                                currentLanguage
+                        )
             } else if (employees.isEmpty()) {
-                _verificationError.value = "해당 이름의 직원을 찾을 수 없습니다."
+                _verificationError.value =
+                        AppStrings.ErrorMessages.getLocalizedMessage(
+                                "employeeNotFound",
+                                currentLanguage
+                        )
             } else if (employees.size == 1) {
                 // 직원이 한 명인 경우 바로 선택
                 val employee = employees[0]
@@ -196,18 +215,33 @@ class PrivacyAgreementViewModel : ViewModel() {
 
         // 직원 확인 여부 검사
         if (!_isEmployeeVerified.value || _formState.value.employeePid == 0) {
-            updateFieldError("employee", "직원 확인이 필요합니다.")
+            updateFieldError(
+                    "employee",
+                    AppStrings.ErrorMessages.getLocalizedMessage(
+                            "employeeVerificationRequired",
+                            currentLanguage
+                    )
+            )
             isValid = false
         }
 
         // 필수 필드 검사
         if (_formState.value.visitorName.trim().isEmpty()) {
-            updateFieldError("visitorName", "방문자 이름을 입력해주세요.")
+            updateFieldError(
+                    "visitorName",
+                    AppStrings.ErrorMessages.getLocalizedMessage(
+                            "visitorNameRequired",
+                            currentLanguage
+                    )
+            )
             isValid = false
         }
 
         if (_formState.value.visitorContact.trim().isEmpty()) {
-            updateFieldError("visitorContact", "연락처를 입력해주세요.")
+            updateFieldError(
+                    "visitorContact",
+                    AppStrings.ErrorMessages.getLocalizedMessage("contactRequired", currentLanguage)
+            )
             isValid = false
         }
 

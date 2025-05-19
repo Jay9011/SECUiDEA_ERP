@@ -902,7 +902,10 @@ fun PrivacyAgreementScreen(
                                                                                 ),
                                                                         singleLine = true,
                                                                         placeholder = {
-                                                                                Text("숫자만 입력 가능합니다")
+                                                                                Text(
+                                                                                        AppStrings
+                                                                                                .numbersOnlyPlaceholder
+                                                                                )
                                                                         }
                                                                 )
 

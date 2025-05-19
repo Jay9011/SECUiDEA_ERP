@@ -19,8 +19,8 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 버튼을 눌러주세요"
-            else "Please press the button below to request a visit"
+                if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 버튼을 눌러주세요"
+                else "Please press the button below to request a visit"
 
     val visitRequestButton: String
         @Composable
@@ -45,8 +45,8 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 정보를 입력해주세요"
-            else "Please fill in the information below to request a visit"
+                if (LocaleHelper.isKorean()) "방문 신청을 위해 아래 정보를 입력해주세요"
+                else "Please fill in the information below to request a visit"
 
     val privacyPolicyTitle: String
         @Composable
@@ -57,30 +57,30 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean()) "아래 내용을 읽고 개인정보 수집 및 이용에 동의해주세요."
-            else
-                "Please read the following and agree to the collection and use of personal information."
+                if (LocaleHelper.isKorean()) "아래 내용을 읽고 개인정보 수집 및 이용에 동의해주세요."
+                else
+                        "Please read the following and agree to the collection and use of personal information."
 
     val privacyPolicyAccordionTitle: String
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean()) "개인정보 수집 및 이용 동의"
-            else "Consent to collection and use of personal information"
+                if (LocaleHelper.isKorean()) "개인정보 수집 및 이용 동의"
+                else "Consent to collection and use of personal information"
 
     val privacyPolicyContent: String
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean())
-                """
+                if (LocaleHelper.isKorean())
+                        """
 1. 수집항목: 이름, 연락처, 회사명, 이메일, 차량번호
 2. 수집목적: 방문자 확인 및 출입 관리
 3. 보유기간: 방문일로부터 1년간 보관 후 파기
 4. 동의를 거부할 권리가 있으나, 동의 거부 시 방문 신청이 제한됩니다.
                 """
-            else
-                """
+                else
+                        """
 1. Collection items: Name, Contact, Company name, Email, Vehicle number
 2. Purpose of collection: Visitor verification and access management
 3. Retention period: Stored for 1 year from the date of visit and then destroyed
@@ -99,9 +99,9 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean()) "개인정보 수집에 동의하지 않으면 방문 신청을 진행할 수 없습니다."
-            else
-                "If you do not agree to the collection of personal information, you cannot proceed with the visit request."
+                if (LocaleHelper.isKorean()) "개인정보 수집에 동의하지 않으면 방문 신청을 진행할 수 없습니다."
+                else
+                        "If you do not agree to the collection of personal information, you cannot proceed with the visit request."
 
     val employeeInfoTitle: String
         @Composable
@@ -153,7 +153,7 @@ object AppStrings {
     val visitDateLabel: String
         @Composable
         @ReadOnlyComposable
-        get() = if (LocaleHelper.isKorean()) "방문 날짜" else "Visit Date"
+        get() = if (LocaleHelper.isKorean()) "방문일: " else "Visit Date: "
 
     val visitTimeLabel: String
         @Composable
@@ -192,15 +192,15 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean()) "요청을 처리하는 중 오류가 발생했습니다."
-            else "An error occurred while processing your request."
+                if (LocaleHelper.isKorean()) "요청을 처리하는 중 오류가 발생했습니다."
+                else "An error occurred while processing your request."
 
     val contactAdminMessage: String
         @Composable
         @ReadOnlyComposable
         get() =
-            if (LocaleHelper.isKorean()) "관리자에게 문의해 주세요."
-            else "Please contact the administrator."
+                if (LocaleHelper.isKorean()) "관리자에게 문의해 주세요."
+                else "Please contact the administrator."
 
     val dismissButtonLabel: String
         @Composable @ReadOnlyComposable get() = if (LocaleHelper.isKorean()) "닫기" else "Dismiss"
@@ -209,4 +209,109 @@ object AppStrings {
         @Composable
         @ReadOnlyComposable
         get() = if (LocaleHelper.isKorean()) "첫 화면으로 돌아가기" else "Return to Home"
+
+    // 방문 결과 화면 문자열
+    val visitCompleteTitle: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "방문 신청 완료" else "Visit Request Completed"
+
+    val visitThankYouMessage: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "감사합니다," else "Thank you,"
+
+    val visitRequestCompletedMessage: String
+        @Composable
+        @ReadOnlyComposable
+        get() =
+                if (LocaleHelper.isKorean()) "귀하의 방문 신청이 정상적으로 접수되었습니다.\n담당자가 확인 후 연락드릴 예정입니다."
+                else
+                        "Your visit request has been successfully received.\nA staff member will contact you after review."
+
+    val returnToHomeButton: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "처음으로" else "Return to Home"
+
+    // 검증 에러 메시지
+    val employeeNotFoundError: String
+        @Composable
+        @ReadOnlyComposable
+        get() =
+                if (LocaleHelper.isKorean()) "해당 이름의 직원을 찾을 수 없습니다."
+                else "No employee found with this name."
+
+    val serverResponseError: String
+        @Composable
+        @ReadOnlyComposable
+        get() =
+                if (LocaleHelper.isKorean()) "서버 응답 오류: 직원 목록이 없습니다."
+                else "Server response error: No employee list available."
+
+    // 입력 필드 관련 문자열
+    val numbersOnlyPlaceholder: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "숫자만 입력 가능합니다" else "Numbers only"
+
+    val employeeVerificationRequired: String
+        @Composable
+        @ReadOnlyComposable
+        get() =
+                if (LocaleHelper.isKorean()) "직원 확인이 필요합니다."
+                else "Employee verification is required."
+
+    val visitorNameRequired: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "방문자 이름을 입력해주세요." else "Please enter visitor name."
+
+    val contactRequired: String
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocaleHelper.isKorean()) "연락처를 입력해주세요." else "Please enter contact information."
+
+    // ViewModel에서 사용할 상수 문자열 (Composable 아님)
+    object ErrorMessages {
+        // 직원 검증 관련 에러
+        val EMPLOYEE_NAME_REQUIRED_KO = "직원 이름을 입력해주세요."
+        val EMPLOYEE_NAME_REQUIRED_EN = "Please enter employee name."
+
+        val SERVER_RESPONSE_ERROR_KO = "서버 응답 오류: 직원 목록이 없습니다."
+        val SERVER_RESPONSE_ERROR_EN = "Server response error: No employee list available."
+
+        val EMPLOYEE_NOT_FOUND_KO = "해당 이름의 직원을 찾을 수 없습니다."
+        val EMPLOYEE_NOT_FOUND_EN = "No employee found with this name."
+
+        val EMPLOYEE_VERIFICATION_REQUIRED_KO = "직원 확인이 필요합니다."
+        val EMPLOYEE_VERIFICATION_REQUIRED_EN = "Employee verification is required."
+
+        val VISITOR_NAME_REQUIRED_KO = "방문자 이름을 입력해주세요."
+        val VISITOR_NAME_REQUIRED_EN = "Please enter visitor name."
+
+        val CONTACT_REQUIRED_KO = "연락처를 입력해주세요."
+        val CONTACT_REQUIRED_EN = "Please enter contact information."
+
+        // 언어에 따른 에러 메시지 반환
+        fun getLocalizedMessage(key: String, language: String): String {
+            return when (key) {
+                "employeeNameRequired" ->
+                        if (language == "ko") EMPLOYEE_NAME_REQUIRED_KO
+                        else EMPLOYEE_NAME_REQUIRED_EN
+                "serverResponseError" ->
+                        if (language == "ko") SERVER_RESPONSE_ERROR_KO else SERVER_RESPONSE_ERROR_EN
+                "employeeNotFound" ->
+                        if (language == "ko") EMPLOYEE_NOT_FOUND_KO else EMPLOYEE_NOT_FOUND_EN
+                "employeeVerificationRequired" ->
+                        if (language == "ko") EMPLOYEE_VERIFICATION_REQUIRED_KO
+                        else EMPLOYEE_VERIFICATION_REQUIRED_EN
+                "visitorNameRequired" ->
+                        if (language == "ko") VISITOR_NAME_REQUIRED_KO else VISITOR_NAME_REQUIRED_EN
+                "contactRequired" ->
+                        if (language == "ko") CONTACT_REQUIRED_KO else CONTACT_REQUIRED_EN
+                else -> "Error"
+            }
+        }
+    }
 }

@@ -1,6 +1,5 @@
 package com.secuidea.visitreservekiosk.ui.screen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,9 +13,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.secuidea.visitreservekiosk.MainScreen
 import com.secuidea.visitreservekiosk.VideoPlayer
 import com.secuidea.visitreservekiosk.VideoPlayerManager
+import com.secuidea.visitreservekiosk.language.AppStrings
 import com.secuidea.visitreservekiosk.ui.components.InactivityTimer
 import com.secuidea.visitreservekiosk.ui.theme.PrimaryColor
 import com.secuidea.visitreservekiosk.ui.theme.SuccessColor
@@ -48,7 +47,7 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
                 contentColor = MaterialTheme.colorScheme.onBackground,
                 topBar = {
                     TopAppBar(
-                            title = { Text("방문 신청 완료") },
+                            title = { Text(AppStrings.visitCompleteTitle) },
                             actions = {
                                 InactivityTimer(timeoutSeconds = 10, onTimeout = onBackClick)
                             }
@@ -79,7 +78,7 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Text(
-                                "감사합니다, $visitorName 님!",
+                                "${AppStrings.visitThankYouMessage} $visitorName 님!",
                                 style = MaterialTheme.typography.titleLarge,
                                 color = PrimaryColor
                         )
@@ -87,7 +86,7 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(
-                                "방문일: $visitDate",
+                                "${AppStrings.visitDateLabel}$visitDate",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = TextPrimaryColor
                         )
@@ -103,32 +102,39 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
                         contentAlignment = Alignment.Center
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxSize().padding(padding),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceAround
-                    )
-                    {
+                            modifier = Modifier.fillMaxSize().padding(padding),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.SpaceAround
+                    ) {
                         Text(
-                            "귀하의 방문 신청이 정상적으로 접수되었습니다.\n담당자가 확인 후 연락드릴 예정입니다.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = PrimaryColor,
-                            textAlign = TextAlign.Center
+                                AppStrings.visitRequestCompletedMessage,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = PrimaryColor,
+                                textAlign = TextAlign.Center
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Button(
-                            onClick = onBackClick,
-                            colors =
-                                ButtonDefaults.buttonColors(
-                                    containerColor =
-                                        MaterialTheme.colorScheme.primary.copy(
-                                            alpha = 0.9f
-                                        )
-                                ),
-                            modifier = Modifier.padding(bottom = 48.dp).width(200.dp).height(56.dp),
-                            shape = RoundedCornerShape(12.dp)
-                        ) { Text("처음으로", style = MaterialTheme.typography.titleMedium) }
+                                onClick = onBackClick,
+                                colors =
+                                        ButtonDefaults.buttonColors(
+                                                containerColor =
+                                                        MaterialTheme.colorScheme.primary.copy(
+                                                                alpha = 0.9f
+                                                        )
+                                        ),
+                                modifier =
+                                        Modifier.padding(bottom = 48.dp)
+                                                .width(200.dp)
+                                                .height(56.dp),
+                                shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text(
+                                    AppStrings.returnToHomeButton,
+                                    style = MaterialTheme.typography.titleMedium
+                            )
+                        }
                     }
                 }
             }
@@ -139,5 +145,7 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
 @Preview(showBackground = true, widthDp = 720, heightDp = 1280)
 @Composable
 fun VisitResultScreenPreview() {
-    VisitReserveKioskTheme { VisitResultScreen(visitorName = "테스트", visitDate = "2025-05-19", onBackClick = {}) }
+    VisitReserveKioskTheme {
+        VisitResultScreen(visitorName = "테스트", visitDate = "2025-05-19", onBackClick = {})
+    }
 }
