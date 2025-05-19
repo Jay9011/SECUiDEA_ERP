@@ -7,7 +7,14 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -37,6 +44,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -120,6 +128,9 @@ fun MainScreen(
     val buttonScale by animateFloatAsState(targetValue = 1f, label = "buttonScale")
     val currentLanguage by remember { LocaleHelper.currentLanguage }
 
+    // 로고를 위한 painter
+    val logoPainter = painterResource(id = R.drawable.logo)
+
     // 숨겨진 버튼 터치 카운터
     var secretTapCount by remember { mutableIntStateOf(0) }
 
@@ -168,11 +179,42 @@ fun MainScreen(
                     contentAlignment = Alignment.BottomCenter
             ) {
                 Column(
-                        Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 24.dp),
+                        Modifier.fillMaxWidth().padding(horizontal = 24.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                 ) {
-                    Text(text = "ASMK 로고")
+                    // 회전 애니메이션을 위한 무한 트랜지션
+                    val infiniteTransition = rememberInfiniteTransition(label = "logoRotation")
+
+                    // Y축 회전 각도 애니메이션 (0도 ~ 360도)
+                    val rotationY by
+                            infiniteTransition.animateFloat(
+                                    initialValue = 0f,
+                                    targetValue = 360f,
+                                    animationSpec =
+                                            infiniteRepeatable(
+                                                    animation = tween(4000, easing = LinearEasing),
+                                                    repeatMode = RepeatMode.Restart
+                                            ),
+                                    label = "rotationYAnimation"
+                            )
+
+                    // 로고 표시 (Y축 회전 효과 적용)
+                    Image(
+                            painter = logoPainter,
+                            contentDescription = "ASMK 로고",
+                            modifier =
+                                    Modifier.size(120.dp).graphicsLayer {
+                                        // Y축 기준 회전
+                                        this.rotationY = rotationY
+                                        // 3D 효과를 위한 카메라 거리 설정
+                                        this.cameraDistance = 8f * density
+                                    }
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    // 앱 타이틀
                     Text(
                             text = AppStrings.appTitle,
                             style = MaterialTheme.typography.displayLarge,

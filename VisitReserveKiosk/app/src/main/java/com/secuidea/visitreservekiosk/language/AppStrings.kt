@@ -8,7 +8,7 @@ object AppStrings {
     val appTitle: String
         @Composable
         @ReadOnlyComposable
-        get() = if (LocaleHelper.isKorean()) "ASMK 방문 예약 시스템" else "ASMK Visit Request System"
+        get() = if (LocaleHelper.isKorean()) "ASMK 방문 예약 시스템" else "ASMK Visit Reservation"
 
     val welcomeTitle: String
         @Composable

@@ -3,8 +3,8 @@ package com.secuidea.visitreservekiosk.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // 메인 색상
-val PrimaryColor = Color(0xFF4A35FF) // 선명한 보라색 (버튼 색상)
-val SecondaryColor = Color(0xFF6A5AFF) // 부드러운 보라색
+val PrimaryColor = Color(0xFF5F4664) // 선명한 보라색 (버튼 색상)
+val SecondaryColor = Color(0xFF9E7EA4) // 부드러운 보라색
 val TertiaryColor = Color(0xFF00C8B3) // 청록색 (포인트 색상)
 
 // 배경 색상
