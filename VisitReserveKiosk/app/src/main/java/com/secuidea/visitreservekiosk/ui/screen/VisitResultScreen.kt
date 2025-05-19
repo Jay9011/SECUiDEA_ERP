@@ -2,6 +2,7 @@ package com.secuidea.visitreservekiosk.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -10,10 +11,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.secuidea.visitreservekiosk.MainScreen
 import com.secuidea.visitreservekiosk.VideoPlayer
 import com.secuidea.visitreservekiosk.VideoPlayerManager
 import com.secuidea.visitreservekiosk.ui.components.InactivityTimer
+import com.secuidea.visitreservekiosk.ui.theme.PrimaryColor
+import com.secuidea.visitreservekiosk.ui.theme.SuccessColor
+import com.secuidea.visitreservekiosk.ui.theme.TextPrimaryColor
+import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,8 +32,8 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
     // 화면 사라질 때 비디오 초기화
     DisposableEffect(Unit) { onDispose { VideoPlayerManager.resetOutroVideo() } }
 
-    // 컨테이너 레이아웃
-    Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
+    // 전체 레이아웃 (비디오 + UI 요소)
+    Box(modifier = Modifier.fillMaxSize()) {
         // 1. 배경 비디오 (미리 준비된 outroPlayer 사용)
         VideoPlayer(
                 exoPlayer = VideoPlayerManager.outroPlayer,
@@ -33,7 +41,7 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
                 showLoadingIndicator = false
         )
 
-        // 2. 결과 화면 UI
+        // 2. 3단 레이아웃 (상단: 메시지, 중앙: 빈 공간, 하단: 버튼)
         Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 containerColor = Color.Transparent,
@@ -42,25 +50,20 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
                     TopAppBar(
                             title = { Text("방문 신청 완료") },
                             actions = {
-                                // 타이머 표시
-                                InactivityTimer(timeoutSeconds = 30, onTimeout = onBackClick)
+                                InactivityTimer(timeoutSeconds = 10, onTimeout = onBackClick)
                             }
                     )
                 }
         ) { padding ->
-            // 결과 카드
-            Box(
+            Column(
                     modifier = Modifier.fillMaxSize().padding(padding),
-                    contentAlignment = Alignment.Center
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Card(
-                        modifier = Modifier.fillMaxWidth(0.85f).padding(16.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-                        colors =
-                                CardDefaults.cardColors(
-                                        containerColor = Color.White.copy(alpha = 0.9f)
-                                )
+                // 상단 영역 (감사 메시지)
+                Box(
+                        modifier = Modifier.fillMaxWidth().weight(.8f),
+                        contentAlignment = Alignment.Center
                 ) {
                     Column(
                             modifier = Modifier.padding(24.dp),
@@ -69,38 +72,72 @@ fun VisitResultScreen(visitorName: String, visitDate: String, onBackClick: () ->
                         Icon(
                                 Icons.Default.CheckCircle,
                                 contentDescription = null,
-                                tint = Color(0xFF4CAF50),
-                                modifier = Modifier.size(80.dp)
+                                tint = SuccessColor,
+                                modifier = Modifier.size(64.dp)
                         )
 
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                        Text("감사합니다, $visitorName 님!", style = MaterialTheme.typography.titleLarge)
+                        Text(
+                                "감사합니다, $visitorName 님!",
+                                style = MaterialTheme.typography.titleLarge,
+                                color = PrimaryColor
+                        )
 
                         Spacer(modifier = Modifier.height(8.dp))
 
-                        Text("방문일: $visitDate", style = MaterialTheme.typography.bodyLarge)
-
-                        Spacer(modifier = Modifier.height(24.dp))
-
                         Text(
-                                "귀하의 방문 신청이 정상적으로 접수되었습니다.\n담당자가 확인 후 연락드릴 예정입니다.",
-                                style = MaterialTheme.typography.bodyMedium
+                                "방문일: $visitDate",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = TextPrimaryColor
+                        )
+                    }
+                }
+
+                // 중앙 영역 (비디오에 집중할 수 있도록 비움)
+                Spacer(modifier = Modifier.weight(1f))
+
+                // 하단 영역 (버튼)
+                Box(
+                        modifier = Modifier.fillMaxWidth().weight(.8f),
+                        contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxSize().padding(padding),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceAround
+                    )
+                    {
+                        Text(
+                            "귀하의 방문 신청이 정상적으로 접수되었습니다.\n담당자가 확인 후 연락드릴 예정입니다.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = PrimaryColor,
+                            textAlign = TextAlign.Center
                         )
 
-                        Spacer(modifier = Modifier.height(32.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
 
                         Button(
-                                onClick = onBackClick,
-                                colors =
-                                        ButtonDefaults.buttonColors(
-                                                containerColor = MaterialTheme.colorScheme.primary
-                                        ),
-                                modifier = Modifier.width(200.dp)
-                        ) { Text("처음으로") }
+                            onClick = onBackClick,
+                            colors =
+                                ButtonDefaults.buttonColors(
+                                    containerColor =
+                                        MaterialTheme.colorScheme.primary.copy(
+                                            alpha = 0.9f
+                                        )
+                                ),
+                            modifier = Modifier.padding(bottom = 48.dp).width(200.dp).height(56.dp),
+                            shape = RoundedCornerShape(12.dp)
+                        ) { Text("처음으로", style = MaterialTheme.typography.titleMedium) }
                     }
                 }
             }
         }
     }
+}
+
+@Preview(showBackground = true, widthDp = 720, heightDp = 1280)
+@Composable
+fun VisitResultScreenPreview() {
+    VisitReserveKioskTheme { VisitResultScreen(visitorName = "테스트", visitDate = "2025-05-19", onBackClick = {}) }
 }
