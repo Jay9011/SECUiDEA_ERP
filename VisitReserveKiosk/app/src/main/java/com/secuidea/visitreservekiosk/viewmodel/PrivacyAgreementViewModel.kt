@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.secuidea.visitreservekiosk.api.ApiErrorHandler.launchSafeApiCall
 import com.secuidea.visitreservekiosk.api.ApiException
 import com.secuidea.visitreservekiosk.data.models.*
+import com.secuidea.visitreservekiosk.data.repository.ApiResult
 import com.secuidea.visitreservekiosk.data.repository.VisitRepository
 import com.secuidea.visitreservekiosk.language.AppStrings
 import com.secuidea.visitreservekiosk.language.LocaleHelper
@@ -337,6 +338,26 @@ class PrivacyAgreementViewModel : ViewModel() {
                             templateVariables = templateVariables,
                             queryVariables = queryVariables
                     )
+                }
+
+                // 3. 방문자 임시 교육 완료 처리
+                try {
+                    val contactLastEight = updatedForm.visitorContact.takeLast(8)
+                    val id = "${visitorName}|${contactLastEight}"
+                    val body = GuestLoginModel(id = id, password = contactLastEight)
+
+                    val educationResult = repository.autoCompleteEducation(body)
+
+                    if (educationResult is ApiResult.Success) {
+                        // 교육 완료 처리 성공
+                        println("방문자 교육 완료 처리 성공")
+                    } else if (educationResult is ApiResult.Error) {
+                        // 교육 완료 처리 실패 (로그만 남기고 결과에는 영향 없음)
+                        println("방문자 교육 완료 처리 실패: ${educationResult.message}")
+                    }
+                } catch (e: Exception) {
+                    // 교육 완료 처리 중 오류 발생 (로그만 남기고 결과에는 영향 없음)
+                    println("교육 완료 처리 오류: ${e.message}")
                 }
 
                 // 예약 성공 신호

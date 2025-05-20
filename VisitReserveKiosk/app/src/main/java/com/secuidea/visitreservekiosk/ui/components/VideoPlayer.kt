@@ -1,4 +1,4 @@
-package com.secuidea.visitreservekiosk
+package com.secuidea.visitreservekiosk.ui.components
 
 import android.content.Context
 import android.net.Uri

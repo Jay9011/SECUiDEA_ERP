@@ -24,6 +24,7 @@ BEGIN
     SET @StatusFilter = LOWER(@StatusFilter);
     
     DECLARE @Offset INT = (@Page - 1) * @PageSize;  -- 페이지네이션을 위한 Offset 계산
+    DECLARE @IsEducated BIT = NULL;
 
     -- RoleType이 Employee일 경우
     IF (@RoleType = 'employee')
@@ -53,8 +54,9 @@ BEGIN
                 ,   vrv.InsertDate AS RegisteredDate
                 ,   (CASE
                             WHEN v.EducationDate IS NULL THEN 0
-                            WHEN DATEDIFF(MONTH, v.EducationDate, GETDATE()) > 3 THEN 0
-                            ELSE 1
+                            WHEN v.Education = 1 AND DATEADD(MONTH, 3, v.EducationDate) >= CAST(GETDATE() AS DATE) THEN 1
+                            WHEN v.Education = 2 AND DATEADD(DAY, 1, v.EducationDate) >= CAST(GETDATE() AS DATE) THEN 1
+                            ELSE 0
                         END
                     ) AS Education
                 ,   v.EducationDate AS EducationDate
@@ -101,8 +103,9 @@ BEGIN
                 ,   vrv.InsertDate AS RegisteredDate
                 ,   (CASE
                             WHEN v.EducationDate IS NULL THEN 0
-                            WHEN DATEDIFF(MONTH, v.EducationDate, GETDATE()) > 3 THEN 0
-                            ELSE 1
+                            WHEN v.Education = 1 AND DATEADD(MONTH, 3, v.EducationDate) >= CAST(GETDATE() AS DATE) THEN 1
+                            WHEN v.Education = 2 AND DATEADD(DAY, 1, v.EducationDate) >= CAST(GETDATE() AS DATE) THEN 1
+                            ELSE 0
                         END
                     ) AS Education
                 ,   v.EducationDate AS EducationDate

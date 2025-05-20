@@ -2,9 +2,9 @@ package com.secuidea.visitreservekiosk.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.secuidea.visitreservekiosk.api.ApiResult
-import com.secuidea.visitreservekiosk.api.VisitRepository
 import com.secuidea.visitreservekiosk.api.VisitRequest
+import com.secuidea.visitreservekiosk.data.repository.ApiResult
+import com.secuidea.visitreservekiosk.data.repository.VisitRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

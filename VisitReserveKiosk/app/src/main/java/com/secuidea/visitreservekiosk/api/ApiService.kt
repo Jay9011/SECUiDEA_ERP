@@ -50,6 +50,19 @@ interface ApiInterface {
             @Body request: KakaoMessageRequest,
             @retrofit2.http.Header("X-API-KEY") apiKey: String
     ): Response<KakaoMessageResponse>
+
+    // 게스트 로그인 API
+    @POST("api/Login/S1Auth/GuestLogin")
+    suspend fun loginAsGuest(
+            @Body request: GuestLoginModel
+    ): Response<ApiResponse<AuthResponse>>
+
+    // 교육 완료 API
+    @POST("api/visit/EducationCompletion")
+    suspend fun completeEducation(
+            @retrofit2.http.Header("Authorization") token: String,
+            @Body request: Map<String, Int>
+    ): Response<ApiResponse<Boolean>>
 }
 
 /** API 서비스 싱글톤 클래스 */

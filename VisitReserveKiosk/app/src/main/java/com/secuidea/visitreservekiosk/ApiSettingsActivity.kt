@@ -1,10 +1,11 @@
-package com.secuidea.visitreservekiosk.ui.screen
+package com.secuidea.visitreservekiosk
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import com.secuidea.visitreservekiosk.ui.screen.ApiSettingsScreen
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
 
 class ApiSettingsActivity : ComponentActivity() {
