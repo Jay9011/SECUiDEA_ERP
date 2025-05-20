@@ -109,6 +109,13 @@ const VisitCard = memo(({
                         <span className="value">{formatDateTime(visit.visitEndDate)}</span>
                     </div>
                 )}
+                {visit.personName && (
+                    <div className="visit-detail">
+                        <span className="label">{t('components.visitCard.visitHost')}:</span>
+                        <span className="value">{visit.personName}</span>
+                    </div>
+                )}
+
                 <div className="visit-detail visit-purpose-detail">
                     <span className="label">{t('components.visitCard.visitPurpose')}:</span>
                     <span
@@ -119,6 +126,7 @@ const VisitCard = memo(({
                         {getVisitPurposeText()}
                     </span>
                 </div>
+
                 {showContact && (
                     <div className="visit-detail">
                         <span className="label">{t('components.visitCard.contact')}:</span>
@@ -129,12 +137,6 @@ const VisitCard = memo(({
                     <div className="visit-detail">
                         <span className="label">{t('components.visitCard.carNumber')}:</span>
                         <span className="value">{visit.licensePlateNumber}</span>
-                    </div>
-                )}
-                {visit.personName && (
-                    <div className="visit-detail">
-                        <span className="label">{t('components.visitCard.visitHost')}:</span>
-                        <span className="value">{visit.personName}</span>
                     </div>
                 )}
                 {visit.education && visit.educationDate && (
