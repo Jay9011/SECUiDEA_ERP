@@ -114,7 +114,11 @@ export async function checkEducationVideo(visitorData) {
  */
 export async function saveEducationCompletion() {
     try {
-        const response = await api.post('/Visit/EducationCompletion');
+        const response = await api.post('/Visit/EducationCompletion', {
+            body: JSON.stringify({
+                completionType: 1
+            })
+        });
         if (!response.ok) {
             throw new Error('교육 완료 저장 API 호출 실패');
         }

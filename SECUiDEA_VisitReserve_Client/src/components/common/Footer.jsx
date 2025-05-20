@@ -11,14 +11,6 @@ const Footer = () => {
                     <div className="footer_info">
                         <h3>{t('components.footer.title')}</h3>
                         <p>{t('components.footer.description')}</p>
-                        <div className="footer_info-contact">
-                            <div className="contact-item">
-                                <i>📱</i> {t('components.footer.support')}: 02-123-4567
-                            </div>
-                            <div className="contact-item">
-                                <i>✉️</i> {t('components.footer.email')}: support@asmk.com
-                            </div>
-                        </div>
                     </div>
 
                     <div className="footer_links">

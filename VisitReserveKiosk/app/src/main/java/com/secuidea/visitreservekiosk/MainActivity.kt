@@ -126,12 +126,8 @@ class MainActivity : ComponentActivity() {
                         VisitReserveKioskTheme {
                                 MainScreen(
                                         onVisitRequestClick = {
-                                                // 비디오 플레이어 일시정지
-                                                VideoPlayerManager.introPlayer?.pause()
-
                                                 // 미리 준비된 인텐트 사용
                                                 startActivity(preloadedPrivacyActivityIntent)
-                                                overridePendingTransition(0, 0) // 전환 애니메이션 제거
                                         },
                                         onAdminSettingsClick = {
                                                 // API 설정 화면으로 이동

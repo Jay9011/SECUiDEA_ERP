@@ -72,13 +72,6 @@ const Home = () => {
 
                     <ProcessSteps steps={processSteps} className="mb-lg" />
 
-                    <div className="text-center mt-lg">
-                        <Link to="/help" className="process-section_link">
-                            {t('home.process.learnMore')}
-                            <ChevronRight size={16} />
-                        </Link>
-                    </div>
-
                 </div>
             </section>
 
@@ -92,9 +85,6 @@ const Home = () => {
                         <div className="flex flex-center flex-gap-md flex-mobile-col mt-lg">
                             <Link to="/visitReserve/privacyAgreement" className="btn btn-outline btn-lg">
                                 {t('home.cta.applyVisit')}
-                            </Link>
-                            <Link to="/help" className="btn btn-light btn-lg">
-                                {t('home.cta.learnMore')}
                             </Link>
                         </div>
                     </div>
