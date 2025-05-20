@@ -3,6 +3,7 @@
 GO
 CREATE PROCEDURE SECUiDEA_EducationREG
     @VisitantID         INT
+,   @CompletionType     INT             = 1     -- 1이 기본 교육 완료
 -- 사용자 ID
 ,	@UpdateID			INT				= 0
 ,	@UpdateIP			VARCHAR(15)		= '127.0.0.1'
@@ -16,7 +17,7 @@ BEGIN
     IF EXISTS(SELECT TOP(1) * FROM Visitant WHERE VisitantID = @VisitantID)
     BEGIN
         UPDATE  Visitant
-        SET     Education = 1
+        SET     Education = @CompletionType
             ,   EducationDate = GETDATE()
             ,   UpdateIP = @UpdateIP
         WHERE   VisitantID = @VisitantID

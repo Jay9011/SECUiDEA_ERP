@@ -20,7 +20,7 @@ IF NOT EXISTS (
     WHERE TABLE_NAME = 'Visitant' AND COLUMN_NAME = 'Education'
 )
 BEGIN
-    ALTER TABLE Visitant ADD Education BIT;
+    ALTER TABLE Visitant ADD Education INT;
 END
 -- Visitant 테이블에 EducationDate datetime 컬럼이 없다면 추가
 IF NOT EXISTS (

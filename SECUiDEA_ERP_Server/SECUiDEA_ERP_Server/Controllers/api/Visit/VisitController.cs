@@ -38,7 +38,6 @@ public partial class VisitController : JwtController
 
     public async Task<IActionResult> VisitReason([FromQuery] string lan)
     {
-        // 유효성 검사
         if (string.IsNullOrEmpty(lan))
         {
             lan = "ko"; // 기본값을 한국어로 설정
@@ -72,11 +71,14 @@ public partial class VisitController : JwtController
 
     public async Task<IActionResult> EmployeeByName([FromQuery] string name)
     {
-        // 유효성 검사
+        #region 유효성 검사
+
         if (string.IsNullOrEmpty(name))
         {
             return BadRequest("Name cannot be null or empty.");
         }
+
+        #endregion
 
         var param = new GetPersonModel
         {
@@ -106,7 +108,8 @@ public partial class VisitController : JwtController
     {
         try
         {
-            // 유효성 검사
+            #region 계정 및 유효성 검사
+
             if (visitReserveDTO == null || visitReserveDTO.EmployeePid == 0)
             {
                 return BadRequest("Invalid visit reserve data.");
@@ -124,6 +127,8 @@ public partial class VisitController : JwtController
             {
                 return BadRequest("Invalid visit date format.");
             }
+
+            #endregion
 
             var param = new SECUiDEA_VisitReserveParam
             {
@@ -177,6 +182,8 @@ public partial class VisitController : JwtController
     [HttpGet]
     public IActionResult GetEmployeeVisitInfo()
     {
+        #region 계정 및 유효성 검사
+
         // 사용자 ID 가져오기
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -195,6 +202,8 @@ public partial class VisitController : JwtController
             return Forbid();
         }
 
+        #endregion
+
         // 여기서 Employee 이상 권한이 있는 사용자에게 필요한 데이터를 반환
         return Ok(new
         {
@@ -209,6 +218,8 @@ public partial class VisitController : JwtController
     [HttpGet]
     public async Task<IActionResult> VisitReserveList([FromQuery] int page, int limit)
     {
+        #region 계정 확인 및 유효성 검사
+
         // 사용자 ID 가져오기
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -227,6 +238,8 @@ public partial class VisitController : JwtController
         {
             return BadRequest(new { message = "Invalid user ID" });
         }
+
+        #endregion
 
         if (userRole == S1AuthType.Guest
             || userRole == S1AuthType.Employee)
@@ -262,6 +275,8 @@ public partial class VisitController : JwtController
     {
         try
         {
+            #region 계정 확인 및 유효성 검사
+
             // 사용자 ID 가져오기
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -299,6 +314,8 @@ public partial class VisitController : JwtController
             {
                 return BadRequest(new { message = "Invalid user ID" });
             }
+
+            #endregion
 
             var param = new SECUiDEA_VisitReserveParam
             {

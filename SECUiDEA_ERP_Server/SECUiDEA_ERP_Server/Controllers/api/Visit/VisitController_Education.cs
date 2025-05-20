@@ -19,11 +19,15 @@ public partial class VisitController : JwtController
     {
         try
         {
+            #region 유효성 검사
+
             // 유효성 검사
             if (string.IsNullOrEmpty(visitor.VisitorName) || string.IsNullOrEmpty(visitor.VisitorContact))
             {
                 return BadRequest(BoolResultModel.Fail("Visitor name and contact cannot be null or empty."));
             }
+
+            #endregion
 
             var param = new VisitantParam
             {
@@ -71,10 +75,12 @@ public partial class VisitController : JwtController
 
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> EducationCompletion()
+    public async Task<IActionResult> EducationCompletion([FromBody] EducationDTO body)
     {
         try
         {
+            #region 계정 및 유효성 검사
+
             // 사용자 ID 가져오기
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -84,10 +90,13 @@ public partial class VisitController : JwtController
                 return BadRequest(BoolResultModel.Fail("Invalid Access."));
             }
 
+            #endregion
+
             var visitorSeq = User.FindFirstValue(ClaimTypes.Sid);
             var param = new Dictionary<string, object>()
             {
                 { "VisitantID", visitorSeq },
+                { "CompletionType", body.CompletionType },
                 { "UpdateIP", GetClientIpAddress() }
             };
             var result = await _s1Access.DAL.ExecuteProcedureAsync(_s1Access, "SECUiDEA_EducationREG", param);
