@@ -96,12 +96,9 @@ class MainActivity : ComponentActivity() {
                         VisitReserveKioskTheme {
                                 MainScreen(
                                         onVisitRequestClick = {
-                                                // 방문 신청 화면으로 이동
-                                                val intent =
-                                                        Intent(
-                                                                this,
-                                                                PrivacyAgreementActivity::class.java
-                                                        )
+                                                // 비디오 플레이어 일시정지
+                                                VideoPlayerManager.introPlayer?.pause()
+                                                val intent = Intent(this, PrivacyAgreementActivity::class.java)
                                                 startActivity(intent)
                                         },
                                         onAdminSettingsClick = {
