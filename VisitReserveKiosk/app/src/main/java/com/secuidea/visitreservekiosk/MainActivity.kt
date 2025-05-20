@@ -1,6 +1,8 @@
 package com.secuidea.visitreservekiosk
 
+import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.WindowManager
@@ -62,8 +64,14 @@ import com.secuidea.visitreservekiosk.ui.components.findVideoFileUri
 import com.secuidea.visitreservekiosk.ui.theme.PrimaryColor
 import com.secuidea.visitreservekiosk.ui.theme.SecondaryColor
 import com.secuidea.visitreservekiosk.ui.theme.VisitReserveKioskTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+        // 미리 준비된 PrivacyAgreementActivity Intent
+        private lateinit var preloadedPrivacyActivityIntent: Intent
+
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
 
@@ -92,14 +100,38 @@ class MainActivity : ComponentActivity() {
                 VideoPlayerManager.prepareIntroPlayer(this, introUri)
                 VideoPlayerManager.prepareOutroPlayer(this, outroUri)
 
+                // PrivacyAgreementActivity 미리 준비
+                preloadedPrivacyActivityIntent = Intent(this, PrivacyAgreementActivity::class.java)
+                preloadedPrivacyActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+
+                // 백그라운드에서 리소스 미리 로드
+                CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                                // PrivacyAgreementActivity 관련 리소스 사전 로드
+                                val activityInfo =
+                                        packageManager.getActivityInfo(
+                                                ComponentName(
+                                                        applicationContext,
+                                                        PrivacyAgreementActivity::class.java
+                                                ),
+                                                PackageManager.GET_META_DATA
+                                        )
+                                // 추가 리소스 로드 작업이 필요하면 여기에 추가
+                        } catch (e: Exception) {
+                                // 오류 처리
+                        }
+                }
+
                 setContent {
                         VisitReserveKioskTheme {
                                 MainScreen(
                                         onVisitRequestClick = {
                                                 // 비디오 플레이어 일시정지
                                                 VideoPlayerManager.introPlayer?.pause()
-                                                val intent = Intent(this, PrivacyAgreementActivity::class.java)
-                                                startActivity(intent)
+
+                                                // 미리 준비된 인텐트 사용
+                                                startActivity(preloadedPrivacyActivityIntent)
+                                                overridePendingTransition(0, 0) // 전환 애니메이션 제거
                                         },
                                         onAdminSettingsClick = {
                                                 // API 설정 화면으로 이동
