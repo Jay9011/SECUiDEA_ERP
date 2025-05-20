@@ -472,8 +472,11 @@ function PrivacyAgreementInput() {
                 visitorCarNumber: visitorCarNumber,
             }).then(response => {
                 if (response.isSuccess && response.data?.ApiKey) {
+                    const currentLang = i18n.language || 'ko';
+                    const templateName = currentLang === 'ko' ? 'VisitReserve' : `VisitReserve_${currentLang}`;
+
                     // 카카오 알림톡 발송
-                    sendTemplateMessage(response.data.ApiKey, 'VisitReserve', visitorContact, visitorName).then(() => response);
+                    sendTemplateMessage(response.data.ApiKey, templateName, visitorContact, visitorName).then(() => response);
 
                     // 접견인에게 알림톡 발송
                     if (response.data.EmployeePhone && response.data.visitReserveVisitantId) {
@@ -489,7 +492,9 @@ function PrivacyAgreementInput() {
                             '방문승인URL': `/`
                         };
 
-                        return sendTemplateMessage(response.data.ApiKey, 'RequestApprove', response.data.EmployeePhone, employeeName, templateVariables, queryVariables).then(() => response);
+                        const employeeTemplateName = currentLang === 'ko' ? 'RequestApprove' : `RequestApprove_${currentLang}`;
+
+                        return sendTemplateMessage(response.data.ApiKey, employeeTemplateName, response.data.EmployeePhone, employeeName, templateVariables, queryVariables).then(() => response);
                     } else {
                         setLoading(false);
 

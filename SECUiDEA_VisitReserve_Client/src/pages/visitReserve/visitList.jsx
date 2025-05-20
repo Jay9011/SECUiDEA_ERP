@@ -19,7 +19,7 @@ import './visitList.scss';
 
 // 방문 현황 목록 컴포넌트
 const VisitList = () => {
-    const { t } = useTranslation('visit');
+    const { t, i18n } = useTranslation('visit');
     const location = useLocation();
     const { user } = useAuth();
     const { showNetworkErrorAlert } = useNetworkErrorAlert();
@@ -179,7 +179,11 @@ const VisitList = () => {
                     "승인시간": new Date().toISOString().replace('T', ' ').substring(0, 19)
                 };
 
-                await sendTemplateMessage(data.data.ApiKey, 'ApprovedMsg', data.data.visitants[0].mobile, data.data.visitants[0].visitantName, templateVariables)
+                // 템플릿 이름 설정 - 한국어 또는 기본값은 'ApprovedMsg', 다른 언어는 'ApprovedMsg_언어코드'
+                const currentLang = i18n.language || 'ko';
+                const templateName = currentLang === 'ko' ? 'ApprovedMsg' : `ApprovedMsg_${currentLang}`;
+
+                await sendTemplateMessage(data.data.ApiKey, templateName, data.data.visitants[0].mobile, data.data.visitants[0].visitantName, templateVariables)
                     .then(async (response) => {
                         const colors = getColorVariables();
 

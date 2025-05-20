@@ -305,9 +305,13 @@ class PrivacyAgreementViewModel : ViewModel() {
                 val visitDate = updatedForm.visitDate
 
                 // 1. 방문자에게 알림톡 발송
+                // 템플릿 이름 설정 - 한국어는 'VisitReserve', 다른 언어는 'VisitReserve_언어코드'
+                val currentLang = LocaleHelper.getLanguage()
+                val visitorTemplateName = if (currentLang == "ko") "VisitReserve" else "VisitReserve_${currentLang}"
+
                 repository.sendTemplateMessage(
                         apiKey = apiKey,
-                        gubun = "VisitReserve",
+                        gubun = visitorTemplateName,
                         phoneNumber = updatedForm.visitorContact,
                         userName = visitorName
                 )
@@ -330,9 +334,13 @@ class PrivacyAgreementViewModel : ViewModel() {
                             mapOf(
                                     "방문승인URL" to "/" // 실제 URL 필요시 수정
                             )
+
+                    // 접견인 알림톡 템플릿 이름 설정
+                    val employeeTemplateName = if (currentLang == "ko") "RequestApprove" else "RequestApprove_${currentLang}"
+
                     repository.sendTemplateMessage(
                             apiKey = apiKey,
-                            gubun = "RequestApprove",
+                            gubun = employeeTemplateName,
                             phoneNumber = employeePhone,
                             userName = employeeName,
                             templateVariables = templateVariables,
