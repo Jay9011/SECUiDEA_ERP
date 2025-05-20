@@ -120,6 +120,33 @@ const VisitList = () => {
         // 이미 상태 변경 중인 경우 중복 요청 방지
         if (pendingStatusChanges[visitId]) return;
 
+        // 교육 미이수 상태 확인
+        const visit = visits.find(v => v.id === visitId);
+
+        if (newStatus === 'approved' && visit && visit.education === false) {
+            // 색상 변수 가져오기
+            const colors = getColorVariables();
+
+            // SweetAlert으로 확인 대화상자 표시
+            const result = await Swal.fire({
+                title: t('common.warning'),
+                text: t('visitReserve.visitList.educationIncompleteWarning'),
+                icon: 'warning',
+                iconColor: colors.warning,
+                showCancelButton: true,
+                confirmButtonText: t('common.confirm'),
+                cancelButtonText: t('common.cancel'),
+                confirmButtonColor: colors.gray,
+                cancelButtonColor: colors.primary,
+                reverseButtons: false
+            });
+
+            // 취소를 누른 경우 처리 중단
+            if (result.isDismissed) {
+                return;
+            }
+        }
+
         // 상태 변경 중임을 표시
         setPendingStatusChanges(prev => ({ ...prev, [visitId]: newStatus }));
 
@@ -133,7 +160,7 @@ const VisitList = () => {
             const response = await api.post(endpoint, {
                 body: JSON.stringify({ visitId: visitId, status: newStatus })
             });
-            ``
+
             const data = await response.json();
 
             if (!data.isSuccess) {
@@ -206,7 +233,7 @@ const VisitList = () => {
                 return newState;
             });
         }
-    }, [isMember, pendingStatusChanges, t]);
+    }, [isMember, pendingStatusChanges, t, visits]);
 
     // 페이지 로드 시 데이터 가져오기
     useEffect(() => {

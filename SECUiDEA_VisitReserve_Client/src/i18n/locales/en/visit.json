@@ -9,7 +9,9 @@
         "retryQuestion": "Would you like to try again?",
         "loading": "Loading...",
         "processingRequest": "Processing...",
-        "kakaoMessageError": "Kakao sending error"
+        "kakaoMessageError": "Kakao sending error",
+        "warning": "Warning",
+        "confirm": "Confirm"
     },
     "components": {
         "visitCard": {
@@ -23,7 +25,8 @@
             "visitPurpose": "Visit Purpose",
             "contact": "Contact",
             "visitHost": "Visit Host",
-            "educationDate": "Education Date"
+            "educationDate": "Education Date",
+            "carNumber": "Vehicle Number"
         },
         "backgroundVideo": {
             "browserNotSupported": "Your browser does not support the video tag."
@@ -207,7 +210,8 @@
                 "finished": "Completed"
             },
             "statusChangeError": "An error occurred while changing the status.",
-            "visitantPhoneNotExists": "The visitor's phone number does not exist. Please contact the visitor directly."
+            "visitantPhoneNotExists": "The visitor's phone number does not exist. Please contact the visitor directly.",
+            "educationIncompleteWarning": "This visitor has not completed the required education. Do you still want to approve?"
         },
         "privacyAgreement": {
             "title": "Visit Reservation",

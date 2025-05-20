@@ -125,6 +125,12 @@ const VisitCard = memo(({
                         <span className="value">{visit.visitorContact}</span>
                     </div>
                 )}
+                {visit.licensePlateNumber && (
+                    <div className="visit-detail">
+                        <span className="label">{t('components.visitCard.carNumber')}:</span>
+                        <span className="value">{visit.licensePlateNumber}</span>
+                    </div>
+                )}
                 {visit.personName && (
                     <div className="visit-detail">
                         <span className="label">{t('components.visitCard.visitHost')}:</span>
@@ -158,6 +164,7 @@ VisitCard.propTypes = {
         visitorName: PropTypes.string.isRequired,
         visitorCompany: PropTypes.string,
         visitorContact: PropTypes.string,
+        visitorCarNumber: PropTypes.string,
         visitStartDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]).isRequired,
         visitEndDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
         visitPurpose: PropTypes.string,

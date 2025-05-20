@@ -389,11 +389,6 @@ function PrivacyAgreementInput() {
             }
         });
 
-        // 이메일 형식 검사
-        if (formData.visitorEmail && !/\S+@\S+\.\S+/.test(formData.visitorEmail)) {
-            newErrors.visitorEmail = t('visitReserve.privacyAgreement.formErrors.invalidEmail');
-        }
-
         // 종료 날짜/시간이 시작 날짜/시간보다 이후인지 검사
         if (formData.visitDate && formData.visitEndDate && formData.visitTime && formData.visitEndTime) {
             const startDateTime = new Date(`${formData.visitDate}T${formData.visitTime}`);
@@ -787,17 +782,15 @@ function PrivacyAgreementInput() {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="visitorEmail">{t('visitReserve.privacyAgreement.visitorInfo.email')}</label>
+                                <label htmlFor="visitorCarNumber">{t('visitReserve.privacyAgreement.visitorInfo.carNumber')}</label>
                                 <input
-                                    type="email"
-                                    id="visitorEmail"
-                                    name="visitorEmail"
-                                    value={formData.visitorEmail}
+                                    type="text"
+                                    id="visitorCarNumber"
+                                    name="visitorCarNumber"
+                                    value={formData.visitorCarNumber}
                                     onChange={handleInputChange}
-                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.emailPlaceholder')}
-                                    className={errors.visitorEmail ? 'error' : ''}
+                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.carNumberPlaceholder')}
                                 />
-                                {errors.visitorEmail && <div className="error-message">{errors.visitorEmail}</div>}
                             </div>
                         </div>
 
@@ -902,20 +895,6 @@ function PrivacyAgreementInput() {
                                     />
                                 </div>
                                 {errors.visitEndTime && <div className="error-message">{errors.visitEndTime}</div>}
-                            </div>
-                        </div>
-
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label htmlFor="visitorCarNumber">{t('visitReserve.privacyAgreement.visitorInfo.carNumber')}</label>
-                                <input
-                                    type="text"
-                                    id="visitorCarNumber"
-                                    name="visitorCarNumber"
-                                    value={formData.visitorCarNumber}
-                                    onChange={handleInputChange}
-                                    placeholder={t('visitReserve.privacyAgreement.visitorInfo.carNumberPlaceholder')}
-                                />
                             </div>
                         </div>
                     </div>

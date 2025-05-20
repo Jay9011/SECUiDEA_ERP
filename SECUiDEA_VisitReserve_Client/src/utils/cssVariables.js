@@ -38,7 +38,8 @@ export const getColorVariables = () => {
         success: getCssVariable('--success-color'),
         warning: getCssVariable('--warning-color'),
         error: getCssVariable('--error-color'),
-        info: getCssVariable('--info-color')
+        info: getCssVariable('--info-color'),
+        gray: getCssVariable('--gray-color')
     };
 };
 
