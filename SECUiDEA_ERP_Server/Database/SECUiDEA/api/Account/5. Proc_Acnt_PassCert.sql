@@ -21,7 +21,6 @@ BEGIN
     IF (@Type IS NULL OR @Mobile IS NULL)
     BEGIN
         SELECT @Message = 'Check Type, Mobile. they must not be NULL.';
-        RETURN @Result;
     END
 
     -- 인증 번호 등록
@@ -55,5 +54,6 @@ BEGIN
     END
 
     -- 결과 반환
-    SELECT @Result AS Result, @Message AS Message;
+    SELECT @Message AS Message;
+    RETURN @Result;
 END

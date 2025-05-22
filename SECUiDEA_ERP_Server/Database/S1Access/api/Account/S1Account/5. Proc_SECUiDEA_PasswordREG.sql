@@ -61,6 +61,8 @@ BEGIN
                 UpdateID = @UpdateID,
                 UpdateIP = @UpdateIP
             WHERE Sabun = @ID
+            
+            SET @Result = 1;
         END
         -- 관리직의 경우
         ELSE IF (@Role = 'Admin')
@@ -86,6 +88,10 @@ BEGIN
                 UpdateID = @UpdateID,
                 UpdateIP = @UpdateIP
             WHERE ID = @ID
+            
+            SET @Result = 1;
         END
     END
+    
+    RETURN @Result;
 END

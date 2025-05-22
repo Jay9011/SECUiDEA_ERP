@@ -58,6 +58,7 @@ public static class StringClass
 
     // 카카오 알림톡 관련
     public const string Issuer_Kakao = "Kakao";
+    public const string Issuer_Account = "Account"; // Account 관련
 
     // API 라우팅 관련
     public const string Nlobby = "nlobby";
