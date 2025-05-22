@@ -115,24 +115,6 @@ fun HtmlContent(
 suspend fun loadHtmlFromFile(context: Context, filePath: String): String? {
     return withContext(Dispatchers.IO) {
         try {
-            // 리소스에서 파일 찾기 (raw 폴더)
-            try {
-                val resourceId =
-                        context.resources.getIdentifier(
-                                filePath.substringBeforeLast("."),
-                                "raw",
-                                context.packageName
-                        )
-
-                if (resourceId != 0) {
-                    context.resources.openRawResource(resourceId).use { inputStream ->
-                        return@withContext inputStream.bufferedReader().use { it.readText() }
-                    }
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
             // 내부 저장소에서 파일 찾기
             val internalFile = File(context.filesDir, filePath)
             if (internalFile.exists()) {
@@ -153,6 +135,24 @@ suspend fun loadHtmlFromFile(context: Context, filePath: String): String? {
                         return@withContext file.readText()
                     }
                 }
+            }
+
+            // 리소스에서 파일 찾기 (raw 폴더)
+            try {
+                val resourceId =
+                    context.resources.getIdentifier(
+                        filePath.substringBeforeLast("."),
+                        "raw",
+                        context.packageName
+                    )
+
+                if (resourceId != 0) {
+                    context.resources.openRawResource(resourceId).use { inputStream ->
+                        return@withContext inputStream.bufferedReader().use { it.readText() }
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
 
             null

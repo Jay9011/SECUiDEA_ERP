@@ -43,6 +43,7 @@ BEGIN
         DECLARE @VisitReserveVisitantID INT = NULL;
         DECLARE @VisitantYMD NVARCHAR(8) = NULL;
         DECLARE @EmployeePhone NVARCHAR(50) = NULL;
+        DECLARE @VisitorPhone NVARCHAR(50) = NULL;
         
         -- Mobile 뒷자리 8자리로 VisitantYMD 설정 (Visitant 테이블 수정이 끝나 있어야 함)
         SET @VisitantYMD = RIGHT(@Mobile, 8);
@@ -138,6 +139,16 @@ BEGIN
             FROM    Person
             WHERE   PID = @PID
             
+            -- 앞에 82가 붙어 있는 경우에는 제거
+            IF (LEFT(@EmployeePhone,4) = '8210')
+			BEGIN
+				SET @EmployeePhone = '010' + RIGHT(@EmployeePhone, LEN(@EmployeePhone) - 4);
+			END
+            IF LEFT(@EmployeePhone, 2) = '82'
+            BEGIN
+                SET @EmployeePhone = RIGHT(@EmployeePhone, LEN(@EmployeePhone) - 2);
+            END
+            
             SET @Result = 1;
             SELECT  @VisitantID AS VisitantID
                 ,   @VisitReserveID AS VisitReserveID
@@ -170,6 +181,20 @@ BEGIN
             ----------------------------------------------------------------------------------------------------------
             -- 방문자 정보 확인
             ----------------------------------------------------------------------------------------------------------
+            SELECT	@VisitorPhone = REPLACE(REPLACE(REPLACE(Mobile, '-', ''), '+', ''), ' ', '')
+			FROM    Visitant
+            WHERE   VisitantID = @VisitantID
+			;
+			-- 앞에 82가 붙어 있는 경우에는 제거
+			IF (LEFT(@VisitorPhone,4) = '8210')
+			BEGIN
+				SET @VisitorPhone = '010' + RIGHT(@VisitorPhone, LEN(@VisitorPhone) - 4);
+			END
+            IF LEFT(@VisitorPhone, 2) = '82'
+            BEGIN
+                SET @VisitorPhone = RIGHT(@VisitorPhone, LEN(@VisitorPhone) - 2);
+            END
+
             -- 방문자 정보 조회
             SELECT  VisitantName
                 ,   REPLACE(REPLACE(REPLACE(Mobile, '-', ''), '+', ''), ' ', '') AS Mobile
