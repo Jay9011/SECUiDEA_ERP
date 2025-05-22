@@ -9,6 +9,7 @@ using FileIOHelper;
 using FileIOHelper.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
 using SECUiDEA_ERP_Server.Models.Authentication;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
@@ -37,7 +38,7 @@ public class Program
         IIOHelper dbSetupFileHelper = new IniFileHelper(dbSetupFilePath);
         builder.Services.AddKeyedSingleton<IIOHelper>(StringClass.IoDbSetupFile, dbSetupFileHelper);
         
-        IIOHelper registryHelper = new RegistryHelper(StringClass.SECUiDEAJWT);
+        IIOHelper registryHelper = new RegistryHelper(StringClass.SECUiDEAJWT, RegistryHive.LocalMachine);
         builder.Services.AddKeyedSingleton<IIOHelper>(StringClass.IoRegistry, registryHelper);
         
         IIOHelper apiSetupFileHelper = new IniFileHelper(apiSetupFilePath);

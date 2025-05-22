@@ -581,6 +581,15 @@ function PrivacyAgreementInput() {
         }
     };
 
+    const [htmlContent, setHtmlContent] = useState('');
+
+    useEffect(() => {
+        const htmlPath = t('visitReserve.privacyAgreement.privacyPolicy.fullContentPath');
+        fetch(htmlPath)
+            .then(res => res.text())
+            .then(setHtmlContent);
+    }, [i18n.language, t]);
+
     return (
         <div className="privacy-agreement-page">
             {/* ToastContainer 추가 */}
@@ -619,9 +628,8 @@ function PrivacyAgreementInput() {
                         >
                             <div
                                 className="privacy-policy-content"
-                                dangerouslySetInnerHTML={{
-                                    __html: t('visitReserve.privacyAgreement.privacyPolicy.fullContent')
-                                }}
+                                style={{ minHeight: htmlContent ? undefined : 400 }}
+                                dangerouslySetInnerHTML={{ __html: htmlContent }}
                             />
                         </Accordion>
 

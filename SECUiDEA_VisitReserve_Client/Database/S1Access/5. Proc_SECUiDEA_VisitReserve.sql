@@ -151,22 +151,25 @@ BEGIN
     ---------------------------------------------------------------------------------------------------------
         ELSE IF (@Type = 'approve')
         BEGIN 
+            -- 방문 신청 번호 및 방문자 번호 획득
+            SELECT  @VisitantID = VisitantID
+                ,   @VisitReserveID = VisitID
+                ,   @VisitReserveVisitantID = VisitReserveVisitantID
+            FROM    VisitReserveVisitant
+            WHERE   VisitReserveVisitantID = @VisitReserveInputId
+            
+            ----------------------------------------------------------------------------------------------------------
             -- 방문 예약 승인 처리
+            ----------------------------------------------------------------------------------------------------------
             UPDATE  VisitReserve
             SET     VisitAssign = 1
                 ,   VisitAssignPID = @PID
-            WHERE   VisitID = @VisitReserveInputId
+            WHERE   VisitID = @VisitReserveID
             ;
             
             ----------------------------------------------------------------------------------------------------------
             -- 방문자 정보 확인
             ----------------------------------------------------------------------------------------------------------
-            SELECT  @VisitantID = VisitantID
-                ,   @VisitReserveID = VisitID
-                ,   @VisitReserveVisitantID = VisitReserveVisitantID
-            FROM    VisitReserveVisitant
-            WHERE   VisitID = @VisitReserveInputId
-                
             -- 방문자 정보 조회
             SELECT  VisitantName
                 ,   REPLACE(REPLACE(REPLACE(Mobile, '-', ''), '+', ''), ' ', '') AS Mobile
@@ -177,14 +180,14 @@ BEGIN
             SELECT  VisitSDate
                 ,   VisitEDate
             FROM    VisitReserve
-            WHERE   VisitID = @VisitReserveInputId
+            WHERE   VisitID = @VisitReserveID
             
             -- 방문 신청 정보 조회
             SELECT  VisitantID
                 ,   VisitID
                 ,   VisitReserveVisitantID
             FROM    VisitReserveVisitant
-            WHERE   VisitID = @VisitReserveInputId
+            WHERE   VisitReserveVisitantID = @VisitReserveVisitantID
             
             SET @Result = 1;
             RETURN @Result;
