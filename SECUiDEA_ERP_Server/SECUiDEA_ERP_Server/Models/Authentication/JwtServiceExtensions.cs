@@ -31,7 +31,7 @@ namespace SECUiDEA_ERP_Server.Models.Authentication
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Issuer = StringClass.Issuer_Kakao,
+                Issuer = issuer,
                 Audience = StringClass.SECUiDEA_Audience,
                 Expires = DateTime.Now.Add(expiry),
                 SigningCredentials = new SigningCredentials(

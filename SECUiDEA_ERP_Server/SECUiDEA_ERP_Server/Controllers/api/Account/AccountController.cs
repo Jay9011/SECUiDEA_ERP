@@ -63,7 +63,8 @@ public class AccountController : JwtController
                 
                 return Ok(BoolResultModel.Success(message, new Dictionary<string, object>
                 {
-                    {"data", mobileModel}
+                    { "data", mobileModel },
+                    { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Kakao, StringClass.SECUIDEA, nameof(CreatePasswordCertification))}
                 }));
 
             }
@@ -105,7 +106,7 @@ public class AccountController : JwtController
                 // 인증에 성공하면 이후 인증/인가용 JWT 토큰을 발급
                 return Ok(BoolResultModel.Success(message, new Dictionary<string, object>
                 {
-                    { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Account, StringClass.SECUIDEA, nameof(CheckPasswordCertification))}
+                    { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Account, StringClass.SECUIDEA, nameof(CheckPasswordCertification), TimeSpan.FromMinutes(60)) },
                 }));
             }
             else if (result.DataSet?.Tables.Count > 0

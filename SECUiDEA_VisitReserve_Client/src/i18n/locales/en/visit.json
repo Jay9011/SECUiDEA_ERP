@@ -138,6 +138,39 @@
             "loginFailed": "Login failed. Please check your ID and password."
         }
     },
+    "forgotPassword": {
+        "title": "Forgot Password",
+        "subtitle": {
+            "step1": "Please enter your user ID and phone number",
+            "step2": "Please enter the verification code sent to your phone",
+            "step3": "Please set a new password"
+        },
+        "userId": "User ID",
+        "phoneNumber": "Phone Number",
+        "certNumber": "Verification Code",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "verified": "Verified",
+        "certExpired": "The verification code has expired. Please click resend to receive a new verification code.",
+        "nextButton": "Next",
+        "verifyButton": "Verify",
+        "changePasswordButton": "Change Password",
+        "resendCert": "Resend Code",
+        "backButton": "Back",
+        "backToLogin": "Back to Login",
+        "success": "Verification completed. Redirecting to password reset page.",
+        "passwordChangeSuccess": "Password has been successfully changed. Redirecting to login page.",
+        "error": {
+            "emptyFields": "Please enter your user ID and phone number.",
+            "emptyCert": "Please enter the verification code.",
+            "emptyPassword": "Please enter new password and confirm password.",
+            "passwordMismatch": "Passwords do not match.",
+            "passwordTooShort": "Password must be at least 8 characters long.",
+            "failed": "User information not found.",
+            "certFailed": "Verification code does not match.",
+            "passwordChangeFailed": "Failed to change password."
+        }
+    },
     "about": {
         "title": "About",
         "subtitle": "Information and copyright notice for the Visit Reservation System",

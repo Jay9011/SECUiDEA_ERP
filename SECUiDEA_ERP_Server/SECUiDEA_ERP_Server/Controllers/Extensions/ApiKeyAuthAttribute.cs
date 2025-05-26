@@ -31,12 +31,12 @@ namespace SECUiDEA_ERP_Server.Controllers.Extensions
             }
 
             // API 키 ID와 서비스명 추출
-            var apiKeyId = principal.FindFirstValue("api_key_id");
-            var service = principal.FindFirstValue("service");
+            var apiKeyId = principal.FindFirstValue(ClaimTypes.Authentication);
+            var service = principal.FindFirstValue(ClaimTypes.AuthenticationMethod);
 
             // 요청 컨텍스트에 API 키 정보 추가
-            context.HttpContext.Items["ApiKeyId"] = apiKeyId;
-            context.HttpContext.Items["ApiService"] = service;
+            context.HttpContext.Items[ClaimTypes.Authentication] = apiKeyId;
+            context.HttpContext.Items[ClaimTypes.AuthenticationMethod] = service;
 
             base.OnActionExecuting(context);
         }

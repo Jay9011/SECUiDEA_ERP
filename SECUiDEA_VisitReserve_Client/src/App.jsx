@@ -10,6 +10,7 @@ import BaseLayout from './components/layouts/BaseLayout';
 // 페이지
 import Home from './pages/Home';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import PrivacyAgreementInput from './pages/visitReserve/PrivacyAgreementInput';
@@ -32,6 +33,7 @@ const App = () => {
             <Route element={<VideoLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
             </Route>
 
             {/* 기본 배경의 레이아웃 */}

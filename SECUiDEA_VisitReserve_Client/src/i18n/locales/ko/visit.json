@@ -138,6 +138,39 @@
             "loginFailed": "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요."
         }
     },
+    "forgotPassword": {
+        "title": "비밀번호 찾기",
+        "subtitle": {
+            "step1": "아이디와 휴대폰번호를 입력해주세요",
+            "step2": "휴대폰으로 전송된 인증번호를 입력해주세요",
+            "step3": "새로운 비밀번호를 설정해주세요"
+        },
+        "userId": "아이디",
+        "phoneNumber": "휴대폰번호",
+        "certNumber": "인증번호",
+        "newPassword": "새 비밀번호",
+        "confirmPassword": "비밀번호 확인",
+        "verified": "인증완료",
+        "certExpired": "인증번호가 만료되었습니다. 재전송을 눌러 새로운 인증번호를 받으세요.",
+        "nextButton": "다음",
+        "verifyButton": "인증하기",
+        "changePasswordButton": "비밀번호 변경",
+        "resendCert": "인증번호 재전송",
+        "backButton": "이전으로",
+        "backToLogin": "로그인 화면으로 돌아가기",
+        "success": "인증이 완료되었습니다. 비밀번호 재설정 페이지로 이동합니다.",
+        "passwordChangeSuccess": "비밀번호가 성공적으로 변경되었습니다. 로그인 페이지로 이동합니다.",
+        "error": {
+            "emptyFields": "아이디와 휴대폰번호를 입력해주세요.",
+            "emptyCert": "인증번호를 입력해주세요.",
+            "emptyPassword": "새 비밀번호와 비밀번호 확인을 입력해주세요.",
+            "passwordMismatch": "비밀번호가 일치하지 않습니다.",
+            "passwordTooShort": "비밀번호는 8자 이상이어야 합니다.",
+            "failed": "사용자 정보를 찾을 수 없습니다.",
+            "certFailed": "인증번호가 일치하지 않습니다.",
+            "passwordChangeFailed": "비밀번호 변경에 실패했습니다."
+        }
+    },
     "about": {
         "title": "About",
         "subtitle": "방문 예약 시스템에 대한 정보와 저작권 고지",

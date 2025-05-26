@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using CoreDAL.Configuration.Interface;
+using CryptoManager;
 using Microsoft.AspNetCore.Mvc;
 using SECUiDEA_ERP_Server.Controllers.BaseControllers;
 using SECUiDEA_ERP_Server.Controllers.Extensions;
@@ -15,17 +16,20 @@ public class S1AccountController : BaseController
 
     private IDatabaseSetupContainer _dbSetupContainer;
     private IDatabaseSetup _s1Setup;
+    private ICryptoManager _s1Sha512;
 
-    public S1AccountController(IDatabaseSetupContainer dbSetupContainer)
+    public S1AccountController(IDatabaseSetupContainer dbSetupContainer,
+        [FromKeyedServices(StringClass.CryptoS1Sha512)] ICryptoManager s1Sha512)
     {
         _dbSetupContainer = dbSetupContainer;
-        
+        _s1Sha512 = s1Sha512;
+
         _s1Setup = _dbSetupContainer.GetSetup(StringClass.S1Access);
     }
 
     #endregion
     
-    [HttpGet]
+    [HttpPost]
     public async Task<IActionResult> FindUserByIdAndMobile([FromBody] AccountMobileModel model)
     {
         try
@@ -74,6 +78,13 @@ public class S1AccountController : BaseController
             var apiKeyId = HttpContext.Items[ClaimTypes.Authentication] as string;
             var serviceName = HttpContext.Items[ClaimTypes.AuthenticationMethod] as string;
             
+            // API 토큰 생성 Issuer가 StringClass.Issuer_Account이고 Authentication이 StringClass.SECUIDEA인 경우에만 성공
+            if (string.IsNullOrEmpty(apiKeyId)
+                || string.IsNullOrEmpty(serviceName))
+            {
+                return BadRequest(BoolResultModel.Fail("Invalid API Key."));
+            }
+            
             // API 생산 액션이 CheckPasswordCertification 만 허용
             if (serviceName != nameof(AccountController.CheckPasswordCertification))
             {
@@ -88,7 +99,7 @@ public class S1AccountController : BaseController
                 Type = "change",
                 Role = model.Role,
                 ID = model.ID,
-                Password = model.Password,
+                Password = _s1Sha512.Encrypt(model.Password),
                 UpdateIP = GetClientIpAddress()
             };
             

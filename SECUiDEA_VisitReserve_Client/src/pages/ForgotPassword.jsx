@@ -1,0 +1,472 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ShieldHalf, Lock, User, Phone, Clock, Eye, EyeOff } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { sendTemplateMessage } from '../services/aligoService';
+
+import './ForgotPassword.scss';
+
+const apiBaseUrl = import.meta.env.VITE_BASE_API_URL;
+
+const ForgotPassword = () => {
+    const { t, i18n } = useTranslation('visit');
+    const navigate = useNavigate();
+
+    // 단계 (1: 아이디/휴대폰 입력, 2: 인증번호 입력, 3: 비밀번호 변경)
+    const [step, setStep] = useState(1);
+
+    // 폼 데이터
+    const [userId, setUserId] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [certNumber, setCertNumber] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    // 상태 관리
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(300); // 5분 = 300초
+    const [timerActive, setTimerActive] = useState(false);
+    const [certVerified, setCertVerified] = useState(false); // 인증번호 확인 완료 상태
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    // eslint-disable-next-line no-unused-vars
+    const [authType, setAuthType] = useState(''); // 인증 유형 (비밀번호 재설정 단계에서 사용 예정)
+    const [apiKey, setApiKey] = useState(''); // API 키 (인증번호 확인 단계에서 사용 예정)
+    const [passwordApiKey, setPasswordApiKey] = useState(''); // 비밀번호 변경용 API 키
+
+    // 타이머 관리
+    useEffect(() => {
+        let timer;
+        if (timerActive && timeLeft > 0 && !certVerified) {
+            timer = setTimeout(() => {
+                setTimeLeft(timeLeft - 1);
+            }, 1000);
+        } else if (timeLeft === 0 && !certVerified) {
+            setTimerActive(false);
+            setError(t('forgotPassword.certExpired'));
+        }
+
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [timerActive, timeLeft, certVerified, t]);
+
+    // 첫 단계 폼 제출 처리 - 계정 확인 및 인증번호 발송
+    const handleSubmitStep1 = async (e) => {
+        e.preventDefault();
+
+        if (!userId || !phoneNumber) {
+            setError(t('forgotPassword.error.emptyFields'));
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError('');
+
+            // 1. 계정 확인 API 호출
+            const accountCheckResponse = await fetch(`${apiBaseUrl}/S1Account/FindUserByIdAndMobile`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ID: userId,
+                    Mobile: phoneNumber
+                })
+            });
+
+            const accountCheckResult = await accountCheckResponse.json();
+
+            if (!accountCheckResponse.ok || !accountCheckResult.isSuccess) {
+                throw new Error(accountCheckResult.message || t('forgotPassword.error.failed'));
+            }
+
+            // 계정 확인 성공 시 AuthType 저장
+            setAuthType(accountCheckResult.data.AuthType);
+
+            // 2. 인증번호 발급 API 호출
+            const certResponse = await fetch(`${apiBaseUrl}/Account/CreatePasswordCertification`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Mobile: phoneNumber
+                })
+            });
+
+            const certResult = await certResponse.json();
+
+            if (!certResponse.ok || !certResult.isSuccess) {
+                throw new Error(certResult.message || t('forgotPassword.error.failed'));
+            }
+
+            // 인증번호 발급 성공 시 API Key 저장
+            setApiKey(certResult.data.ApiKey);
+
+            // 3. 알림톡 발송
+            const currentLang = i18n.language || 'ko';
+            const templateName = currentLang === 'ko' ? 'CERT' : `CERT_${currentLang}`;
+
+            const templateVariables = {
+                "인증번호": certResult.data.data.certificateData
+            }
+
+            const aligoResponse = await sendTemplateMessage(certResult.data.ApiKey, templateName, phoneNumber, userId, templateVariables);
+
+            if (!aligoResponse.ok) {
+                throw new Error(t('common.kakaoMessageError'));
+            }
+
+            // 모든 과정 성공 시 다음 단계로 이동
+            setStep(2);
+            setTimeLeft(300); // 5분 타이머 설정
+            setTimerActive(true);
+        } catch (err) {
+            setError(err.message || t('forgotPassword.error.failed'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // 두번째 단계 폼 제출 처리 - 인증번호 확인
+    const handleSubmitStep2 = async (e) => {
+        e.preventDefault();
+
+        if (!certNumber) {
+            setError(t('forgotPassword.error.emptyCert'));
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError('');
+
+            // 인증번호 확인 API 호출
+            const certCheckResponse = await fetch(`${apiBaseUrl}/Account/CheckPasswordCertification`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Mobile: phoneNumber,
+                    CertificateData: certNumber
+                })
+            });
+
+            const certCheckResult = await certCheckResponse.json();
+
+            if (!certCheckResponse.ok || !certCheckResult.isSuccess) {
+                throw new Error(certCheckResult.message || t('forgotPassword.error.certFailed'));
+            }
+
+            // 인증 성공 시 처리
+            setCertVerified(true);
+            setTimerActive(false);
+            setPasswordApiKey(certCheckResult.data.ApiKey); // 비밀번호 변경용 API 키 저장
+            setError(''); // 에러 메시지 클리어
+
+        } catch (err) {
+            setError(err.message || t('forgotPassword.error.certFailed'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // 세번째 단계 폼 제출 처리 - 비밀번호 변경
+    const handleSubmitStep3 = async (e) => {
+        e.preventDefault();
+
+        if (!newPassword || !confirmPassword) {
+            setError(t('forgotPassword.error.emptyPassword'));
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            setError(t('forgotPassword.error.passwordMismatch'));
+            return;
+        }
+
+        if (newPassword.length < 8) {
+            setError(t('forgotPassword.error.passwordTooShort'));
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError('');
+
+            // 비밀번호 변경 API 호출
+            const passwordChangeResponse = await fetch(`${apiBaseUrl}/S1Account/SetPassword`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-KEY': passwordApiKey
+                },
+                body: JSON.stringify({
+                    Role: authType,
+                    ID: userId,
+                    Password: newPassword
+                })
+            });
+
+            const passwordChangeResult = await passwordChangeResponse.json();
+
+            if (!passwordChangeResponse.ok || !passwordChangeResult.isSuccess) {
+                throw new Error(passwordChangeResult.message || t('forgotPassword.error.passwordChangeFailed'));
+            }
+
+            // 비밀번호 변경 성공
+            alert(t('forgotPassword.passwordChangeSuccess'));
+            navigate('/login');
+
+        } catch (err) {
+            setError(err.message || t('forgotPassword.error.passwordChangeFailed'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // 인증번호 재요청
+    const handleResendCert = async () => {
+        if (!userId || !phoneNumber) {
+            setError(t('forgotPassword.error.emptyFields'));
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError('');
+
+            // 인증번호 재발급 API 호출
+            const certResponse = await fetch(`${apiBaseUrl}/Account/CreatePasswordCertification`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Mobile: phoneNumber
+                })
+            });
+
+            const certResult = await certResponse.json();
+
+            if (!certResponse.ok || !certResult.isSuccess) {
+                throw new Error(certResult.message || t('forgotPassword.error.failed'));
+            }
+
+            // 인증번호 발급 성공 시 API Key 업데이트
+            setApiKey(certResult.data.ApiKey);
+
+            // 알림톡 재발송
+            const currentLang = i18n.language || 'ko';
+            const templateName = currentLang === 'ko' ? 'CERT' : `CERT_${currentLang}`;
+            const aligoResponse = await sendTemplateMessage(
+                certResult.data.ApiKey,
+                templateName,
+                phoneNumber,
+                userId,
+                {
+                    "인증번호": certResult.data.data.CertificateData
+                }
+            );
+
+            if (!aligoResponse.ok) {
+                throw new Error(t('common.kakaoMessageError'));
+            }
+
+            // 타이머 재설정
+            setTimeLeft(300);
+            setTimerActive(true);
+        } catch (err) {
+            setError(err.message || t('forgotPassword.error.failed'));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // 타이머 포맷팅 (mm:ss)
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    return (
+        <div className="forgot-password-page">
+            <div className="forgot-password-container">
+                <div className="forgot-password-box">
+                    <div className="forgot-password-logo">
+                        <ShieldHalf size={40} />
+                    </div>
+                    <h2>{t('forgotPassword.title')}</h2>
+                    <p className="forgot-password-subtitle">
+                        {step === 1
+                            ? t('forgotPassword.subtitle.step1')
+                            : certVerified
+                                ? t('forgotPassword.subtitle.step3')
+                                : t('forgotPassword.subtitle.step2')}
+                    </p>
+
+                    {error && <div className="error-message">{error}</div>}
+
+                    {step === 1 ? (
+                        <form onSubmit={handleSubmitStep1}>
+                            <div className="form-group">
+                                <div className="input-icon">
+                                    <User size={20} />
+                                </div>
+                                <input
+                                    type="text"
+                                    value={userId}
+                                    onChange={(e) => setUserId(e.target.value)}
+                                    placeholder={t('forgotPassword.userId')}
+                                    disabled={loading}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <div className="input-icon">
+                                    <Phone size={20} />
+                                </div>
+                                <input
+                                    type="text"
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    placeholder={t('forgotPassword.phoneNumber')}
+                                    disabled={loading}
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="submit-btn"
+                                disabled={loading}
+                            >
+                                {loading ? t('common.loading') : t('forgotPassword.nextButton')}
+                            </button>
+
+                            <div className="form-options">
+                                <a href="#" onClick={() => navigate('/login')} className="back-to-login">
+                                    {t('forgotPassword.backToLogin')}
+                                </a>
+                            </div>
+                        </form>
+                    ) : (
+                        <form onSubmit={certVerified ? handleSubmitStep3 : handleSubmitStep2}>
+                            <div className="form-group cert-group">
+                                <div className="input-icon">
+                                    <Lock size={20} />
+                                </div>
+                                <input
+                                    type="text"
+                                    value={certNumber}
+                                    onChange={(e) => setCertNumber(e.target.value)}
+                                    placeholder={t('forgotPassword.certNumber')}
+                                    disabled={loading || certVerified}
+                                    className={certVerified ? 'verified' : ''}
+                                />
+                                {!certVerified && (
+                                    <div className="timer">
+                                        <Clock size={16} />
+                                        <span className={timeLeft < 60 ? 'time-warning' : ''}>
+                                            {formatTime(timeLeft)}
+                                        </span>
+                                    </div>
+                                )}
+                                {certVerified && (
+                                    <div className="verified-badge">
+                                        ✓ {t('forgotPassword.verified')}
+                                    </div>
+                                )}
+                            </div>
+
+                            {!certVerified && (
+                                <button
+                                    type="submit"
+                                    className="submit-btn"
+                                    disabled={loading || !timerActive}
+                                >
+                                    {loading ? t('common.loading') : t('forgotPassword.verifyButton')}
+                                </button>
+                            )}
+
+                            {certVerified && (
+                                <>
+                                    <div className="form-group password-group">
+                                        <div className="input-icon">
+                                            <Lock size={20} />
+                                        </div>
+                                        <input
+                                            type={showPassword ? 'text' : 'password'}
+                                            value={newPassword}
+                                            onChange={(e) => setNewPassword(e.target.value)}
+                                            placeholder={t('forgotPassword.newPassword')}
+                                            disabled={loading}
+                                        />
+                                        <button
+                                            type="button"
+                                            className="password-toggle"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                        >
+                                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        </button>
+                                    </div>
+
+                                    <div className="form-group password-group">
+                                        <div className="input-icon">
+                                            <Lock size={20} />
+                                        </div>
+                                        <input
+                                            type={showConfirmPassword ? 'text' : 'password'}
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            placeholder={t('forgotPassword.confirmPassword')}
+                                            disabled={loading}
+                                        />
+                                        <button
+                                            type="button"
+                                            className="password-toggle"
+                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        >
+                                            {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        </button>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="submit-btn"
+                                        disabled={loading}
+                                    >
+                                        {loading ? t('common.loading') : t('forgotPassword.changePasswordButton')}
+                                    </button>
+                                </>
+                            )}
+
+                            <div className="form-options">
+                                {!certVerified && (
+                                    <button
+                                        type="button"
+                                        onClick={handleResendCert}
+                                        className="resend-btn"
+                                        disabled={loading || (timerActive && timeLeft > 240)} // 1분 이상 남았을 때는 재전송 비활성화
+                                    >
+                                        {t('forgotPassword.resendCert')}
+                                    </button>
+                                )}
+                                <a href="#" onClick={() => setStep(1)} className="back-btn">
+                                    {t('forgotPassword.backButton')}
+                                </a>
+                            </div>
+                        </form>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ForgotPassword; 

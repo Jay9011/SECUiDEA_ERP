@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ShieldHalf, Lock, User } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -126,8 +126,8 @@ const Login = () => {
                             />
                         </div>
 
-                        <div className="form-options" style={{ display: "none" }}>
-                            <label className="remember-me">
+                        <div className="form-options">
+                            <label className="remember-me" style={{ display: "none" }}>
                                 <input
                                     type="checkbox"
                                     id="rememberMe"
@@ -137,7 +137,7 @@ const Login = () => {
                                 />
                                 <span>{t('login.rememberMe')}</span>
                             </label>
-                            <a href="#" className="forgot-password">{t('login.forgotPassword')}</a>
+                            <Link to="/forgot-password" className="forgot-password">{t('login.forgotPassword')}</Link>
                         </div>
 
                         <button
