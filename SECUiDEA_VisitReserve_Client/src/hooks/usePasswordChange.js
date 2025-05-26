@@ -1,0 +1,136 @@
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+/**
+ * 비밀번호 변경을 위한 커스텀 훅
+ * @param {Object} options - 옵션 객체
+ * @param {Function} options.onSuccess - 성공 시 콜백 함수
+ * @param {Function} options.onError - 실패 시 콜백 함수
+ * @param {Object} options.apiConfig - API 설정 정보
+ * @param {string} options.apiConfig.url - API URL
+ * @param {Function} options.apiConfig.buildHeaders - 헤더 생성 함수
+ * @param {Function} options.apiConfig.buildBody - 바디 생성 함수
+ * @returns {Object} 비밀번호 변경 관련 상태와 함수들
+ */
+export const usePasswordChange = (options = {}) => {
+    const { t } = useTranslation('visit');
+    const { onSuccess, onError, apiConfig } = options;
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    /**
+     * 비밀번호 유효성 검사
+     * @param {string} newPassword - 새 비밀번호
+     * @param {string} confirmPassword - 비밀번호 확인
+     * @returns {Object} 검사 결과 { isValid, errorMessage }
+     */
+    const validatePassword = (newPassword, confirmPassword) => {
+        if (!newPassword || !confirmPassword) {
+            return {
+                isValid: false,
+                errorMessage: t('forgotPassword.error.emptyPassword')
+            };
+        }
+
+        if (newPassword !== confirmPassword) {
+            return {
+                isValid: false,
+                errorMessage: t('forgotPassword.error.passwordMismatch')
+            };
+        }
+
+        if (newPassword.length < 8) {
+            return {
+                isValid: false,
+                errorMessage: t('forgotPassword.error.passwordTooShort')
+            };
+        }
+
+        return { isValid: true };
+    };
+
+    /**
+     * 비밀번호 변경 API 호출
+     * @param {Object} params - 비밀번호 변경 파라미터
+     * @returns {Promise<Object>} 결과 { success, message }
+     */
+    const changePassword = async (params) => {
+        const { newPassword, confirmPassword } = params;
+
+        try {
+            setLoading(true);
+            setError('');
+
+            // 비밀번호 유효성 검사
+            const validation = validatePassword(newPassword, confirmPassword);
+            if (!validation.isValid) {
+                const errorMessage = validation.errorMessage;
+                setError(errorMessage);
+                onError?.({ message: errorMessage });
+                return { success: false, message: errorMessage };
+            }
+
+            // API 설정이 없으면 에러
+            if (!apiConfig || !apiConfig.url) {
+                const errorMessage = 'API configuration is required';
+                setError(errorMessage);
+                onError?.({ message: errorMessage });
+                return { success: false, message: errorMessage };
+            }
+
+            // API 요청 헤더와 바디 생성
+            const headers = apiConfig.buildHeaders ? apiConfig.buildHeaders(params) : {
+                'Content-Type': 'application/json'
+            };
+
+            const body = apiConfig.buildBody ? apiConfig.buildBody(params) : JSON.stringify(params);
+
+            // 비밀번호 변경 API 호출
+            const response = await fetch(apiConfig.url, {
+                method: 'POST',
+                headers,
+                body
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.isSuccess) {
+                const errorMessage = result.message || t('forgotPassword.error.passwordChangeFailed');
+                setError(errorMessage);
+                onError?.({ message: errorMessage, result });
+                return { success: false, message: errorMessage };
+            }
+
+            // 성공 처리
+            const successMessage = t('forgotPassword.passwordChangeSuccess');
+            onSuccess?.({ message: successMessage, result });
+            return { success: true, message: successMessage };
+
+        } catch (err) {
+            const errorMessage = err.message || t('forgotPassword.error.passwordChangeFailed');
+            setError(errorMessage);
+            onError?.({ message: errorMessage, error: err });
+            return { success: false, message: errorMessage };
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    /**
+     * 에러 상태 초기화
+     */
+    const clearError = () => {
+        setError('');
+    };
+
+    return {
+        loading,
+        error,
+        changePassword,
+        validatePassword,
+        clearError
+    };
+};
+
+export default usePasswordChange; 

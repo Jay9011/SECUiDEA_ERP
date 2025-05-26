@@ -152,6 +152,7 @@
         "confirmPassword": "Confirm Password",
         "verified": "Verified",
         "certExpired": "The verification code has expired. Please click resend to receive a new verification code.",
+        "certSent": "Verification code has been sent.",
         "nextButton": "Next",
         "verifyButton": "Verify",
         "changePasswordButton": "Change Password",
@@ -370,6 +371,18 @@
             "retryButton": "Retry",
             "cancelButton": "Cancel",
             "confirm": "Confirm"
+        }
+    },
+    "userSettings": {
+        "passwordChange": {
+            "title": "Change Password",
+            "currentPassword": "Current Password",
+            "currentPasswordPlaceholder": "Enter your current password",
+            "newPasswordPlaceholder": "Enter new password (8+ characters)",
+            "confirmPasswordPlaceholder": "Re-enter new password",
+            "error": {
+                "emptyCurrentPassword": "Please enter your current password."
+            }
         }
     }
 }

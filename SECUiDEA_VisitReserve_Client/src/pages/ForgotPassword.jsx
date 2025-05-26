@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldHalf, Lock, User, Phone, Clock, Eye, EyeOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { sendTemplateMessage } from '../services/aligoService';
+import { usePasswordChange } from '../hooks/usePasswordChange';
+import { useCertification } from '../hooks/useCertification';
+import Swal from 'sweetalert2';
 
 import './ForgotPassword.scss';
 
 const apiBaseUrl = import.meta.env.VITE_BASE_API_URL;
 
 const ForgotPassword = () => {
-    const { t, i18n } = useTranslation('visit');
+    const { t } = useTranslation('visit');
     const navigate = useNavigate();
 
     // 단계 (1: 아이디/휴대폰 입력, 2: 인증번호 입력, 3: 비밀번호 변경)
@@ -31,10 +33,55 @@ const ForgotPassword = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    // eslint-disable-next-line no-unused-vars
-    const [authType, setAuthType] = useState(''); // 인증 유형 (비밀번호 재설정 단계에서 사용 예정)
-    const [apiKey, setApiKey] = useState(''); // API 키 (인증번호 확인 단계에서 사용 예정)
+    // 인증 관련 상태
+    const [authType, setAuthType] = useState(''); // 인증 유형
     const [passwordApiKey, setPasswordApiKey] = useState(''); // 비밀번호 변경용 API 키
+
+    // 인증번호 발급/확인 훅
+    const {
+        loading: certLoading,
+        createAndSendCertification,
+        verifyCertification
+    } = useCertification();
+
+    // 비밀번호 변경 훅 - API 설정을 동적으로 생성
+    const passwordChangeApiConfig = {
+        url: `${apiBaseUrl}/S1Account/SetPassword`,
+        buildHeaders: (params) => ({
+            'Content-Type': 'application/json',
+            'X-API-KEY': params.apiKey
+        }),
+        buildBody: (params) => JSON.stringify({
+            Role: params.authType,
+            ID: params.userId,
+            Password: params.newPassword
+        })
+    };
+
+    const {
+        loading: passwordChangeLoading,
+        changePassword
+    } = usePasswordChange({
+        apiConfig: passwordChangeApiConfig,
+        onSuccess: ({ message }) => {
+            Swal.fire({
+                icon: 'success',
+                title: t('common.confirm'),
+                text: message,
+                confirmButtonText: t('common.ok')
+            }).then(() => {
+                navigate('/login');
+            });
+        },
+        onError: ({ message }) => {
+            Swal.fire({
+                icon: 'error',
+                title: t('common.warning'),
+                text: message,
+                confirmButtonText: t('common.ok')
+            });
+        }
+    });
 
     // 타이머 관리
     useEffect(() => {
@@ -87,44 +134,21 @@ const ForgotPassword = () => {
             // 계정 확인 성공 시 AuthType 저장
             setAuthType(accountCheckResult.data.AuthType);
 
-            // 2. 인증번호 발급 API 호출
-            const certResponse = await fetch(`${apiBaseUrl}/Account/CreatePasswordCertification`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Mobile: phoneNumber
-                })
+            // 2. 인증번호 발급 및 전송
+            const certResult = await createAndSendCertification({
+                phoneNumber,
+                userId
             });
 
-            const certResult = await certResponse.json();
-
-            if (!certResponse.ok || !certResult.isSuccess) {
-                throw new Error(certResult.message || t('forgotPassword.error.failed'));
+            if (certResult.success) {
+                // 성공 시 다음 단계로 이동
+                setStep(2);
+                setTimeLeft(300); // 5분 타이머 설정
+                setTimerActive(true);
+            } else {
+                setError(certResult.message);
             }
 
-            // 인증번호 발급 성공 시 API Key 저장
-            setApiKey(certResult.data.ApiKey);
-
-            // 3. 알림톡 발송
-            const currentLang = i18n.language || 'ko';
-            const templateName = currentLang === 'ko' ? 'CERT' : `CERT_${currentLang}`;
-
-            const templateVariables = {
-                "인증번호": certResult.data.data.certificateData
-            }
-
-            const aligoResponse = await sendTemplateMessage(certResult.data.ApiKey, templateName, phoneNumber, userId, templateVariables);
-
-            if (!aligoResponse.ok) {
-                throw new Error(t('common.kakaoMessageError'));
-            }
-
-            // 모든 과정 성공 시 다음 단계로 이동
-            setStep(2);
-            setTimeLeft(300); // 5분 타이머 설정
-            setTimerActive(true);
         } catch (err) {
             setError(err.message || t('forgotPassword.error.failed'));
         } finally {
@@ -141,39 +165,20 @@ const ForgotPassword = () => {
             return;
         }
 
-        try {
-            setLoading(true);
-            setError('');
+        const certResult = await verifyCertification({
+            userId,
+            phoneNumber,
+            certNumber
+        });
 
-            // 인증번호 확인 API 호출
-            const certCheckResponse = await fetch(`${apiBaseUrl}/Account/CheckPasswordCertification`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Id: userId,
-                    Mobile: phoneNumber,
-                    CertificateData: certNumber
-                })
-            });
-
-            const certCheckResult = await certCheckResponse.json();
-
-            if (!certCheckResponse.ok || !certCheckResult.isSuccess) {
-                throw new Error(certCheckResult.message || t('forgotPassword.error.certFailed'));
-            }
-
+        if (certResult.success) {
             // 인증 성공 시 처리
             setCertVerified(true);
             setTimerActive(false);
-            setPasswordApiKey(certCheckResult.data.ApiKey); // 비밀번호 변경용 API 키 저장
+            setPasswordApiKey(certResult.apiKey); // 비밀번호 변경용 API 키 저장
             setError(''); // 에러 메시지 클리어
-
-        } catch (err) {
-            setError(err.message || t('forgotPassword.error.certFailed'));
-        } finally {
-            setLoading(false);
+        } else {
+            setError(certResult.message);
         }
     };
 
@@ -181,54 +186,15 @@ const ForgotPassword = () => {
     const handleSubmitStep3 = async (e) => {
         e.preventDefault();
 
-        if (!newPassword || !confirmPassword) {
-            setError(t('forgotPassword.error.emptyPassword'));
-            return;
-        }
+        const result = await changePassword({
+            userId,
+            newPassword,
+            confirmPassword,
+            authType,
+            apiKey: passwordApiKey
+        });
 
-        if (newPassword !== confirmPassword) {
-            setError(t('forgotPassword.error.passwordMismatch'));
-            return;
-        }
-
-        if (newPassword.length < 8) {
-            setError(t('forgotPassword.error.passwordTooShort'));
-            return;
-        }
-
-        try {
-            setLoading(true);
-            setError('');
-
-            // 비밀번호 변경 API 호출
-            const passwordChangeResponse = await fetch(`${apiBaseUrl}/S1Account/SetPassword`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-API-KEY': passwordApiKey
-                },
-                body: JSON.stringify({
-                    Role: authType,
-                    ID: userId,
-                    Password: newPassword
-                })
-            });
-
-            const passwordChangeResult = await passwordChangeResponse.json();
-
-            if (!passwordChangeResponse.ok || !passwordChangeResult.isSuccess) {
-                throw new Error(passwordChangeResult.message || t('forgotPassword.error.passwordChangeFailed'));
-            }
-
-            // 비밀번호 변경 성공
-            alert(t('forgotPassword.passwordChangeSuccess'));
-            navigate('/login');
-
-        } catch (err) {
-            setError(err.message || t('forgotPassword.error.passwordChangeFailed'));
-        } finally {
-            setLoading(false);
-        }
+        return result;
     };
 
     // 인증번호 재요청
@@ -238,54 +204,18 @@ const ForgotPassword = () => {
             return;
         }
 
-        try {
-            setLoading(true);
-            setError('');
+        const certResult = await createAndSendCertification({
+            phoneNumber,
+            userId
+        });
 
-            // 인증번호 재발급 API 호출
-            const certResponse = await fetch(`${apiBaseUrl}/Account/CreatePasswordCertification`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Mobile: phoneNumber
-                })
-            });
-
-            const certResult = await certResponse.json();
-
-            if (!certResponse.ok || !certResult.isSuccess) {
-                throw new Error(certResult.message || t('forgotPassword.error.failed'));
-            }
-
-            // 인증번호 발급 성공 시 API Key 업데이트
-            setApiKey(certResult.data.ApiKey);
-
-            // 알림톡 재발송
-            const currentLang = i18n.language || 'ko';
-            const templateName = currentLang === 'ko' ? 'CERT' : `CERT_${currentLang}`;
-            const aligoResponse = await sendTemplateMessage(
-                certResult.data.ApiKey,
-                templateName,
-                phoneNumber,
-                userId,
-                {
-                    "인증번호": certResult.data.data.CertificateData
-                }
-            );
-
-            if (!aligoResponse.ok) {
-                throw new Error(t('common.kakaoMessageError'));
-            }
-
+        if (certResult.success) {
             // 타이머 재설정
             setTimeLeft(300);
             setTimerActive(true);
-        } catch (err) {
-            setError(err.message || t('forgotPassword.error.failed'));
-        } finally {
-            setLoading(false);
+            setError(''); // 에러 메시지 클리어
+        } else {
+            setError(certResult.message);
         }
     };
 
@@ -325,7 +255,7 @@ const ForgotPassword = () => {
                                     value={userId}
                                     onChange={(e) => setUserId(e.target.value)}
                                     placeholder={t('forgotPassword.userId')}
-                                    disabled={loading}
+                                    disabled={loading || certLoading}
                                 />
                             </div>
 
@@ -338,16 +268,16 @@ const ForgotPassword = () => {
                                     value={phoneNumber}
                                     onChange={(e) => setPhoneNumber(e.target.value)}
                                     placeholder={t('forgotPassword.phoneNumber')}
-                                    disabled={loading}
+                                    disabled={loading || certLoading}
                                 />
                             </div>
 
                             <button
                                 type="submit"
                                 className="submit-btn"
-                                disabled={loading}
+                                disabled={loading || certLoading}
                             >
-                                {loading ? t('common.loading') : t('forgotPassword.nextButton')}
+                                {(loading || certLoading) ? t('common.loading') : t('forgotPassword.nextButton')}
                             </button>
 
                             <div className="form-options">
@@ -367,7 +297,7 @@ const ForgotPassword = () => {
                                     value={certNumber}
                                     onChange={(e) => setCertNumber(e.target.value)}
                                     placeholder={t('forgotPassword.certNumber')}
-                                    disabled={loading || certVerified}
+                                    disabled={loading || certLoading || certVerified}
                                     className={certVerified ? 'verified' : ''}
                                 />
                                 {!certVerified && (
@@ -389,9 +319,9 @@ const ForgotPassword = () => {
                                 <button
                                     type="submit"
                                     className="submit-btn"
-                                    disabled={loading || !timerActive}
+                                    disabled={loading || certLoading || !timerActive}
                                 >
-                                    {loading ? t('common.loading') : t('forgotPassword.verifyButton')}
+                                    {(loading || certLoading) ? t('common.loading') : t('forgotPassword.verifyButton')}
                                 </button>
                             )}
 
@@ -406,7 +336,7 @@ const ForgotPassword = () => {
                                             value={newPassword}
                                             onChange={(e) => setNewPassword(e.target.value)}
                                             placeholder={t('forgotPassword.newPassword')}
-                                            disabled={loading}
+                                            disabled={loading || passwordChangeLoading}
                                         />
                                         <button
                                             type="button"
@@ -426,7 +356,7 @@ const ForgotPassword = () => {
                                             value={confirmPassword}
                                             onChange={(e) => setConfirmPassword(e.target.value)}
                                             placeholder={t('forgotPassword.confirmPassword')}
-                                            disabled={loading}
+                                            disabled={loading || passwordChangeLoading}
                                         />
                                         <button
                                             type="button"
@@ -440,9 +370,9 @@ const ForgotPassword = () => {
                                     <button
                                         type="submit"
                                         className="submit-btn"
-                                        disabled={loading}
+                                        disabled={loading || passwordChangeLoading}
                                     >
-                                        {loading ? t('common.loading') : t('forgotPassword.changePasswordButton')}
+                                        {(loading || passwordChangeLoading) ? t('common.loading') : t('forgotPassword.changePasswordButton')}
                                     </button>
                                 </>
                             )}
@@ -453,7 +383,7 @@ const ForgotPassword = () => {
                                         type="button"
                                         onClick={handleResendCert}
                                         className="resend-btn"
-                                        disabled={loading || (timerActive && timeLeft > 240)} // 1분 이상 남았을 때는 재전송 비활성화
+                                        disabled={loading || certLoading || (timerActive && timeLeft > 240)} // 1분 이상 남았을 때는 재전송 비활성화
                                     >
                                         {t('forgotPassword.resendCert')}
                                     </button>
