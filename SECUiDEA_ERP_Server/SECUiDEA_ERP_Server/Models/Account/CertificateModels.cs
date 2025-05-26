@@ -8,6 +8,8 @@ public class PassCertMobileModel : SQLParam
     [DbParameter]
     public string Type { get; set; } = "reg";
     [DbParameter]
+    public string Id { get; set; } = string.Empty;
+    [DbParameter]
     public string? Mobile { get; set; }
     [DbParameter]
     public string? CertificateData { get; set; }

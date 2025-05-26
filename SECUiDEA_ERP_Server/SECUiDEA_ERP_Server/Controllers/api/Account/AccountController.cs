@@ -103,10 +103,19 @@ public class AccountController : JwtController
                 var data = result.DataSet.Tables[0].Rows[0];
                 var message = data["Message"].ToString();
                 
+                // Certification이 성공한 Id만 인증된 것으로 간주
+                var additionalClaims = new List<Claim>
+                {
+                    new Claim(StringClass.CertID, mobileModel.Id)
+                };
+                
                 // 인증에 성공하면 이후 인증/인가용 JWT 토큰을 발급
                 return Ok(BoolResultModel.Success(message, new Dictionary<string, object>
                 {
-                    { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Account, StringClass.SECUIDEA, nameof(CheckPasswordCertification), TimeSpan.FromMinutes(60)) },
+                    { "ApiKey", _jwtService.GenerateApiKeyToken(StringClass.Issuer_Account, StringClass.SECUIDEA, nameof(CheckPasswordCertification)
+                        , TimeSpan.FromMinutes(60)
+                        , additionalClaims
+                    ) }
                 }));
             }
             else if (result.DataSet?.Tables.Count > 0

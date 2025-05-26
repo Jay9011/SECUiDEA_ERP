@@ -152,6 +152,7 @@ const ForgotPassword = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    Id: userId,
                     Mobile: phoneNumber,
                     CertificateData: certNumber
                 })

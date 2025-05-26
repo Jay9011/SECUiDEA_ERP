@@ -75,20 +75,27 @@ public class S1AccountController : BaseController
             #region 인증 검사
 
             // API Key 인증
-            var apiKeyId = HttpContext.Items[ClaimTypes.Authentication] as string;
-            var serviceName = HttpContext.Items[ClaimTypes.AuthenticationMethod] as string;
+            var apiKeyId = HttpContext.GetApiKeyId();
+            var serviceName = HttpContext.GetApiServiceName();
             
             // API 토큰 생성 Issuer가 StringClass.Issuer_Account이고 Authentication이 StringClass.SECUIDEA인 경우에만 성공
             if (string.IsNullOrEmpty(apiKeyId)
                 || string.IsNullOrEmpty(serviceName))
             {
-                return BadRequest(BoolResultModel.Fail("Invalid API Key."));
+                return BadRequest(BoolResultModel.Fail("Invalid API Key. (ErrorCode: 1000)"));
             }
             
             // API 생산 액션이 CheckPasswordCertification 만 허용
             if (serviceName != nameof(AccountController.CheckPasswordCertification))
             {
-                return BadRequest(BoolResultModel.Fail("Invalid API Key."));
+                return BadRequest(BoolResultModel.Fail("Invalid API Key. (ErrorCode: 1000)"));
+            }
+            
+            // API 인증 CertID가 model에서 가져온 ID와 일치하는지 확인
+            var certId = HttpContext.GetApiClaim(StringClass.CertID);
+            if (model.ID != certId)
+            {
+                return BadRequest(BoolResultModel.Fail("Invalid API Key. (ErrorCode: 1300)"));
             }
 
             #endregion

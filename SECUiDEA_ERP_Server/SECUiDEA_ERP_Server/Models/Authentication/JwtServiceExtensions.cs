@@ -14,17 +14,24 @@ namespace SECUiDEA_ERP_Server.Models.Authentication
         /// <param name="apiKeyId">API Key</param>
         /// <param name="serviceName">발급 서비스</param>
         /// <param name="expiryOption">시간 제한</param>
+        /// <param name="additionalClaims">추가 Claim 리스트</param>
         /// <returns></returns>
-        public string GenerateApiKeyToken(string issuer, string apiKeyId, string serviceName, TimeSpan? expiryOption = null)
+        public string GenerateApiKeyToken(string issuer, string apiKeyId, string serviceName, TimeSpan? expiryOption = null, IEnumerable<Claim>? additionalClaims = null)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Convert.FromBase64String(_jwtSettings.Secret);
 
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Authentication, apiKeyId),
                 new Claim(ClaimTypes.AuthenticationMethod, serviceName)
             };
+
+            // 추가 Claim이 있는 경우 포함
+            if (additionalClaims != null)
+            {
+                claims.AddRange(additionalClaims);
+            }
 
             TimeSpan expiry = expiryOption ?? TimeSpan.FromMinutes(StringClass.DefaultApiExpiryMinutes);
 
