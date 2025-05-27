@@ -71,7 +71,6 @@ const ForgotPassword = () => {
             Swal.fire({
                 icon: 'success',
                 iconColor: colors.success,
-                title: t('common.confirm'),
                 text: message,
                 confirmButtonText: t('common.ok'),
                 confirmButtonColor: colors.primary
@@ -83,7 +82,6 @@ const ForgotPassword = () => {
             Swal.fire({
                 icon: 'error',
                 iconColor: colors.error,
-                title: t('common.warning'),
                 text: message,
                 confirmButtonText: t('common.ok'),
                 confirmButtonColor: colors.primary

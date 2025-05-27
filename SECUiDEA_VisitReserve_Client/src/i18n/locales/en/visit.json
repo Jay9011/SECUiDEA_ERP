@@ -392,10 +392,16 @@
             "currentPasswordRequired": "Current password is required.",
             "userNotFound": "User not found.",
             "currentPasswordIncorrect": "Current password is incorrect.",
-            "passwordUpdateFailed": "Failed to update password."
+            "passwordUpdateFailed": "Failed to update password.",
+            "failedToFindUser": "Failed to find user information.",
+            "invalidApiKey": "Invalid API key.",
+            "failedToSetPassword": "Failed to set password.",
+            "failedToCreatePasswordCertification": "Failed to create password certification.",
+            "failedToCheckPasswordCertification": "Failed to check password certification."
         },
         "success": {
-            "passwordUpdateSuccess": "Password updated successfully."
+            "passwordUpdateSuccess": "Password updated successfully.",
+            "passwordChangedSuccessfully": "Password changed successfully."
         }
     },
     "passwordValidation": {

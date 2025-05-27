@@ -68,7 +68,7 @@ public class S1AccountController : BaseController
             return BadRequest(BoolResultModel.Fail(e.Message));
         }
         
-        return BadRequest(BoolResultModel.Fail("Failed to find user."));
+        return BadRequest(BoolResultModel.Fail("failedToFindUser"));
     }
     
     [HttpPost]
@@ -87,20 +87,20 @@ public class S1AccountController : BaseController
             if (string.IsNullOrEmpty(apiKeyId)
                 || string.IsNullOrEmpty(serviceName))
             {
-                return BadRequest(BoolResultModel.Fail("Invalid API Key. (ErrorCode: 1000)"));
+                return BadRequest(BoolResultModel.Fail("invalidApiKey"));
             }
             
             // API 생산 액션이 CheckPasswordCertification 만 허용
             if (serviceName != nameof(AccountController.CheckPasswordCertification))
             {
-                return BadRequest(BoolResultModel.Fail("Invalid API Key. (ErrorCode: 1000)"));
+                return BadRequest(BoolResultModel.Fail("invalidApiKey"));
             }
             
             // API 인증 CertID가 model에서 가져온 ID와 일치하는지 확인
             var certId = HttpContext.GetApiClaim(StringClass.CertID);
             if (model.ID != certId)
             {
-                return BadRequest(BoolResultModel.Fail("Invalid API Key. (ErrorCode: 1300)"));
+                return BadRequest(BoolResultModel.Fail("invalidApiKey"));
             }
 
             #endregion
@@ -120,7 +120,7 @@ public class S1AccountController : BaseController
             if (result.IsSuccess
                 && result.ReturnValue == 1)
             {
-                return Ok(BoolResultModel.Success("Password changed successfully."));
+                return Ok(BoolResultModel.Success("passwordChangedSuccessfully"));
             }
         }
         catch (Exception e)
@@ -128,7 +128,7 @@ public class S1AccountController : BaseController
             return BadRequest(BoolResultModel.Fail(e.Message));
         }
         
-        return Ok(BoolResultModel.Fail("Failed to set password."));
+        return Ok(BoolResultModel.Fail("failedToSetPassword"));
     }
     
     [Authorize]

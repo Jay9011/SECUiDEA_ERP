@@ -82,7 +82,7 @@ public class AccountController : JwtController
             return BadRequest(BoolResultModel.Fail(e.Message));
         }
         
-        return BadRequest(BoolResultModel.Fail("Failed to create password certification."));
+        return BadRequest(BoolResultModel.Fail("failedToCreatePasswordCertification"));
     }
     
     /// <summary>
@@ -132,7 +132,7 @@ public class AccountController : JwtController
             return BadRequest(BoolResultModel.Fail(e.Message));
         }
         
-        return BadRequest(BoolResultModel.Fail("Failed to check password certification."));
+        return BadRequest(BoolResultModel.Fail("failedToCheckPasswordCertification"));
     }
     
     /// <summary>

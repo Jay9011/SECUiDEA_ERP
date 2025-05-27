@@ -63,15 +63,12 @@ export const usePasswordChange = (options = {}) => {
 
             // 커스텀 fetch 함수가 있으면 사용, 없으면 기본 fetch 사용
             if (apiConfig.customFetch) {
-                // 커스텀 fetch는 이미 파싱된 결과를 반환
                 result = await apiConfig.customFetch(apiConfig.url, {
                     method: 'POST',
                     headers,
                     body
                 });
 
-                // api.js의 post 함수는 성공/실패에 관계없이 결과를 반환하므로
-                // result.isSuccess로 성공 여부를 판단
                 if (!result.isSuccess) {
                     const errorMessage = getTranslatedErrorMessage(result, t, 'forgotPassword.error.passwordChangeFailed');
                     setError(errorMessage);
