@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Lock, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { api } from '../utils/api';
 import { usePasswordChange } from '../hooks/usePasswordChange';
 import Swal from 'sweetalert2';
 import PropTypes from 'prop-types';
 
 import './PasswordChangeModal.scss';
-
-const apiBaseUrl = import.meta.env.VITE_BASE_API_URL;
 
 /**
  * 비밀번호 변경 모달 컴포넌트
@@ -27,22 +26,23 @@ const PasswordChangeModal = ({ isOpen, onClose, userId, authType }) => {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-    // 로그인한 사용자용 비밀번호 변경 API 설정
+    // 로그인한 사용자용 비밀번호 변경 API 설정 - JWT 인증 사용
     const passwordChangeApiConfig = {
-        url: `${apiBaseUrl}/S1Account/SetPassword`,
-        buildHeaders: () => ({
-            'Content-Type': 'application/json'
-            // 로그인한 사용자의 경우 API Key 대신 세션/토큰 인증 사용
-        }),
+        url: '/S1Account/UpdatePassword',
+        buildHeaders: () => ({}), // api.js에서 자동으로 Authorization 헤더 추가
         buildBody: (params) => JSON.stringify({
-            Role: params.authType,
-            ID: params.userId,
             Password: params.newPassword,
             CurrentPassword: params.currentPassword
-        })
+        }),
+        customFetch: async (url, options) => {
+            return await api.post(url, {
+                body: options.body,
+                headers: options.headers
+            }, true);
+        }
     };
 
-    // 비밀번호 변경 훅 사용 (API Key 사용하지 않음)
+    // 비밀번호 변경 훅 사용 (JWT 인증)
     const {
         loading,
         error,

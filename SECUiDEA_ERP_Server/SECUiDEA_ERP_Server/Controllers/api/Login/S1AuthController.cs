@@ -149,6 +149,7 @@ public class S1UserRepository : IUserRepository
             {
                 Seq = userEntity.Seq,
                 ID = userEntity.Id,
+                Password = userEntity.Password,
                 Name = userEntity.Name,
                 UserRole = userEntity.AuthType,
                 EnableSessionTimeout = userEntity.EnableSessionTimeout,
@@ -199,6 +200,7 @@ public class S1UserRepository : IUserRepository
             {
                 Seq = userEntity.Seq,
                 ID = userEntity.Id,
+                Password = userEntity.Password,
                 Name = userEntity.Name,
                 UserRole = userEntity.AuthType,
                 EnableSessionTimeout = userEntity.EnableSessionTimeout,

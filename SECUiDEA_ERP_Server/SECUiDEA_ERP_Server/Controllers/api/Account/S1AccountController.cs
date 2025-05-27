@@ -1,9 +1,11 @@
 ﻿using System.Security.Claims;
 using CoreDAL.Configuration.Interface;
 using CryptoManager;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SECUiDEA_ERP_Server.Controllers.BaseControllers;
 using SECUiDEA_ERP_Server.Controllers.Extensions;
+using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
 using SECUiDEA_ERP_Server.Models.ResultModels;
 
@@ -14,15 +16,18 @@ public class S1AccountController : BaseController
 {
     #region 의존 주입
 
-    private IDatabaseSetupContainer _dbSetupContainer;
-    private IDatabaseSetup _s1Setup;
-    private ICryptoManager _s1Sha512;
+    private readonly IDatabaseSetupContainer _dbSetupContainer;
+    private readonly IDatabaseSetup _s1Setup;
+    private readonly ICryptoManager _s1Sha512;
+    private readonly UserRepositoryFactory _userRepositoryFactory;
 
     public S1AccountController(IDatabaseSetupContainer dbSetupContainer,
-        [FromKeyedServices(StringClass.CryptoS1Sha512)] ICryptoManager s1Sha512)
+        [FromKeyedServices(StringClass.CryptoS1Sha512)] ICryptoManager s1Sha512, 
+        UserRepositoryFactory userRepositoryFactory)
     {
         _dbSetupContainer = dbSetupContainer;
         _s1Sha512 = s1Sha512;
+        _userRepositoryFactory = userRepositoryFactory;
 
         _s1Setup = _dbSetupContainer.GetSetup(StringClass.S1Access);
     }
@@ -124,5 +129,83 @@ public class S1AccountController : BaseController
         }
         
         return Ok(BoolResultModel.Fail("Failed to set password."));
+    }
+    
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> UpdatePassword([FromBody] S1UpdatePasswordModel model)
+    {
+        try
+        {
+            #region 인증 인가
+
+            // 로그인 사용자 ID 가져오기
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
+            // 로그인 사용자 Role 가져오기
+            var userRoleClaimValue = User.FindFirstValue(ClaimTypes.Role);
+            
+            // 두 정보 중 하나라도 없으면 인증 실패
+            if (string.IsNullOrEmpty(userId)
+                || string.IsNullOrEmpty(userRoleClaimValue))
+            {
+                return BadRequest(BoolResultModel.Fail("Invalid user authentication."));
+            }
+
+            #endregion
+            
+            // 들어온 비밀번호 암호화
+            var shaEncryptPassword = _s1Sha512.Encrypt(model.Password);
+
+            #region 현재 비밀번호 검증
+
+            // 현재 비밀번호가 제공되지 않은 경우
+            if (string.IsNullOrEmpty(model.CurrentPassword))
+            {
+                return BadRequest(BoolResultModel.Fail("Current password is required."));
+            }
+            
+            // 사용자 정보 가져오기
+            var repository = _userRepositoryFactory.GetRepository(StringClass.S1Access);
+            User user = await repository.GetUserModelByIdAsync(userId);
+
+            // 사용자 정보가 없는 경우
+            if (user == null)
+            {
+                return Unauthorized(BoolResultModel.Fail("User not found."));
+            }
+            
+            // 현재 비밀번호 검증
+            if (user.Password != shaEncryptPassword)
+            {
+                return BadRequest(BoolResultModel.Fail("Current password is incorrect."));
+            }
+
+            #endregion
+
+            // 비밀번호 변경 파라미터 설정
+            S1AccountPassRegParam param = new S1AccountPassRegParam
+            {
+                Type = "change",
+                Role = userRoleClaimValue,
+                ID = userId,
+                Password = shaEncryptPassword,
+                UpdateIP = GetClientIpAddress()
+            };
+            
+            // 비밀번호 설정
+            var result = await _s1Setup.DAL.ExecuteProcedureAsync(_s1Setup, "SECUiDEA_PasswordREG", param);
+            if (result.IsSuccess
+                && result.ReturnValue == 1)
+            {
+                return Ok(BoolResultModel.Success("Password updated successfully."));
+            }
+        }
+        catch (Exception e)
+        {
+            return BadRequest(BoolResultModel.Fail(e.Message));
+        }
+        
+        return Ok(BoolResultModel.Fail("Failed to update password."));
     }
 }

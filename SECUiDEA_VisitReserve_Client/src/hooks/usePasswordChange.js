@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
  * @param {string} options.apiConfig.url - API URL
  * @param {Function} options.apiConfig.buildHeaders - 헤더 생성 함수
  * @param {Function} options.apiConfig.buildBody - 바디 생성 함수
+ * @param {Function} options.apiConfig.customFetch - 커스텀 fetch 함수 (선택사항)
  * @returns {Object} 비밀번호 변경 관련 상태와 함수들
  */
 export const usePasswordChange = (options = {}) => {
@@ -86,12 +87,23 @@ export const usePasswordChange = (options = {}) => {
 
             const body = apiConfig.buildBody ? apiConfig.buildBody(params) : JSON.stringify(params);
 
-            // 비밀번호 변경 API 호출
-            const response = await fetch(apiConfig.url, {
-                method: 'POST',
-                headers,
-                body
-            });
+            let response;
+
+            // 커스텀 fetch 함수가 있으면 사용, 없으면 기본 fetch 사용
+            if (apiConfig.customFetch) {
+                response = await apiConfig.customFetch(apiConfig.url, {
+                    method: 'POST',
+                    headers,
+                    body
+                });
+            } else {
+                // 기본 fetch 사용
+                response = await fetch(apiConfig.url, {
+                    method: 'POST',
+                    headers,
+                    body
+                });
+            }
 
             const result = await response.json();
 

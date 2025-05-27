@@ -43,3 +43,12 @@ public class S1AccountPassRegParam : S1AccountModel
     [DbParameter]
     public string Type { get; set; } = "find";
 }
+
+/// <summary>
+/// 로그인한 사용자의 비밀번호 변경을 위한 모델
+/// </summary>
+public class S1UpdatePasswordModel
+{
+    public string? Password { get; set; }
+    public string? CurrentPassword { get; set; }
+}
