@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { usePasswordChange } from '../hooks/usePasswordChange';
 import { useCertification } from '../hooks/useCertification';
 import { getTranslatedErrorMessage } from '../utils/translation';
+import PasswordStrengthIndicator from '../components/features/PasswordStrengthIndicator';
 import Swal from 'sweetalert2';
 import { getColorVariables } from '../utils/cssVariables';
 import './ForgotPassword.scss';
@@ -34,6 +35,7 @@ const ForgotPassword = () => {
     const [certVerified, setCertVerified] = useState(false); // 인증번호 확인 완료 상태
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showRequirements, setShowRequirements] = useState(true);
 
     // 인증 관련 상태
     const [authType, setAuthType] = useState(''); // 인증 유형
@@ -355,6 +357,13 @@ const ForgotPassword = () => {
                                         </button>
                                     </div>
 
+                                    {/* 비밀번호 강도 표시기 */}
+                                    <PasswordStrengthIndicator
+                                        password={newPassword}
+                                        show={newPassword.length > 0}
+                                        showRequirements={showRequirements}
+                                    />
+
                                     <div className="form-group password-group">
                                         <div className="input-icon">
                                             <Lock size={20} />
@@ -363,6 +372,8 @@ const ForgotPassword = () => {
                                             type={showConfirmPassword ? 'text' : 'password'}
                                             value={confirmPassword}
                                             onChange={(e) => setConfirmPassword(e.target.value)}
+                                            onFocus={() => setShowRequirements(false)}
+                                            onBlur={() => setShowRequirements(true)}
                                             placeholder={t('forgotPassword.confirmPassword')}
                                             disabled={loading || passwordChangeLoading}
                                         />

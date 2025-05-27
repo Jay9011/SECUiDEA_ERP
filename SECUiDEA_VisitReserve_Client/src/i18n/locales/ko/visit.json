@@ -407,5 +407,18 @@
             "consecutiveNumbers": "연속된 숫자 3개 이상 사용할 수 없습니다.",
             "sameAsUserId": "비밀번호는 아이디와 동일할 수 없습니다."
         }
+    },
+    "passwordStrength": {
+        "weak": "약함",
+        "medium": "보통",
+        "strong": "강함",
+        "requirements": {
+            "minLength": {
+                "satisfied": "최소 {{minLength}}자 이상 (만족)",
+                "unsatisfied": "최소 {{minLength}}자 이상 필요"
+            },
+            "characterTypes": "문자 종류 {{count}}/4개 (영문 대/소문자, 숫자, 특수문자)",
+            "noConsecutive": "연속된 숫자 3개 이상 사용 금지"
+        }
     }
 }

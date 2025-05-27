@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { getColorVariables } from '../utils/cssVariables';
 import { api } from '../utils/api';
 import { usePasswordChange } from '../hooks/usePasswordChange';
+import PasswordStrengthIndicator from '../components/features/PasswordStrengthIndicator';
 import Swal from 'sweetalert2';
 
 import './ChangePassword.scss';
@@ -25,6 +26,7 @@ const ChangePassword = () => {
     const [showCurrentPassword, setShowCurrentPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showRequirements, setShowRequirements] = useState(true);
 
     // 로그인하지 않은 경우 로그인 페이지로 리다이렉트 (useEffect 사용)
     useEffect(() => {
@@ -185,6 +187,13 @@ const ChangePassword = () => {
                                 </div>
                             </div>
 
+                            {/* 비밀번호 강도 표시기 */}
+                            <PasswordStrengthIndicator
+                                password={newPassword}
+                                show={newPassword.length > 0}
+                                showRequirements={showRequirements}
+                            />
+
                             <div className="form-group">
                                 <label className="form-label">
                                     {t('forgotPassword.confirmPassword')}
@@ -197,6 +206,8 @@ const ChangePassword = () => {
                                         type={showConfirmPassword ? 'text' : 'password'}
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
+                                        onFocus={() => setShowRequirements(false)}
+                                        onBlur={() => setShowRequirements(true)}
                                         placeholder={t('userSettings.passwordChange.confirmPasswordPlaceholder')}
                                         disabled={loading}
                                         className="password-input"

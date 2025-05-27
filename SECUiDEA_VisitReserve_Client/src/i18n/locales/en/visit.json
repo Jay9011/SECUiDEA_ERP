@@ -407,5 +407,18 @@
             "consecutiveNumbers": "Cannot use 3 or more consecutive numbers.",
             "sameAsUserId": "Password cannot be the same as your user ID."
         }
+    },
+    "passwordStrength": {
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong",
+        "requirements": {
+            "minLength": {
+                "satisfied": "Minimum {{minLength}} characters (satisfied)",
+                "unsatisfied": "Minimum {{minLength}} characters required"
+            },
+            "characterTypes": "Character types {{count}}/4 (uppercase, lowercase, numbers, special characters)",
+            "noConsecutive": "No 3+ consecutive numbers allowed"
+        }
     }
 }
