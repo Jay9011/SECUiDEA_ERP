@@ -44,12 +44,12 @@ const ChangePassword = () => {
             CurrentPassword: params.currentPassword
         }),
         customFetch: async (url, options) => {
-            const result = await api.post(url, {
+            const response = await api.post(url, {
                 body: options.body,
                 headers: options.headers
             }, true);
 
-            return result;
+            return await response.json();
         }
     };
 

@@ -34,7 +34,7 @@ export const usePasswordChange = (options = {}) => {
             setLoading(true);
             setError('');
 
-            // 비밀번호 유효성 검사 (새로운 유틸리티 사용)
+            // 비밀번호 유효성 검사
             const validation = validatePassword(newPassword, confirmPassword, { userId, t });
             if (!validation.isValid) {
                 const errorMessage = validation.errorMessage;
@@ -59,14 +59,25 @@ export const usePasswordChange = (options = {}) => {
             const body = apiConfig.buildBody ? apiConfig.buildBody(params) : JSON.stringify(params);
 
             let response;
+            let result;
 
             // 커스텀 fetch 함수가 있으면 사용, 없으면 기본 fetch 사용
             if (apiConfig.customFetch) {
-                response = await apiConfig.customFetch(apiConfig.url, {
+                // 커스텀 fetch는 이미 파싱된 결과를 반환
+                result = await apiConfig.customFetch(apiConfig.url, {
                     method: 'POST',
                     headers,
                     body
                 });
+
+                // api.js의 post 함수는 성공/실패에 관계없이 결과를 반환하므로
+                // result.isSuccess로 성공 여부를 판단
+                if (!result.isSuccess) {
+                    const errorMessage = getTranslatedErrorMessage(result, t, 'forgotPassword.error.passwordChangeFailed');
+                    setError(errorMessage);
+                    onError?.({ message: errorMessage, result });
+                    return { success: false, message: errorMessage };
+                }
             } else {
                 // 기본 fetch 사용
                 response = await fetch(apiConfig.url, {
@@ -74,15 +85,15 @@ export const usePasswordChange = (options = {}) => {
                     headers,
                     body
                 });
-            }
 
-            const result = await response.json();
+                result = await response.json();
 
-            if (!response.ok || !result.isSuccess) {
-                const errorMessage = getTranslatedErrorMessage(result, t, 'forgotPassword.error.passwordChangeFailed');
-                setError(errorMessage);
-                onError?.({ message: errorMessage, result });
-                return { success: false, message: errorMessage };
+                if (!response.ok || !result.isSuccess) {
+                    const errorMessage = getTranslatedErrorMessage(result, t, 'forgotPassword.error.passwordChangeFailed');
+                    setError(errorMessage);
+                    onError?.({ message: errorMessage, result });
+                    return { success: false, message: errorMessage };
+                }
             }
 
             // 성공 처리
