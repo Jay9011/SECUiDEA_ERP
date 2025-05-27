@@ -349,6 +349,7 @@ const ForgotPassword = () => {
                                             type="button"
                                             className="password-toggle"
                                             onClick={() => setShowPassword(!showPassword)}
+                                            tabIndex="-1"
                                         >
                                             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                         </button>
@@ -369,6 +370,7 @@ const ForgotPassword = () => {
                                             type="button"
                                             className="password-toggle"
                                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                            tabIndex="-1"
                                         >
                                             {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                         </button>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getTranslatedErrorMessage, getTranslatedSuccessMessage } from '../utils/translation';
+import { validatePassword } from '../utils/passwordValidation';
 
 /**
  * 비밀번호 변경을 위한 커스텀 훅
@@ -22,50 +23,19 @@ export const usePasswordChange = (options = {}) => {
     const [error, setError] = useState('');
 
     /**
-     * 비밀번호 유효성 검사
-     * @param {string} newPassword - 새 비밀번호
-     * @param {string} confirmPassword - 비밀번호 확인
-     * @returns {Object} 검사 결과 { isValid, errorMessage }
-     */
-    const validatePassword = (newPassword, confirmPassword) => {
-        if (!newPassword || !confirmPassword) {
-            return {
-                isValid: false,
-                errorMessage: t('forgotPassword.error.emptyPassword')
-            };
-        }
-
-        if (newPassword !== confirmPassword) {
-            return {
-                isValid: false,
-                errorMessage: t('forgotPassword.error.passwordMismatch')
-            };
-        }
-
-        if (newPassword.length < 8) {
-            return {
-                isValid: false,
-                errorMessage: t('forgotPassword.error.passwordTooShort')
-            };
-        }
-
-        return { isValid: true };
-    };
-
-    /**
      * 비밀번호 변경 API 호출
      * @param {Object} params - 비밀번호 변경 파라미터
      * @returns {Promise<Object>} 결과 { success, message }
      */
     const changePassword = async (params) => {
-        const { newPassword, confirmPassword } = params;
+        const { newPassword, confirmPassword, userId } = params;
 
         try {
             setLoading(true);
             setError('');
 
-            // 비밀번호 유효성 검사
-            const validation = validatePassword(newPassword, confirmPassword);
+            // 비밀번호 유효성 검사 (새로운 유틸리티 사용)
+            const validation = validatePassword(newPassword, confirmPassword, { userId, t });
             if (!validation.isValid) {
                 const errorMessage = validation.errorMessage;
                 setError(errorMessage);
@@ -141,7 +111,6 @@ export const usePasswordChange = (options = {}) => {
         loading,
         error,
         changePassword,
-        validatePassword,
         clearError
     };
 };

@@ -397,5 +397,15 @@
         "success": {
             "passwordUpdateSuccess": "Password updated successfully."
         }
+    },
+    "passwordValidation": {
+        "error": {
+            "emptyPassword": "Please enter a password.",
+            "passwordMismatch": "Passwords do not match.",
+            "insufficientTypes": "Please use at least 2 types of characters: uppercase, lowercase, numbers, and special characters.",
+            "tooShort": "Password must be at least {{minLength}} characters long with {{typeCount}} character types.",
+            "consecutiveNumbers": "Cannot use 3 or more consecutive numbers.",
+            "sameAsUserId": "Password cannot be the same as your user ID."
+        }
     }
 }

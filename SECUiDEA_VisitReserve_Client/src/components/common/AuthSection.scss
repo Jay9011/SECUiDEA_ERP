@@ -54,22 +54,19 @@
       .change-password-btn {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: end;
         gap: 0.5rem;
-        padding: 0.5rem 1rem;
         background-color: transparent;
-        border: 1px solid var(--primary-color, #4a6cf7);
-        color: var(--primary-color, #4a6cf7);
-        border-radius: 0.25rem;
-        font-weight: 500;
+        border: none;
         text-decoration: none;
+        font-weight: 500;
+        font-size: 0.85rem;
+        color: var(--text-placeholder, #4a6cf7);
         cursor: pointer;
         transition: all 0.3s ease;
-        font-size: 0.85rem;
 
         &:hover {
-          background-color: var(--primary-color, #4a6cf7);
-          color: white;
+          color: var(--light-text, #4a6cf7);
         }
       }
 
