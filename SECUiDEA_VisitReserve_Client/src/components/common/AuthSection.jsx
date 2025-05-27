@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from 'react-i18next';
+import { Settings } from 'lucide-react';
 
 // 스타일
 import './AuthSection.scss';
@@ -36,11 +37,23 @@ const AuthSection = ({ onClose }) => {
                             </span>
                         </div>
                     </div>
-                    <button
-                        onClick={handleLogout}
-                        className="logout-btn">
-                        {t('components.authSection.logout')}
-                    </button>
+
+                    <div className="user-actions">
+                        <Link
+                            to="/change-password"
+                            className="change-password-btn"
+                            onClick={onClose}
+                        >
+                            <Settings size={16} />
+                            {t('userSettings.passwordChange.title')}
+                        </Link>
+
+                        <button
+                            onClick={handleLogout}
+                            className="logout-btn">
+                            {t('components.authSection.logout')}
+                        </button>
+                    </div>
                 </div>
             ) : (
                 <Link

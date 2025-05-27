@@ -149,20 +149,22 @@ public class S1AccountController : BaseController
             if (string.IsNullOrEmpty(userId)
                 || string.IsNullOrEmpty(userRoleClaimValue))
             {
-                return BadRequest(BoolResultModel.Fail("Invalid user authentication."));
+                return Ok(BoolResultModel.Fail("invalidUserAuthentication"));
             }
 
             #endregion
             
             // 들어온 비밀번호 암호화
             var shaEncryptPassword = _s1Sha512.Encrypt(model.Password);
+            // 현재 비밀번호 암호화
+            var currentPasswordHash = _s1Sha512.Encrypt(model.CurrentPassword);
 
             #region 현재 비밀번호 검증
 
             // 현재 비밀번호가 제공되지 않은 경우
             if (string.IsNullOrEmpty(model.CurrentPassword))
             {
-                return BadRequest(BoolResultModel.Fail("Current password is required."));
+                return Ok(BoolResultModel.Fail("currentPasswordRequired"));
             }
             
             // 사용자 정보 가져오기
@@ -172,13 +174,13 @@ public class S1AccountController : BaseController
             // 사용자 정보가 없는 경우
             if (user == null)
             {
-                return Unauthorized(BoolResultModel.Fail("User not found."));
+                return Unauthorized(BoolResultModel.Fail("userNotFound"));
             }
             
             // 현재 비밀번호 검증
-            if (user.Password != shaEncryptPassword)
+            if (user.Password != currentPasswordHash)
             {
-                return BadRequest(BoolResultModel.Fail("Current password is incorrect."));
+                return Ok(BoolResultModel.Fail("currentPasswordIncorrect"));
             }
 
             #endregion
@@ -198,7 +200,7 @@ public class S1AccountController : BaseController
             if (result.IsSuccess
                 && result.ReturnValue == 1)
             {
-                return Ok(BoolResultModel.Success("Password updated successfully."));
+                return Ok(BoolResultModel.Success("passwordUpdateSuccess"));
             }
         }
         catch (Exception e)
@@ -206,6 +208,6 @@ public class S1AccountController : BaseController
             return BadRequest(BoolResultModel.Fail(e.Message));
         }
         
-        return Ok(BoolResultModel.Fail("Failed to update password."));
+        return Ok(BoolResultModel.Fail("passwordUpdateFailed"));
     }
 }

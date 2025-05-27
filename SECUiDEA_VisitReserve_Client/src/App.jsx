@@ -11,6 +11,7 @@ import BaseLayout from './components/layouts/BaseLayout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
+import ChangePassword from './pages/ChangePassword';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 import PrivacyAgreementInput from './pages/visitReserve/PrivacyAgreementInput';
@@ -34,6 +35,11 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/change-password" element={
+                <ProtectedRoute>
+                  <ChangePassword />
+                </ProtectedRoute>
+              } />
             </Route>
 
             {/* 기본 배경의 레이아웃 */}

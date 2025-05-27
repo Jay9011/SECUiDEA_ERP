@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getTranslatedErrorMessage, getTranslatedSuccessMessage } from '../utils/translation';
 
 /**
  * 비밀번호 변경을 위한 커스텀 훅
@@ -108,14 +109,14 @@ export const usePasswordChange = (options = {}) => {
             const result = await response.json();
 
             if (!response.ok || !result.isSuccess) {
-                const errorMessage = result.message || t('forgotPassword.error.passwordChangeFailed');
+                const errorMessage = getTranslatedErrorMessage(result, t, 'forgotPassword.error.passwordChangeFailed');
                 setError(errorMessage);
                 onError?.({ message: errorMessage, result });
                 return { success: false, message: errorMessage };
             }
 
             // 성공 처리
-            const successMessage = t('forgotPassword.passwordChangeSuccess');
+            const successMessage = getTranslatedSuccessMessage(result, t, 'forgotPassword.passwordChangeSuccess');
             onSuccess?.({ message: successMessage, result });
             return { success: true, message: successMessage };
 

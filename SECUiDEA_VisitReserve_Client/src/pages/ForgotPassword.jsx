@@ -4,8 +4,9 @@ import { ShieldHalf, Lock, User, Phone, Clock, Eye, EyeOff } from 'lucide-react'
 import { useTranslation } from 'react-i18next';
 import { usePasswordChange } from '../hooks/usePasswordChange';
 import { useCertification } from '../hooks/useCertification';
+import { getTranslatedErrorMessage } from '../utils/translation';
 import Swal from 'sweetalert2';
-
+import { getColorVariables } from '../utils/cssVariables';
 import './ForgotPassword.scss';
 
 const apiBaseUrl = import.meta.env.VITE_BASE_API_URL;
@@ -13,6 +14,7 @@ const apiBaseUrl = import.meta.env.VITE_BASE_API_URL;
 const ForgotPassword = () => {
     const { t } = useTranslation('visit');
     const navigate = useNavigate();
+    const colors = getColorVariables();
 
     // 단계 (1: 아이디/휴대폰 입력, 2: 인증번호 입력, 3: 비밀번호 변경)
     const [step, setStep] = useState(1);
@@ -66,9 +68,11 @@ const ForgotPassword = () => {
         onSuccess: ({ message }) => {
             Swal.fire({
                 icon: 'success',
+                iconColor: colors.success,
                 title: t('common.confirm'),
                 text: message,
-                confirmButtonText: t('common.ok')
+                confirmButtonText: t('common.ok'),
+                confirmButtonColor: colors.primary
             }).then(() => {
                 navigate('/login');
             });
@@ -76,9 +80,11 @@ const ForgotPassword = () => {
         onError: ({ message }) => {
             Swal.fire({
                 icon: 'error',
+                iconColor: colors.error,
                 title: t('common.warning'),
                 text: message,
-                confirmButtonText: t('common.ok')
+                confirmButtonText: t('common.ok'),
+                confirmButtonColor: colors.primary
             });
         }
     });
@@ -128,7 +134,8 @@ const ForgotPassword = () => {
             const accountCheckResult = await accountCheckResponse.json();
 
             if (!accountCheckResponse.ok || !accountCheckResult.isSuccess) {
-                throw new Error(accountCheckResult.message || t('forgotPassword.error.failed'));
+                const errorMessage = getTranslatedErrorMessage(accountCheckResult, t, 'forgotPassword.error.failed');
+                throw new Error(errorMessage);
             }
 
             // 계정 확인 성공 시 AuthType 저장

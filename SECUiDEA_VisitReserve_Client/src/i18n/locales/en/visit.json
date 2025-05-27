@@ -376,13 +376,26 @@
     "userSettings": {
         "passwordChange": {
             "title": "Change Password",
+            "description": "For security, please enter your current password and then change to a new password.",
             "currentPassword": "Current Password",
             "currentPasswordPlaceholder": "Enter your current password",
             "newPasswordPlaceholder": "Enter new password (8+ characters)",
-            "confirmPasswordPlaceholder": "Re-enter new password",
+            "confirmPasswordPlaceholder": "Confirm new password",
             "error": {
                 "emptyCurrentPassword": "Please enter your current password."
             }
+        }
+    },
+    "api": {
+        "errors": {
+            "invalidUserAuthentication": "Invalid user authentication.",
+            "currentPasswordRequired": "Current password is required.",
+            "userNotFound": "User not found.",
+            "currentPasswordIncorrect": "Current password is incorrect.",
+            "passwordUpdateFailed": "Failed to update password."
+        },
+        "success": {
+            "passwordUpdateSuccess": "Password updated successfully."
         }
     }
 }
