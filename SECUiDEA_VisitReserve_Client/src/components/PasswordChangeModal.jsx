@@ -123,75 +123,81 @@ const PasswordChangeModal = ({ isOpen, onClose, userId, authType }) => {
                     {error && <div className="error-message">{error}</div>}
 
                     <form onSubmit={handleSubmit}>
-                        {/* 현재 비밀번호 */}
-                        <div className="form-group password-group">
-                            <label>{t('userSettings.passwordChange.currentPassword')}</label>
-                            <div className="input-wrapper">
-                                <div className="input-icon">
-                                    <Lock size={20} />
+                        {/* 현재 비밀번호 섹션 */}
+                        <div className="password-section current-password-section">
+                            <div className="form-group password-group">
+                                <label>{t('userSettings.passwordChange.currentPassword')}</label>
+                                <div className="input-wrapper">
+                                    <div className="input-icon">
+                                        <Lock size={20} />
+                                    </div>
+                                    <input
+                                        type={showCurrentPassword ? 'text' : 'password'}
+                                        value={currentPassword}
+                                        onChange={(e) => setCurrentPassword(e.target.value)}
+                                        placeholder={t('userSettings.passwordChange.currentPasswordPlaceholder')}
+                                        disabled={loading}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="password-toggle"
+                                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                                        tabIndex="-1"
+                                    >
+                                        {showCurrentPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                    </button>
                                 </div>
-                                <input
-                                    type={showCurrentPassword ? 'text' : 'password'}
-                                    value={currentPassword}
-                                    onChange={(e) => setCurrentPassword(e.target.value)}
-                                    placeholder={t('userSettings.passwordChange.currentPasswordPlaceholder')}
-                                    disabled={loading}
-                                />
-                                <button
-                                    type="button"
-                                    className="password-toggle"
-                                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                                >
-                                    {showCurrentPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                </button>
                             </div>
                         </div>
 
-                        {/* 새 비밀번호 */}
-                        <div className="form-group password-group">
-                            <label>{t('forgotPassword.newPassword')}</label>
-                            <div className="input-wrapper">
-                                <div className="input-icon">
-                                    <Lock size={20} />
+                        {/* 새 비밀번호 섹션 */}
+                        <div className="password-section new-password-section">
+                            <div className="form-group password-group">
+                                <label>{t('forgotPassword.newPassword')}</label>
+                                <div className="input-wrapper">
+                                    <div className="input-icon">
+                                        <Lock size={20} />
+                                    </div>
+                                    <input
+                                        type={showNewPassword ? 'text' : 'password'}
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        placeholder={t('userSettings.passwordChange.newPasswordPlaceholder')}
+                                        disabled={loading}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="password-toggle"
+                                        onClick={() => setShowNewPassword(!showNewPassword)}
+                                        tabIndex="-1"
+                                    >
+                                        {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                    </button>
                                 </div>
-                                <input
-                                    type={showNewPassword ? 'text' : 'password'}
-                                    value={newPassword}
-                                    onChange={(e) => setNewPassword(e.target.value)}
-                                    placeholder={t('userSettings.passwordChange.newPasswordPlaceholder')}
-                                    disabled={loading}
-                                />
-                                <button
-                                    type="button"
-                                    className="password-toggle"
-                                    onClick={() => setShowNewPassword(!showNewPassword)}
-                                >
-                                    {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                </button>
                             </div>
-                        </div>
 
-                        {/* 비밀번호 확인 */}
-                        <div className="form-group password-group">
-                            <label>{t('forgotPassword.confirmPassword')}</label>
-                            <div className="input-wrapper">
-                                <div className="input-icon">
-                                    <Lock size={20} />
+                            <div className="form-group password-group">
+                                <label>{t('forgotPassword.confirmPassword')}</label>
+                                <div className="input-wrapper">
+                                    <div className="input-icon">
+                                        <Lock size={20} />
+                                    </div>
+                                    <input
+                                        type={showConfirmPassword ? 'text' : 'password'}
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        placeholder={t('userSettings.passwordChange.confirmPasswordPlaceholder')}
+                                        disabled={loading}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="password-toggle"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        tabIndex="-1"
+                                    >
+                                        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                    </button>
                                 </div>
-                                <input
-                                    type={showConfirmPassword ? 'text' : 'password'}
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    placeholder={t('userSettings.passwordChange.confirmPasswordPlaceholder')}
-                                    disabled={loading}
-                                />
-                                <button
-                                    type="button"
-                                    className="password-toggle"
-                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                >
-                                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                </button>
                             </div>
                         </div>
 
