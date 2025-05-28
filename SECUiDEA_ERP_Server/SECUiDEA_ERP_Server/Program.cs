@@ -52,9 +52,13 @@ public class Program
         builder.Services.AddKeyedSingleton<ICryptoManager>(StringClass.CryptoS1Sha512, S1SHA512);
         builder.Services.AddKeyedSingleton<ICryptoManager>(StringClass.CryptoSecuidea, SECUiDEA);
 
+        // DB Container 초기 설정
         var dbContainer = SetupDbContainer(dbSetupFileHelper, SECUiDEA);
         builder.Services.AddSingleton<IDatabaseSetupContainer>(dbContainer);
         builder.Services.AddSingleton<IDBSetupService, DBSetupService>();
+
+        // API Client 초기 설정
+        var apiSetupContainer = SetupApiContainer(apiSetupFileHelper);
 
         /* ================================================
          * 최우선 기타 설정 종료
@@ -88,12 +92,6 @@ public class Program
                 IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(jwtSettings[StringClass.Secret])),
                 ClockSkew = TimeSpan.Zero
             };
-        });
-
-        // API Client 초기 설정
-        var apiSetupContainer = new APISetupContainer(new Dictionary<string, IIOHelper>
-        {
-            [StringClass.Nlobby] = apiSetupFileHelper
         });
 
         builder.Services.AddSingleton<IRefreshTokenRepository, RefreshTokenRepository>();
@@ -154,5 +152,17 @@ public class Program
 
         DatabaseSetupContainer dbContainer = new DatabaseSetupContainer(setupConfigs, SECUiDEA);
         return dbContainer;
+    }
+
+    public static APISetupContainer SetupApiContainer(IIOHelper apiSetupFileHelper)
+    {
+        var setupConfigs = new Dictionary<string, IIOHelper>
+        {
+            [StringClass.Nlobby] = apiSetupFileHelper,
+            [StringClass.IParking] = apiSetupFileHelper
+        };
+        
+        APISetupContainer apiContainer = new APISetupContainer(setupConfigs);
+        return apiContainer;
     }
 }

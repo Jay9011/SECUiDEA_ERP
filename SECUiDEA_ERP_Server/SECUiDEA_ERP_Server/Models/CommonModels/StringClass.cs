@@ -56,11 +56,12 @@ public static class StringClass
     // API 키 관련
     public const double DefaultApiExpiryMinutes = 1; // 기본 JWT 유효기간 (분 단위)
     public const string CertID = "CertID"; // 인증 ID
-
-    // 카카오 알림톡 관련
+    
     public const string Issuer_Kakao = "Kakao";
-    public const string Issuer_Account = "Account"; // Account 관련
+    public const string Issuer_Account = "Account";
+    public const string Issuer_Parking = "Parking";
 
     // API 라우팅 관련
     public const string Nlobby = "nlobby";
+    public const string IParking = "iParking";
 }
