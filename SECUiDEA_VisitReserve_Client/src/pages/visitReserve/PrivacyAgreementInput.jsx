@@ -584,7 +584,12 @@ function PrivacyAgreementInput() {
     const [htmlContent, setHtmlContent] = useState('');
 
     useEffect(() => {
-        const htmlPath = t('visitReserve.privacyAgreement.privacyPolicy.fullContentPath');
+        let htmlPath = t('visitReserve.privacyAgreement.privacyPolicy.fullContentPath');
+
+        if (import.meta.env.DEV) {
+            htmlPath = `${import.meta.env.BASE_URL}${htmlPath}`;
+        }
+
         fetch(htmlPath)
             .then(res => res.text())
             .then(setHtmlContent);

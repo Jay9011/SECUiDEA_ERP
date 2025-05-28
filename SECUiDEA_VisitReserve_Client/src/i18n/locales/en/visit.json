@@ -205,6 +205,14 @@
             "home": "Home"
         }
     },
+    "privacy": {
+        "title": "Privacy Policy",
+        "subtitle": "Review the privacy policy for the visit reservation system",
+        "actions": {
+            "home": "Home",
+            "reservation": "Make Reservation"
+        }
+    },
     "notFound": {
         "code": "404",
         "title": "Page Not Found",

@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import ChangePassword from './pages/ChangePassword';
 import About from './pages/About';
+import Privacy from './pages/Privacy';
 import NotFound from './pages/NotFound';
 import PrivacyAgreementInput from './pages/visitReserve/PrivacyAgreementInput';
 import ReserveResult from './pages/visitReserve/ReserveResult';
@@ -57,6 +58,7 @@ const App = () => {
                 </ProtectedRoute>
               } />
               <Route path="/about" element={<About />} />
+              <Route path="/privacy" element={<Privacy />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
