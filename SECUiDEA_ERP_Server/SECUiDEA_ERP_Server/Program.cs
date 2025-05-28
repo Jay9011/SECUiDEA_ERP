@@ -10,6 +10,7 @@ using FileIOHelper.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
+using SECUiDEA_ERP_Server.Models.Account;
 using SECUiDEA_ERP_Server.Models.Authentication;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
@@ -100,6 +101,8 @@ public class Program
         builder.Services.AddSingleton<JwtService>();
         builder.Services.AddSingleton<SessionService>();
         builder.Services.AddSingleton<UserAuthService>();
+        
+        builder.Services.AddSingleton<AccountService>();
 
         builder.Services.AddSingleton<APISetupContainer>(apiSetupContainer);
 
@@ -125,7 +128,12 @@ public class Program
         app.MapFallbackToFile("/visit/{**path}", "/visit/index.html");
         app.MapFallbackToFile("/index.html");
 
+        /* ================================================
+         * 미리 실행되어야 하는 서비스들
+         * ================================================
+         */
         app.Services.GetRequiredService<SessionService>();
+        app.Services.GetRequiredService<AccountService>();
         
         app.Run();
     }

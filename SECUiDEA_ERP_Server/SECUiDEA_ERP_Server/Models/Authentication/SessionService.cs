@@ -384,7 +384,17 @@ public class SessionService : IDisposable
 
     private void CleanupCacheCallback(object state)
     {
-        _ = Task.Run(async () => await CleanupCacheAsync()); // 비동기 정리 작업
+        _ = Task.Run(async () => // 비동기 정리 작업
+        {
+            try
+            {
+                await CleanupCacheAsync();
+            }
+            catch (Exception ex)
+            {
+                // 예외 처리 로직 필요
+            }
+        });
     }
 
     private async Task CleanupCacheAsync()

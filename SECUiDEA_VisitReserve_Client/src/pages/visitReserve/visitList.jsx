@@ -42,7 +42,6 @@ const VisitList = () => {
     // 페이지 이동 시 모달과 알림 정리
     useEffect(() => {
         return () => {
-            // 컴포넌트 언마운트 시 실행
             Swal.close();
         };
     }, []);
@@ -167,7 +166,7 @@ const VisitList = () => {
                 throw new Error(data.message || t('visitReserve.visitList.statusChangeError'));
             }
 
-            // 성공적으로 상태가 변경된 경우 UI 업데이트와 카카오 알림톡 발송
+            // 상태변경 성공 - 승인: UI 업데이트와 카카오 알림톡 발송
             if (newStatus === 'approved'
                 && data.data?.ApiKey
                 && data.data?.visitants?.length > 0
