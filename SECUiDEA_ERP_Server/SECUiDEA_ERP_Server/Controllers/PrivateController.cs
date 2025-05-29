@@ -1,9 +1,11 @@
-﻿using CoreDAL.Configuration;
+﻿using APIClient.Configuration.Interfaces;
+using CoreDAL.Configuration;
 using CoreDAL.Configuration.Interface;
 using CryptoManager;
 using FileIOHelper;
 using Microsoft.AspNetCore.Mvc;
 using SECUiDEA_ERP_Server.Controllers.Extensions;
+using SECUiDEA_ERP_Server.Models.APIServices;
 using SECUiDEA_ERP_Server.Models.CommonModels;
 using SECUiDEA_ERP_Server.Models.ControllerModels.Private;
 using SECUiDEA_ERP_Server.Models.DBServices;
@@ -20,10 +22,16 @@ public class PrivateController : Controller
     private readonly IIOHelper _ioHelper;
     private readonly IDatabaseSetupContainer _dbSetupContainer;
     private readonly IDBSetupService _dbSetupService;
+    private readonly IAPISetupContainer _apiSetupContainer;
+    private readonly IAPISetupService _apiSetupService;
 
     #endregion
 
-    public PrivateController(IDatabaseSetupContainer dbSetupContainer, IDBSetupService dbSetupService, [FromKeyedServices(StringClass.IoDbSetupFile)] IIOHelper ioHelper, [FromKeyedServices(StringClass.CryptoSecuidea)] ICryptoManager cryptoSecuidea)
+    public PrivateController(
+        [FromKeyedServices(StringClass.IoDbSetupFile)] IIOHelper ioHelper, 
+        [FromKeyedServices(StringClass.CryptoSecuidea)] ICryptoManager cryptoSecuidea, 
+        IDatabaseSetupContainer dbSetupContainer, IDBSetupService dbSetupService, 
+        IAPISetupContainer apiSetupContainer)
     {
         #region 의존 주입
 
@@ -31,9 +39,12 @@ public class PrivateController : Controller
         _dbSetupService = dbSetupService;
         _ioHelper = ioHelper;
         _cryptoSecuidea = cryptoSecuidea;
+        _apiSetupContainer = apiSetupContainer;
 
         #endregion
     }
+
+    #region DB 설정 관련
 
     [HttpGet]
     public IActionResult DBSetup()
@@ -94,4 +105,16 @@ public class PrivateController : Controller
         var result = await _dbSetupService.TestConnectionAsync(setting);
         return Ok(result);
     }
+
+    #endregion
+    
+    #region API 설정 관련
+
+    [HttpGet]
+    public IActionResult APISetup()
+    {
+        var apiSetups = _apiSetupService.GetAllSetups();
+    }
+    
+    #endregion
 }

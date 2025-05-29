@@ -39,14 +39,16 @@ const AuthSection = ({ onClose }) => {
                     </div>
 
                     <div className="user-actions">
-                        <Link
-                            to="/change-password"
-                            className="change-password-btn"
-                            onClick={onClose}
-                        >
-                            <Settings size={16} />
-                            {t('userSettings.passwordChange.title')}
-                        </Link>
+                        {(user.role === 'Employee' || user.role === 'Admin') && (
+                            <Link
+                                to="/change-password"
+                                className="change-password-btn"
+                                onClick={onClose}
+                            >
+                                <Settings size={16} />
+                                {t('userSettings.passwordChange.title')}
+                            </Link>
+                        )}
 
                         <button
                             onClick={handleLogout}
