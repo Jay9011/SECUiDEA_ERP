@@ -47,6 +47,12 @@
             "logout": "Logout",
             "login": "Login",
             "logoutError": "An error occurred during logout"
+        },
+        "employeeSelector": {
+            "searchPlaceholder": "Search by name or department",
+            "noResults": "No matching employees found",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
         }
     },
     "reservation": {

@@ -47,6 +47,12 @@
             "logout": "로그아웃",
             "login": "로그인",
             "logoutError": "로그아웃 처리 중 오류가 발생했습니다"
+        },
+        "employeeSelector": {
+            "searchPlaceholder": "이름 또는 부서명으로 검색",
+            "noResults": "해당하는 직원이 없습니다",
+            "cancel": "취소",
+            "confirm": "확인"
         }
     },
     "reservation": {

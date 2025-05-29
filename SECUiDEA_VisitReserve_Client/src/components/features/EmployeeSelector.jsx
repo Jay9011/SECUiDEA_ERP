@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Search } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const EmployeeSelector = ({ employees, onSelect, onCancel }) => {
+  const { t } = useTranslation('visit');
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -33,7 +35,7 @@ const EmployeeSelector = ({ employees, onSelect, onCancel }) => {
           <input
             type="text"
             className="search-input"
-            placeholder="이름 또는 부서명으로 검색"
+            placeholder={t('components.employeeSelector.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -56,7 +58,7 @@ const EmployeeSelector = ({ employees, onSelect, onCancel }) => {
             </div>
           ))
         ) : (
-          <div className="no-results">검색 결과가의 직원이 없습니다</div>
+          <div className="no-results">{t('components.employeeSelector.noResults')}</div>
         )}
       </div>
 
@@ -66,14 +68,14 @@ const EmployeeSelector = ({ employees, onSelect, onCancel }) => {
           className="btn btn-outline"
           onClick={onCancel}
         >
-          취소
+          {t('components.employeeSelector.cancel')}
         </button>
         <button
           className="btn btn-primary"
           disabled={!selectedEmployee}
           onClick={handleConfirm}
         >
-          확인
+          {t('components.employeeSelector.confirm')}
         </button>
       </div>
     </div>
