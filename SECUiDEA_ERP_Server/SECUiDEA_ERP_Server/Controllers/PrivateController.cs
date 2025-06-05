@@ -22,16 +22,13 @@ public class PrivateController : Controller
     private readonly IIOHelper _ioHelper;
     private readonly IDatabaseSetupContainer _dbSetupContainer;
     private readonly IDBSetupService _dbSetupService;
-    private readonly IAPISetupContainer _apiSetupContainer;
-    private readonly IAPISetupService _apiSetupService;
 
     #endregion
 
     public PrivateController(
         [FromKeyedServices(StringClass.IoDbSetupFile)] IIOHelper ioHelper, 
         [FromKeyedServices(StringClass.CryptoSecuidea)] ICryptoManager cryptoSecuidea, 
-        IDatabaseSetupContainer dbSetupContainer, IDBSetupService dbSetupService, 
-        IAPISetupContainer apiSetupContainer)
+        IDatabaseSetupContainer dbSetupContainer, IDBSetupService dbSetupService)
     {
         #region 의존 주입
 
@@ -39,7 +36,6 @@ public class PrivateController : Controller
         _dbSetupService = dbSetupService;
         _ioHelper = ioHelper;
         _cryptoSecuidea = cryptoSecuidea;
-        _apiSetupContainer = apiSetupContainer;
 
         #endregion
     }
@@ -106,15 +102,5 @@ public class PrivateController : Controller
         return Ok(result);
     }
 
-    #endregion
-    
-    #region API 설정 관련
-
-    [HttpGet]
-    public IActionResult APISetup()
-    {
-        var apiSetups = _apiSetupService.GetAllSetups();
-    }
-    
     #endregion
 }

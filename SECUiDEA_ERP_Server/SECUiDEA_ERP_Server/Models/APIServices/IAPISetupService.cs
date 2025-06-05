@@ -1,4 +1,5 @@
-﻿using SECUiDEA_ERP_Server.Models.ResultModels;
+﻿using SECUiDEA_ERP_Server.Models.ControllerModels.Private;
+using SECUiDEA_ERP_Server.Models.ResultModels;
 
 namespace SECUiDEA_ERP_Server.Models.APIServices;
 

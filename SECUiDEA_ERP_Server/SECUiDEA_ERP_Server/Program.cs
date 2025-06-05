@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using APIClient.Configuration;
+using APIClient.Configuration.Interfaces;
 using CoreDAL.Configuration;
 using CoreDAL.Configuration.Interface;
 using CryptoManager;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Win32;
 using SECUiDEA_ERP_Server.Models.Account;
+using SECUiDEA_ERP_Server.Models.APIServices;
 using SECUiDEA_ERP_Server.Models.Authentication;
 using SECUiDEA_ERP_Server.Models.AuthUser;
 using SECUiDEA_ERP_Server.Models.CommonModels;
@@ -59,6 +61,7 @@ public class Program
 
         // API Client 초기 설정
         var apiSetupContainer = SetupApiContainer(apiSetupFileHelper);
+        builder.Services.AddSingleton<IAPISetupContainer>(apiSetupContainer);
 
         /* ================================================
          * 최우선 기타 설정 종료
@@ -161,8 +164,8 @@ public class Program
             [StringClass.Nlobby] = apiSetupFileHelper,
             [StringClass.IParking] = apiSetupFileHelper
         };
-        
         APISetupContainer apiContainer = new APISetupContainer(setupConfigs);
+        
         return apiContainer;
     }
 }
