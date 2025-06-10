@@ -18,6 +18,7 @@ using SECUiDEA_ERP_Server.Models.CommonModels;
 using SECUiDEA_ERP_Server.Models.ControllerModels.Private;
 using SECUiDEA_ERP_Server.Models.Parking;
 using SECUiDEA_ERP_Server.Models.ResultModels;
+using System.Text.Json;
 
 namespace SECUiDEA_ERP_Server.Controllers.api.Parking;
 
@@ -473,7 +474,6 @@ public class IParkingController : BaseController
 #if DEBUG
 
     [HttpGet]
-    [Route("test/visitcar")]
     public async Task<IActionResult> TestResponseVisitCarList(string? carNumber, DateTime? startDate, DateTime? endDate, 
         int? periodType = 1, int? currentPage = 1, int? pageSize = 10)
     {
@@ -522,66 +522,68 @@ public class IParkingController : BaseController
         Response.Headers.Add("result-message", "SUCCESS");
         Response.Headers.Add("Content-Type", "application/json");
         
-        // 차량 번호에 따른 테스트 데이터 생성
-        var response = new VisitCarResponseModel
-        {
-            CurrentPage = currentPage ?? 1,
-            TotalCount = 0,
-            List = new List<VisitCar>()
-        };
+        // JSON 문자열로 직접 응답 생성
+        string jsonResponse;
         
         // 특정 차량번호일 경우 더미 데이터 2개 반환 (12가3456)
         if (carNumber == "12가3456")
         {
-            response.TotalCount = 2;
-            response.List = new List<VisitCar>
-            {
-                new VisitCar
-                {
-                    VisitCarSeq = 1,
-                    CarNumber = "12가3456",
-                    StartDate = DateTime.Now.AddDays(-5),
-                    EndDate = DateTime.Now.AddDays(5),
-                    Dong = "101",
-                    Hosu = "1001",
-                    Memo = "방문객 1",
-                    Auth = true
-                },
-                new VisitCar
-                {
-                    VisitCarSeq = 2,
-                    CarNumber = "12가3456",
-                    StartDate = DateTime.Now.AddDays(-2),
-                    EndDate = DateTime.Now.AddDays(10),
-                    Dong = "102",
-                    Hosu = "2001",
-                    Memo = "방문객 2",
-                    Auth = true
-                }
-            };
+            jsonResponse = @"{
+                ""List"": [
+                    {
+                        ""VisitCarSeq"": 1,
+                        ""CarNumber"": ""12가3456"",
+                        ""StartDate"": """ + DateTime.Now.AddDays(-5).ToString("yyyy-MM-dd HH:mm:ss") + @""",
+                        ""EndDate"": """ + DateTime.Now.AddDays(5).ToString("yyyy-MM-dd HH:mm:ss") + @""",
+                        ""Dong"": ""101"",
+                        ""Hosu"": ""1001"",
+                        ""Memo"": ""방문객 1"",
+                        ""Auth"": true
+                    },
+                    {
+                        ""VisitCarSeq"": 2,
+                        ""CarNumber"": ""12가3456"",
+                        ""StartDate"": """ + DateTime.Now.AddDays(-2).ToString("yyyy-MM-dd HH:mm:ss") + @""",
+                        ""EndDate"": """ + DateTime.Now.AddDays(10).ToString("yyyy-MM-dd HH:mm:ss") + @""",
+                        ""Dong"": ""102"",
+                        ""Hosu"": ""2001"",
+                        ""Memo"": ""방문객 2"",
+                        ""Auth"": true
+                    }
+                ],
+                ""CurrentPage"": " + (currentPage ?? 1) + @",
+                ""TotalCount"": 2
+            }";
         }
         // null 가능한 데이터에 null이 들어있는 데이터 1개 반환 (34나5678)
         else if (carNumber == "34나5678")
         {
-            response.TotalCount = 1;
-            response.List = new List<VisitCar>
-            {
-                new VisitCar
-                {
-                    VisitCarSeq = 3,
-                    CarNumber = "34나5678",
-                    StartDate = DateTime.Now.AddDays(-1),
-                    EndDate = DateTime.Now.AddDays(3),
-                    Dong = null,
-                    Hosu = null,
-                    Memo = null,
-                    Auth = false
-                }
-            };
+            jsonResponse = @"{
+                ""CurrentPage"": " + (currentPage ?? 1) + @",
+                ""TotalCount"": 1,
+                ""List"": [
+                    {
+                        ""VisitCarSeq"": 3,
+                        ""CarNumber"": ""34나5678"",
+                        ""StartDate"": """ + DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss") + @""",
+                        ""EndDate"": """ + DateTime.Now.AddDays(3).ToString("yyyy-MM-dd HH:mm:ss") + @""",
+                        ""Auth"": false
+                    }
+                ]
+            }";
         }
         // 그 외의 경우 빈 리스트 반환
+        else
+        {
+            jsonResponse = @"{
+                ""CurrentPage"": " + (currentPage ?? 1) + @",
+                ""TotalCount"": 0,
+                ""List"": []
+            }";
+        }
         
-        return Ok(response);
+        // JSON 문자열을 직접 반환
+        return Content(jsonResponse, "application/json");
     }
 
 #endif
