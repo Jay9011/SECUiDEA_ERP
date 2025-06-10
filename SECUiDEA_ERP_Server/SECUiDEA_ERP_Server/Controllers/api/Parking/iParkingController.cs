@@ -59,7 +59,7 @@ public class IParkingController : BaseController
         _apiContainer = apiContainer;
         _apiSetup = _apiContainer.GetSetup(StringClass.IParking);
         _setupService = new IParkingSetupService(_apiContainer);
-        
+
         // 만약 _apiSetup에 기본 URL이 설정되어 있지 않다면, 하드코딩으로 최초 설정 세팅
         if (string.IsNullOrEmpty(_apiSetup.GetConnectionInfo().BaseUrl))
         {
@@ -72,7 +72,7 @@ public class IParkingController : BaseController
             InitializeApiConnectionInfo();
         }
         
-        _coreApi = new CoreAPIClient(_apiSetup);
+        _coreApi = new CoreAPIClient(_apiSetup, ignoreSslErrors: true);
     }
 
     #endregion
@@ -194,7 +194,7 @@ public class IParkingController : BaseController
                 Body = RequestBody.CreateJson(body)
             };
             
-            APIResponse<VisitCarResponseModel> result = await _coreApi.PostAsync<VisitCarResponseModel>(Register, request);
+            APIResponse<VisitCarResponseModel> result = await _coreApi.GetAsync<VisitCarResponseModel>(Selector, request);
 
             if (result.IsSuccess
                 && result.Data.TotalCount > 0)
@@ -397,14 +397,16 @@ public class IParkingController : BaseController
         // API Setup에서 암호화된 ID, 비밀번호, 목적지 ID를 가져옴
         try
         {
-            id = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedId);
+            id = _apiSetup.GetConnectionInfo().GetEndpoint(EncryptedId);
             id = _crypto.Decrypt(id);
             
-            password = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedPwd);
+            password = _apiSetup.GetConnectionInfo().GetEndpoint(EncryptedPwd);
             password = _crypto.Decrypt(password);
             
-            destinationId = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedDestinationId);
+            destinationId = _apiSetup.GetConnectionInfo().GetEndpoint(EncryptedDestinationId);
             destinationId = _crypto.Decrypt(destinationId);
+
+            return true;
         }
         catch (Exception e)
         {
@@ -473,6 +475,77 @@ public class IParkingController : BaseController
 
 #if DEBUG
 
+    [HttpGet]
+    public async Task<IActionResult> TestGetVisitCarList(string? carNumber, DateTime? startDate, DateTime? endDate)
+    {
+        string? id;
+        string? password;
+        string? destinationId;
+
+        if (!GetDecryptedApiCredentials(out id, out password, out destinationId))
+        {
+            return BadRequest(BoolResultModel.Fail("invalidApiKey"));
+        }
+        
+        // API 호출
+        try
+        {
+            // 추가 Header 설정
+            var header = new Dictionary<string, string>
+            {
+                ["Destination-Id"] = destinationId
+            };
+            
+            // Query 생성
+            var query = new Dictionary<string, string>();
+            
+            if (carNumber != null
+                && !string.IsNullOrEmpty(carNumber))
+            {
+                query["carNumber"] = carNumber;
+            }
+            
+            if (startDate != null
+                && startDate != DateTime.MinValue)
+            {
+                query["startDate"] = startDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            
+            if (endDate != null
+                && endDate != DateTime.MinValue)
+            {
+                query["endDate"] = endDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            
+            // Request 생성
+            IAPIRequest request = new APIRequest
+            {
+                Authentication = BasicAuthentication.FromUserPass(id, password),
+                Headers = header,
+                QueryParameters = query
+            };
+            
+            APIResponse<VisitCarResponseModel> result = await _coreApi.GetAsync<VisitCarResponseModel>(Selector, request);
+
+            if (result.IsSuccess
+                && result.Data.TotalCount > 0)
+            {
+                return Ok(BoolResultModel.Success("visitCarFound", new Dictionary<string, object>
+                {
+                    { "visitCars", result.Data.List },
+                    { "totalCount", result.Data.TotalCount },
+                    { "currentPage", result.Data.CurrentPage }
+                }));
+            }
+        }
+        catch (Exception e)
+        {
+            return Ok(BoolResultModel.Fail("apiCallError"));
+        }
+
+        return Ok(BoolResultModel.Fail("visitCarNotFound"));
+    }
+    
     [HttpGet]
     public async Task<IActionResult> TestResponseVisitCarList(string? carNumber, DateTime? startDate, DateTime? endDate, 
         int? periodType = 1, int? currentPage = 1, int? pageSize = 10)
