@@ -1,4 +1,5 @@
-﻿using APIClient.Authentication.Models;
+using System.Text;
+using APIClient.Authentication.Models;
 using APIClient.Client;
 using APIClient.Client.Interfaces;
 using APIClient.Configuration.Interfaces;
@@ -75,6 +76,8 @@ public class IParkingController : BaseController
 
     #endregion
 
+    #region API Setup
+    
     [LocalHostOnly]
     [HttpGet]
     public async Task<IActionResult> Setup()
@@ -110,7 +113,107 @@ public class IParkingController : BaseController
 
         return Ok(result);
     }
+    
+    #endregion
 
+    [HttpGet]
+    [ApiKeyAuth(issuer: StringClass.Issuer_Parking)]
+    public async Task<IActionResult> VisitCar(string? carNumber, DateTime? startDate, DateTime? endDate, 
+        int? periodType = 1, int? currentPage = 1, int? pageSize = 10)
+    {
+        #region 인증 검사
+
+        try
+        {
+            // API Key 인증
+            var apiKeyId = HttpContext.GetApiKeyId();
+            var serviceName = HttpContext.GetApiServiceName();
+            
+            if (string.IsNullOrEmpty(apiKeyId)
+                || string.IsNullOrEmpty(serviceName))
+            {
+                return BadRequest(BoolResultModel.Fail("invalidApiKey"));
+            }
+        }
+        catch (Exception e)
+        {
+            
+        }
+        
+        #endregion
+
+        string? id;
+        string? password;
+        string? destinationId;
+
+        if (!GetDecryptedApiCredentials(out id, out password, out destinationId))
+        {
+            return BadRequest(BoolResultModel.Fail("invalidApiKey"));
+        }
+        
+        // API 호출
+        try
+        {
+            // 추가 Header 설정
+            var header = new Dictionary<string, string>
+            {
+                ["Destination-Id"] = destinationId
+            };
+            
+            // Body 생성
+            var body = new Dictionary<string, string>();
+            
+            if (carNumber != null
+                && !string.IsNullOrEmpty(carNumber))
+            {
+                body["carNumber"] = carNumber;
+            }
+            
+            if (startDate != null
+                && startDate != DateTime.MinValue)
+            {
+                body["startDate"] = startDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            
+            if (endDate != null
+                && endDate != DateTime.MinValue)
+            {
+                body["endDate"] = endDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            
+            body["periodType"] = periodType.ToString();
+            body["currentPage"] = currentPage.ToString();
+            body["pageSize"] = pageSize.ToString();
+            
+            // Request 생성
+            IAPIRequest request = new APIRequest
+            {
+                Authentication = BasicAuthentication.FromUserPass(id, password),
+                Headers = header,
+                Body = RequestBody.CreateJson(body)
+            };
+            
+            APIResponse<VisitCarResponseModel> result = await _coreApi.PostAsync<VisitCarResponseModel>(Register, request);
+
+            if (result.IsSuccess
+                && result.Data.TotalCount > 0)
+            {
+                return Ok(BoolResultModel.Success("visitCarFound", new Dictionary<string, object>
+                {
+                    { "visitCars", result.Data.List },
+                    { "totalCount", result.Data.TotalCount },
+                    { "currentPage", result.Data.CurrentPage }
+                }));
+            }
+        }
+        catch (Exception e)
+        {
+            return Ok(BoolResultModel.Fail("apiCallError"));
+        }
+
+        return Ok(BoolResultModel.Fail("visitCarNotFound"));
+    }
+    
     /// <summary>
     /// 방문 차량 등록
     /// </summary>
@@ -143,25 +246,13 @@ public class IParkingController : BaseController
         
         #endregion
 
-        string? id = null;
-        string? password = null;
-        string? destinationId = null;
+        string? id;
+        string? password;
+        string? destinationId;
         
-        // API Setup에서 암호화된 ID, 비밀번호, 목적지 ID를 가져옴
-        try
+        if (!GetDecryptedApiCredentials(out id, out password, out destinationId))
         {
-            id = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedId);
-            id = _crypto.Decrypt(id);
-            
-            password = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedPwd);
-            password = _crypto.Decrypt(password);
-            
-            destinationId = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedDestinationId);
-            destinationId = _crypto.Decrypt(destinationId);
-        }
-        catch (Exception e)
-        {
-            return BadRequest(BoolResultModel.Fail("invalidApiIdOrPassword"));
+            return BadRequest(BoolResultModel.Fail("invalidApiKey"));
         }
         
         // API 호출
@@ -295,7 +386,33 @@ public class IParkingController : BaseController
 
         return Ok(BoolResultModel.Fail("visitCarRegisterFailed"));
     }
-    
+
+    private bool GetDecryptedApiCredentials(out string? id, out string? password, out string? destinationId)
+    {
+        id = null;
+        password = null;
+        destinationId = null;
+        
+        // API Setup에서 암호화된 ID, 비밀번호, 목적지 ID를 가져옴
+        try
+        {
+            id = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedId);
+            id = _crypto.Decrypt(id);
+            
+            password = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedPwd);
+            password = _crypto.Decrypt(password);
+            
+            destinationId = _apiSetup.ConnectionInfo.GetEndpoint(EncryptedDestinationId);
+            destinationId = _crypto.Decrypt(destinationId);
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        
+        return false;
+    }
+
     /// <summary>
     /// API 최초 설정
     /// </summary>
@@ -352,6 +469,122 @@ public class IParkingController : BaseController
             }
         }
     }
+
+#if DEBUG
+
+    [HttpGet]
+    [Route("test/visitcar")]
+    public async Task<IActionResult> TestResponseVisitCarList(string? carNumber, DateTime? startDate, DateTime? endDate, 
+        int? periodType = 1, int? currentPage = 1, int? pageSize = 10)
+    {
+        // 요청 헤더 검증
+        string authHeader = Request.Headers["Authorization"].FirstOrDefault() ?? string.Empty;
+        string destinationId = Request.Headers["Destination-Id"].FirstOrDefault() ?? string.Empty;
+        
+        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Basic "))
+        {
+            Response.Headers.Add("result-code", "10401");
+            Response.Headers.Add("result-message", "AUTHENTICATION ID IS REQUIRED");
+            return StatusCode(401, new { error = "인증 정보가 없거나 잘못되었습니다." });
+        }
+        
+        if (string.IsNullOrEmpty(destinationId))
+        {
+            Response.Headers.Add("result-code", "10402");
+            Response.Headers.Add("result-message", "DESTINATION ID IS REQUIRED");
+            return StatusCode(401, new { error = "목적지 ID가 없습니다." });
+        }
+        
+        try
+        {
+            // Basic 인증 디코딩 (실제로는 검증만 하고 사용하지 않음)
+            string encodedCredentials = authHeader.Substring("Basic ".Length).Trim();
+            byte[] credentialBytes = Convert.FromBase64String(encodedCredentials);
+            string credentials = Encoding.UTF8.GetString(credentialBytes);
+            string[] parts = credentials.Split(':');
+            
+            if (parts.Length != 2)
+            {
+                Response.Headers.Add("result-code", "10401");
+                Response.Headers.Add("result-message", "INVALID CREDENTIALS FORMAT");
+                return StatusCode(401, new { error = "인증 정보 형식이 잘못되었습니다." });
+            }
+        }
+        catch
+        {
+            Response.Headers.Add("result-code", "10401");
+            Response.Headers.Add("result-message", "INVALID CREDENTIALS");
+            return StatusCode(401, new { error = "인증 정보가 잘못되었습니다." });
+        }
+        
+        // 응답 헤더 설정
+        Response.Headers.Add("result-code", "10200");
+        Response.Headers.Add("result-message", "SUCCESS");
+        Response.Headers.Add("Content-Type", "application/json");
+        
+        // 차량 번호에 따른 테스트 데이터 생성
+        var response = new VisitCarResponseModel
+        {
+            CurrentPage = currentPage ?? 1,
+            TotalCount = 0,
+            List = new List<VisitCar>()
+        };
+        
+        // 특정 차량번호일 경우 더미 데이터 2개 반환 (12가3456)
+        if (carNumber == "12가3456")
+        {
+            response.TotalCount = 2;
+            response.List = new List<VisitCar>
+            {
+                new VisitCar
+                {
+                    VisitCarSeq = 1,
+                    CarNumber = "12가3456",
+                    StartDate = DateTime.Now.AddDays(-5),
+                    EndDate = DateTime.Now.AddDays(5),
+                    Dong = "101",
+                    Hosu = "1001",
+                    Memo = "방문객 1",
+                    Auth = true
+                },
+                new VisitCar
+                {
+                    VisitCarSeq = 2,
+                    CarNumber = "12가3456",
+                    StartDate = DateTime.Now.AddDays(-2),
+                    EndDate = DateTime.Now.AddDays(10),
+                    Dong = "102",
+                    Hosu = "2001",
+                    Memo = "방문객 2",
+                    Auth = true
+                }
+            };
+        }
+        // null 가능한 데이터에 null이 들어있는 데이터 1개 반환 (34나5678)
+        else if (carNumber == "34나5678")
+        {
+            response.TotalCount = 1;
+            response.List = new List<VisitCar>
+            {
+                new VisitCar
+                {
+                    VisitCarSeq = 3,
+                    CarNumber = "34나5678",
+                    StartDate = DateTime.Now.AddDays(-1),
+                    EndDate = DateTime.Now.AddDays(3),
+                    Dong = null,
+                    Hosu = null,
+                    Memo = null,
+                    Auth = false
+                }
+            };
+        }
+        // 그 외의 경우 빈 리스트 반환
+        
+        return Ok(response);
+    }
+
+#endif
 }
 
 public class IParkingSetupService : IAPISetupService
