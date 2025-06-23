@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SECUiDEA_ERP_Server: D:/Projects/SECUiDEA_ERP/SECUiDEA_ERP_Server/SECUiDEA_ERP_Server/Models/ControllerModels/Private/DBSetupViewModel.cs 소스 파일</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SECUiDEA.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">SECUiDEA_ERP_Server<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">통합 운영 관리 솔루션 API 서버</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_d_b_setup_view_model_8cs_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">DBSetupViewModel.cs</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_d_b_setup_view_model_8cs.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using </span>System.Text.Json.Serialization;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">using </span>CoreDAL.Configuration;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using </span>CoreDAL.Configuration.Interface;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using </span>CoreDAL.DALs.Interface;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services.html">SECUiDEA_ERP_Server.Models.DBServices</a>;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private.html">SECUiDEA_ERP_Server.Models.ControllerModels.Private</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html">    9</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html">ConnectionSettingDefinition</a></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#ab160e7e0ad9887fb99f3497e364dc773">   11</a></span>    <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#ab160e7e0ad9887fb99f3497e364dc773">Key</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; }</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a16cf9ce79090ba81ba08855d42ac0970">   12</a></span>    <span class="keyword">public</span> <a class="code hl_enumeration" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html#af3401dbc3c1f9d92ff968927d9906019">InputType</a> <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a16cf9ce79090ba81ba08855d42ac0970">Type</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; }</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a7da2668e214ca86653cfa440a84ceae6">   13</a></span>    <span class="keyword">public</span> List&lt;string&gt; <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a7da2668e214ca86653cfa440a84ceae6">Options</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">new</span>();</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a5c6a00c23a6c5fe906b75c0c6a238c71">   14</a></span>    <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a5c6a00c23a6c5fe906b75c0c6a238c71">Value</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; }</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
+</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html">   17</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html">DBSetupViewModel</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a31e9fa4fec359cba8ee30d5fa57daaed">   22</a></span>    <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a31e9fa4fec359cba8ee30d5fa57daaed">sectionName</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keywordtype">string</span>.Empty;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    [JsonConverter(typeof(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_database_type_json_converter.html">DatabaseTypeJsonConverter</a>))]</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#ad36d152c392980f2c53f89b783ceee45">   27</a></span>    <span class="keyword">public</span> DatabaseType <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#ad36d152c392980f2c53f89b783ceee45">databaseType</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; } = DatabaseType.MSSQL;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a17997421a4c23ddba725bd7ed0a42ef5">   31</a></span>    <span class="keyword">public</span> Dictionary&lt;string, string&gt; <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a17997421a4c23ddba725bd7ed0a42ef5">connectionSettings</a> { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">new</span> Dictionary&lt;string, string&gt;();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a194a5615a902f72a2500d0a3abf1ece5">   36</a></span>    <span class="keyword">public</span> ICoreDAL <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a194a5615a902f72a2500d0a3abf1ece5">DAL</a> =&gt; DbDalFactory.CreateCoreDal(<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#ad36d152c392980f2c53f89b783ceee45">databaseType</a>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a4d8c63fed62d6fd98d1e3fa4499681b8">   40</a></span>    <span class="keyword">public</span> IDbConnectionInfo <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a4d8c63fed62d6fd98d1e3fa4499681b8">ConnectionInfo</a> =&gt;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        DbConnectionFactory.CreateConnectionInfo(<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#ad36d152c392980f2c53f89b783ceee45">databaseType</a>, <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a17997421a4c23ddba725bd7ed0a42ef5">connectionSettings</a>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a1792102f2ab4db7976f9aef1bec970ab">   43</a></span>    <span class="keyword">public</span> List&lt;ConnectionSettingDefinition&gt; <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a1792102f2ab4db7976f9aef1bec970ab">GetSettingDefinitions</a>()</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        var definitions = <span class="keyword">new</span> List&lt;ConnectionSettingDefinition&gt;();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">foreach</span> (var setting <span class="keywordflow">in</span> <a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a17997421a4c23ddba725bd7ed0a42ef5">connectionSettings</a>.Where(s =&gt; s.Key != DatabaseSetup.DBTypeKey))</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            var definition = <span class="keyword">new</span> <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html">ConnectionSettingDefinition</a></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                Key = setting.Key,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                Value = setting.Value,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            };</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="comment">// input 타입 설정</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordflow">switch</span> (setting.Key.ToLower())</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <span class="keywordflow">case</span> var x when x.Contains(<span class="stringliteral">&quot;password&quot;</span>):</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                    definition.Type = <a class="code hl_enumeration" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html#af3401dbc3c1f9d92ff968927d9906019">InputType</a>.Password;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                <span class="keywordflow">case</span> <span class="stringliteral">&quot;integratedsecurity&quot;</span>:</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                <span class="keywordflow">case</span> <span class="stringliteral">&quot;protocol&quot;</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                    definition.Type = <a class="code hl_enumeration" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html#af3401dbc3c1f9d92ff968927d9906019">InputType</a>.Select;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    definition.Type = <a class="code hl_enumeration" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html#af3401dbc3c1f9d92ff968927d9906019">InputType</a>.Text;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="comment">// select 옵션 설정</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordflow">if</span> (definition.Type == <a class="code hl_enumeration" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html#af3401dbc3c1f9d92ff968927d9906019">InputType</a>.Select)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">switch</span> (setting.Key.ToLower())</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                    <span class="keywordflow">case</span> <span class="stringliteral">&quot;integratedsecurity&quot;</span>:</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                        definition.Options = <span class="keyword">new</span> List&lt;string&gt; { <span class="stringliteral">&quot;True&quot;</span>, <span class="stringliteral">&quot;False&quot;</span> };</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    <span class="keywordflow">case</span> <span class="stringliteral">&quot;protocol&quot;</span>:</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                        definition.Options = <span class="keyword">new</span> List&lt;string&gt; { <span class="stringliteral">&quot;TCP&quot;</span>, <span class="stringliteral">&quot;NP&quot;</span> };</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                        definition.Options = <span class="keyword">new</span> List&lt;string&gt;();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            definitions.Add(definition);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">return</span> definitions;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
+</div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html">SECUiDEA_ERP_Server.Models.ControllerModels.Private.ConnectionSettingDefinition</a></div><div class="ttdef"><b>Definition</b> <a href="#l00009">DBSetupViewModel.cs:10</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition_html_a16cf9ce79090ba81ba08855d42ac0970"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a16cf9ce79090ba81ba08855d42ac0970">SECUiDEA_ERP_Server.Models.ControllerModels.Private.ConnectionSettingDefinition.Type</a></div><div class="ttdeci">InputType Type</div><div class="ttdef"><b>Definition</b> <a href="#l00012">DBSetupViewModel.cs:12</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition_html_a5c6a00c23a6c5fe906b75c0c6a238c71"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a5c6a00c23a6c5fe906b75c0c6a238c71">SECUiDEA_ERP_Server.Models.ControllerModels.Private.ConnectionSettingDefinition.Value</a></div><div class="ttdeci">string Value</div><div class="ttdef"><b>Definition</b> <a href="#l00014">DBSetupViewModel.cs:14</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition_html_a7da2668e214ca86653cfa440a84ceae6"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#a7da2668e214ca86653cfa440a84ceae6">SECUiDEA_ERP_Server.Models.ControllerModels.Private.ConnectionSettingDefinition.Options</a></div><div class="ttdeci">List&lt; string &gt; Options</div><div class="ttdef"><b>Definition</b> <a href="#l00013">DBSetupViewModel.cs:13</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition_html_ab160e7e0ad9887fb99f3497e364dc773"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_connection_setting_definition.html#ab160e7e0ad9887fb99f3497e364dc773">SECUiDEA_ERP_Server.Models.ControllerModels.Private.ConnectionSettingDefinition.Key</a></div><div class="ttdeci">string Key</div><div class="ttdef"><b>Definition</b> <a href="#l00011">DBSetupViewModel.cs:11</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html">SECUiDEA_ERP_Server.Models.ControllerModels.Private.DBSetupViewModel</a></div><div class="ttdef"><b>Definition</b> <a href="#l00017">DBSetupViewModel.cs:18</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_html_a1792102f2ab4db7976f9aef1bec970ab"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a1792102f2ab4db7976f9aef1bec970ab">SECUiDEA_ERP_Server.Models.ControllerModels.Private.DBSetupViewModel.GetSettingDefinitions</a></div><div class="ttdeci">List&lt; ConnectionSettingDefinition &gt; GetSettingDefinitions()</div><div class="ttdef"><b>Definition</b> <a href="#l00043">DBSetupViewModel.cs:43</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_html_a17997421a4c23ddba725bd7ed0a42ef5"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a17997421a4c23ddba725bd7ed0a42ef5">SECUiDEA_ERP_Server.Models.ControllerModels.Private.DBSetupViewModel.connectionSettings</a></div><div class="ttdeci">Dictionary&lt; string, string &gt; connectionSettings</div><div class="ttdoc">DB 연결 설정</div><div class="ttdef"><b>Definition</b> <a href="#l00031">DBSetupViewModel.cs:31</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_html_a194a5615a902f72a2500d0a3abf1ece5"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a194a5615a902f72a2500d0a3abf1ece5">SECUiDEA_ERP_Server.Models.ControllerModels.Private.DBSetupViewModel.DAL</a></div><div class="ttdeci">ICoreDAL DAL</div><div class="ttdoc">DB 연결 객체 ICoreDAL</div><div class="ttdef"><b>Definition</b> <a href="#l00036">DBSetupViewModel.cs:36</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_html_a31e9fa4fec359cba8ee30d5fa57daaed"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a31e9fa4fec359cba8ee30d5fa57daaed">SECUiDEA_ERP_Server.Models.ControllerModels.Private.DBSetupViewModel.sectionName</a></div><div class="ttdeci">string sectionName</div><div class="ttdoc">DB 설정 섹션 이름</div><div class="ttdef"><b>Definition</b> <a href="#l00022">DBSetupViewModel.cs:22</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_html_a4d8c63fed62d6fd98d1e3fa4499681b8"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#a4d8c63fed62d6fd98d1e3fa4499681b8">SECUiDEA_ERP_Server.Models.ControllerModels.Private.DBSetupViewModel.ConnectionInfo</a></div><div class="ttdeci">IDbConnectionInfo ConnectionInfo</div><div class="ttdoc">DB 연결 정보</div><div class="ttdef"><b>Definition</b> <a href="#l00040">DBSetupViewModel.cs:40</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_html_ad36d152c392980f2c53f89b783ceee45"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model.html#ad36d152c392980f2c53f89b783ceee45">SECUiDEA_ERP_Server.Models.ControllerModels.Private.DBSetupViewModel.databaseType</a></div><div class="ttdeci">DatabaseType databaseType</div><div class="ttdoc">DB 타입</div><div class="ttdef"><b>Definition</b> <a href="#l00027">DBSetupViewModel.cs:27</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_database_type_json_converter_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_database_type_json_converter.html">SECUiDEA_ERP_Server.Models.DBServices.DatabaseTypeJsonConverter</a></div><div class="ttdef"><b>Definition</b> <a href="_database_type_json_converter_8cs_source.html#l00007">DatabaseTypeJsonConverter.cs:8</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private.html">SECUiDEA_ERP_Server.Models.ControllerModels.Private</a></div><div class="ttdef"><b>Definition</b> <a href="_a_p_i_setup_view_model_8cs_source.html#l00004">APISetupViewModel.cs:4</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_html_af3401dbc3c1f9d92ff968927d9906019"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html#af3401dbc3c1f9d92ff968927d9906019">SECUiDEA_ERP_Server.Models.ControllerModels.InputType</a></div><div class="ttdeci">InputType</div><div class="ttdef"><b>Definition</b> <a href="_input_types_8cs_source.html#l00003">InputTypes.cs:4</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services.html">SECUiDEA_ERP_Server.Models.DBServices</a></div><div class="ttdef"><b>Definition</b> <a href="_database_type_json_converter_8cs_source.html#l00005">DatabaseTypeJsonConverter.cs:5</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_af34b85ff88993e1152170f543ba41d6.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_e3147d111bd9abb5b9521263f4a24daf.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_e5e918697ed6865781213355e6f6b08a.html">Models</a></li><li class="navelem"><a href="dir_6c2e0f86328716bbcda80110e8363152.html">ControllerModels</a></li><li class="navelem"><a href="dir_5a5b3335a1a9b16875b587e5942eead8.html">Private</a></li><li class="navelem"><a href="_d_b_setup_view_model_8cs.html">DBSetupViewModel.cs</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

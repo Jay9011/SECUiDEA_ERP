@@ -110,7 +110,7 @@ public class IParkingController : BaseController
     {
         EncryptEndpoints(setting.EndPoints);
         
-        var result = _setupService.SaveSingleSetupAsync(setting);
+        var result = await _setupService.SaveSingleSetupAsync(setting);
 
         return Ok(result);
     }

@@ -1,0 +1,189 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions 클래스 참조}
+\hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions}{}\label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions}\index{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}}
+
+
+Http\+Context 확장 메서드  
+
+
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{정적 Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+static ? string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a09a63c4a5c175919ddbc80d9ce3b956f}{Get\+Api\+Claim}} (this Http\+Context context, string claim\+Type)
+\begin{DoxyCompactList}\small\item\em API 키 토큰에서 특정 Claim 값을 가져오는 메서드 \end{DoxyCompactList}\item 
+static ? string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_ad822ba35b1fcf1cb4414f3ce700121db}{Get\+Api\+Key\+Id}} (this Http\+Context context)
+\begin{DoxyCompactList}\small\item\em API 키 ID를 가져오는 메서드 \end{DoxyCompactList}\item 
+static ? string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_ac5ba2e6d268bac0d0ed254e7a4dc3da1}{Get\+Api\+Service\+Name}} (this Http\+Context context)
+\begin{DoxyCompactList}\small\item\em API 서비스명을 가져오는 메서드 \end{DoxyCompactList}\item 
+static Dictionary$<$ string, string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_af64cf5229d8d6dd5fe801eb9ff4a8671}{Get\+All\+Api\+Claims}} (this Http\+Context context)
+\begin{DoxyCompactList}\small\item\em 모든 API Claim을 Dictionary로 가져오는 메서드 \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a9fa3648e63e97bf8d80c88ec682edf5b}{Has\+Api\+Claim}} (this Http\+Context context, string claim\+Type)
+\begin{DoxyCompactList}\small\item\em 특정 Claim이 존재하는지 확인하는 메서드 \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a8578f11bb6f6498526ae8339aa362f15}{Has\+Api\+Claim\+Value}} (this Http\+Context context, string claim\+Type, string expected\+Value)
+\begin{DoxyCompactList}\small\item\em 특정 Claim이 특정 값을 가지는지 확인하는 메서드 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+Http\+Context 확장 메서드 
+
+\mbox{\hyperlink{_http_context_extensions_8cs_source}{Http\+Context\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_http_context_extensions_8cs_source_l00008}{8}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_af64cf5229d8d6dd5fe801eb9ff4a8671}\index{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}!GetAllApiClaims@{GetAllApiClaims}}
+\index{GetAllApiClaims@{GetAllApiClaims}!SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}}
+\doxysubsubsection{\texorpdfstring{GetAllApiClaims()}{GetAllApiClaims()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_af64cf5229d8d6dd5fe801eb9ff4a8671} 
+Dictionary$<$ string, string $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions.\+Get\+All\+Api\+Claims (\begin{DoxyParamCaption}\item[{this Http\+Context}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+모든 API Claim을 Dictionary로 가져오는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em context} & Http\+Context\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+API Claim Dictionary
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_http_context_extensions_8cs_source}{Http\+Context\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_http_context_extensions_8cs_source_l00047}{47}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a09a63c4a5c175919ddbc80d9ce3b956f}\index{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}!GetApiClaim@{GetApiClaim}}
+\index{GetApiClaim@{GetApiClaim}!SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}}
+\doxysubsubsection{\texorpdfstring{GetApiClaim()}{GetApiClaim()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a09a63c4a5c175919ddbc80d9ce3b956f} 
+? string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions.\+Get\+Api\+Claim (\begin{DoxyParamCaption}\item[{this Http\+Context}]{context}{, }\item[{string}]{claim\+Type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+API 키 토큰에서 특정 Claim 값을 가져오는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em context} & Http\+Context\\
+\hline
+{\em claim\+Type} & 가져올 Claim 타입\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+Claim 값 (없으면 null)
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_http_context_extensions_8cs_source}{Http\+Context\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_http_context_extensions_8cs_source_l00016}{16}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_ad822ba35b1fcf1cb4414f3ce700121db}\index{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}!GetApiKeyId@{GetApiKeyId}}
+\index{GetApiKeyId@{GetApiKeyId}!SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}}
+\doxysubsubsection{\texorpdfstring{GetApiKeyId()}{GetApiKeyId()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_ad822ba35b1fcf1cb4414f3ce700121db} 
+? string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions.\+Get\+Api\+Key\+Id (\begin{DoxyParamCaption}\item[{this Http\+Context}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+API 키 ID를 가져오는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em context} & Http\+Context\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+API 키 ID
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_http_context_extensions_8cs_source}{Http\+Context\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_http_context_extensions_8cs_source_l00027}{27}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_ac5ba2e6d268bac0d0ed254e7a4dc3da1}\index{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}!GetApiServiceName@{GetApiServiceName}}
+\index{GetApiServiceName@{GetApiServiceName}!SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}}
+\doxysubsubsection{\texorpdfstring{GetApiServiceName()}{GetApiServiceName()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_ac5ba2e6d268bac0d0ed254e7a4dc3da1} 
+? string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions.\+Get\+Api\+Service\+Name (\begin{DoxyParamCaption}\item[{this Http\+Context}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+API 서비스명을 가져오는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em context} & Http\+Context\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+API 서비스명
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_http_context_extensions_8cs_source}{Http\+Context\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_http_context_extensions_8cs_source_l00037}{37}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a9fa3648e63e97bf8d80c88ec682edf5b}\index{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}!HasApiClaim@{HasApiClaim}}
+\index{HasApiClaim@{HasApiClaim}!SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}}
+\doxysubsubsection{\texorpdfstring{HasApiClaim()}{HasApiClaim()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a9fa3648e63e97bf8d80c88ec682edf5b} 
+bool SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions.\+Has\+Api\+Claim (\begin{DoxyParamCaption}\item[{this Http\+Context}]{context}{, }\item[{string}]{claim\+Type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+특정 Claim이 존재하는지 확인하는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em context} & Http\+Context\\
+\hline
+{\em claim\+Type} & 확인할 Claim 타입\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+존재 여부
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_http_context_extensions_8cs_source}{Http\+Context\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_http_context_extensions_8cs_source_l00069}{69}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a8578f11bb6f6498526ae8339aa362f15}\index{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}!HasApiClaimValue@{HasApiClaimValue}}
+\index{HasApiClaimValue@{HasApiClaimValue}!SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions@{SECUiDEA\_ERP\_Server.Controllers.Extensions.HttpContextExtensions}}
+\doxysubsubsection{\texorpdfstring{HasApiClaimValue()}{HasApiClaimValue()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_a8578f11bb6f6498526ae8339aa362f15} 
+bool SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Extensions.\+Http\+Context\+Extensions.\+Has\+Api\+Claim\+Value (\begin{DoxyParamCaption}\item[{this Http\+Context}]{context}{, }\item[{string}]{claim\+Type}{, }\item[{string}]{expected\+Value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+특정 Claim이 특정 값을 가지는지 확인하는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em context} & Http\+Context\\
+\hline
+{\em claim\+Type} & 확인할 Claim 타입\\
+\hline
+{\em expected\+Value} & 기대하는 값\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+값 일치 여부
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_http_context_extensions_8cs_source}{Http\+Context\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_http_context_extensions_8cs_source_l00082}{82}} 번째 라인에서 정의되었습니다.
+
+
+
+이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Controllers/\+Extensions/\mbox{\hyperlink{_http_context_extensions_8cs}{Http\+Context\+Extensions.\+cs}}\end{DoxyCompactItemize}

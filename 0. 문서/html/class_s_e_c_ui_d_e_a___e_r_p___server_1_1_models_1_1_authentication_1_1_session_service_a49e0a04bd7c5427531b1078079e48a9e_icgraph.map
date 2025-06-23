@@ -1,0 +1,7 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetSessionCacheKey" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetSessionCacheKey">
+<area shape="rect" id="Node000001" title=" " alt="" coords="320,47,544,105"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ade8309c1b2e67e831f303519b1ea2188" title="세션 비활성화 (로그아웃 등으로 호출)" alt="" coords="5,5,272,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="304,61,272,56,273,51,305,55"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#af8eebd4845e6a67ec35840e04d493f1e" title="세션 활성 상태 업데이트 (요청 처리시마다)" alt="" coords="16,88,261,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="305,97,262,103,261,97,304,91"/>
+</map>

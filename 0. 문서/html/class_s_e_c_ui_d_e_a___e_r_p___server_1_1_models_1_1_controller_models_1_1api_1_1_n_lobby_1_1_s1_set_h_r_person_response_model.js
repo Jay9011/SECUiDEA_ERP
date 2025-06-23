@@ -1,0 +1,5 @@
+var class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_s1_set_h_r_person_response_model =
+[
+    [ "Sabun", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_s1_set_h_r_person_response_model.html#a8042aa6e0f218b34916857fa1b9e9387", null ],
+    [ "Status", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_s1_set_h_r_person_response_model.html#a93910af175e2d49b37d29796a956a692", null ]
+];

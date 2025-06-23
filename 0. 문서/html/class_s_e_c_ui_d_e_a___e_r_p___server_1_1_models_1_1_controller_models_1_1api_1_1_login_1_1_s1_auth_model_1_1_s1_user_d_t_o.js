@@ -1,0 +1,7 @@
+var class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_login_1_1_s1_auth_model_1_1_s1_user_d_t_o =
+[
+    [ "Id", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_login_1_1_s1_auth_model_1_1_s1_user_d_t_o.html#aaeaaf066036edaa22f324a4185f5a704", null ],
+    [ "LastLogin", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_login_1_1_s1_auth_model_1_1_s1_user_d_t_o.html#a5c223b50c1955678508e225d294526ea", null ],
+    [ "Password", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_login_1_1_s1_auth_model_1_1_s1_user_d_t_o.html#ab9952d648af6284e4430616908a13bb6", null ],
+    [ "rememberMe", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_login_1_1_s1_auth_model_1_1_s1_user_d_t_o.html#ae75c2cd3c85fe96df99ce42fa8b061ad", null ]
+];

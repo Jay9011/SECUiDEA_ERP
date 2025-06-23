@@ -1,0 +1,10 @@
+<map id="SECUiDEA_ERP_Server.Models.DBServices.DBSetupService.TestConnectionAsync" name="SECUiDEA_ERP_Server.Models.DBServices.DBSetupService.TestConnectionAsync">
+<area shape="rect" id="Node000001" title="연결 테스트" alt="" coords="5,39,330,81"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec" title=" " alt="" coords="393,5,622,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="330,41,377,37,377,42,330,47"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f" title=" " alt="" coords="378,72,637,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="330,73,363,76,362,82,330,79"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#ad40974f127682f30e7b5634d62800e23" title=" " alt="" coords="685,31,919,89"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="623,37,670,42,669,48,622,42"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="637,76,669,72,670,78,638,81"/>
+</map>

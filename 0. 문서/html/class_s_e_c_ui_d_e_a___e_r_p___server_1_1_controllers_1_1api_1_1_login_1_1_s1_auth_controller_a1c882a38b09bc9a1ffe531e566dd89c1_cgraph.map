@@ -1,0 +1,14 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Login.S1AuthController.GuestLogin" name="SECUiDEA_ERP_Server.Controllers.api.Login.S1AuthController.GuestLogin">
+<area shape="rect" id="Node000001" title="S1ACCESS 게스트 로그인 처리" alt="" coords="5,80,268,123"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a7732537c9fdb78869d9e534c32580334" title=" " alt="" coords="316,80,591,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,99,300,99,300,104,268,104"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec" title=" " alt="" coords="654,5,883,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="546,77,660,50,661,55,547,82"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#a2fa737bcaa639cd6c458c184a1c6918e" title="Client IP 주소를 획득" alt="" coords="648,72,889,131"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="591,99,632,99,632,104,591,104"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f" title=" " alt="" coords="639,155,898,197"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="547,121,661,148,660,153,546,126"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#ad40974f127682f30e7b5634d62800e23" title=" " alt="" coords="946,72,1181,131"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="857,46,932,65,930,70,855,51"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="855,151,930,132,932,137,857,157"/>
+</map>

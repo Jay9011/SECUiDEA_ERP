@@ -1,0 +1,11 @@
+digraph "SECUiDEA_ERP_Server.Controllers.BaseControllers.BaseController.GetAligoTemplateInfo"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="SECUiDEA_ERP_Server.Controllers.\lBaseControllers.BaseController.Get\lAligoTemplateInfo",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="SECUiDEA_ERP_Server.Controllers.api.\lAligo.AligoController.SendRequest",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a31f7bca61dae33ffb35612ec2b8f9d77",tooltip=" "];
+}

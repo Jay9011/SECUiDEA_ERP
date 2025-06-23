@@ -1,0 +1,251 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller 클래스 참조}
+\hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller}{}\label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller에 대한 상속 다이어그램 \+: 
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller__inherit__graph}
+\end{center}
+\end{figure}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a9ff66fe047dbe09ec9823fede953dce0}{Account\+Controller}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} jwt\+Service, \mbox{[}From\+Keyed\+Services(String\+Class.\+Crypto\+Secuidea)\mbox{]} ICrypto\+Manager crypto, IDatabase\+Setup\+Container db\+Setup\+Container)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a83e3b9ee6c5600653cf7131a60fb0e74}{Create\+Password\+Certification}} (\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model}{Pass\+Cert\+Mobile\+Model}} mobile\+Model)
+\begin{DoxyCompactList}\small\item\em 비밀번호 찾기용 인증번호 생성 \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aa7a0fc6c4dfa32990b41125633f2cd8e}{Check\+Password\+Certification}} (\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model}{Pass\+Cert\+Mobile\+Model}} mobile\+Model)
+\begin{DoxyCompactList}\small\item\em 비밀번호 찾기용 인증번호 확인 \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_acf27a08293e1d1aec52b70b5f42e7038}{Generate\+Random\+Token}} (int length)
+\begin{DoxyCompactList}\small\item\em Base32로 인코딩된 랜덤 토큰을 생성. 알아보기 쉬운 숫자와 문자로만 구성되며, 혼동되기 쉬운 문자(0과 O, 1과 I)는 제외. 알파벳은 대문자로만 사용. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Jwt\+Controller}}(으)로부터 상속된 Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller_a9e9f3d2e095735082fb5fdf86ad2b597}{Jwt\+Controller}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} jwt\+Service)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly ICrypto\+Manager \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aca06304faecf667d49e89453fa56a10e}{\+\_\+crypto}}
+\item 
+readonly IDatabase\+Setup\+Container \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a8dc7283451862f9f25f43a137e0bc615}{\+\_\+db\+Setup\+Container}}
+\item 
+readonly IDatabase\+Setup \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a65f26b70839fd8a6c8e7c3f14d3449e7}{\+\_\+db\+Setup}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{정적 Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a6d9f0c5861ea38d22d625992420e8949}{BASE32\+\_\+\+CHARS}} = "{}0123456789ABCDEFGHJKLMNPQRSTUVWX"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{추가로 상속된 멤버들}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Jwt\+Controller}}(으)로부터 상속된 Protected 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller_a3826ad2cc04704ee964cf7e20f5ad45d}{Set\+Refresh\+Token\+Cookie}} (string token, bool remember\+Me=false, Date\+Time? expiry\+Date=null)
+\begin{DoxyCompactList}\small\item\em 리프레시 토큰을 쿠키에 설정 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Base\+Controller}}(으)로부터 상속된 Protected 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_a2fa737bcaa639cd6c458c184a1c6918e}{Get\+Client\+Ip\+Address}} ()
+\begin{DoxyCompactList}\small\item\em Client IP 주소를 획득 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_afd600d928223eefea9996f1f9ec7b9ba}{Is\+Browser\+Client}} (Http\+Request request)
+\begin{DoxyCompactList}\small\item\em 브라우저 클라이언트인지 확인 \end{DoxyCompactList}\item 
+async Task$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_ab3144918b23ab471e99c4ab53afafbb7}{Get\+Request\+Body\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Request Body를 Dictionary 형태로 읽음 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o}{Aligo\+Acount\+DTO}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_afdcdc8406d8543138348f5df7ecaab1e}{Get\+Aligo\+Account\+Info}} (IDatabase\+Setup \+\_\+database)
+\begin{DoxyCompactList}\small\item\em \doxylink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo}{Aligo} 계정 정보를 DB에서 조회 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o}{Aligo\+Template\+DTO}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_ae834e36bc951b3c77882f778dcb1235e}{Get\+Aligo\+Template\+Info}} (IDatabase\+Setup \+\_\+database, string gubun)
+\end{DoxyCompactItemize}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Jwt\+Controller}}(으)로부터 상속된 Protected 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller_a65b902c6239903a97dfb815276a2cedd}{\+\_\+jwt\+Service}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00015}{15}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_doc-constructors}
+\doxysubsection{생성자 \& 소멸자 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a9ff66fe047dbe09ec9823fede953dce0}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!AccountController@{AccountController}}
+\index{AccountController@{AccountController}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{AccountController()}{AccountController()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a9ff66fe047dbe09ec9823fede953dce0} 
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+Account\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}}}]{jwt\+Service}{, }\item[{\mbox{[}\+From\+Keyed\+Services(\+String\+Class.\+Crypto\+Secuidea)\mbox{]} ICrypto\+Manager}]{crypto}{, }\item[{IDatabase\+Setup\+Container}]{db\+Setup\+Container}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00023}{23}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aa7a0fc6c4dfa32990b41125633f2cd8e}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!CheckPasswordCertification@{CheckPasswordCertification}}
+\index{CheckPasswordCertification@{CheckPasswordCertification}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{CheckPasswordCertification()}{CheckPasswordCertification()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aa7a0fc6c4dfa32990b41125633f2cd8e} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+Check\+Password\+Certification (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model}{Pass\+Cert\+Mobile\+Model}}}]{mobile\+Model}{}\end{DoxyParamCaption})}
+
+
+
+비밀번호 찾기용 인증번호 확인 
+
+
+\begin{DoxyParams}{매개변수}
+{\em mobile\+Model} & 모바일 번호가 포함된 인증 모델\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00093}{93}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aa7a0fc6c4dfa32990b41125633f2cd8e_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aa7a0fc6c4dfa32990b41125633f2cd8e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a83e3b9ee6c5600653cf7131a60fb0e74}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!CreatePasswordCertification@{CreatePasswordCertification}}
+\index{CreatePasswordCertification@{CreatePasswordCertification}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{CreatePasswordCertification()}{CreatePasswordCertification()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a83e3b9ee6c5600653cf7131a60fb0e74} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+Create\+Password\+Certification (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model}{Pass\+Cert\+Mobile\+Model}}}]{mobile\+Model}{}\end{DoxyParamCaption})}
+
+
+
+비밀번호 찾기용 인증번호 생성 
+
+
+\begin{DoxyParams}{매개변수}
+{\em mobile\+Model} & 모바일 번호가 포함된 인증 모델\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00045}{45}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a83e3b9ee6c5600653cf7131a60fb0e74_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_acf27a08293e1d1aec52b70b5f42e7038}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!GenerateRandomToken@{GenerateRandomToken}}
+\index{GenerateRandomToken@{GenerateRandomToken}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{GenerateRandomToken()}{GenerateRandomToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_acf27a08293e1d1aec52b70b5f42e7038} 
+string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+Generate\+Random\+Token (\begin{DoxyParamCaption}\item[{int}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Base32로 인코딩된 랜덤 토큰을 생성. 알아보기 쉬운 숫자와 문자로만 구성되며, 혼동되기 쉬운 문자(0과 O, 1과 I)는 제외. 알파벳은 대문자로만 사용. 
+
+
+\begin{DoxyParams}{매개변수}
+{\em length} & 생성할 토큰의 길이\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+지정된 길이의 랜덤 토큰
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00145}{145}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_acf27a08293e1d1aec52b70b5f42e7038_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_doc-variable-members}
+\doxysubsection{멤버 데이터 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aca06304faecf667d49e89453fa56a10e}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!\_crypto@{\_crypto}}
+\index{\_crypto@{\_crypto}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{\_crypto}{\_crypto}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aca06304faecf667d49e89453fa56a10e} 
+readonly ICrypto\+Manager SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+\_\+crypto\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00019}{19}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a65f26b70839fd8a6c8e7c3f14d3449e7}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!\_dbSetup@{\_dbSetup}}
+\index{\_dbSetup@{\_dbSetup}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{\_dbSetup}{\_dbSetup}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a65f26b70839fd8a6c8e7c3f14d3449e7} 
+readonly IDatabase\+Setup SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+\_\+db\+Setup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00021}{21}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a8dc7283451862f9f25f43a137e0bc615}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!\_dbSetupContainer@{\_dbSetupContainer}}
+\index{\_dbSetupContainer@{\_dbSetupContainer}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{\_dbSetupContainer}{\_dbSetupContainer}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a8dc7283451862f9f25f43a137e0bc615} 
+readonly IDatabase\+Setup\+Container SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+\_\+db\+Setup\+Container\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00020}{20}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a6d9f0c5861ea38d22d625992420e8949}\index{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}!BASE32\_CHARS@{BASE32\_CHARS}}
+\index{BASE32\_CHARS@{BASE32\_CHARS}!SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController@{SECUiDEA\_ERP\_Server.Controllers.api.Account.AccountController}}
+\doxysubsubsection{\texorpdfstring{BASE32\_CHARS}{BASE32\_CHARS}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_a6d9f0c5861ea38d22d625992420e8949} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Account.\+Account\+Controller.\+BASE32\+\_\+\+CHARS = "{}0123456789ABCDEFGHJKLMNPQRSTUVWX"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_account_controller_8cs_source}{Account\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_account_controller_8cs_source_l00037}{37}} 번째 라인에서 정의되었습니다.
+
+
+
+이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Controllers/api/\+Account/\mbox{\hyperlink{_account_controller_8cs}{Account\+Controller.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,5 @@
+var _aligo_entity_8cs =
+[
+    [ "SECUiDEA_ERP_Server.Models.ControllerModels.AligoAcountDTO", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o" ],
+    [ "SECUiDEA_ERP_Server.Models.ControllerModels.AligoTemplateDTO", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o" ]
+];

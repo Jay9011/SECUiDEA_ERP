@@ -1,0 +1,148 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Login.\+Auth\+Controller 클래스 참조}
+\hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller}{}\label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller}\index{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Login.\+Auth\+Controller에 대한 상속 다이어그램 \+: 
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller__inherit__graph}
+\end{center}
+\end{figure}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Login.\+Auth\+Controller에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_aea60ff7c4c96c2aa7a5d3930e7c7f611}{Auth\+Controller}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_auth_service}{User\+Auth\+Service}} auth\+Service, \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} jwt\+Service)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_a51ac5cf245adfdc69d689853c52fa80a}{Refresh\+Token}} ()
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_ab4f119f0e8f485bb65ca910910c1b5ef}{Logout}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Jwt\+Controller}}(으)로부터 상속된 Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller_a9e9f3d2e095735082fb5fdf86ad2b597}{Jwt\+Controller}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} jwt\+Service)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_auth_service}{User\+Auth\+Service}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_aebb445db96cccdbea83a5fb4c1c28fad}{\+\_\+auth\+Service}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{추가로 상속된 멤버들}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Jwt\+Controller}}(으)로부터 상속된 Protected 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller_a3826ad2cc04704ee964cf7e20f5ad45d}{Set\+Refresh\+Token\+Cookie}} (string token, bool remember\+Me=false, Date\+Time? expiry\+Date=null)
+\begin{DoxyCompactList}\small\item\em 리프레시 토큰을 쿠키에 설정 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Base\+Controller}}(으)로부터 상속된 Protected 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_a2fa737bcaa639cd6c458c184a1c6918e}{Get\+Client\+Ip\+Address}} ()
+\begin{DoxyCompactList}\small\item\em Client IP 주소를 획득 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_afd600d928223eefea9996f1f9ec7b9ba}{Is\+Browser\+Client}} (Http\+Request request)
+\begin{DoxyCompactList}\small\item\em 브라우저 클라이언트인지 확인 \end{DoxyCompactList}\item 
+async Task$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_ab3144918b23ab471e99c4ab53afafbb7}{Get\+Request\+Body\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Request Body를 Dictionary 형태로 읽음 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o}{Aligo\+Acount\+DTO}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_afdcdc8406d8543138348f5df7ecaab1e}{Get\+Aligo\+Account\+Info}} (IDatabase\+Setup \+\_\+database)
+\begin{DoxyCompactList}\small\item\em \doxylink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo}{Aligo} 계정 정보를 DB에서 조회 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o}{Aligo\+Template\+DTO}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_ae834e36bc951b3c77882f778dcb1235e}{Get\+Aligo\+Template\+Info}} (IDatabase\+Setup \+\_\+database, string gubun)
+\end{DoxyCompactItemize}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Jwt\+Controller}}(으)로부터 상속된 Protected 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller_a65b902c6239903a97dfb815276a2cedd}{\+\_\+jwt\+Service}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+\mbox{\hyperlink{_auth_controller_8cs_source}{Auth\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_auth_controller_8cs_source_l00010}{10}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_doc-constructors}
+\doxysubsection{생성자 \& 소멸자 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_aea60ff7c4c96c2aa7a5d3930e7c7f611}\index{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}!AuthController@{AuthController}}
+\index{AuthController@{AuthController}!SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}}
+\doxysubsubsection{\texorpdfstring{AuthController()}{AuthController()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_aea60ff7c4c96c2aa7a5d3930e7c7f611} 
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Login.\+Auth\+Controller.\+Auth\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_auth_service}{User\+Auth\+Service}}}]{auth\+Service}{, }\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}}}]{jwt\+Service}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_auth_controller_8cs_source}{Auth\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_auth_controller_8cs_source_l00016}{16}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_ab4f119f0e8f485bb65ca910910c1b5ef}\index{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}!Logout@{Logout}}
+\index{Logout@{Logout}!SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}}
+\doxysubsubsection{\texorpdfstring{Logout()}{Logout()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_ab4f119f0e8f485bb65ca910910c1b5ef} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Login.\+Auth\+Controller.\+Logout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_auth_controller_8cs_source}{Auth\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_auth_controller_8cs_source_l00060}{60}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_ab4f119f0e8f485bb65ca910910c1b5ef_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_a51ac5cf245adfdc69d689853c52fa80a}\index{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}!RefreshToken@{RefreshToken}}
+\index{RefreshToken@{RefreshToken}!SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}}
+\doxysubsubsection{\texorpdfstring{RefreshToken()}{RefreshToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_a51ac5cf245adfdc69d689853c52fa80a} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Login.\+Auth\+Controller.\+Refresh\+Token (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_auth_controller_8cs_source}{Auth\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_auth_controller_8cs_source_l00024}{24}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_a51ac5cf245adfdc69d689853c52fa80a_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_doc-variable-members}
+\doxysubsection{멤버 데이터 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_aebb445db96cccdbea83a5fb4c1c28fad}\index{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}!\_authService@{\_authService}}
+\index{\_authService@{\_authService}!SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController@{SECUiDEA\_ERP\_Server.Controllers.api.Login.AuthController}}
+\doxysubsubsection{\texorpdfstring{\_authService}{\_authService}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller_aebb445db96cccdbea83a5fb4c1c28fad} 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_auth_service}{User\+Auth\+Service}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Login.\+Auth\+Controller.\+\_\+auth\+Service\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_auth_controller_8cs_source}{Auth\+Controller.\+cs}} 파일의 \mbox{\hyperlink{_auth_controller_8cs_source_l00014}{14}} 번째 라인에서 정의되었습니다.
+
+
+
+이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Controllers/api/\+Login/\mbox{\hyperlink{_auth_controller_8cs}{Auth\+Controller.\+cs}}\end{DoxyCompactItemize}

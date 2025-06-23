@@ -1,0 +1,9 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetUserSessionKey" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetUserSessionKey">
+<area shape="rect" id="Node000001" title=" " alt="" coords="320,88,544,147"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ac2cebe54d493c477ec808cb2d4c66ec8" title="세션 생성 &#45; 로그인 성공 후 호출" alt="" coords="17,5,260,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="310,86,245,67,246,62,312,81"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ade8309c1b2e67e831f303519b1ea2188" title="세션 비활성화 (로그아웃 등으로 호출)" alt="" coords="5,88,272,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="304,120,272,120,272,115,304,115"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a57f7d9aa7a99eae262f3d062fc0e44ec" title="세션 유효성 검증" alt="" coords="14,171,263,229"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="312,154,246,173,245,167,310,149"/>
+</map>

@@ -1,0 +1,5 @@
+var class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_s1_response_count_model =
+[
+    [ "Count", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_s1_response_count_model.html#afa90e86787fde8878f3a16da6a7e1ad4", null ],
+    [ "Total", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_s1_response_count_model.html#a5821bf3fe11ea6604973d333e3d3111e", null ]
+];

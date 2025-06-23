@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SECUiDEA_ERP_Server: D:/Projects/SECUiDEA_ERP/SECUiDEA_ERP_Server/SECUiDEA_ERP_Server/Controllers/Extensions/HttpContextExtensions.cs 소스 파일</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SECUiDEA.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">SECUiDEA_ERP_Server<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">통합 운영 관리 솔루션 API 서버</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_http_context_extensions_8cs_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">HttpContextExtensions.cs</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_http_context_extensions_8cs.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using </span>System.Security.Claims;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions.html">SECUiDEA_ERP_Server.Controllers.Extensions</a></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>{</div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html">    8</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class </span><a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html">HttpContextExtensions</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    {</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a09a63c4a5c175919ddbc80d9ce3b956f">   16</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">string</span>? <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a09a63c4a5c175919ddbc80d9ce3b956f">GetApiClaim</a>(<span class="keyword">this</span> HttpContext context, <span class="keywordtype">string</span> claimType)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            var key = $<span class="stringliteral">&quot;ApiClaim_{claimType}&quot;</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <span class="keywordflow">return</span> context.Items.TryGetValue(key, out var value) ? value?.ToString() : <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        }</div>
+</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#ad822ba35b1fcf1cb4414f3ce700121db">   27</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">string</span>? <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#ad822ba35b1fcf1cb4414f3ce700121db">GetApiKeyId</a>(<span class="keyword">this</span> HttpContext context)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keywordflow">return</span> context.Items.TryGetValue(ClaimTypes.Authentication, out var value) ? value?.ToString() : <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        }</div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#ac5ba2e6d268bac0d0ed254e7a4dc3da1">   37</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">string</span>? <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#ac5ba2e6d268bac0d0ed254e7a4dc3da1">GetApiServiceName</a>(<span class="keyword">this</span> HttpContext context)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keywordflow">return</span> context.Items.TryGetValue(ClaimTypes.AuthenticationMethod, out var value) ? value?.ToString() : <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        }</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#af64cf5229d8d6dd5fe801eb9ff4a8671">   47</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> Dictionary&lt;string, string&gt; <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#af64cf5229d8d6dd5fe801eb9ff4a8671">GetAllApiClaims</a>(<span class="keyword">this</span> HttpContext context)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            var claims = <span class="keyword">new</span> Dictionary&lt;string, string&gt;();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordflow">foreach</span> (var item <span class="keywordflow">in</span> context.Items)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                <span class="keywordflow">if</span> (item.Key is <span class="keywordtype">string</span> key &amp;&amp; key.StartsWith(<span class="stringliteral">&quot;ApiClaim_&quot;</span>) &amp;&amp; item.Value != <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                    var claimType = key.Substring(<span class="stringliteral">&quot;ApiClaim_&quot;</span>.Length);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                    claims[claimType] = item.Value.ToString()!;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">return</span> claims;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        }</div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a9fa3648e63e97bf8d80c88ec682edf5b">   69</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a9fa3648e63e97bf8d80c88ec682edf5b">HasApiClaim</a>(<span class="keyword">this</span> HttpContext context, <span class="keywordtype">string</span> claimType)</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            var key = $<span class="stringliteral">&quot;ApiClaim_{claimType}&quot;</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">return</span> context.Items.ContainsKey(key);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        }</div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a8578f11bb6f6498526ae8339aa362f15">   82</a></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a8578f11bb6f6498526ae8339aa362f15">HasApiClaimValue</a>(<span class="keyword">this</span> HttpContext context, <span class="keywordtype">string</span> claimType, <span class="keywordtype">string</span> expectedValue)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            var actualValue = context.GetApiClaim(claimType);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <span class="keywordflow">return</span> actualValue == expectedValue;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>} </div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html">SECUiDEA_ERP_Server.Controllers.Extensions.HttpContextExtensions</a></div><div class="ttdoc">HttpContext 확장 메서드</div><div class="ttdef"><b>Definition</b> <a href="#l00008">HttpContextExtensions.cs:9</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_html_a09a63c4a5c175919ddbc80d9ce3b956f"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a09a63c4a5c175919ddbc80d9ce3b956f">SECUiDEA_ERP_Server.Controllers.Extensions.HttpContextExtensions.GetApiClaim</a></div><div class="ttdeci">static ? string GetApiClaim(this HttpContext context, string claimType)</div><div class="ttdoc">API 키 토큰에서 특정 Claim 값을 가져오는 메서드</div><div class="ttdef"><b>Definition</b> <a href="#l00016">HttpContextExtensions.cs:16</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_html_a8578f11bb6f6498526ae8339aa362f15"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a8578f11bb6f6498526ae8339aa362f15">SECUiDEA_ERP_Server.Controllers.Extensions.HttpContextExtensions.HasApiClaimValue</a></div><div class="ttdeci">static bool HasApiClaimValue(this HttpContext context, string claimType, string expectedValue)</div><div class="ttdoc">특정 Claim이 특정 값을 가지는지 확인하는 메서드</div><div class="ttdef"><b>Definition</b> <a href="#l00082">HttpContextExtensions.cs:82</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_html_a9fa3648e63e97bf8d80c88ec682edf5b"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#a9fa3648e63e97bf8d80c88ec682edf5b">SECUiDEA_ERP_Server.Controllers.Extensions.HttpContextExtensions.HasApiClaim</a></div><div class="ttdeci">static bool HasApiClaim(this HttpContext context, string claimType)</div><div class="ttdoc">특정 Claim이 존재하는지 확인하는 메서드</div><div class="ttdef"><b>Definition</b> <a href="#l00069">HttpContextExtensions.cs:69</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_html_ac5ba2e6d268bac0d0ed254e7a4dc3da1"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#ac5ba2e6d268bac0d0ed254e7a4dc3da1">SECUiDEA_ERP_Server.Controllers.Extensions.HttpContextExtensions.GetApiServiceName</a></div><div class="ttdeci">static ? string GetApiServiceName(this HttpContext context)</div><div class="ttdoc">API 서비스명을 가져오는 메서드</div><div class="ttdef"><b>Definition</b> <a href="#l00037">HttpContextExtensions.cs:37</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_html_ad822ba35b1fcf1cb4414f3ce700121db"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#ad822ba35b1fcf1cb4414f3ce700121db">SECUiDEA_ERP_Server.Controllers.Extensions.HttpContextExtensions.GetApiKeyId</a></div><div class="ttdeci">static ? string GetApiKeyId(this HttpContext context)</div><div class="ttdoc">API 키 ID를 가져오는 메서드</div><div class="ttdef"><b>Definition</b> <a href="#l00027">HttpContextExtensions.cs:27</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions_html_af64cf5229d8d6dd5fe801eb9ff4a8671"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_http_context_extensions.html#af64cf5229d8d6dd5fe801eb9ff4a8671">SECUiDEA_ERP_Server.Controllers.Extensions.HttpContextExtensions.GetAllApiClaims</a></div><div class="ttdeci">static Dictionary&lt; string, string &gt; GetAllApiClaims(this HttpContext context)</div><div class="ttdoc">모든 API Claim을 Dictionary로 가져오는 메서드</div><div class="ttdef"><b>Definition</b> <a href="#l00047">HttpContextExtensions.cs:47</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions.html">SECUiDEA_ERP_Server.Controllers.Extensions</a></div><div class="ttdef"><b>Definition</b> <a href="_api_key_auth_attribute_8cs_source.html#l00006">ApiKeyAuthAttribute.cs:7</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_af34b85ff88993e1152170f543ba41d6.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_e3147d111bd9abb5b9521263f4a24daf.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_a225e1f05f35e0ceb39b0d04360d61e9.html">Controllers</a></li><li class="navelem"><a href="dir_9b93a7cd44c53599b91ee76c2f72fe09.html">Extensions</a></li><li class="navelem"><a href="_http_context_extensions_8cs.html">HttpContextExtensions.cs</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

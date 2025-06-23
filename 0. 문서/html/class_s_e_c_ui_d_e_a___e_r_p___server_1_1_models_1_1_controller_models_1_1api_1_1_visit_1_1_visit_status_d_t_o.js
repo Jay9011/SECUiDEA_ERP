@@ -1,0 +1,5 @@
+var class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_visit_1_1_visit_status_d_t_o =
+[
+    [ "Status", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_visit_1_1_visit_status_d_t_o.html#ac319f66fdcef10f7059e42ad5c288973", null ],
+    [ "VisitId", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_visit_1_1_visit_status_d_t_o.html#a6303cbfe10c3032753a62202998b8bd2", null ]
+];

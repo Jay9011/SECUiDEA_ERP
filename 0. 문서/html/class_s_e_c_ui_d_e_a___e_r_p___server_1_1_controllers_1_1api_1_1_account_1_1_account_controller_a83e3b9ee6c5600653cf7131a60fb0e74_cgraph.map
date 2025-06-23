@@ -1,0 +1,14 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Account.AccountController.CreatePasswordCertification" name="SECUiDEA_ERP_Server.Controllers.api.Account.AccountController.CreatePasswordCertification">
+<area shape="rect" id="Node000001" title="비밀번호 찾기용 인증번호 생성" alt="" coords="5,101,284,160"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec" title=" " alt="" coords="376,5,606,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,98,331,57,360,49,362,55,332,63,218,103"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#acf27a08293e1d1aec52b70b5f42e7038" title="Base32로 인코딩된 랜덤 토큰을 생성. 알아보기 쉬운 숫자와 문자로만 구성되며, 혼동되기 쉬운 문자(0과 O, 1과 I)는 제외. 알파벳은 대문자로만 사용." alt="" coords="332,72,650,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="284,113,316,110,316,115,284,118"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#a2fa737bcaa639cd6c458c184a1c6918e" title="Client IP 주소를 획득" alt="" coords="370,139,612,197"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="284,143,355,151,354,156,284,148"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f" title=" " alt="" coords="361,221,620,264"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="209,158,268,184,332,207,359,214,358,220,331,212,266,188,207,163"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#ad40974f127682f30e7b5634d62800e23" title=" " alt="" coords="698,105,932,164"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="607,45,651,57,744,96,742,101,649,63,605,50"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="609,218,649,207,742,169,744,174,651,212,611,223"/>
+</map>

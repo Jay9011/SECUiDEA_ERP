@@ -1,0 +1,7 @@
+<map id="AccountModel" name="AccountModel">
+<area shape="rect" id="Node000001" title="기본 계정 모델" alt="" coords="24,123,118,213"/>
+<area shape="rect" id="Node000003" href="$class_account_mobile_model.html" title="휴대폰 번호가 있는 계정 모델" alt="" coords="5,261,137,331"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="74,229,74,262,68,262,68,229"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="34,5,108,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,89,74,123,68,123,68,89"/>
+</map>

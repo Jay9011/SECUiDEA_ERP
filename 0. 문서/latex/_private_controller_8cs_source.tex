@@ -1,0 +1,112 @@
+\doxysection{Private\+Controller.\+cs}
+\hypertarget{_private_controller_8cs_source}{}\label{_private_controller_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/PrivateController.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/PrivateController.cs}}
+\mbox{\hyperlink{_private_controller_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }APIClient.Configuration.Interfaces;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }CoreDAL.Configuration;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }CoreDAL.Configuration.Interface;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }CryptoManager;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }FileIOHelper;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Mvc;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions}{SECUiDEA\_ERP\_Server.Controllers.Extensions}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_a_p_i_services}{SECUiDEA\_ERP\_Server.Models.APIServices}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models}{SECUiDEA\_ERP\_Server.Models.CommonModels}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private}{SECUiDEA\_ERP\_Server.Models.ControllerModels.Private}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services}{SECUiDEA\_ERP\_Server.Models.DBServices}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models}{SECUiDEA\_ERP\_Server.Models.ResultModels}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers}{SECUiDEA\_ERP\_Server.Controllers}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00016}00016\ [LocalHostOnly]}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00017}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller}{00017}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a06740cfc1841922e7877083e2b7e47e2}{PrivateController}}\ :\ Controller}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00019}00019\ \textcolor{preprocessor}{\ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00021}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a0c9f75030a8ce188fbeb86a123babc66}{00021}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ ICryptoManager\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a0c9f75030a8ce188fbeb86a123babc66}{\_cryptoSecuidea}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00022}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a2984d61c268ff37ea0e4bf5d4cd30bec}{00022}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IIOHelper\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a2984d61c268ff37ea0e4bf5d4cd30bec}{\_ioHelper}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00023}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_ae0f4306ef1c6a973eb212646f10427b5}{00023}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_ae0f4306ef1c6a973eb212646f10427b5}{\_dbSetupContainer}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00024}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{00024}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service}{IDBSetupService}}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}};}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00026}00026\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00028}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a06740cfc1841922e7877083e2b7e47e2}{00028}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a06740cfc1841922e7877083e2b7e47e2}{PrivateController}}(}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ [FromKeyedServices(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a473dd98868af48e722673c220e2f2b2b}{IoDbSetupFile}})]\ IIOHelper\ ioHelper,\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ [FromKeyedServices(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_aebec391c7552da59c0996c844c362baf}{CryptoSecuidea}})]\ ICryptoManager\ cryptoSecuidea,\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ IDatabaseSetupContainer\ dbSetupContainer,\ \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service}{IDBSetupService}}\ dbSetupService)}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00032}00032\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00033}00033\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_ae0f4306ef1c6a973eb212646f10427b5}{\_dbSetupContainer}}\ =\ dbSetupContainer;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}}\ =\ dbSetupService;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a2984d61c268ff37ea0e4bf5d4cd30bec}{\_ioHelper}}\ =\ ioHelper;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a0c9f75030a8ce188fbeb86a123babc66}{\_cryptoSecuidea}}\ =\ cryptoSecuidea;}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00040}00040\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00043}00043\ \textcolor{preprocessor}{\ \ \ \ \#region\ DB\ 설정\ 관련}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00045}00045\ \ \ \ \ [HttpGet]}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00046}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a955d603dbcfe28e8b6f9138525bc82a0}{00046}}\ \ \ \ \ \textcolor{keyword}{public}\ IActionResult\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a955d603dbcfe28e8b6f9138525bc82a0}{DBSetup}}()}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ DBSetup\ 파일이\ 없는\ 경우\ 파일\ 생성}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}}.GetAllSetups();}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (FileNotFoundException\ e)}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program}{Program}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_a3e37dda84cfa898ade5f19d1e3ec7166}{SetupDbContainer}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a2984d61c268ff37ea0e4bf5d4cd30bec}{\_ioHelper}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a0c9f75030a8ce188fbeb86a123babc66}{\_cryptoSecuidea}});}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ var\ setupViewModel\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}}.GetAllSetups();}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ View(setupViewModel);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00063}00063\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00064}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_abd9d96094c3f200d4720d4df0e427f62}{00064}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_abd9d96094c3f200d4720d4df0e427f62}{DBSetup}}(List<DBSetupViewModel>\ settings)}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}}.SaveMultiSetupAsync(settings);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!result.IsSuccess)}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(result);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ RedirectToAction(nameof(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a955d603dbcfe28e8b6f9138525bc82a0}{DBSetup}}));}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00076}00076\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00077}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_ad8a24925869ce8ac501943d6404fde36}{00077}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_ad8a24925869ce8ac501943d6404fde36}{SaveSingleDBSetup}}([FromBody]\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetupViewModel}}\ setting)}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 연결\ 테스트\ 후\ 정상적으로\ 연결\ 되어야만\ 저장}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}}.TestConnectionAsync(setting);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess)}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}}.SaveSingleSetupAsync(setting);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(result);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00089}00089\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00090}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a1dc82e33b91872cfb458c3655b1e272e}{00090}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a1dc82e33b91872cfb458c3655b1e272e}{TestConnection}}([FromBody]\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetupViewModel}}?\ setting)}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00091}00091\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (setting\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}response:기본.\{\{what\}\}가\ 잘못되었습니다."{}},}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}what"{}},\ \textcolor{stringliteral}{"{}기본.요청\ 파라미터"{}}\ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller_a3390f7f0704e59fe02b152d6842a1603}{\_dbSetupService}}.\mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service_a3e3986bc5503ffdc7753af2aa080483c}{TestConnectionAsync}}(setting);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(result);}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00103}00103\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00105}00105\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_private_controller_8cs_source_l00106}00106\ \}}
+
+\end{DoxyCode}

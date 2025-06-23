@@ -1,0 +1,171 @@
+\doxysection{Program.\+cs}
+\hypertarget{_program_8cs_source}{}\label{_program_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Program.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Program.cs}}
+\mbox{\hyperlink{_program_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Text.Json;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }APIClient.Configuration;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }APIClient.Configuration.Interfaces;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }CoreDAL.Configuration;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }CoreDAL.Configuration.Interface;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }CryptoManager;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }CryptoManager.Services;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }FileIOHelper;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }FileIOHelper.Helpers;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Authentication.JwtBearer;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }Microsoft.IdentityModel.Tokens;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }Microsoft.Win32;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account}{SECUiDEA\_ERP\_Server.Models.Account}};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_a_p_i_services}{SECUiDEA\_ERP\_Server.Models.APIServices}};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication}{SECUiDEA\_ERP\_Server.Models.Authentication}};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user}{SECUiDEA\_ERP\_Server.Models.AuthUser}};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00018}00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models}{SECUiDEA\_ERP\_Server.Models.CommonModels}};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00019}00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services}{SECUiDEA\_ERP\_Server.Models.DBServices}};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00021}00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server}{SECUiDEA\_ERP\_Server}};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00023}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program}{00023}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program}{Program}}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00024}00024\ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00025}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_ad4b68fc74b4f25647b8d739a053041af}{00025}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_ad4b68fc74b4f25647b8d739a053041af}{Main}}(\textcolor{keywordtype}{string}[]\ args)}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00026}00026\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ var\ builder\ =\ WebApplication.CreateBuilder(args);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ builder.Services.AddControllersWithViews()}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ .AddApplicationPart(typeof(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program}{Program}}).Assembly);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00033}00033\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 최우선\ 기타\ 설정\ 시작}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00034}00034\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00035}00035\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ builder.Services.AddMemoryCache();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ var\ dbSetupFilePath\ =\ Path.Combine(builder.Environment.ContentRootPath,\ \textcolor{stringliteral}{"{}Upload"{}},\ \textcolor{stringliteral}{"{}Data"{}},\ \textcolor{stringliteral}{"{}dbSetup.ini"{}});}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ var\ apiSetupFilePath\ =\ Path.Combine(builder.Environment.ContentRootPath,\ \textcolor{stringliteral}{"{}Upload"{}},\ \textcolor{stringliteral}{"{}Data"{}},\ \textcolor{stringliteral}{"{}apiSetup.ini"{}});}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ IIOHelper\ dbSetupFileHelper\ =\ \textcolor{keyword}{new}\ IniFileHelper(dbSetupFilePath);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ builder.Services.AddKeyedSingleton<IIOHelper>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a473dd98868af48e722673c220e2f2b2b}{IoDbSetupFile}},\ dbSetupFileHelper);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ IIOHelper\ registryHelper\ =\ \textcolor{keyword}{new}\ RegistryHelper(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a185cef76891a4e9fe0d50cb969af682a}{SECUiDEAJWT}},\ RegistryHive.LocalMachine);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ builder.Services.AddKeyedSingleton<IIOHelper>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a28b64702bfd3b2088994b60661ca8cc4}{IoRegistry}},\ registryHelper);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ IIOHelper\ apiSetupFileHelper\ =\ \textcolor{keyword}{new}\ IniFileHelper(apiSetupFilePath);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ builder.Services.AddKeyedSingleton<IIOHelper>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a49882bf54c168cc414a99e195a8d706b}{IoApiSetupFile}},\ apiSetupFileHelper);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ ICryptoManager\ S1AES\ =\ \textcolor{keyword}{new}\ S1AES();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ ICryptoManager\ S1SHA512\ =\ \textcolor{keyword}{new}\ S1SHA512();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ ICryptoManager\ SECUiDEA\ =\ \textcolor{keyword}{new}\ SecuAES256();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ builder.Services.AddKeyedSingleton<ICryptoManager>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_afd309916aaf13a06ffe438033587856a}{CryptoS1Aes}},\ S1AES);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ builder.Services.AddKeyedSingleton<ICryptoManager>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a6a8521f683be3d4aae1b6fe560cf6360}{CryptoS1Sha512}},\ S1SHA512);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ builder.Services.AddKeyedSingleton<ICryptoManager>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_aebec391c7552da59c0996c844c362baf}{CryptoSecuidea}},\ SECUiDEA);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ DB\ Container\ 초기\ 설정}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ var\ dbContainer\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_a3e37dda84cfa898ade5f19d1e3ec7166}{SetupDbContainer}}(dbSetupFileHelper,\ SECUiDEA);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<IDatabaseSetupContainer>(dbContainer);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<\mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service}{IDBSetupService}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service}{DBSetupService}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ Client\ 초기\ 설정}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ var\ apiSetupContainer\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_ac437165c251b0165dd6f292c0f9d1bff}{SetupApiContainer}}(apiSetupFileHelper);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<IAPISetupContainer>(apiSetupContainer);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00067}00067\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 최우선\ 기타\ 설정\ 종료}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00068}00068\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00069}00069\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00070}00070\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 의존\ 주입\ 시작}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00071}00071\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00072}00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ JWT\ 초기\ 설정}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{JwtService}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9ac92c4e87ec80204d647c4368ea2226}{JwtConfigSetup}}(registryHelper,\ SECUiDEA);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ JWT\ 인증\ 설정}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ builder.Services.AddAuthentication(options\ =>}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ options.DefaultAuthenticateScheme\ =\ JwtBearerDefaults.AuthenticationScheme;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ options.DefaultChallengeScheme\ =\ JwtBearerDefaults.AuthenticationScheme;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \}).AddJwtBearer(options\ =>}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ var\ jwtSettings\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{JwtService}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_afebcdf2b83c9cdab80a4c8843d40fdaf}{GetJwtCollection}}(registryHelper,\ SECUiDEA);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ options.RequireHttpsMetadata\ =\ \textcolor{keyword}{false};\ \ \ \textcolor{comment}{//\ TODO:\ 프로덕션\ 환경에서는\ true로\ 설정\ 변경\ (http\ 사용하려면\ false로\ 유지)}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ options.SaveToken\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ options.TokenValidationParameters\ =\ \textcolor{keyword}{new}\ TokenValidationParameters}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateIssuer\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateAudience\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateLifetime\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateIssuerSigningKey\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidIssuer\ =\ jwtSettings[\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a5fd4f5004f234d77f77ac599f204b2ef}{Issuer}}],}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidAudience\ =\ jwtSettings[\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a231289781cdd4c3000a19d205479dc19}{Audience}}],}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IssuerSigningKey\ =\ \textcolor{keyword}{new}\ SymmetricSecurityKey(Convert.FromBase64String(jwtSettings[\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a109fd33f6c3d98e32474c5c98db8dfd8}{Secret}}])),}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ClockSkew\ =\ TimeSpan.Zero}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<\mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository}{IRefreshTokenRepository}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token_repository}{RefreshTokenRepository}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{UserRepositoryFactory}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{JwtService}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service}{SessionService}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_auth_service}{UserAuthService}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service}{AccountService}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ builder.Services.AddSingleton<APISetupContainer>(apiSetupContainer);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00111}00111\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 의존\ 주입\ 종료}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00112}00112\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00113}00113\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ var\ app\ =\ builder.Build();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ app.UseHttpsRedirection();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ app.UseStaticFiles();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ app.UseRouting();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ app.UseAuthentication();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ app.UseAuthorization();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ app.MapControllerRoute(}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ name:\ \textcolor{stringliteral}{"{}default"{}},}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ pattern:\ \textcolor{stringliteral}{"{}\{controller=Home\}/\{action=Index\}/\{id?\}"{}});}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SPA\ 라우팅\ 설정}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ app.MapFallbackToFile(\textcolor{stringliteral}{"{}/visit/\{**path\}"{}},\ \textcolor{stringliteral}{"{}/visit/index.html"{}});}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ app.MapFallbackToFile(\textcolor{stringliteral}{"{}/index.html"{}});}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00133}00133\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ 미리\ 실행되어야\ 하는\ 서비스들}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00134}00134\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ ================================================}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00135}00135\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ app.Services.GetRequiredService<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service}{SessionService}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ app.Services.GetRequiredService<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service}{AccountService}}>();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ app.Run();}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00140}00140\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00148}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_a3e37dda84cfa898ade5f19d1e3ec7166}{00148}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ DatabaseSetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_a3e37dda84cfa898ade5f19d1e3ec7166}{SetupDbContainer}}(IIOHelper\ dbSetupFileHelper,\ ICryptoManager\ SECUiDEA)}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00149}00149\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ var\ setupConfigs\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ (DatabaseType\ dbType,\ IIOHelper\ ioHelper)>}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a39362d74ac5f896ee0439388d5e02762}{S1Access}}]\ =\ (DatabaseType.MSSQL,\ dbSetupFileHelper),}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_af64beef43ea065f5a13a29d13321a2ff}{SECUIDEA}}]\ =\ (DatabaseType.MSSQL,\ dbSetupFileHelper)}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ DatabaseSetupContainer\ dbContainer\ =\ \textcolor{keyword}{new}\ DatabaseSetupContainer(setupConfigs,\ SECUiDEA);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ dbContainer;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00158}00158\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00160}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_ac437165c251b0165dd6f292c0f9d1bff}{00160}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ APISetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_ac437165c251b0165dd6f292c0f9d1bff}{SetupApiContainer}}(IIOHelper\ apiSetupFileHelper)}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00161}00161\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ var\ setupConfigs\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ IIOHelper>}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a941ddc8e635d46dd993638960ee991d6}{Nlobby}}]\ =\ apiSetupFileHelper,}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a944ff48a1db61b5ea0ad88f0a0164e4e}{IParking}}]\ =\ apiSetupFileHelper}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ APISetupContainer\ apiContainer\ =\ \textcolor{keyword}{new}\ APISetupContainer(setupConfigs);}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ apiContainer;}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00170}00170\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_program_8cs_source_l00171}00171\ \}}
+
+\end{DoxyCode}

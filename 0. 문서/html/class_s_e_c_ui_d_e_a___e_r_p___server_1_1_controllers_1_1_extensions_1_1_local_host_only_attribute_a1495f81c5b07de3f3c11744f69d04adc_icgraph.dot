@@ -1,0 +1,11 @@
+digraph "SECUiDEA_ERP_Server.Controllers.Extensions.LocalHostOnlyAttribute.IsLocalRequest"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="SECUiDEA_ERP_Server.Controllers.\lExtensions.LocalHostOnlyAttribute.\lIsLocalRequest",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="SECUiDEA_ERP_Server.Controllers.\lExtensions.LocalHostOnlyAttribute.\lOnActionExecuting",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_local_host_only_attribute.html#a518c5b90341d06255935b955dbf7b086",tooltip=" "];
+}

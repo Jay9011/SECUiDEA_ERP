@@ -1,0 +1,21 @@
+<map id="SECUiDEA_ERP_Server.Controllers.BaseControllers.BaseController.GetClientIpAddress" name="SECUiDEA_ERP_Server.Controllers.BaseControllers.BaseController.GetClientIpAddress">
+<area shape="rect" id="Node000001" title="Client IP 주소를 획득" alt="" coords="661,213,902,272"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a83e3b9ee6c5600653cf7131a60fb0e74" title="비밀번호 찾기용 인증번호 생성" alt="" coords="325,5,604,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="747,203,688,138,652,106,612,78,589,67,591,62,614,74,655,102,692,135,751,199"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_visit_1_1_visit_controller.html#a535d41f4771f78b47dad2f5a6be0bbc6" title=" " alt="" coords="333,88,596,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="725,207,672,174,612,145,579,134,580,129,614,140,674,169,728,202"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller.html#ab4f119f0e8f485bb65ca910910c1b5ef" title=" " alt="" coords="333,155,596,197"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="645,217,569,201,570,195,646,212"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a7732537c9fdb78869d9e534c32580334" title=" " alt="" coords="327,221,602,264"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="645,245,603,245,603,240,645,240"/>
+<area shape="rect" id="Node000008" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_auth_controller.html#a51ac5cf245adfdc69d689853c52fa80a" title=" " alt="" coords="333,288,596,331"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="646,274,570,290,569,285,645,269"/>
+<area shape="rect" id="Node000009" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller.html#a0bc7e6bdf9e20dc85b239375e2fe8f0f" title=" " alt="" coords="327,355,602,397"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="728,283,674,316,614,345,580,357,579,352,612,340,672,311,725,279"/>
+<area shape="rect" id="Node000010" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller.html#acfacd0e0f22a058251d52163976e8159" title=" " alt="" coords="316,421,613,464"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="752,286,693,351,656,384,614,412,589,423,587,418,612,407,652,380,689,348,748,282"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a1c882a38b09bc9a1ffe531e566dd89c1" title="S1ACCESS 게스트 로그인 처리" alt="" coords="5,188,268,231"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="311,230,268,225,268,220,311,224"/>
+<area shape="rect" id="Node000007" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a18f7c957f90c231f48c0ffc75783d0d7" title="S1ACCESS 로그인 처리" alt="" coords="5,255,268,297"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="311,261,268,265,268,260,311,256"/>
+</map>

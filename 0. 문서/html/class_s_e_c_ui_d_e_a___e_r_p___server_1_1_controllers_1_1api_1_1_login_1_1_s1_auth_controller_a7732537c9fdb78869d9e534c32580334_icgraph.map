@@ -1,0 +1,7 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Login.S1AuthController.ProcessLoginAsync" name="SECUiDEA_ERP_Server.Controllers.api.Login.S1AuthController.ProcessLoginAsync">
+<area shape="rect" id="Node000001" title=" " alt="" coords="316,39,591,81"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a1c882a38b09bc9a1ffe531e566dd89c1" title="S1ACCESS 게스트 로그인 처리" alt="" coords="5,5,268,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,47,268,43,269,38,300,41"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a18f7c957f90c231f48c0ffc75783d0d7" title="S1ACCESS 로그인 처리" alt="" coords="5,72,268,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="300,79,269,82,268,77,300,73"/>
+</map>

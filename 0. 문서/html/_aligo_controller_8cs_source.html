@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SECUiDEA_ERP_Server: D:/Projects/SECUiDEA_ERP/SECUiDEA_ERP_Server/SECUiDEA_ERP_Server/Controllers/api/Aligo/AligoController.cs 소스 파일</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SECUiDEA.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">SECUiDEA_ERP_Server<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">통합 운영 관리 솔루션 API 서버</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_aligo_controller_8cs_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">AligoController.cs</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_aligo_controller_8cs.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using </span>AligoService;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">using </span>AligoService.Interface;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using </span>AligoService.Model;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using </span>AligoService.Model.Messages;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>AligoService.Model.Templates;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span>CoreDAL.Configuration.Interface;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span>Microsoft.AspNetCore.Mvc;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers.html">SECUiDEA_ERP_Server.Controllers.BaseControllers</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions.html">SECUiDEA_ERP_Server.Controllers.Extensions</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models.html">SECUiDEA_ERP_Server.Models.CommonModels</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html">SECUiDEA_ERP_Server.Models.ControllerModels</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo.html">SECUiDEA_ERP_Server.Models.ControllerModels.Aligo</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">using </span>System.Security.Claims;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models.html">SECUiDEA_ERP_Server.Models.ResultModels</a>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo.html">   16</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo.html">SECUiDEA_ERP_Server.Controllers.api.Aligo</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>[Route(<span class="stringliteral">&quot;api/[controller]/[action]&quot;</span>)]</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html">   19</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#abf04297b99adc42c447dc3db22b47d0e">AligoController</a> : <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html">BaseController</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">    #region 의존 주입</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a130e873f6d09448e7799189fe6e64695">   23</a></span>    <span class="keyword">private</span> readonly IDatabaseSetupContainer <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a130e873f6d09448e7799189fe6e64695">_dbContainer</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a25af0dd94a1154a49a0b2feaf910bc2e">   24</a></span>    <span class="keyword">private</span> readonly IDatabaseSetup <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a25af0dd94a1154a49a0b2feaf910bc2e">_s1Access</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#ae565c587250e1daecdf8d815bf5d3e2e">   25</a></span>    <span class="keyword">private</span> readonly IDatabaseSetup <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#ae565c587250e1daecdf8d815bf5d3e2e">_secuidea</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#abf04297b99adc42c447dc3db22b47d0e">   27</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#abf04297b99adc42c447dc3db22b47d0e">AligoController</a>(IDatabaseSetupContainer dbContainer)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a130e873f6d09448e7799189fe6e64695">_dbContainer</a> = dbContainer;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a25af0dd94a1154a49a0b2feaf910bc2e">_s1Access</a> = <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a130e873f6d09448e7799189fe6e64695">_dbContainer</a>.GetSetup(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">StringClass</a>.<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#a39362d74ac5f896ee0439388d5e02762">S1Access</a>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#ae565c587250e1daecdf8d815bf5d3e2e">_secuidea</a> = <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a130e873f6d09448e7799189fe6e64695">_dbContainer</a>.GetSetup(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">StringClass</a>.<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#af64beef43ea065f5a13a29d13321a2ff">SECUIDEA</a>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
+</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">    #endregion</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    [HttpPost]</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    [ApiKeyAuth(issuer: <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">StringClass</a>.<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#a7d8060b45929d1042db5024c87f7c28f">Issuer_Kakao</a>)]</div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a31f7bca61dae33ffb35612ec2b8f9d77">   39</a></span>    <span class="keyword">public</span> async Task&lt;IActionResult&gt; <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a31f7bca61dae33ffb35612ec2b8f9d77">SendRequest</a>([FromBody] <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_1_1_send_request_model.html">SendRequestModel</a> request)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="comment">// API 키 인증</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            var apiKeyId = HttpContext.Items[ClaimTypes.Authentication] as string;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            var serviceName = HttpContext.Items[ClaimTypes.AuthenticationMethod] as string;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html">AligoAcountDTO</a> aligoAcountDto = await <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#afdcdc8406d8543138348f5df7ecaab1e">GetAligoAccountInfo</a>(<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#ae565c587250e1daecdf8d815bf5d3e2e">_secuidea</a>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html">AligoTemplateDTO</a> aligoTemplateDto = await <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#ae834e36bc951b3c77882f778dcb1235e">GetAligoTemplateInfo</a>(<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#ae565c587250e1daecdf8d815bf5d3e2e">_secuidea</a>, request.Gubun);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="comment">// 만약 둘 중 하나가 null이라면 에러 처리</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            <span class="keywordflow">if</span> (aligoAcountDto == <span class="keyword">null</span> || aligoTemplateDto == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                <span class="keywordflow">return</span> BadRequest(<span class="stringliteral">&quot;Aligo account or template information is missing.&quot;</span>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            IAligoClient aligoClient = AligoClientFactory.Create(aligoAcountDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#ab39da4bfc976a1fe0cf6bf9cb27735af">APIKey</a>, aligoAcountDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#a1f5d927f0bc4797270e929ffd1ad6212">UserID</a>, aligoTemplateDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html#a486b32901e7dc60099c4d6528d6360c4">SenderKey</a>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="comment">// AligoTemplateDTO의 Path가 null 혹은 빈 값이 아니라면 도메인 + Path를 사용</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordtype">string</span> domain = aligoAcountDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#a5d7921ae748953c7cd5fa279efb64392">Url</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">if</span> (!<span class="keywordtype">string</span>.IsNullOrEmpty(aligoTemplateDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html#a7dedd386401594f3b96df0f565cd3cfd">Path</a>))</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                domain = $<span class="stringliteral">&quot;{domain}{aligoTemplateDto.Path}&quot;</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="comment">// 템플릿 정보 조회</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            var templateResult = await aligoClient.TemplateService.GetTemplatesAsync(aligoTemplateDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html#a943076141e00aecaab70ed7355e1847a">TPL_CODE</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="keywordflow">if</span> (templateResult.Success &amp;&amp; templateResult.Templates.Count &gt; 0)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                var <span class="keyword">template</span> = templateResult.Templates[0]; <span class="comment">// 일단 템플릿은 하나만 사용한다고 가정</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                var tplContent = <span class="keyword">template</span>.Content;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                var tplName = <span class="keyword">template</span>.Name;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="comment">// 수신자별로 메시지 내용과 변수 세팅</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                <span class="keywordflow">foreach</span> (var receiver <span class="keywordflow">in</span> request.ReceiverList)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                    receiver.Subject = tplName;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                    receiver.TemplateContent = tplContent;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    receiver.FailoverSubject = tplName;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                    receiver.FailoverMessage = tplContent;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                    <span class="comment">// variables는 클라이언트 측에서 세팅</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                    <span class="comment">// queryVariables가 1개 이상이라면 해당 값에 도메인 추가 (queryVariables도 클라이언트 측에서 세팅)</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    <span class="keywordflow">if</span> (receiver.QueryVariables != <span class="keyword">null</span> &amp;&amp; receiver.QueryVariables.Count &gt; 0)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                        <span class="keywordflow">foreach</span> (var queryVariable <span class="keywordflow">in</span> receiver.QueryVariables)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                        {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                            var key = queryVariable.Key;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                            var value = $<span class="stringliteral">&quot;{domain}{queryVariable.Value}&quot;</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                            <span class="comment">// 도메인 추가</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                            receiver.QueryVariables[key] = value;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                        }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                <span class="comment">// 메시지 전송 요청 생성</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                var sendRequest = TemplateHelper.CreateSendRequest(</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    templateCode: aligoTemplateDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html#a943076141e00aecaab70ed7355e1847a">TPL_CODE</a>,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                    sender: aligoAcountDto.<a class="code hl_property" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#a4f02da5931b4637afa1ad58ad2df2a6e">SenderPhone</a>,</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                    receiverList: request.ReceiverList</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                );</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                <span class="comment">// 메시지 전송</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                aligoClient.MessageService.SendMessageAsync(sendRequest);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">return</span> Ok(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f">Success</a>(<span class="stringliteral">&quot;Success to send message&quot;</span>));</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">catch</span> (Exception e)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="keywordflow">return</span> BadRequest(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(e.Message));</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> BadRequest(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(<span class="stringliteral">&quot;Failed to send message&quot;</span>));</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+</div>
+</div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html">SECUiDEA_ERP_Server.Controllers.BaseControllers.BaseController</a></div><div class="ttdef"><b>Definition</b> <a href="_base_controller_8cs_source.html#l00013">BaseController.cs:14</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_html_ae834e36bc951b3c77882f778dcb1235e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#ae834e36bc951b3c77882f778dcb1235e">SECUiDEA_ERP_Server.Controllers.BaseControllers.BaseController.GetAligoTemplateInfo</a></div><div class="ttdeci">async Task&lt; AligoTemplateDTO &gt; GetAligoTemplateInfo(IDatabaseSetup _database, string gubun)</div><div class="ttdef"><b>Definition</b> <a href="_base_controller_8cs_source.html#l00142">BaseController.cs:142</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_html_afdcdc8406d8543138348f5df7ecaab1e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#afdcdc8406d8543138348f5df7ecaab1e">SECUiDEA_ERP_Server.Controllers.BaseControllers.BaseController.GetAligoAccountInfo</a></div><div class="ttdeci">async Task&lt; AligoAcountDTO &gt; GetAligoAccountInfo(IDatabaseSetup _database)</div><div class="ttdoc">Aligo 계정 정보를 DB에서 조회</div><div class="ttdef"><b>Definition</b> <a href="_base_controller_8cs_source.html#l00125">BaseController.cs:125</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_html_a130e873f6d09448e7799189fe6e64695"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a130e873f6d09448e7799189fe6e64695">SECUiDEA_ERP_Server.Controllers.api.Aligo.AligoController._dbContainer</a></div><div class="ttdeci">readonly IDatabaseSetupContainer _dbContainer</div><div class="ttdef"><b>Definition</b> <a href="#l00023">AligoController.cs:23</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_html_a25af0dd94a1154a49a0b2feaf910bc2e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a25af0dd94a1154a49a0b2feaf910bc2e">SECUiDEA_ERP_Server.Controllers.api.Aligo.AligoController._s1Access</a></div><div class="ttdeci">readonly IDatabaseSetup _s1Access</div><div class="ttdef"><b>Definition</b> <a href="#l00024">AligoController.cs:24</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_html_a31f7bca61dae33ffb35612ec2b8f9d77"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a31f7bca61dae33ffb35612ec2b8f9d77">SECUiDEA_ERP_Server.Controllers.api.Aligo.AligoController.SendRequest</a></div><div class="ttdeci">async Task&lt; IActionResult &gt; SendRequest([FromBody] SendRequestModel request)</div><div class="ttdef"><b>Definition</b> <a href="#l00039">AligoController.cs:39</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_html_abf04297b99adc42c447dc3db22b47d0e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#abf04297b99adc42c447dc3db22b47d0e">SECUiDEA_ERP_Server.Controllers.api.Aligo.AligoController.AligoController</a></div><div class="ttdeci">AligoController(IDatabaseSetupContainer dbContainer)</div><div class="ttdef"><b>Definition</b> <a href="#l00027">AligoController.cs:27</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_html_ae565c587250e1daecdf8d815bf5d3e2e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#ae565c587250e1daecdf8d815bf5d3e2e">SECUiDEA_ERP_Server.Controllers.api.Aligo.AligoController._secuidea</a></div><div class="ttdeci">readonly IDatabaseSetup _secuidea</div><div class="ttdef"><b>Definition</b> <a href="#l00025">AligoController.cs:25</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">SECUiDEA_ERP_Server.Models.CommonModels.StringClass</a></div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00003">StringClass.cs:4</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html_a39362d74ac5f896ee0439388d5e02762"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#a39362d74ac5f896ee0439388d5e02762">SECUiDEA_ERP_Server.Models.CommonModels.StringClass.S1Access</a></div><div class="ttdeci">const string S1Access</div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00046">StringClass.cs:46</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html_a7d8060b45929d1042db5024c87f7c28f"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#a7d8060b45929d1042db5024c87f7c28f">SECUiDEA_ERP_Server.Models.CommonModels.StringClass.Issuer_Kakao</a></div><div class="ttdeci">const string Issuer_Kakao</div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00060">StringClass.cs:60</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html_af64beef43ea065f5a13a29d13321a2ff"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#af64beef43ea065f5a13a29d13321a2ff">SECUiDEA_ERP_Server.Models.CommonModels.StringClass.SECUIDEA</a></div><div class="ttdeci">const string SECUIDEA</div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00047">StringClass.cs:47</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_1_1_send_request_model_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_1_1_send_request_model.html">SECUiDEA_ERP_Server.Models.ControllerModels.Aligo.SendRequestModel</a></div><div class="ttdef"><b>Definition</b> <a href="_request_models_8cs_source.html#l00005">RequestModels.cs:6</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html">SECUiDEA_ERP_Server.Models.ControllerModels.AligoAcountDTO</a></div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00003">AligoEntity.cs:4</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_html_a1f5d927f0bc4797270e929ffd1ad6212"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#a1f5d927f0bc4797270e929ffd1ad6212">SECUiDEA_ERP_Server.Models.ControllerModels.AligoAcountDTO.UserID</a></div><div class="ttdeci">string UserID</div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00006">AligoEntity.cs:6</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_html_a4f02da5931b4637afa1ad58ad2df2a6e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#a4f02da5931b4637afa1ad58ad2df2a6e">SECUiDEA_ERP_Server.Models.ControllerModels.AligoAcountDTO.SenderPhone</a></div><div class="ttdeci">string SenderPhone</div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00007">AligoEntity.cs:7</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_html_a5d7921ae748953c7cd5fa279efb64392"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#a5d7921ae748953c7cd5fa279efb64392">SECUiDEA_ERP_Server.Models.ControllerModels.AligoAcountDTO.Url</a></div><div class="ttdeci">string Url</div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00009">AligoEntity.cs:9</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_html_ab39da4bfc976a1fe0cf6bf9cb27735af"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o.html#ab39da4bfc976a1fe0cf6bf9cb27735af">SECUiDEA_ERP_Server.Models.ControllerModels.AligoAcountDTO.APIKey</a></div><div class="ttdeci">string APIKey</div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00005">AligoEntity.cs:5</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html">SECUiDEA_ERP_Server.Models.ControllerModels.AligoTemplateDTO</a></div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00012">AligoEntity.cs:13</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_html_a486b32901e7dc60099c4d6528d6360c4"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html#a486b32901e7dc60099c4d6528d6360c4">SECUiDEA_ERP_Server.Models.ControllerModels.AligoTemplateDTO.SenderKey</a></div><div class="ttdeci">string SenderKey</div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00017">AligoEntity.cs:17</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_html_a7dedd386401594f3b96df0f565cd3cfd"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html#a7dedd386401594f3b96df0f565cd3cfd">SECUiDEA_ERP_Server.Models.ControllerModels.AligoTemplateDTO.Path</a></div><div class="ttdeci">string Path</div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00020">AligoEntity.cs:20</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_html_a943076141e00aecaab70ed7355e1847a"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o.html#a943076141e00aecaab70ed7355e1847a">SECUiDEA_ERP_Server.Models.ControllerModels.AligoTemplateDTO.TPL_CODE</a></div><div class="ttdeci">string TPL_CODE</div><div class="ttdef"><b>Definition</b> <a href="_aligo_entity_8cs_source.html#l00018">AligoEntity.cs:18</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel</a></div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00005">BoolResultModel.cs:6</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_html_a7bb335fcad0508bd2749cc9179c8c1ec"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel.Fail</a></div><div class="ttdeci">static BoolResultModel Fail(string message, Dictionary&lt; string, object &gt;? data=null)</div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00028">BoolResultModel.cs:28</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_html_a8b0ef2b800da87eeb1046e0bb6219b6f"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f">SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel.Success</a></div><div class="ttdeci">static BoolResultModel Success(string message=&quot;&quot;, Dictionary&lt; string, object &gt;? data=null)</div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00023">BoolResultModel.cs:23</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers.html">SECUiDEA_ERP_Server.Controllers.BaseControllers</a></div><div class="ttdef"><b>Definition</b> <a href="_base_controller_8cs_source.html#l00011">BaseController.cs:11</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions.html">SECUiDEA_ERP_Server.Controllers.Extensions</a></div><div class="ttdef"><b>Definition</b> <a href="_api_key_auth_attribute_8cs_source.html#l00006">ApiKeyAuthAttribute.cs:7</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo.html">SECUiDEA_ERP_Server.Controllers.api.Aligo</a></div><div class="ttdef"><b>Definition</b> <a href="#l00016">AligoController.cs:16</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models.html">SECUiDEA_ERP_Server.Models.CommonModels</a></div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00001">StringClass.cs:1</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo.html">SECUiDEA_ERP_Server.Models.ControllerModels.Aligo</a></div><div class="ttdef"><b>Definition</b> <a href="_request_models_8cs_source.html#l00003">RequestModels.cs:3</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models.html">SECUiDEA_ERP_Server.Models.ControllerModels</a></div><div class="ttdef"><b>Definition</b> <a href="_request_models_8cs_source.html#l00003">RequestModels.cs:3</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models.html">SECUiDEA_ERP_Server.Models.ResultModels</a></div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00003">BoolResultModel.cs:3</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_af34b85ff88993e1152170f543ba41d6.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_e3147d111bd9abb5b9521263f4a24daf.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_a225e1f05f35e0ceb39b0d04360d61e9.html">Controllers</a></li><li class="navelem"><a href="dir_acdb3eb1a63852939e0f6a8d6baa0896.html">api</a></li><li class="navelem"><a href="dir_6df2c305a47e265118d30d259e2a4bd5.html">Aligo</a></li><li class="navelem"><a href="_aligo_controller_8cs.html">AligoController.cs</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

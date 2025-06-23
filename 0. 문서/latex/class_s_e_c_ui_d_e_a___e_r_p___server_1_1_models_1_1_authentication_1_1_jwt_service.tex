@@ -1,0 +1,652 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service 클래스 참조}
+\hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{}\label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7abd5fb0cbb822474610746018e8bda3}{Jwt\+Service}} (\mbox{[}From\+Keyed\+Services(String\+Class.\+Io\+Registry)\mbox{]} IIOHelper registry\+Helper, \mbox{[}From\+Keyed\+Services(String\+Class.\+Crypto\+Secuidea)\mbox{]} ICrypto\+Manager crypto\+Manager)
+\begin{DoxyCompactList}\small\item\em JWT 서비스 생성자 Singleton으로 등록된다고 가성하고, 최초 호출시 Registry에서 값을 읽어옴 \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a52b8c8bd019ae8710818ccafcb65ed22}{Generate\+Jwt\+Token}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}} user, string? session\+Id=null)
+\begin{DoxyCompactList}\small\item\em JWT 토큰 생성 \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a76de9c883a045021922104a72ca69e57}{Extract\+Session\+Id\+From\+Token}} (string token)
+\begin{DoxyCompactList}\small\item\em JWT 토큰에서 세션 ID를 추출하는 메서드 \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_aaa54c9abdd40b2f3cdeeb625c501a846}{Extract\+User\+Id\+From\+Token}} (string token)
+\begin{DoxyCompactList}\small\item\em JWT 토큰에서 사용자 ID를 추출하는 메서드 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_adf23c2901fd9cad04d9720cdb3aa8ba9}{Generate\+Refresh\+Token}} (string user\+Id, string ip\+Address, string session\+Id, bool remember\+Me=false)
+\begin{DoxyCompactList}\small\item\em Refresh Token 생성 메서드 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a6e806598ce71b4e70821f49dea6fd4e0}{Validate\+Token}} (string token, out Claims\+Principal principal)
+\begin{DoxyCompactList}\small\item\em 토큰 유효성 검증 \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a70f0edcf4a9d10b88e64319aa3334f22}{Generate\+Api\+Key\+Token}} (string issuer, string api\+Key\+Id, string service\+Name, Time\+Span? expiry\+Option=null, IEnumerable$<$ Claim $>$? additional\+Claims=null)
+\begin{DoxyCompactList}\small\item\em API 키 토큰 생성 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a2a5b6d3d77c39208919f94f9daa0048e}{Validate\+Api\+Key\+Token}} (string token, string issuer, out Claims\+Principal principal)
+\begin{DoxyCompactList}\small\item\em API 키 토큰 검증 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{정적 Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a1483e5ce7615ba9f4a3d937c85e9cfd1}{Set\+Jwt\+Collection}} (Dictionary$<$ string, string $>$ collection, string secret\+Key, ICrypto\+Manager? crypto\+Manager=null)
+\begin{DoxyCompactList}\small\item\em JWT 설정을 위한 Dictionary 생성 \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9ac92c4e87ec80204d647c4368ea2226}{Jwt\+Config\+Setup}} (IIOHelper reg\+Io\+Helper, ICrypto\+Manager crypto\+Manager)
+\begin{DoxyCompactList}\small\item\em JWT 설정을 초기화하는 메서드 \end{DoxyCompactList}\item 
+static Dictionary$<$ string, string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_afebcdf2b83c9cdab80a4c8843d40fdaf}{Get\+Jwt\+Collection}} (IIOHelper reg\+Io\+Helper, ICrypto\+Manager? crypto\+Manager=null)
+\begin{DoxyCompactList}\small\item\em JWT 설정을 가져오기 위한 메서드 \end{DoxyCompactList}\item 
+static Dictionary$<$ string, string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a71f62064d1b7f6f1bfb08b629944d1b7}{Try\+Get\+Jwt\+Collection}} (IIOHelper reg\+Io\+Helper, ICrypto\+Manager? crypto\+Manager=null)
+\begin{DoxyCompactList}\small\item\em JWT 설정을 가져오기 위한 메서드 (예외 처리 없이 시도) \end{DoxyCompactList}\item 
+static Dictionary$<$ string, string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a4a6b89d75fd69b1612ba8d0c3939f7bd}{Get\+Set\+Jwt\+Collection}} (IIOHelper reg\+Io\+Helper, string secret\+Key, ICrypto\+Manager? crypto\+Manager=null)
+\begin{DoxyCompactList}\small\item\em JWT 설정을 가져오기 위한 메서드 (설정이 없는 경우 생성) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{속성}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_settings}{Jwt\+Settings}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a4c84c97b3237b894fda4ec93991a5cea}{Get\+Settings}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_settings}{Jwt\+Settings}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a438407d9347b06bcfc459b48ae403ef2}{Load\+Jwt\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em JWT 설정을 로드 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{정적 Private 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+static Dictionary$<$ string, string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9bedd1347ce12eff8bbc205006f3d50b}{Get\+Jwt\+Dictionary}} (IIOHelper reg\+Io\+Helper, ICrypto\+Manager? crypto\+Manager=null)
+\begin{DoxyCompactList}\small\item\em JWT 설정을 Dictionary로 가져오는 메서드 \end{DoxyCompactList}\item 
+static string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7d41b116e20f6b8b5e7834a98e954a06}{Generate\+Secure\+Key}} (int key\+Size\+In\+Bytes=64)
+\begin{DoxyCompactList}\small\item\em Secure Key를 생성하는 메서드 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_settings}{Jwt\+Settings}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acd765640b3dd154f20b8f53b8faeba36}{\+\_\+jwt\+Settings}}
+\item 
+readonly IIOHelper \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_aac5c2af338d23cc8729f68d759a24b09}{\+\_\+registry\+Helper}}
+\item 
+readonly ICrypto\+Manager \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a457b79708218ca89256575e1bb3d0d60}{\+\_\+crypto\+Manager}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{정적 Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+static readonly string\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acbc7488952fe2d588c2f124c3b1d8143}{\+\_\+crypt\+Keys}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00013}{13}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_doc-constructors}
+\doxysubsection{생성자 \& 소멸자 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7abd5fb0cbb822474610746018e8bda3}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!JwtService@{JwtService}}
+\index{JwtService@{JwtService}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{JwtService()}{JwtService()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7abd5fb0cbb822474610746018e8bda3} 
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Jwt\+Service (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Keyed\+Services(\+String\+Class.\+Io\+Registry)\mbox{]} IIOHelper}]{registry\+Helper}{, }\item[{\mbox{[}\+From\+Keyed\+Services(\+String\+Class.\+Crypto\+Secuidea)\mbox{]} ICrypto\+Manager}]{crypto\+Manager}{}\end{DoxyParamCaption})}
+
+
+
+JWT 서비스 생성자 Singleton으로 등록된다고 가성하고, 최초 호출시 Registry에서 값을 읽어옴 
+
+
+\begin{DoxyParams}{매개변수}
+{\em registry\+Helper} & 레지스트리 IIOHelper\\
+\hline
+{\em crypto\+Manager} & 암호화 ICrypto\+Manager\\
+\hline
+\end{DoxyParams}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00039}{39}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7abd5fb0cbb822474610746018e8bda3_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a76de9c883a045021922104a72ca69e57}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!ExtractSessionIdFromToken@{ExtractSessionIdFromToken}}
+\index{ExtractSessionIdFromToken@{ExtractSessionIdFromToken}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{ExtractSessionIdFromToken()}{ExtractSessionIdFromToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a76de9c883a045021922104a72ca69e57} 
+string? SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Extract\+Session\+Id\+From\+Token (\begin{DoxyParamCaption}\item[{string}]{token}{}\end{DoxyParamCaption})}
+
+
+
+JWT 토큰에서 세션 ID를 추출하는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em token} & JWT 토큰\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+Session ID
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00114}{114}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_aaa54c9abdd40b2f3cdeeb625c501a846}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!ExtractUserIdFromToken@{ExtractUserIdFromToken}}
+\index{ExtractUserIdFromToken@{ExtractUserIdFromToken}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{ExtractUserIdFromToken()}{ExtractUserIdFromToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_aaa54c9abdd40b2f3cdeeb625c501a846} 
+string? SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Extract\+User\+Id\+From\+Token (\begin{DoxyParamCaption}\item[{string}]{token}{}\end{DoxyParamCaption})}
+
+
+
+JWT 토큰에서 사용자 ID를 추출하는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em token} & JWT 토큰\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+사용자 ID
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00140}{140}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a70f0edcf4a9d10b88e64319aa3334f22}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GenerateApiKeyToken@{GenerateApiKeyToken}}
+\index{GenerateApiKeyToken@{GenerateApiKeyToken}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GenerateApiKeyToken()}{GenerateApiKeyToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a70f0edcf4a9d10b88e64319aa3334f22} 
+string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Generate\+Api\+Key\+Token (\begin{DoxyParamCaption}\item[{string}]{issuer}{, }\item[{string}]{api\+Key\+Id}{, }\item[{string}]{service\+Name}{, }\item[{Time\+Span?}]{expiry\+Option}{ = {\ttfamily null}, }\item[{IEnumerable$<$ Claim $>$?}]{additional\+Claims}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+API 키 토큰 생성 
+
+
+\begin{DoxyParams}{매개변수}
+{\em issuer} & 발급 구분\\
+\hline
+{\em api\+Key\+Id} & API Key\\
+\hline
+{\em service\+Name} & 발급 서비스\\
+\hline
+{\em expiry\+Option} & 시간 제한\\
+\hline
+{\em additional\+Claims} & 추가 Claim 리스트\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_extensions_8cs_source}{Jwt\+Service\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_extensions_8cs_source_l00019}{19}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a52b8c8bd019ae8710818ccafcb65ed22}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GenerateJwtToken@{GenerateJwtToken}}
+\index{GenerateJwtToken@{GenerateJwtToken}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GenerateJwtToken()}{GenerateJwtToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a52b8c8bd019ae8710818ccafcb65ed22} 
+string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Generate\+Jwt\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}}}]{user}{, }\item[{string?}]{session\+Id}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+
+
+JWT 토큰 생성 
+
+
+\begin{DoxyParams}{매개변수}
+{\em user} & \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User} 정보\\
+\hline
+{\em session\+Id} & Session ID\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+string 형식의 JWT 토큰
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00062}{62}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_adf23c2901fd9cad04d9720cdb3aa8ba9}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GenerateRefreshToken@{GenerateRefreshToken}}
+\index{GenerateRefreshToken@{GenerateRefreshToken}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GenerateRefreshToken()}{GenerateRefreshToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_adf23c2901fd9cad04d9720cdb3aa8ba9} 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Generate\+Refresh\+Token (\begin{DoxyParamCaption}\item[{string}]{user\+Id}{, }\item[{string}]{ip\+Address}{, }\item[{string}]{session\+Id}{, }\item[{bool}]{remember\+Me}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Refresh Token 생성 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em ip\+Address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00164}{164}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7d41b116e20f6b8b5e7834a98e954a06}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GenerateSecureKey@{GenerateSecureKey}}
+\index{GenerateSecureKey@{GenerateSecureKey}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GenerateSecureKey()}{GenerateSecureKey()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7d41b116e20f6b8b5e7834a98e954a06} 
+string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Generate\+Secure\+Key (\begin{DoxyParamCaption}\item[{int}]{key\+Size\+In\+Bytes}{ = {\ttfamily 64}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Secure Key를 생성하는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em key\+Size\+In\+Bytes} & Secure Key의 바이트 크기\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+생성된 Secure Key
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00450}{450}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a7d41b116e20f6b8b5e7834a98e954a06_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_afebcdf2b83c9cdab80a4c8843d40fdaf}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GetJwtCollection@{GetJwtCollection}}
+\index{GetJwtCollection@{GetJwtCollection}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GetJwtCollection()}{GetJwtCollection()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_afebcdf2b83c9cdab80a4c8843d40fdaf} 
+Dictionary$<$ string, string $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Get\+Jwt\+Collection (\begin{DoxyParamCaption}\item[{IIOHelper}]{reg\+Io\+Helper}{, }\item[{ICrypto\+Manager?}]{crypto\+Manager}{ = {\ttfamily null}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+JWT 설정을 가져오기 위한 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em reg\+Io\+Helper} & JWT 파일이 저장된 IIOHelper\\
+\hline
+{\em crypto\+Manager} & 암호화가 되어있는 경우 복호화를 위한 Crypto\+Manager\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+Dictionary$<$string, string$>$ JWT 설정을 담고 있는 Dictionary
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{예외}
+{\em File\+Not\+Found\+Exception} & JWT 설정 파일이 존재하지 않는 경우\\
+\hline
+\end{DoxyExceptions}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00309}{309}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_afebcdf2b83c9cdab80a4c8843d40fdaf_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_afebcdf2b83c9cdab80a4c8843d40fdaf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9bedd1347ce12eff8bbc205006f3d50b}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GetJwtDictionary@{GetJwtDictionary}}
+\index{GetJwtDictionary@{GetJwtDictionary}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GetJwtDictionary()}{GetJwtDictionary()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9bedd1347ce12eff8bbc205006f3d50b} 
+Dictionary$<$ string, string $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Get\+Jwt\+Dictionary (\begin{DoxyParamCaption}\item[{IIOHelper}]{reg\+Io\+Helper}{, }\item[{ICrypto\+Manager?}]{crypto\+Manager}{ = {\ttfamily null}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+JWT 설정을 Dictionary로 가져오는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em reg\+Io\+Helper} & JWT 파일이 저장된 IIOHelper\\
+\hline
+{\em crypto\+Manager} & 암호화가 되어있는 경우 복호화를 위한 Crypto\+Manager\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+Dictionary$<$string, string$>$ JWT 설정을 담고 있는 Dictionary
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00362}{362}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9bedd1347ce12eff8bbc205006f3d50b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a4a6b89d75fd69b1612ba8d0c3939f7bd}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GetSetJwtCollection@{GetSetJwtCollection}}
+\index{GetSetJwtCollection@{GetSetJwtCollection}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GetSetJwtCollection()}{GetSetJwtCollection()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a4a6b89d75fd69b1612ba8d0c3939f7bd} 
+Dictionary$<$ string, string $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Get\+Set\+Jwt\+Collection (\begin{DoxyParamCaption}\item[{IIOHelper}]{reg\+Io\+Helper}{, }\item[{string}]{secret\+Key}{, }\item[{ICrypto\+Manager?}]{crypto\+Manager}{ = {\ttfamily null}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+JWT 설정을 가져오기 위한 메서드 (설정이 없는 경우 생성) 
+
+
+\begin{DoxyParams}{매개변수}
+{\em reg\+Io\+Helper} & JWT 파일이 저장된 IIOHelper\\
+\hline
+{\em crypto\+Manager} & 암호화가 되어있는 경우 복호화를 위한 Crypto\+Manager\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+Dictionary$<$string, string$>$ JWT 설정을 담고 있는 Dictionary
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00343}{343}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a4a6b89d75fd69b1612ba8d0c3939f7bd_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9ac92c4e87ec80204d647c4368ea2226}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!JwtConfigSetup@{JwtConfigSetup}}
+\index{JwtConfigSetup@{JwtConfigSetup}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{JwtConfigSetup()}{JwtConfigSetup()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9ac92c4e87ec80204d647c4368ea2226} 
+void SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Jwt\+Config\+Setup (\begin{DoxyParamCaption}\item[{IIOHelper}]{reg\+Io\+Helper}{, }\item[{ICrypto\+Manager}]{crypto\+Manager}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+JWT 설정을 초기화하는 메서드 
+
+
+\begin{DoxyParams}{매개변수}
+{\em reg\+Io\+Helper} & \\
+\hline
+{\em crypto\+Manager} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{예외}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00264}{264}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9ac92c4e87ec80204d647c4368ea2226_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a9ac92c4e87ec80204d647c4368ea2226_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a438407d9347b06bcfc459b48ae403ef2}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!LoadJwtSettings@{LoadJwtSettings}}
+\index{LoadJwtSettings@{LoadJwtSettings}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{LoadJwtSettings()}{LoadJwtSettings()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a438407d9347b06bcfc459b48ae403ef2} 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_settings}{Jwt\+Settings}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Load\+Jwt\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+JWT 설정을 로드 
+
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00393}{393}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a438407d9347b06bcfc459b48ae403ef2_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a438407d9347b06bcfc459b48ae403ef2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a1483e5ce7615ba9f4a3d937c85e9cfd1}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!SetJwtCollection@{SetJwtCollection}}
+\index{SetJwtCollection@{SetJwtCollection}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{SetJwtCollection()}{SetJwtCollection()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a1483e5ce7615ba9f4a3d937c85e9cfd1} 
+void SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Set\+Jwt\+Collection (\begin{DoxyParamCaption}\item[{Dictionary$<$ string, string $>$}]{collection}{, }\item[{string}]{secret\+Key}{, }\item[{ICrypto\+Manager?}]{crypto\+Manager}{ = {\ttfamily null}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+JWT 설정을 위한 Dictionary 생성 
+
+
+\begin{DoxyParams}{매개변수}
+{\em collection} & JWT 설정을 담기 위한 Dictionary\\
+\hline
+{\em secret\+Key} & JWT 비밀키\\
+\hline
+{\em crypto\+Manager} & 암호화를 하는 경우 사용할 Crypto\+Manager\\
+\hline
+\end{DoxyParams}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00234}{234}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a1483e5ce7615ba9f4a3d937c85e9cfd1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a71f62064d1b7f6f1bfb08b629944d1b7}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!TryGetJwtCollection@{TryGetJwtCollection}}
+\index{TryGetJwtCollection@{TryGetJwtCollection}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{TryGetJwtCollection()}{TryGetJwtCollection()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a71f62064d1b7f6f1bfb08b629944d1b7} 
+Dictionary$<$ string, string $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Try\+Get\+Jwt\+Collection (\begin{DoxyParamCaption}\item[{IIOHelper}]{reg\+Io\+Helper}{, }\item[{ICrypto\+Manager?}]{crypto\+Manager}{ = {\ttfamily null}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+JWT 설정을 가져오기 위한 메서드 (예외 처리 없이 시도) 
+
+
+\begin{DoxyParams}{매개변수}
+{\em reg\+Io\+Helper} & JWT 파일이 저장된 IIOHelper\\
+\hline
+{\em crypto\+Manager} & 암호화가 되어있는 경우 복호화를 위한 Crypto\+Manager\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+Dictionary$<$string, string$>$ JWT 설정을 담고 있는 Dictionary
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00326}{326}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a71f62064d1b7f6f1bfb08b629944d1b7_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a71f62064d1b7f6f1bfb08b629944d1b7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a2a5b6d3d77c39208919f94f9daa0048e}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!ValidateApiKeyToken@{ValidateApiKeyToken}}
+\index{ValidateApiKeyToken@{ValidateApiKeyToken}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{ValidateApiKeyToken()}{ValidateApiKeyToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a2a5b6d3d77c39208919f94f9daa0048e} 
+bool SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Validate\+Api\+Key\+Token (\begin{DoxyParamCaption}\item[{string}]{token}{, }\item[{string}]{issuer}{, }\item[{out Claims\+Principal}]{principal}{}\end{DoxyParamCaption})}
+
+
+
+API 키 토큰 검증 
+
+
+\begin{DoxyParams}{매개변수}
+{\em token} & API 키 토큰\\
+\hline
+{\em issuer} & 발급 구분\\
+\hline
+{\em principal} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_extensions_8cs_source}{Jwt\+Service\+Extensions.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_extensions_8cs_source_l00061}{61}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a6e806598ce71b4e70821f49dea6fd4e0}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!ValidateToken@{ValidateToken}}
+\index{ValidateToken@{ValidateToken}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{ValidateToken()}{ValidateToken()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a6e806598ce71b4e70821f49dea6fd4e0} 
+bool SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Validate\+Token (\begin{DoxyParamCaption}\item[{string}]{token}{, }\item[{out Claims\+Principal}]{principal}{}\end{DoxyParamCaption})}
+
+
+
+토큰 유효성 검증 
+
+
+\begin{DoxyParams}{매개변수}
+{\em token} & \\
+\hline
+{\em principal} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00194}{194}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_doc-variable-members}
+\doxysubsection{멤버 데이터 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acbc7488952fe2d588c2f124c3b1d8143}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!\_cryptKeys@{\_cryptKeys}}
+\index{\_cryptKeys@{\_cryptKeys}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{\_cryptKeys}{\_cryptKeys}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acbc7488952fe2d588c2f124c3b1d8143} 
+readonly string \mbox{[}$\,$\mbox{]} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+\_\+crypt\+Keys\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries 초기값\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \textcolor{keyword}{new}[]}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ StringClass.Secret,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ StringClass.Issuer,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ StringClass.Audience,}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00019}{19}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a457b79708218ca89256575e1bb3d0d60}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!\_cryptoManager@{\_cryptoManager}}
+\index{\_cryptoManager@{\_cryptoManager}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{\_cryptoManager}{\_cryptoManager}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a457b79708218ca89256575e1bb3d0d60} 
+readonly ICrypto\+Manager SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+\_\+crypto\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00029}{29}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acd765640b3dd154f20b8f53b8faeba36}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!\_jwtSettings@{\_jwtSettings}}
+\index{\_jwtSettings@{\_jwtSettings}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{\_jwtSettings}{\_jwtSettings}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acd765640b3dd154f20b8f53b8faeba36} 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_settings}{Jwt\+Settings}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+\_\+jwt\+Settings\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00016}{16}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_aac5c2af338d23cc8729f68d759a24b09}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!\_registryHelper@{\_registryHelper}}
+\index{\_registryHelper@{\_registryHelper}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{\_registryHelper}{\_registryHelper}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_aac5c2af338d23cc8729f68d759a24b09} 
+readonly IIOHelper SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+\_\+registry\+Helper\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00028}{28}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-property-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_doc-property-members}
+\doxysubsection{속성 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a4c84c97b3237b894fda4ec93991a5cea}\index{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}!GetSettings@{GetSettings}}
+\index{GetSettings@{GetSettings}!SECUiDEA\_ERP\_Server.Models.Authentication.JwtService@{SECUiDEA\_ERP\_Server.Models.Authentication.JwtService}}
+\doxysubsubsection{\texorpdfstring{GetSettings}{GetSettings}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a4c84c97b3237b894fda4ec93991a5cea} 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_settings}{Jwt\+Settings}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Jwt\+Service.\+Get\+Settings\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+\mbox{\hyperlink{_jwt_service_8cs_source}{Jwt\+Service.\+cs}} 파일의 \mbox{\hyperlink{_jwt_service_8cs_source_l00015}{15}} 번째 라인에서 정의되었습니다.
+
+
+
+이 클래스에 대한 문서화 페이지는 다음의 파일들로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Models/\+Authentication/\mbox{\hyperlink{_jwt_service_8cs}{Jwt\+Service.\+cs}}\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Models/\+Authentication/\mbox{\hyperlink{_jwt_service_extensions_8cs}{Jwt\+Service\+Extensions.\+cs}}\end{DoxyCompactItemize}

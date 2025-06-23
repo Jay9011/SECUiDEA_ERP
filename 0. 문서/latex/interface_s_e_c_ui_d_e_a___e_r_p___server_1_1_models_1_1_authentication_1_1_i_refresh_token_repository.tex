@@ -1,0 +1,140 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+IRefresh\+Token\+Repository 인터페이스 참조}
+\hypertarget{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository}{}\label{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository}\index{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+IRefresh\+Token\+Repository에 대한 상속 다이어그램 \+: 
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository__inherit__graph}
+\end{center}
+\end{figure}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+IRefresh\+Token\+Repository에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} $>$ \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a634e07cc0ee2495d19b35c9433fbca35}{Get\+By\+Token\+Async}} (string token)
+\begin{DoxyCompactList}\small\item\em 토큰으로 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 조회 \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a55070e366f3713c2fe31da3aaad13664}{Save\+Token\+Async}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} token)
+\begin{DoxyCompactList}\small\item\em 새로운 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 저장 \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a6561b5566c710a6d9ffd2639130f4d89}{Update\+Token\+Async}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} token)
+\begin{DoxyCompactList}\small\item\em 기존 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 업데이트 (토큰 취소, 토큰 교체, 로그아웃 등) \end{DoxyCompactList}\item 
+Task$<$ List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} $>$ $>$ \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a15f33e8ba8e2787e8a5172536a4e8be3}{Get\+Active\+Tokens\+By\+User\+Id\+Async}} (string provider, string user\+Id)
+\begin{DoxyCompactList}\small\item\em 사용자의 모든 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 조회 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+\mbox{\hyperlink{_i_refresh_token_repository_8cs_source}{IRefresh\+Token\+Repository.\+cs}} 파일의 \mbox{\hyperlink{_i_refresh_token_repository_8cs_source_l00003}{3}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-func-members}
+\Hypertarget{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a15f33e8ba8e2787e8a5172536a4e8be3}\index{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}!GetActiveTokensByUserIdAsync@{GetActiveTokensByUserIdAsync}}
+\index{GetActiveTokensByUserIdAsync@{GetActiveTokensByUserIdAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}}
+\doxysubsubsection{\texorpdfstring{GetActiveTokensByUserIdAsync()}{GetActiveTokensByUserIdAsync()}}
+{\footnotesize\ttfamily \label{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a15f33e8ba8e2787e8a5172536a4e8be3} 
+Task$<$ List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} $>$ $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+IRefresh\+Token\+Repository.\+Get\+Active\+Tokens\+By\+User\+Id\+Async (\begin{DoxyParamCaption}\item[{string}]{provider}{, }\item[{string}]{user\+Id}{}\end{DoxyParamCaption})}
+
+
+
+사용자의 모든 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 조회 
+
+
+\begin{DoxyParams}{매개변수}
+{\em provider} & \\
+\hline
+{\em user\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token_repository_a61e564b32f7177009760399a82966f3b}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Refresh\+Token\+Repository}}에서 구현되었습니다.
+
+\Hypertarget{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a634e07cc0ee2495d19b35c9433fbca35}\index{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}!GetByTokenAsync@{GetByTokenAsync}}
+\index{GetByTokenAsync@{GetByTokenAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}}
+\doxysubsubsection{\texorpdfstring{GetByTokenAsync()}{GetByTokenAsync()}}
+{\footnotesize\ttfamily \label{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a634e07cc0ee2495d19b35c9433fbca35} 
+Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+IRefresh\+Token\+Repository.\+Get\+By\+Token\+Async (\begin{DoxyParamCaption}\item[{string}]{token}{}\end{DoxyParamCaption})}
+
+
+
+토큰으로 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 조회 
+
+
+\begin{DoxyParams}{매개변수}
+{\em token} & \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token_repository_afbe39ef617cd35e823f9935089063c34}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Refresh\+Token\+Repository}}에서 구현되었습니다.
+
+\Hypertarget{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a55070e366f3713c2fe31da3aaad13664}\index{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}!SaveTokenAsync@{SaveTokenAsync}}
+\index{SaveTokenAsync@{SaveTokenAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}}
+\doxysubsubsection{\texorpdfstring{SaveTokenAsync()}{SaveTokenAsync()}}
+{\footnotesize\ttfamily \label{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a55070e366f3713c2fe31da3aaad13664} 
+Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+IRefresh\+Token\+Repository.\+Save\+Token\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}}}]{token}{}\end{DoxyParamCaption})}
+
+
+
+새로운 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 저장 
+
+
+\begin{DoxyParams}{매개변수}
+{\em token} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token_repository_a8a9203f398c03e2769ccf94409d0c1e5}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Refresh\+Token\+Repository}}에서 구현되었습니다.
+
+\Hypertarget{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a6561b5566c710a6d9ffd2639130f4d89}\index{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}!UpdateTokenAsync@{UpdateTokenAsync}}
+\index{UpdateTokenAsync@{UpdateTokenAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository@{SECUiDEA\_ERP\_Server.Models.Authentication.IRefreshTokenRepository}}
+\doxysubsubsection{\texorpdfstring{UpdateTokenAsync()}{UpdateTokenAsync()}}
+{\footnotesize\ttfamily \label{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_i_refresh_token_repository_a6561b5566c710a6d9ffd2639130f4d89} 
+Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+IRefresh\+Token\+Repository.\+Update\+Token\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token}}}]{token}{}\end{DoxyParamCaption})}
+
+
+
+기존 \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token}{Refresh\+Token} 업데이트 (토큰 취소, 토큰 교체, 로그아웃 등) 
+
+
+\begin{DoxyParams}{매개변수}
+{\em token} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_refresh_token_repository_a639b80e6082da90aea29960fa476021c}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Refresh\+Token\+Repository}}에서 구현되었습니다.
+
+
+
+이 인터페이스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Models/\+Authentication/\mbox{\hyperlink{_i_refresh_token_repository_8cs}{IRefresh\+Token\+Repository.\+cs}}\end{DoxyCompactItemize}

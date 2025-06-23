@@ -1,0 +1,18 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.JwtService.GetJwtDictionary" name="SECUiDEA_ERP_Server.Models.Authentication.JwtService.GetJwtDictionary">
+<area shape="rect" id="Node000001" title="JWT 설정을 Dictionary로 가져오는 메서드" alt="" coords="895,88,1116,147"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#afebcdf2b83c9cdab80a4c8843d40fdaf" title="JWT 설정을 가져오기 위한 메서드" alt="" coords="627,5,847,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="893,86,834,67,836,62,895,80"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#a4a6b89d75fd69b1612ba8d0c3939f7bd" title="JWT 설정을 가져오기 위한 메서드 (설정이 없는 경우 생성)" alt="" coords="627,88,847,147"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="880,120,848,120,848,115,880,115"/>
+<area shape="rect" id="Node000007" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#a71f62064d1b7f6f1bfb08b629944d1b7" title="JWT 설정을 가져오기 위한 메서드 (예외 처리 없이 시도)" alt="" coords="627,171,847,229"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="895,154,836,173,834,167,893,149"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#a438407d9347b06bcfc459b48ae403ef2" title="JWT 설정을 로드" alt="" coords="331,5,557,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="611,37,557,37,557,32,611,32"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program.html#ad4b68fc74b4f25647b8d739a053041af" title=" " alt="" coords="5,127,261,153"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="614,71,580,79,412,108,259,129,258,123,411,102,578,73,613,66"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#a7abd5fb0cbb822474610746018e8bda3" title="JWT 서비스 생성자 Singleton으로 등록된다고 가성하고, 최초 호출시 Registry에서 값을 읽어옴" alt="" coords="12,13,254,56"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="315,37,255,37,255,32,315,32"/>
+<area shape="rect" id="Node000008" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#a9ac92c4e87ec80204d647c4368ea2226" title="JWT 설정을 초기화하는 메서드" alt="" coords="309,168,579,211"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="611,198,579,197,580,192,611,193"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="293,168,221,157,222,151,294,163"/>
+</map>

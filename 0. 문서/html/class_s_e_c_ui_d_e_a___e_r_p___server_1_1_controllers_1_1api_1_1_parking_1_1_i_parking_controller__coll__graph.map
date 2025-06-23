@@ -1,0 +1,11 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Parking.IParkingController" name="SECUiDEA_ERP_Server.Controllers.api.Parking.IParkingController">
+<area shape="rect" id="Node000001" title=" " alt="" coords="127,447,378,916"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html" title=" " alt="" coords="5,204,236,375"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,388,176,446,171,448,151,389"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="87,45,154,115"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,130,123,204,118,204,118,130"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service.html" title=" " alt="" coords="260,204,512,375"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="360,375,341,432,336,430,355,373"/>
+<area shape="rect" id="Node000005" href="$interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_a_p_i_services_1_1_i_a_p_i_setup_service.html" title=" " alt="" coords="281,5,491,155"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="389,169,389,204,383,204,383,169"/>
+</map>

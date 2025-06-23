@@ -1,0 +1,218 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service 클래스 참조}
+\hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service}{}\label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service}\index{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service에 대한 상속 다이어그램 \+: 
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service__inherit__graph}
+\end{center}
+\end{figure}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4aa2facfa99c0cd060fb0c14c2f93e1b}{DBSetup\+Service}} (IDatabase\+Setup\+Container db\+Setup\+Container)
+\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{Bool\+Result\+Model}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc}{Save\+Single\+Setup\+Async}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}} setting)
+\begin{DoxyCompactList}\small\item\em 단일 DB 설정을 저장 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{Bool\+Result\+Model}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4e44984b257862b11264ff57bfcf528e}{Save\+Multi\+Setup\+Async}} (List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}} $>$ settings)
+\begin{DoxyCompactList}\small\item\em 다중 DB 설정을 저장 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{Bool\+Result\+Model}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a35e8e534f74e2cb0489a9d66b25195db}{Test\+Connection\+Async}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}} setting)
+\begin{DoxyCompactList}\small\item\em 연결 테스트 \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a97ae8d1f3777b1353724a9d03046d325}{Get\+All\+Setups}} ()
+\begin{DoxyCompactList}\small\item\em 모든 DB 설정을 가져옴 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly IDatabase\+Setup\+Container \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}{\+\_\+db\+Setup\+Container}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+\mbox{\hyperlink{_d_b_setup_service_8cs_source}{DBSetup\+Service.\+cs}} 파일의 \mbox{\hyperlink{_d_b_setup_service_8cs_source_l00008}{8}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_doc-constructors}
+\doxysubsection{생성자 \& 소멸자 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4aa2facfa99c0cd060fb0c14c2f93e1b}\index{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}!DBSetupService@{DBSetupService}}
+\index{DBSetupService@{DBSetupService}!SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}}
+\doxysubsubsection{\texorpdfstring{DBSetupService()}{DBSetupService()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4aa2facfa99c0cd060fb0c14c2f93e1b} 
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service.\+DBSetup\+Service (\begin{DoxyParamCaption}\item[{IDatabase\+Setup\+Container}]{db\+Setup\+Container}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_d_b_setup_service_8cs_source}{DBSetup\+Service.\+cs}} 파일의 \mbox{\hyperlink{_d_b_setup_service_8cs_source_l00014}{14}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a97ae8d1f3777b1353724a9d03046d325}\index{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}!GetAllSetups@{GetAllSetups}}
+\index{GetAllSetups@{GetAllSetups}!SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}}
+\doxysubsubsection{\texorpdfstring{GetAllSetups()}{GetAllSetups()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a97ae8d1f3777b1353724a9d03046d325} 
+List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service.\+Get\+All\+Setups (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+모든 DB 설정을 가져옴 
+
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service_af4decc9dcb061ab7c54899b26e5fc3eb}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+IDBSetup\+Service}}를 구현.
+
+
+
+\mbox{\hyperlink{_d_b_setup_service_8cs_source}{DBSetup\+Service.\+cs}} 파일의 \mbox{\hyperlink{_d_b_setup_service_8cs_source_l00101}{101}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4e44984b257862b11264ff57bfcf528e}\index{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}!SaveMultiSetupAsync@{SaveMultiSetupAsync}}
+\index{SaveMultiSetupAsync@{SaveMultiSetupAsync}!SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}}
+\doxysubsubsection{\texorpdfstring{SaveMultiSetupAsync()}{SaveMultiSetupAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4e44984b257862b11264ff57bfcf528e} 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{Bool\+Result\+Model}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service.\+Save\+Multi\+Setup\+Async (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}} $>$}]{settings}{}\end{DoxyParamCaption})}
+
+
+
+다중 DB 설정을 저장 
+
+
+\begin{DoxyParams}{매개변수}
+{\em settings} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service_a83943f985de0be7e9bdd1a386a8a2bbf}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+IDBSetup\+Service}}를 구현.
+
+
+
+\mbox{\hyperlink{_d_b_setup_service_8cs_source}{DBSetup\+Service.\+cs}} 파일의 \mbox{\hyperlink{_d_b_setup_service_8cs_source_l00049}{49}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4e44984b257862b11264ff57bfcf528e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc}\index{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}!SaveSingleSetupAsync@{SaveSingleSetupAsync}}
+\index{SaveSingleSetupAsync@{SaveSingleSetupAsync}!SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}}
+\doxysubsubsection{\texorpdfstring{SaveSingleSetupAsync()}{SaveSingleSetupAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc} 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{Bool\+Result\+Model}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service.\+Save\+Single\+Setup\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}}}]{setting}{}\end{DoxyParamCaption})}
+
+
+
+단일 DB 설정을 저장 
+
+
+\begin{DoxyParams}{매개변수}
+{\em setting} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service_a66a463542801ca14eb4909eda6ac1714}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+IDBSetup\+Service}}를 구현.
+
+
+
+\mbox{\hyperlink{_d_b_setup_service_8cs_source}{DBSetup\+Service.\+cs}} 파일의 \mbox{\hyperlink{_d_b_setup_service_8cs_source_l00021}{21}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a35e8e534f74e2cb0489a9d66b25195db}\index{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}!TestConnectionAsync@{TestConnectionAsync}}
+\index{TestConnectionAsync@{TestConnectionAsync}!SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}}
+\doxysubsubsection{\texorpdfstring{TestConnectionAsync()}{TestConnectionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a35e8e534f74e2cb0489a9d66b25195db} 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{Bool\+Result\+Model}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service.\+Test\+Connection\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetup\+View\+Model}}}]{setting}{}\end{DoxyParamCaption})}
+
+
+
+연결 테스트 
+
+
+\begin{DoxyParams}{매개변수}
+{\em setting} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service_a3e3986bc5503ffdc7753af2aa080483c}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+IDBSetup\+Service}}를 구현.
+
+
+
+\mbox{\hyperlink{_d_b_setup_service_8cs_source}{DBSetup\+Service.\+cs}} 파일의 \mbox{\hyperlink{_d_b_setup_service_8cs_source_l00074}{74}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a35e8e534f74e2cb0489a9d66b25195db_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_doc-variable-members}
+\doxysubsection{멤버 데이터 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}\index{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}!\_dbSetupContainer@{\_dbSetupContainer}}
+\index{\_dbSetupContainer@{\_dbSetupContainer}!SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService@{SECUiDEA\_ERP\_Server.Models.DBServices.DBSetupService}}
+\doxysubsubsection{\texorpdfstring{\_dbSetupContainer}{\_dbSetupContainer}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0} 
+readonly IDatabase\+Setup\+Container SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+DBServices.\+DBSetup\+Service.\+\_\+db\+Setup\+Container\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_d_b_setup_service_8cs_source}{DBSetup\+Service.\+cs}} 파일의 \mbox{\hyperlink{_d_b_setup_service_8cs_source_l00012}{12}} 번째 라인에서 정의되었습니다.
+
+
+
+이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Models/\+DBServices/\mbox{\hyperlink{_d_b_setup_service_8cs}{DBSetup\+Service.\+cs}}\end{DoxyCompactItemize}

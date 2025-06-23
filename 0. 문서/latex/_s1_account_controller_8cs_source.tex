@@ -1,0 +1,219 @@
+\doxysection{S1\+Account\+Controller.\+cs}
+\hypertarget{_s1_account_controller_8cs_source}{}\label{_s1_account_controller_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/api/Account/S1AccountController.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/api/Account/S1AccountController.cs}}
+\mbox{\hyperlink{_s1_account_controller_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Security.Claims;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }CoreDAL.Configuration.Interface;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }CryptoManager;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Authorization;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Mvc;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers}{SECUiDEA\_ERP\_Server.Controllers.BaseControllers}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions}{SECUiDEA\_ERP\_Server.Controllers.Extensions}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user}{SECUiDEA\_ERP\_Server.Models.AuthUser}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models}{SECUiDEA\_ERP\_Server.Models.CommonModels}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models}{SECUiDEA\_ERP\_Server.Models.ResultModels}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account}{SECUiDEA\_ERP\_Server.Controllers.api.Account}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00014}00014\ [Route(\textcolor{stringliteral}{"{}api/[controller]/[action]"{}})]}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00015}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller}{00015}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_af55895641e75c612b4673295a1bbe32f}{S1AccountController}}\ :\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller}{BaseController}}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00017}00017\ \textcolor{preprocessor}{\ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00019}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_ad0475ebfc5d13fc276176d92662b4b8b}{00019}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_ad0475ebfc5d13fc276176d92662b4b8b}{\_dbSetupContainer}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00020}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{00020}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetup\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00021}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a79e0734b3998536c2fa9f8b22edc4779}{00021}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ ICryptoManager\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a79e0734b3998536c2fa9f8b22edc4779}{\_s1Sha512}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00022}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a522e310a81b5274d4a734dd089a8326b}{00022}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{UserRepositoryFactory}}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a522e310a81b5274d4a734dd089a8326b}{\_userRepositoryFactory}};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00024}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_af55895641e75c612b4673295a1bbe32f}{00024}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_af55895641e75c612b4673295a1bbe32f}{S1AccountController}}(IDatabaseSetupContainer\ dbSetupContainer,}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ [FromKeyedServices(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a6a8521f683be3d4aae1b6fe560cf6360}{CryptoS1Sha512}})]\ ICryptoManager\ s1Sha512,\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{UserRepositoryFactory}}\ userRepositoryFactory)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00027}00027\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_ad0475ebfc5d13fc276176d92662b4b8b}{\_dbSetupContainer}}\ =\ dbSetupContainer;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a79e0734b3998536c2fa9f8b22edc4779}{\_s1Sha512}}\ =\ s1Sha512;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a522e310a81b5274d4a734dd089a8326b}{\_userRepositoryFactory}}\ =\ userRepositoryFactory;}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}}\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_ad0475ebfc5d13fc276176d92662b4b8b}{\_dbSetupContainer}}.GetSetup(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a39362d74ac5f896ee0439388d5e02762}{S1Access}});}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00035}00035\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00036}00036\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00037}00037\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00038}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a001ac6af597c043a785104df1ddf70bc}{00038}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a001ac6af597c043a785104df1ddf70bc}{FindUserByIdAndMobile}}([FromBody]\ \mbox{\hyperlink{class_account_mobile_model}{AccountMobileModel}}\ model)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00039}00039\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}}.DAL.ExecuteProcedureAsync(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}},\ \textcolor{stringliteral}{"{}SECUiDEA\_AccountFindSEL"{}},\ model);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ result.ReturnValue\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 성공한\ 경우\ Message와\ AuthType을\ 반환}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ data\ =\ result.DataSet.Tables[0].Rows[0];}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ message\ =\ data[\textcolor{stringliteral}{"{}Message"{}}].ToString();}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ authType\ =\ data[\textcolor{stringliteral}{"{}AuthType"{}}].ToString();}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(message,\ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}AuthType"{}},\ authType\ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (result.IsSuccess}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ result.ReturnValue\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 실패한\ 경우\ Message를\ 반환}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ data\ =\ result.DataSet.Tables[0].Rows[0];}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ message\ =\ data[\textcolor{stringliteral}{"{}Message"{}}].ToString();}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(message));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}failedToFindUser"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00073}00073\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00074}00074\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00075}00075\ \ \ \ \ [ApiKeyAuth(issuer:\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_ade1766d8a264beb441d5e9b54d66493d}{Issuer\_Account}})]}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00076}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a0bc7e6bdf9e20dc85b239375e2fe8f0f}{00076}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a0bc7e6bdf9e20dc85b239375e2fe8f0f}{SetPassword}}([FromBody]\ \mbox{\hyperlink{class_s1_account_model}{S1AccountModel}}\ model)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#region\ 인증\ 검사}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ Key\ 인증}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ var\ apiKeyId\ =\ HttpContext.GetApiKeyId();}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ var\ serviceName\ =\ HttpContext.GetApiServiceName();}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ 토큰\ 생성\ Issuer가\ StringClass.Issuer\_Account이고\ Authentication이\ StringClass.SECUIDEA인\ 경우에만\ 성공}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(apiKeyId)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(serviceName))}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ 생산\ 액션이\ CheckPasswordCertification\ 만\ 허용}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (serviceName\ !=\ nameof(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller}{AccountController}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_aa7a0fc6c4dfa32990b41125633f2cd8e}{CheckPasswordCertification}}))}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ 인증\ CertID가\ model에서\ 가져온\ ID와\ 일치하는지\ 확인}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ var\ certId\ =\ HttpContext.GetApiClaim(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a98d860b596d4d0f3b87bb2fa15f16c4b}{CertID}});}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (model.ID\ !=\ certId)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00106}00106\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 비밀번호\ 변경\ 파라미터\ 설정}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s1_account_pass_reg_param}{S1AccountPassRegParam}}\ param\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_s1_account_pass_reg_param}{S1AccountPassRegParam}}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Type\ =\ \textcolor{stringliteral}{"{}change"{}},}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Role\ =\ model.Role,}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ID\ =\ model.ID,}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Password\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a79e0734b3998536c2fa9f8b22edc4779}{\_s1Sha512}}.Encrypt(model.Password),}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UpdateIP\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_a2fa737bcaa639cd6c458c184a1c6918e}{GetClientIpAddress}}()}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 비밀번호\ 설정}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}}.DAL.ExecuteProcedureAsync(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}},\ \textcolor{stringliteral}{"{}SECUiDEA\_PasswordREG"{}},\ param);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ result.ReturnValue\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}passwordChangedSuccessfully"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00125}00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}failedToSetPassword"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00132}00132\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00133}00133\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00134}00134\ \ \ \ \ [Authorize]}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00135}00135\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00136}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_acfacd0e0f22a058251d52163976e8159}{00136}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_acfacd0e0f22a058251d52163976e8159}{UpdatePassword}}([FromBody]\ \mbox{\hyperlink{class_s1_update_password_model}{S1UpdatePasswordModel}}\ model)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00137}00137\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00140}00140\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#region\ 인증\ 인가}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 로그인\ 사용자\ ID\ 가져오기}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ var\ userId\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}}.FindFirstValue(ClaimTypes.NameIdentifier);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 로그인\ 사용자\ Role\ 가져오기}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ var\ userRoleClaimValue\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}}.FindFirstValue(ClaimTypes.Role);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 두\ 정보\ 중\ 하나라도\ 없으면\ 인증\ 실패}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(userId)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(userRoleClaimValue))}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidUserAuthentication"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00155}00155\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 들어온\ 비밀번호\ 암호화}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ var\ shaEncryptPassword\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a79e0734b3998536c2fa9f8b22edc4779}{\_s1Sha512}}.Encrypt(model.Password);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 현재\ 비밀번호\ 암호화}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ var\ currentPasswordHash\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a79e0734b3998536c2fa9f8b22edc4779}{\_s1Sha512}}.Encrypt(model.CurrentPassword);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00162}00162\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#region\ 현재\ 비밀번호\ 검증}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 현재\ 비밀번호가\ 제공되지\ 않은\ 경우}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(model.CurrentPassword))}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}currentPasswordRequired"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 사용자\ 정보\ 가져오기}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ var\ repository\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a522e310a81b5274d4a734dd089a8326b}{\_userRepositoryFactory}}.GetRepository(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a39362d74ac5f896ee0439388d5e02762}{S1Access}});}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}}\ user\ =\ await\ repository.GetUserModelByIdAsync(userId);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 사용자\ 정보가\ 없는\ 경우}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (user\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Unauthorized(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}userNotFound"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 현재\ 비밀번호\ 검증}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (user.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_ac9961b020025c2cffc631fb9e9885136}{Password}}\ !=\ currentPasswordHash)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}currentPasswordIncorrect"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00186}00186\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 비밀번호\ 변경\ 파라미터\ 설정}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s1_account_pass_reg_param}{S1AccountPassRegParam}}\ param\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_s1_account_pass_reg_param}{S1AccountPassRegParam}}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Type\ =\ \textcolor{stringliteral}{"{}change"{}},}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Role\ =\ userRoleClaimValue,}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ID\ =\ userId,}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Password\ =\ shaEncryptPassword,}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UpdateIP\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_a2fa737bcaa639cd6c458c184a1c6918e}{GetClientIpAddress}}()}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 비밀번호\ 설정}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}}.DAL.ExecuteProcedureAsync(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller_a5f84518ac12c848d04b0ad1055d64980}{\_s1Setup}},\ \textcolor{stringliteral}{"{}SECUiDEA\_PasswordREG"{}},\ param);}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ result.ReturnValue\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}passwordUpdateSuccess"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}passwordUpdateFailed"{}}));}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00212}00212\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_s1_account_controller_8cs_source_l00213}00213\ \}}
+
+\end{DoxyCode}

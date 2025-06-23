@@ -1,0 +1,81 @@
+\doxysection{Jwt\+Service\+Extensions.\+cs}
+\hypertarget{_jwt_service_extensions_8cs_source}{}\label{_jwt_service_extensions_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Models/Authentication/JwtServiceExtensions.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Models/Authentication/JwtServiceExtensions.cs}}
+\mbox{\hyperlink{_jwt_service_extensions_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.IdentityModel.Tokens.Jwt;}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }System.Security.Claims;}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }Microsoft.IdentityModel.Tokens;}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models}{SECUiDEA\_ERP\_Server.Models.CommonModels}};}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication}{SECUiDEA\_ERP\_Server.Models.Authentication}}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00008}00008\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{partial\ class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{JwtService}}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00009}00009\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00019}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a70f0edcf4a9d10b88e64319aa3334f22}{00019}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a70f0edcf4a9d10b88e64319aa3334f22}{GenerateApiKeyToken}}(\textcolor{keywordtype}{string}\ issuer,\ \textcolor{keywordtype}{string}\ apiKeyId,\ \textcolor{keywordtype}{string}\ serviceName,\ TimeSpan?\ expiryOption\ =\ \textcolor{keyword}{null},\ IEnumerable<Claim>?\ additionalClaims\ =\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00020}00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ var\ tokenHandler\ =\ \textcolor{keyword}{new}\ JwtSecurityTokenHandler();}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ var\ key\ =\ Convert.FromBase64String(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acd765640b3dd154f20b8f53b8faeba36}{\_jwtSettings}}.Secret);}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ var\ claims\ =\ \textcolor{keyword}{new}\ List<Claim>}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Claim(ClaimTypes.Authentication,\ apiKeyId),}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Claim(ClaimTypes.AuthenticationMethod,\ serviceName)}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 추가\ Claim이\ 있는\ 경우\ 포함}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (additionalClaims\ !=\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ claims.AddRange(additionalClaims);}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ TimeSpan\ expiry\ =\ expiryOption\ ??\ TimeSpan.FromMinutes(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_aac6288e17709080f803d211ffc6697ca}{DefaultApiExpiryMinutes}});}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ var\ tokenDescriptor\ =\ \textcolor{keyword}{new}\ SecurityTokenDescriptor}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Subject\ =\ \textcolor{keyword}{new}\ ClaimsIdentity(claims),}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Issuer\ =\ issuer,}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Audience\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_ace1446a3c58acbb2148a65790834f9f8}{SECUiDEA\_Audience}},}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Expires\ =\ DateTime.Now.Add(expiry),}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SigningCredentials\ =\ \textcolor{keyword}{new}\ SigningCredentials(}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ SymmetricSecurityKey(key),\ \textcolor{comment}{//\ 토큰\ 서명\ 대칭키}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SecurityAlgorithms.HmacSha256Signature\ \textcolor{comment}{//\ 토큰\ 서명\ 해시\ 알고리즘}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ var\ token\ =\ tokenHandler.CreateToken(tokenDescriptor);}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tokenHandler.WriteToken(token);}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00061}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a2a5b6d3d77c39208919f94f9daa0048e}{00061}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_a2a5b6d3d77c39208919f94f9daa0048e}{ValidateApiKeyToken}}(\textcolor{keywordtype}{string}\ token,\ \textcolor{keywordtype}{string}\ issuer,\ out\ ClaimsPrincipal\ principal)}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ principal\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ tokenHandler\ =\ \textcolor{keyword}{new}\ JwtSecurityTokenHandler();}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ key\ =\ Convert.FromBase64String(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_acd765640b3dd154f20b8f53b8faeba36}{\_jwtSettings}}.Secret);}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ validationParameters\ =\ \textcolor{keyword}{new}\ TokenValidationParameters}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateIssuer\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateAudience\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateLifetime\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidateIssuerSigningKey\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidIssuer\ =\ issuer,}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValidAudience\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_ace1446a3c58acbb2148a65790834f9f8}{SECUiDEA\_Audience}},}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ IssuerSigningKey\ =\ \textcolor{keyword}{new}\ SymmetricSecurityKey(key),}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ClockSkew\ =\ TimeSpan.Zero}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ principal\ =\ tokenHandler.ValidateToken(token,\ validationParameters,\ out\ SecurityToken\ validatedToken);}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_jwt_service_extensions_8cs_source_l00091}00091\ \}}
+
+\end{DoxyCode}

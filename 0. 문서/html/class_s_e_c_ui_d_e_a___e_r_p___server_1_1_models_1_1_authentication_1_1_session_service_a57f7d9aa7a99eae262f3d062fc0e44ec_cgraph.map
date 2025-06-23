@@ -1,0 +1,9 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.ValidateSessionAsync" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.ValidateSessionAsync">
+<area shape="rect" id="Node000001" title="세션 유효성 검증" alt="" coords="5,88,255,147"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a7685349b33a31bca5e467ed1840a44d8" title="사용자 ID로 최신 세션 정보 조회" alt="" coords="303,5,527,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="233,85,296,66,297,71,234,90"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ae937269c4b57307cb34a29bd552fd5b1" title=" " alt="" coords="303,88,527,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="255,115,287,115,287,120,255,120"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ae1a504a95436c2574716dcd2fd9d0b1d" title=" " alt="" coords="303,171,527,229"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="234,145,297,163,296,168,233,150"/>
+</map>

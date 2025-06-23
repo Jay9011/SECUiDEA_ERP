@@ -1,0 +1,444 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller 클래스 참조}
+\hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller}{}\label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller에 대한 상속 다이어그램 \+: 
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller__inherit__graph}
+\end{center}
+\end{figure}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a52ee5d0925dbf40883fda6bd452297e1}{IParking\+Controller}} (\mbox{[}From\+Keyed\+Services(String\+Class.\+Crypto\+Secuidea)\mbox{]} ICrypto\+Manager crypto, \mbox{[}From\+Keyed\+Services(String\+Class.\+Io\+Api\+Setup\+File)\mbox{]} IIOHelper io\+Helper, IAPISetup\+Container api\+Container)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab588c01f70325470a744e73297504a38}{Setup}} ()
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af1ad6fb8cc417c01508ad5108079ece9}{Save\+Single\+Setup}} (\mbox{[}From\+Form\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetup\+View\+Model}} setting)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af0397f5e2017c8f1544f7ef888f8ffe8}{Visit\+Car}} (string? car\+Number, Date\+Time? start\+Date, Date\+Time? end\+Date, int? period\+Type=1, int? current\+Page=1, int? page\+Size=10)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aeae1e6c8df994fadcf5187ff7a8d5d00}{Visit\+Car}} (\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_parking_1_1_visit_car_model}{Visit\+Car\+Model}} visit\+Car\+Model)
+\begin{DoxyCompactList}\small\item\em 방문 차량 등록 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685}{Get\+Decrypted\+Api\+Credentials}} (out string? id, out string? password, out string? destination\+Id)
+\item 
+APIConnection\+Info \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221}{Initialize\+Api\+Connection\+Info}} ()
+\begin{DoxyCompactList}\small\item\em API 최초 설정 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a33cfaa84fd418e4fa4dea72875e7cff5}{Decrypt\+Endpoints}} (Dictionary$<$ string, string $>$ encrypted\+Endpoints)
+\begin{DoxyCompactList}\small\item\em IParking 시스템의 암호화 된 일부 정보를 복호화 하여 읽음 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ae5db4ae3521f50c995209e416fc5249a}{Encrypt\+Endpoints}} (Dictionary$<$ string, string $>$ plain\+Endpoints)
+\begin{DoxyCompactList}\small\item\em IParking 시스템의 일부 정보를 암호화하여 저장 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly ICrypto\+Manager \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\+\_\+crypto}}
+\item 
+readonly IIOHelper \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad83137e6e85973d1d4c7a9c01698bd84}{\+\_\+io\+Helper}}
+\item 
+readonly IAPISetup\+Container \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6}{\+\_\+api\+Container}}
+\item 
+readonly IAPISetup \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\+\_\+api\+Setup}}
+\item 
+readonly ICore\+API \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a}{\+\_\+core\+Api}}
+\item 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service}{IParking\+Setup\+Service}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}{\+\_\+setup\+Service}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{정적 Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}{Selector}} = "{}Select\+Visit\+Car"{}
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}{Register}} = "{}Regist\+Visit\+Car"{}
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{Encrypted\+Id}} = "{}Encrypted\+Id"{}
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{Encrypted\+Pwd}} = "{}Encrypted\+Pwd"{}
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{Encrypted\+Destination\+Id}} = "{}Encrypted\+Destination\+Id"{}
+\item 
+static readonly List$<$ string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ade26de68fd8e3461f0f385c880c107b6}{Endpoints\+Strings}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{추가로 상속된 멤버들}
+\doxysubsection*{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+Base\+Controllers.\+Base\+Controller}}(으)로부터 상속된 Protected 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_a2fa737bcaa639cd6c458c184a1c6918e}{Get\+Client\+Ip\+Address}} ()
+\begin{DoxyCompactList}\small\item\em Client IP 주소를 획득 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_afd600d928223eefea9996f1f9ec7b9ba}{Is\+Browser\+Client}} (Http\+Request request)
+\begin{DoxyCompactList}\small\item\em 브라우저 클라이언트인지 확인 \end{DoxyCompactList}\item 
+async Task$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_ab3144918b23ab471e99c4ab53afafbb7}{Get\+Request\+Body\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Request Body를 Dictionary 형태로 읽음 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o}{Aligo\+Acount\+DTO}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_afdcdc8406d8543138348f5df7ecaab1e}{Get\+Aligo\+Account\+Info}} (IDatabase\+Setup \+\_\+database)
+\begin{DoxyCompactList}\small\item\em \doxylink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo}{Aligo} 계정 정보를 DB에서 조회 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o}{Aligo\+Template\+DTO}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_ae834e36bc951b3c77882f778dcb1235e}{Get\+Aligo\+Template\+Info}} (IDatabase\+Setup \+\_\+database, string gubun)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00026}{26}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_doc-constructors}
+\doxysubsection{생성자 \& 소멸자 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a52ee5d0925dbf40883fda6bd452297e1}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!IParkingController@{IParkingController}}
+\index{IParkingController@{IParkingController}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{IParkingController()}{IParkingController()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a52ee5d0925dbf40883fda6bd452297e1} 
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+IParking\+Controller (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Keyed\+Services(\+String\+Class.\+Crypto\+Secuidea)\mbox{]} ICrypto\+Manager}]{crypto}{, }\item[{\mbox{[}\+From\+Keyed\+Services(\+String\+Class.\+Io\+Api\+Setup\+File)\mbox{]} IIOHelper}]{io\+Helper}{, }\item[{IAPISetup\+Container}]{api\+Container}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00052}{52}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a52ee5d0925dbf40883fda6bd452297e1_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a33cfaa84fd418e4fa4dea72875e7cff5}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!DecryptEndpoints@{DecryptEndpoints}}
+\index{DecryptEndpoints@{DecryptEndpoints}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{DecryptEndpoints()}{DecryptEndpoints()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a33cfaa84fd418e4fa4dea72875e7cff5} 
+void SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Decrypt\+Endpoints (\begin{DoxyParamCaption}\item[{Dictionary$<$ string, string $>$}]{encrypted\+Endpoints}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+IParking 시스템의 암호화 된 일부 정보를 복호화 하여 읽음 
+
+
+\begin{DoxyParams}{매개변수}
+{\em encrypted\+Endpoints} & \\
+\hline
+\end{DoxyParams}
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00446}{446}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a33cfaa84fd418e4fa4dea72875e7cff5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ae5db4ae3521f50c995209e416fc5249a}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!EncryptEndpoints@{EncryptEndpoints}}
+\index{EncryptEndpoints@{EncryptEndpoints}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{EncryptEndpoints()}{EncryptEndpoints()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ae5db4ae3521f50c995209e416fc5249a} 
+void SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Encrypt\+Endpoints (\begin{DoxyParamCaption}\item[{Dictionary$<$ string, string $>$}]{plain\+Endpoints}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+IParking 시스템의 일부 정보를 암호화하여 저장 
+
+
+\begin{DoxyParams}{매개변수}
+{\em plain\+Endpoints} & \\
+\hline
+\end{DoxyParams}
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00463}{463}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ae5db4ae3521f50c995209e416fc5249a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!GetDecryptedApiCredentials@{GetDecryptedApiCredentials}}
+\index{GetDecryptedApiCredentials@{GetDecryptedApiCredentials}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{GetDecryptedApiCredentials()}{GetDecryptedApiCredentials()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685} 
+bool SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Get\+Decrypted\+Api\+Credentials (\begin{DoxyParamCaption}\item[{out string?}]{id}{, }\item[{out string?}]{password}{, }\item[{out string?}]{destination\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00391}{391}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!InitializeApiConnectionInfo@{InitializeApiConnectionInfo}}
+\index{InitializeApiConnectionInfo@{InitializeApiConnectionInfo}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{InitializeApiConnectionInfo()}{InitializeApiConnectionInfo()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221} 
+APIConnection\+Info SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Initialize\+Api\+Connection\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+API 최초 설정 
+
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00423}{423}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af1ad6fb8cc417c01508ad5108079ece9}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!SaveSingleSetup@{SaveSingleSetup}}
+\index{SaveSingleSetup@{SaveSingleSetup}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{SaveSingleSetup()}{SaveSingleSetup()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af1ad6fb8cc417c01508ad5108079ece9} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Save\+Single\+Setup (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Form\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetup\+View\+Model}}}]{setting}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00109}{109}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af1ad6fb8cc417c01508ad5108079ece9_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab588c01f70325470a744e73297504a38}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!Setup@{Setup}}
+\index{Setup@{Setup}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{Setup()}{Setup()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab588c01f70325470a744e73297504a38} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00084}{84}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab588c01f70325470a744e73297504a38_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aeae1e6c8df994fadcf5187ff7a8d5d00}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!VisitCar@{VisitCar}}
+\index{VisitCar@{VisitCar}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{VisitCar()}{VisitCar()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aeae1e6c8df994fadcf5187ff7a8d5d00} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Visit\+Car (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_parking_1_1_visit_car_model}{Visit\+Car\+Model}}}]{visit\+Car\+Model}{}\end{DoxyParamCaption})}
+
+
+
+방문 차량 등록 
+
+
+\begin{DoxyParams}{매개변수}
+{\em visit\+Car\+Model} & \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_parking_1_1_visit_car_model}{Visit\+Car\+Model} 차량 방문 등록 모델 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00227}{227}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aeae1e6c8df994fadcf5187ff7a8d5d00_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af0397f5e2017c8f1544f7ef888f8ffe8}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!VisitCar@{VisitCar}}
+\index{VisitCar@{VisitCar}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{VisitCar()}{VisitCar()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af0397f5e2017c8f1544f7ef888f8ffe8} 
+async Task$<$ IAction\+Result $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Visit\+Car (\begin{DoxyParamCaption}\item[{string?}]{car\+Number}{, }\item[{Date\+Time?}]{start\+Date}{, }\item[{Date\+Time?}]{end\+Date}{, }\item[{int?}]{period\+Type}{ = {\ttfamily 1}, }\item[{int?}]{current\+Page}{ = {\ttfamily 1}, }\item[{int?}]{page\+Size}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00122}{122}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af0397f5e2017c8f1544f7ef888f8ffe8_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_doc-variable-members}
+\doxysubsection{멤버 데이터 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!\_apiContainer@{\_apiContainer}}
+\index{\_apiContainer@{\_apiContainer}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{\_apiContainer}{\_apiContainer}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6} 
+readonly IAPISetup\+Container SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+\_\+api\+Container\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00047}{47}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!\_apiSetup@{\_apiSetup}}
+\index{\_apiSetup@{\_apiSetup}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{\_apiSetup}{\_apiSetup}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521} 
+readonly IAPISetup SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+\_\+api\+Setup\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00048}{48}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!\_coreApi@{\_coreApi}}
+\index{\_coreApi@{\_coreApi}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{\_coreApi}{\_coreApi}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a} 
+readonly ICore\+API SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+\_\+core\+Api\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00049}{49}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!\_crypto@{\_crypto}}
+\index{\_crypto@{\_crypto}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{\_crypto}{\_crypto}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f} 
+readonly ICrypto\+Manager SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+\_\+crypto\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00045}{45}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad83137e6e85973d1d4c7a9c01698bd84}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!\_ioHelper@{\_ioHelper}}
+\index{\_ioHelper@{\_ioHelper}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{\_ioHelper}{\_ioHelper}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad83137e6e85973d1d4c7a9c01698bd84} 
+readonly IIOHelper SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+\_\+io\+Helper\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00046}{46}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!\_setupService@{\_setupService}}
+\index{\_setupService@{\_setupService}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{\_setupService}{\_setupService}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110} 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service}{IParking\+Setup\+Service}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+\_\+setup\+Service\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00050}{50}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!EncryptedDestinationId@{EncryptedDestinationId}}
+\index{EncryptedDestinationId@{EncryptedDestinationId}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{EncryptedDestinationId}{EncryptedDestinationId}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Encrypted\+Destination\+Id = "{}Encrypted\+Destination\+Id"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00034}{34}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!EncryptedId@{EncryptedId}}
+\index{EncryptedId@{EncryptedId}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{EncryptedId}{EncryptedId}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Encrypted\+Id = "{}Encrypted\+Id"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00032}{32}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!EncryptedPwd@{EncryptedPwd}}
+\index{EncryptedPwd@{EncryptedPwd}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{EncryptedPwd}{EncryptedPwd}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Encrypted\+Pwd = "{}Encrypted\+Pwd"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00033}{33}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ade26de68fd8e3461f0f385c880c107b6}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!EndpointsStrings@{EndpointsStrings}}
+\index{EndpointsStrings@{EndpointsStrings}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{EndpointsStrings}{EndpointsStrings}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ade26de68fd8e3461f0f385c880c107b6} 
+readonly List$<$string$>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Endpoints\+Strings\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries 초기값\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \textcolor{keyword}{new}()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}{Selector}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}{Register}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{EncryptedId}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{EncryptedPwd}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{EncryptedDestinationId}}}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00036}{36}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!Register@{Register}}
+\index{Register@{Register}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{Register}{Register}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Register = "{}Regist\+Visit\+Car"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00031}{31}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}\index{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}!Selector@{Selector}}
+\index{Selector@{Selector}!SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController@{SECUiDEA\_ERP\_Server.Controllers.api.Parking.IParkingController}}
+\doxysubsubsection{\texorpdfstring{Selector}{Selector}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Controllers.\+api.\+Parking.\+IParking\+Controller.\+Selector = "{}Select\+Visit\+Car"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{i_parking_controller_8cs_source}{i\+Parking\+Controller.\+cs}} 파일의 \mbox{\hyperlink{i_parking_controller_8cs_source_l00030}{30}} 번째 라인에서 정의되었습니다.
+
+
+
+이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Controllers/api/\+Parking/\mbox{\hyperlink{i_parking_controller_8cs}{i\+Parking\+Controller.\+cs}}\end{DoxyCompactItemize}

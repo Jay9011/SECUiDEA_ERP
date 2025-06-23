@@ -1,0 +1,5 @@
+var class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_n_lobby_visitor_delete_d_t_o =
+[
+    [ "qrCode", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_n_lobby_visitor_delete_d_t_o.html#ab51ebce59e1c1085b25198530242367a", null ],
+    [ "visitID", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_n_lobby_1_1_n_lobby_visitor_delete_d_t_o.html#a83ff1e41d250cbb9c3d83f8fa2406b40", null ]
+];

@@ -1,0 +1,79 @@
+\doxysection{Account\+Service.\+cs}
+\hypertarget{_account_service_8cs_source}{}\label{_account_service_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Models/Account/AccountService.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Models/Account/AccountService.cs}}
+\mbox{\hyperlink{_account_service_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }CoreDAL.Configuration.Interface;}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models}{SECUiDEA\_ERP\_Server.Models.CommonModels}};}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00004}\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models}{00004}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account}{SECUiDEA\_ERP\_Server.Models.Account}};}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00006}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service}{00006}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a7d3feadbf749cbb5c9ab7c6a8fdce9a3}{AccountService}}\ :\ IDisposable}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00007}00007\ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00008}00008\ \textcolor{preprocessor}{\ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00010}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a7096d7f5789ef3a782ed2e0226186b63}{00010}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a7096d7f5789ef3a782ed2e0226186b63}{\_dbContainer}};}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00011}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ac77c44df68db17266c2b1a46b5a45dab}{00011}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetup\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ac77c44df68db17266c2b1a46b5a45dab}{\_setup}};}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00013}00013\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00014}00014\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00015}00015\ \textcolor{preprocessor}{\ \ \ \ \#region\ 인증번호\ 관리\ 멤버}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00017}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a16a6ab06e4f5c26a01e8d37ec997302b}{00017}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ Timer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a16a6ab06e4f5c26a01e8d37ec997302b}{\_certCleanupTimer}};}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00019}00019\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00020}00020\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00021}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a7d3feadbf749cbb5c9ab7c6a8fdce9a3}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a7d3feadbf749cbb5c9ab7c6a8fdce9a3}{AccountService}}(IDatabaseSetupContainer\ dbContainer)}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00023}00023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a7096d7f5789ef3a782ed2e0226186b63}{\_dbContainer}}\ =\ dbContainer;}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ac77c44df68db17266c2b1a46b5a45dab}{\_setup}}\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a7096d7f5789ef3a782ed2e0226186b63}{\_dbContainer}}.GetSetup(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_af64beef43ea065f5a13a29d13321a2ff}{SECUIDEA}});}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00028}00028\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00030}00030\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#region\ 인증번호\ 관리}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a16a6ab06e4f5c26a01e8d37ec997302b}{\_certCleanupTimer}}\ =\ \textcolor{keyword}{new}\ Timer(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ab280655dc386c03118836f0c6a33cfa0}{CertCleanupCallback}},\ \textcolor{keyword}{null},\ TimeSpan.Zero,\ TimeSpan.FromMinutes(5));}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00034}00034\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00038}00038\ \textcolor{preprocessor}{\ \ \ \ \#region\ 인증번호\ 관리}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00040}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ab280655dc386c03118836f0c6a33cfa0}{00040}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ab280655dc386c03118836f0c6a33cfa0}{CertCleanupCallback}}(\textcolor{keywordtype}{object}\ state)}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00041}00041\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \_\ =\ Task.Run(async\ ()\ =>\ \textcolor{comment}{//\ 비동기\ 정리\ 작업}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_aae6b272b27611d926df2c63462ff2cee}{CleanupExpiredCertsAsync}}();}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ ex)}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 예외\ 처리\ 로직\ 필요}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00054}00054\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00055}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_aae6b272b27611d926df2c63462ff2cee}{00055}}\ \ \ \ \ \textcolor{keyword}{private}\ async\ Task\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_aae6b272b27611d926df2c63462ff2cee}{CleanupExpiredCertsAsync}}()}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ac77c44df68db17266c2b1a46b5a45dab}{\_setup}}.DAL.ExecuteProcedureAsync(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_ac77c44df68db17266c2b1a46b5a45dab}{\_setup}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_string}{AccountString}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_string_a8fc679619e06ce323f944a4f52a0f3a1}{CleanupExpiredCert}});}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00067}00067\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00068}00068\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00069}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a690b5f4daf8c5df8cd57e17408dfe537}{00069}}\ \ \ \ \ \textcolor{keyword}{public}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a690b5f4daf8c5df8cd57e17408dfe537}{Dispose}}()}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00070}00070\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service_a16a6ab06e4f5c26a01e8d37ec997302b}{\_certCleanupTimer}}?.Dispose();}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_account_service_8cs_source_l00073}00073\ \}}
+
+\end{DoxyCode}

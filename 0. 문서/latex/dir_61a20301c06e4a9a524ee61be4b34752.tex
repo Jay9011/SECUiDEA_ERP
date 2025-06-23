@@ -1,0 +1,195 @@
+\doxysection{D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/obj/\+Release/net8.0/\+Pub\+Tmp/\+Out/wwwroot/lib/i18next-\/browser-\/languagedetector 디렉토리 참조}
+\hypertarget{dir_61a20301c06e4a9a524ee61be4b34752}{}\label{dir_61a20301c06e4a9a524ee61be4b34752}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/obj/Release/net8.0/PubTmp/Out/wwwroot/lib/i18next-\/browser-\/languagedetector 디렉토리 참조@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/obj/Release/net8.0/PubTmp/Out/wwwroot/lib/i18next-\/browser-\/languagedetector 디렉토리 참조}}
+i18next-\/browser-\/languagedetector에 대한 디렉토리 의존성 그래프\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{dir_61a20301c06e4a9a524ee61be4b34752_dep}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{상세한 설명}
+\hypertarget{README.md_autotoc_md46}{}\doxysubsection{\texorpdfstring{Introduction}{Introduction}}\label{README.md_autotoc_md46}
+\href{https://www.npmjs.com/package/i18next-browser-languagedetector}{\texttt{}}
+
+This is an i18next language detection plugin used to detect user language in the browser, with support for\+:
+
+
+\begin{DoxyItemize}
+\item cookie (set cookie i18next=LANGUAGE)
+\item session\+Storage (set key i18next\+Lng=LANGUAGE)
+\item local\+Storage (set key i18next\+Lng=LANGUAGE)
+\item navigator (set browser language)
+\item querystring (append {\ttfamily ?lng=LANGUAGE} to URL)
+\item html\+Tag (add html language tag \texorpdfstring{$<$}{<}html lang="{}\+LANGUAGE"{} ...)
+\item path (\href{http://my.site.com/LANGUAGE/..}{\texttt{http\+://my.\+site.\+com/\+LANGUAGE/..}}.)
+\item subdomain (\href{http://LANGUAGE.site.com/..}{\texttt{http\+://\+LANGUAGE.\+site.\+com/..}}.)
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md47}{}\doxysubsection{\texorpdfstring{Getting started}{Getting started}}\label{README.md_autotoc_md47}
+Source can be loaded via \mbox{[}npm\mbox{]}(\href{https://www.npmjs.com/package/i18next-browser-languagedetector}{\texttt{https\+://www.\+npmjs.\+com/package/i18next-\/browser-\/languagedetector}}), bower or \mbox{[}downloaded\mbox{]}(\href{https://github.com/i18next/i18next-browser-languagedetector/blob/master/i18nextBrowserLanguageDetector.min.js}{\texttt{https\+://github.\+com/i18next/i18next-\/browser-\/languagedetector/blob/master/i18next\+Browser\+Language\+Detector.\+min.\+js}}) from this repo.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ npm\ package}
+\DoxyCodeLine{\$\ npm\ install\ i18next-\/browser-\/languagedetector}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ bower}
+\DoxyCodeLine{\$\ bower\ install\ i18next-\/browser-\/languagedetector}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item If you don\textquotesingle{}t use a module loader it will be added to \`{}window.i18next\+Browser\+Language\+Detector\`{}
+\end{DoxyItemize}
+
+Wiring up\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ i18next\ from\ 'i18next';}
+\DoxyCodeLine{import\ LanguageDetector\ from\ 'i18next-\/browser-\/languagedetector';}
+\DoxyCodeLine{}
+\DoxyCodeLine{i18next.use(LanguageDetector).init(\{}
+\DoxyCodeLine{\ \ supportedLngs:\ ['de',\ 'en',\ 'fr'],}
+\DoxyCodeLine{\ \ ...i18nextOptions}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+
+
+As with all modules you can either pass the constructor function (class) to the \`{}i18next.use\`{} or to a concrete instance.
+
+\mbox{[}\`{}supported\+Lngs\`{}\mbox{]}(\href{https://www.i18next.com/overview/configuration-options\#languages-namespaces-resources}{\texttt{https\+://www.\+i18next.\+com/overview/configuration-\/options\#languages-\/namespaces-\/resources}}) is optional, but allows i18next to pick the best match from the list of detected languages. If it\textquotesingle{}s not set then \mbox{[}\`{}language\`{}\mbox{]}(\href{https://www.i18next.com/overview/api\#language}{\texttt{https\+://www.\+i18next.\+com/overview/api\#language}}) will be set to the first detected language, regardless of whether your application has translations for that language or not. ~\newline
+\hypertarget{README.md_autotoc_md48}{}\doxysubsubsection{\texorpdfstring{Detector Options}{Detector Options}}\label{README.md_autotoc_md48}
+{\itshape The default options can be found \href{https://github.com/i18next/i18next-browser-languageDetector/blob/9efebe6ca0271c3797bc09b84babf1ba2d9b4dbb/src/index.js\#L11}{\texttt{here}}.}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ //\ order\ and\ from\ where\ user\ language\ should\ be\ detected}
+\DoxyCodeLine{\ \ order:\ ['querystring',\ 'cookie',\ 'localStorage',\ 'sessionStorage',\ 'navigator',\ 'htmlTag',\ 'path',\ 'subdomain'],}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ keys\ or\ params\ to\ lookup\ language\ from}
+\DoxyCodeLine{\ \ lookupQuerystring:\ 'lng',}
+\DoxyCodeLine{\ \ lookupCookie:\ 'i18next',}
+\DoxyCodeLine{\ \ lookupLocalStorage:\ 'i18nextLng',}
+\DoxyCodeLine{\ \ lookupSessionStorage:\ 'i18nextLng',}
+\DoxyCodeLine{\ \ lookupFromPathIndex:\ 0,}
+\DoxyCodeLine{\ \ lookupFromSubdomainIndex:\ 0,}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ cache\ user\ language\ on}
+\DoxyCodeLine{\ \ caches:\ ['localStorage',\ 'cookie'],}
+\DoxyCodeLine{\ \ excludeCacheFor:\ ['cimode'],\ //\ languages\ to\ not\ persist\ (cookie,\ localStorage)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ optional\ expiry\ and\ domain\ for\ set\ cookie}
+\DoxyCodeLine{\ \ cookieMinutes:\ 10,}
+\DoxyCodeLine{\ \ cookieDomain:\ 'myDomain',}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ optional\ htmlTag\ with\ lang\ attribute,\ the\ default\ is:}
+\DoxyCodeLine{\ \ htmlTag:\ document.documentElement,}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ optional\ set\ cookie\ options,\ reference:[MDN\ Set-\/Cookie\ docs](https://developer.mozilla.org/en-\/US/docs/Web/HTTP/Headers/Set-\/Cookie)}
+\DoxyCodeLine{\ \ cookieOptions:\ \{\ path:\ '/',\ sameSite:\ 'strict'\ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ optional\ conversion\ function\ used\ to\ modify\ the\ detected\ language\ code}
+\DoxyCodeLine{\ \ convertDetectedLanguage:\ 'Iso15897',}
+\DoxyCodeLine{\ \ convertDetectedLanguage:\ (lng)\ =>\ lng.replace('-\/',\ '\_')}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Options can be passed in\+:
+
+{\bfseries{preferred}} -\/ by setting options.\+detection in i18next.\+init\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ i18next\ from\ 'i18next';}
+\DoxyCodeLine{import\ LanguageDetector\ from\ 'i18next-\/browser-\/languagedetector';}
+\DoxyCodeLine{}
+\DoxyCodeLine{i18next.use(LanguageDetector).init(\{}
+\DoxyCodeLine{\ \ detection:\ options,}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+
+
+on construction\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ LanguageDetector\ from\ 'i18next-\/browser-\/languagedetector';}
+\DoxyCodeLine{const\ languageDetector\ =\ new\ LanguageDetector(null,\ options);}
+
+\end{DoxyCode}
+
+
+via calling init\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ LanguageDetector\ from\ 'i18next-\/browser-\/languagedetector';}
+\DoxyCodeLine{const\ languageDetector\ =\ new\ LanguageDetector();}
+\DoxyCodeLine{languageDetector.init(options);}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md49}{}\doxysubsubsection{\texorpdfstring{Adding own detection functionality}{Adding own detection functionality}}\label{README.md_autotoc_md49}
+\hypertarget{README.md_autotoc_md50}{}\doxysubsubsubsection{\texorpdfstring{interface}{interface}}\label{README.md_autotoc_md50}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ default\ \{}
+\DoxyCodeLine{\ \ name:\ 'myDetectorsName',}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ lookup(options)\ \{}
+\DoxyCodeLine{\ \ \ \ //\ options\ -\/>\ are\ passed\ in\ options}
+\DoxyCodeLine{\ \ \ \ return\ 'en';}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ cacheUserLanguage(lng,\ options)\ \{}
+\DoxyCodeLine{\ \ \ \ //\ options\ -\/>\ are\ passed\ in\ options}
+\DoxyCodeLine{\ \ \ \ //\ lng\ -\/>\ current\ language,\ will\ be\ called\ after\ init\ and\ on\ changeLanguage}
+\DoxyCodeLine{\ \ \ \ //\ store\ it}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md51}{}\doxysubsubsubsection{\texorpdfstring{adding it}{adding it}}\label{README.md_autotoc_md51}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ LanguageDetector\ from\ 'i18next-\/browser-\/languagedetector';}
+\DoxyCodeLine{const\ languageDetector\ =\ new\ LanguageDetector();}
+\DoxyCodeLine{languageDetector.addDetector(myDetector);}
+\DoxyCodeLine{}
+\DoxyCodeLine{i18next.use(languageDetector).init(\{}
+\DoxyCodeLine{\ \ detection:\ options,}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+
+
+Don\textquotesingle{}t forget\+: You have to add the name of your detector ({\ttfamily my\+Detectors\+Name} in this case) to the {\ttfamily order} array in your {\ttfamily options} object. Without that, your detector won\textquotesingle{}t be used. See the Detector Options section for more.
+
+\DoxyHorRuler{0}
+
+
+\doxysubsubsubsection*{Gold Sponsors}
+
+\href{https://locize.com/}{\texttt{ }} 
+
+\DoxyHorRuler{0}
+
+
+{\bfseries{localization as a service -\/ locize.\+com}}
+
+Needing a translation management? Want to edit your translations with an In\+Context Editor? Use the orginal provided to you by the maintainers of i18next!
+
+
+
+With using \href{http://locize.com/?utm_source=react_i18next_readme&utm_medium=github}{\texttt{locize}} you directly support the future of i18next and react-\/i18next.
+
+\DoxyHorRuler{0}
+ 

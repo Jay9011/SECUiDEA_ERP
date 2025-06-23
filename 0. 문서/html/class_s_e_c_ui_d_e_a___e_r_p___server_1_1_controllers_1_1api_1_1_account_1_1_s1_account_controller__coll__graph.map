@@ -1,0 +1,9 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Account.S1AccountController" name="SECUiDEA_ERP_Server.Controllers.api.Account.S1AccountController">
+<area shape="rect" id="Node000001" title=" " alt="" coords="178,367,429,559"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html" title=" " alt="" coords="5,124,236,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,305,237,365,232,368,188,308"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="87,5,154,75"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,90,123,124,118,124,118,90"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory.html" title=" " alt="" coords="260,156,470,263"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="355,263,333,351,328,349,349,262"/>
+</map>

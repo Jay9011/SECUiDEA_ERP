@@ -1,0 +1,5 @@
+<map id="AccountModel" name="AccountModel">
+<area shape="rect" id="Node000001" title="기본 계정 모델" alt="" coords="5,123,99,213"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="15,5,90,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,89,55,123,50,123,50,89"/>
+</map>

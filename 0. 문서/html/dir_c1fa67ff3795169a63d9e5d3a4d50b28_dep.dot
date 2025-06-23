@@ -1,0 +1,12 @@
+digraph "D:/Projects/SECUiDEA_ERP/SECUiDEA_ERP_Server/SECUiDEA_ERP_Server/Controllers/api/Parking"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_acdb3eb1a63852939e0f6a8d6baa0896 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="api", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_acdb3eb1a63852939e0f6a8d6baa0896.html",tooltip=""]
+  dir_c1fa67ff3795169a63d9e5d3a4d50b28 [label="Parking", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_c1fa67ff3795169a63d9e5d3a4d50b28.html",tooltip=""];
+  }
+}

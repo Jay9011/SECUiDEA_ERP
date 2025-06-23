@@ -1,0 +1,9 @@
+digraph "그래픽컬한 클래스 계통도"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="SECUiDEA_ERP_Server.Models.\lControllerModels.api.Visit.Visit\lReasonDTO",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_visit_1_1_visit_reason_d_t_o.html",tooltip=" "];
+}

@@ -1,0 +1,116 @@
+\doxysection{DBSetup\+Service.\+cs}
+\hypertarget{_d_b_setup_service_8cs_source}{}\label{_d_b_setup_service_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Models/DBServices/DBSetupService.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Models/DBServices/DBSetupService.cs}}
+\mbox{\hyperlink{_d_b_setup_service_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }CoreDAL.Configuration;}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }CoreDAL.Configuration.Interface;}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private}{SECUiDEA\_ERP\_Server.Models.ControllerModels.Private}};}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models}{SECUiDEA\_ERP\_Server.Models.ResultModels}};}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00006}00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services}{SECUiDEA\_ERP\_Server.Models.DBServices}};}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00008}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service}{00008}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4aa2facfa99c0cd060fb0c14c2f93e1b}{DBSetupService}}\ :\ \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_i_d_b_setup_service}{IDBSetupService}}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00010}00010\ \textcolor{preprocessor}{\ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00012}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}{00012}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}{\_dbSetupContainer}};}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00014}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4aa2facfa99c0cd060fb0c14c2f93e1b}{00014}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4aa2facfa99c0cd060fb0c14c2f93e1b}{DBSetupService}}(IDatabaseSetupContainer\ dbSetupContainer)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00016}00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}{\_dbSetupContainer}}\ =\ dbSetupContainer;}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00017}00017\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00019}00019\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00020}00020\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00021}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc}{00021}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<BoolResultModel>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc}{SaveSingleSetupAsync}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetupViewModel}}\ setting)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00024}00024\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ var\ setup\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}{\_dbSetupContainer}}.Setups[setting.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_a31e9fa4fec359cba8ee30d5fa57daaed}{sectionName}}];}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ var\ connectionInfo\ =\ DbConnectionFactory.CreateConnectionInfo(}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ setup.DatabaseType,}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ setting.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_a17997421a4c23ddba725bd7ed0a42ef5}{connectionSettings}});}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00029}00029\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!connectionInfo.Validate(out\ \textcolor{keywordtype}{string}\ errorMessage))}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(errorMessage);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00034}00034\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}{\_dbSetupContainer}}.UpdateSetup(setting.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_a31e9fa4fec359cba8ee30d5fa57daaed}{sectionName}},\ connectionInfo);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}response:기본.\{\{what\}\}\ 설정이\ 성공적으로\ 저장되었습니다."{}},}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}what"{}},\ setting.sectionName\ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00046}00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00049}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4e44984b257862b11264ff57bfcf528e}{00049}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<BoolResultModel>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a4e44984b257862b11264ff57bfcf528e}{SaveMultiSetupAsync}}(List<DBSetupViewModel>\ settings)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00050}00050\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ setting\ \textcolor{keywordflow}{in}\ settings)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_aba7690e0098e6195a6ac343501f6dbcc}{SaveSingleSetupAsync}}(setting);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!result.IsSuccess)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}response:기본.\{\{what\}\}\ 설정이\ 성공적으로\ 저장되었습니다."{}},}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}what"{}},\ \textcolor{stringliteral}{"{}DB.데이터베이스"{}}\ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00074}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a35e8e534f74e2cb0489a9d66b25195db}{00074}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<BoolResultModel>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a35e8e534f74e2cb0489a9d66b25195db}{TestConnectionAsync}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetupViewModel}}\ setting)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00075}00075\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (setting\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}response:기본.\{\{what\}\}가\ 잘못되었습니다."{}},}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}what"{}},\ \textcolor{stringliteral}{"{}기본.요청\ 파라미터"{}}\ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ var\ connectionInfo\ =\ setting.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_a4d8c63fed62d6fd98d1e3fa4499681b8}{ConnectionInfo}};}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!connectionInfo.Validate(out\ \textcolor{keywordtype}{string}\ errorMessage))}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(errorMessage);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ var\ result\ =\ await\ DbDalFactory.CreateCoreDal(setting.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model_ad36d152c392980f2c53f89b783ceee45}{databaseType}}).TestConnectionAsync(connectionInfo.ToConnectionString());}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess)}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(result.Message);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00096}00096\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(result.Message);}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00099}00099\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00101}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a97ae8d1f3777b1353724a9d03046d325}{00101}}\ \ \ \ \ \textcolor{keyword}{public}\ List<DBSetupViewModel>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_a97ae8d1f3777b1353724a9d03046d325}{GetAllSetups}}()}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00102}00102\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service_ac6d2dedfe673a492268c760cfb75e5d0}{\_dbSetupContainer}}.Setups.Select(setup\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_d_b_setup_view_model}{DBSetupViewModel}}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ sectionName\ =\ setup.Key,}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ databaseType\ =\ setup.Value.DatabaseType,}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ connectionSettings\ =\ setup.Value.GetConnectionInfo().ToSettings()}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \}).ToList();}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00109}00109\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_d_b_setup_service_8cs_source_l00110}00110\ \}}
+
+\end{DoxyCode}

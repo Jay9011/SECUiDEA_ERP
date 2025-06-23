@@ -1,0 +1,14 @@
+<map id="SECUiDEA_ERP_Server.Models.DBServices.DBSetupService.SaveMultiSetupAsync" name="SECUiDEA_ERP_Server.Models.DBServices.DBSetupService.SaveMultiSetupAsync">
+<area shape="rect" id="Node000001" title="다중 DB 설정을 저장" alt="" coords="5,31,260,89"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec" title=" " alt="" coords="633,5,862,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,27,307,16,387,10,469,8,618,13,618,18,469,13,388,15,308,21,243,33"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service.html#aba7690e0098e6195a6ac343501f6dbcc" title="단일 DB 설정을 저장" alt="" coords="308,31,570,89"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="260,57,292,57,292,63,260,63"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f" title=" " alt="" coords="618,72,877,115"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="243,87,308,99,383,105,460,107,602,103,603,108,460,112,383,110,307,104,242,93"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#ad40974f127682f30e7b5634d62800e23" title=" " alt="" coords="925,31,1160,89"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="863,37,910,42,910,48,862,42"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="570,43,617,38,618,43,571,48"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="571,72,603,75,602,80,570,77"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="878,76,910,72,910,78,878,81"/>
+</map>

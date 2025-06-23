@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SECUiDEA_ERP_Server: D:/Projects/SECUiDEA_ERP/SECUiDEA_ERP_Server/SECUiDEA_ERP_Server/Controllers/Extensions/ApiKeyAuthAttribute.cs 소스 파일</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SECUiDEA.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">SECUiDEA_ERP_Server<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">통합 운영 관리 솔루션 API 서버</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_api_key_auth_attribute_8cs_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ApiKeyAuthAttribute.cs</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_api_key_auth_attribute_8cs.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using </span>System.Security.Claims;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">using </span>Microsoft.AspNetCore.Mvc;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using </span>Microsoft.AspNetCore.Mvc.Filters;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication.html">SECUiDEA_ERP_Server.Models.Authentication</a>;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="foldopen" id="foldopen00006" data-start="{" data-end="}">
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions.html">    6</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions.html">SECUiDEA_ERP_Server.Controllers.Extensions</a></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]</div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html">    9</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a51927da7064f166923f6f38505568198">ApiKeyAuthAttribute</a>: ActionFilterAttribute</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ae8cc9659044cafa7d721c4721c21920d">   11</a></span>        <span class="keyword">private</span> readonly <span class="keywordtype">string</span> <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ae8cc9659044cafa7d721c4721c21920d">_issuer</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#afe48bb5299d174aba4d5b0660ced021b">   12</a></span>        <span class="keyword">private</span> readonly Dictionary&lt;string, string&gt;? <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#afe48bb5299d174aba4d5b0660ced021b">_requiredClaims</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a51927da7064f166923f6f38505568198">   14</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a51927da7064f166923f6f38505568198">ApiKeyAuthAttribute</a>(<span class="keywordtype">string</span> issuer)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ae8cc9659044cafa7d721c4721c21920d">_issuer</a> = issuer;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        }</div>
+</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a019b605b8c1b0acf76ddaa511fb10174">   24</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a019b605b8c1b0acf76ddaa511fb10174">ApiKeyAuthAttribute</a>(<span class="keywordtype">string</span> issuer, Dictionary&lt;string, string&gt; requiredClaims) : this(issuer)</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#afe48bb5299d174aba4d5b0660ced021b">_requiredClaims</a> = requiredClaims;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        }</div>
+</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ad5ad8ec858522cf8c028797322f8d7be">   29</a></span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ad5ad8ec858522cf8c028797322f8d7be">OnActionExecuting</a>(ActionExecutingContext context)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">if</span> (!context.HttpContext.Request.Headers.TryGetValue(<span class="stringliteral">&quot;X-API-KEY&quot;</span>, out var apiKeyToken))</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                context.Result = <span class="keyword">new</span> UnauthorizedObjectResult(<span class="stringliteral">&quot;API 키가 필요합니다.&quot;</span>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            var jwtService = context.HttpContext.RequestServices.GetRequiredService&lt;<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html">JwtService</a>&gt;();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">if</span> (!jwtService.ValidateApiKeyToken(apiKeyToken, <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ae8cc9659044cafa7d721c4721c21920d">_issuer</a>, out var principal))</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                context.Result = <span class="keyword">new</span> UnauthorizedObjectResult(<span class="stringliteral">&quot;유효하지 않은 API 키입니다.&quot;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            <span class="comment">// 필수 Claim 검증</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#afe48bb5299d174aba4d5b0660ced021b">_requiredClaims</a> != <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                <span class="keywordflow">foreach</span> (var requiredClaim <span class="keywordflow">in</span> <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#afe48bb5299d174aba4d5b0660ced021b">_requiredClaims</a>)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                    var claimValue = principal.FindFirstValue(requiredClaim.Key);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                    <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.IsNullOrEmpty(claimValue) || claimValue != requiredClaim.Value)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                        context.Result = <span class="keyword">new</span> UnauthorizedObjectResult($<span class="stringliteral">&quot;필수 권한이 부족합니다: {requiredClaim.Key}&quot;</span>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                    }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="comment">// API 키 ID와 서비스명 추출</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            var apiKeyId = principal.FindFirstValue(ClaimTypes.Authentication);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            var service = principal.FindFirstValue(ClaimTypes.AuthenticationMethod);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="comment">// 요청 컨텍스트에 API 키 정보 추가</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            context.HttpContext.Items[ClaimTypes.Authentication] = apiKeyId;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            context.HttpContext.Items[ClaimTypes.AuthenticationMethod] = service;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="comment">// 모든 추가 Claim을 HttpContext에 저장</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="keywordflow">foreach</span> (var claim <span class="keywordflow">in</span> principal.Claims)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                <span class="comment">// 이미 저장된 기본 Claim들은 제외</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                <span class="keywordflow">if</span> (claim.Type != ClaimTypes.Authentication &amp;&amp; claim.Type != ClaimTypes.AuthenticationMethod)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                    context.HttpContext.Items[$<span class="stringliteral">&quot;ApiClaim_{claim.Type}&quot;</span>] = claim.Value;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            base.OnActionExecuting(context);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]</div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="};">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute.html">   84</a></span>    <span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute.html#adeb7de6b6e68aa027b7dc0eb4150c03b">ApiKeyAuthWithClaimAttribute</a> : <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a51927da7064f166923f6f38505568198">ApiKeyAuthAttribute</a></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    {</div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute.html#adeb7de6b6e68aa027b7dc0eb4150c03b">   92</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute.html#adeb7de6b6e68aa027b7dc0eb4150c03b">ApiKeyAuthWithClaimAttribute</a>(<span class="keywordtype">string</span> issuer, <span class="keywordtype">string</span> claimType, <span class="keywordtype">string</span> claimValue) </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            : base(issuer, new Dictionary&lt;string, string&gt; { { claimType, claimValue } })</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
+</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
+</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+</div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute_html_a019b605b8c1b0acf76ddaa511fb10174"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a019b605b8c1b0acf76ddaa511fb10174">SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthAttribute.ApiKeyAuthAttribute</a></div><div class="ttdeci">ApiKeyAuthAttribute(string issuer, Dictionary&lt; string, string &gt; requiredClaims)</div><div class="ttdoc">특정 Claim을 요구하는 API 키 인증 어트리뷰트</div><div class="ttdef"><b>Definition</b> <a href="#l00024">ApiKeyAuthAttribute.cs:24</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute_html_a51927da7064f166923f6f38505568198"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#a51927da7064f166923f6f38505568198">SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthAttribute.ApiKeyAuthAttribute</a></div><div class="ttdeci">ApiKeyAuthAttribute(string issuer)</div><div class="ttdef"><b>Definition</b> <a href="#l00014">ApiKeyAuthAttribute.cs:14</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute_html_ad5ad8ec858522cf8c028797322f8d7be"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ad5ad8ec858522cf8c028797322f8d7be">SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthAttribute.OnActionExecuting</a></div><div class="ttdeci">override void OnActionExecuting(ActionExecutingContext context)</div><div class="ttdef"><b>Definition</b> <a href="#l00029">ApiKeyAuthAttribute.cs:29</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute_html_ae8cc9659044cafa7d721c4721c21920d"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#ae8cc9659044cafa7d721c4721c21920d">SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthAttribute._issuer</a></div><div class="ttdeci">readonly string _issuer</div><div class="ttdef"><b>Definition</b> <a href="#l00011">ApiKeyAuthAttribute.cs:11</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute_html_afe48bb5299d174aba4d5b0660ced021b"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html#afe48bb5299d174aba4d5b0660ced021b">SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthAttribute._requiredClaims</a></div><div class="ttdeci">readonly? Dictionary&lt; string, string &gt; _requiredClaims</div><div class="ttdef"><b>Definition</b> <a href="#l00012">ApiKeyAuthAttribute.cs:12</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute_html_adeb7de6b6e68aa027b7dc0eb4150c03b"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute.html#adeb7de6b6e68aa027b7dc0eb4150c03b">SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthWithClaimAttribute.ApiKeyAuthWithClaimAttribute</a></div><div class="ttdeci">ApiKeyAuthWithClaimAttribute(string issuer, string claimType, string claimValue)</div><div class="ttdoc">단일 Claim을 요구하는 생성자</div><div class="ttdef"><b>Definition</b> <a href="#l00092">ApiKeyAuthAttribute.cs:92</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html">SECUiDEA_ERP_Server.Models.Authentication.JwtService</a></div><div class="ttdef"><b>Definition</b> <a href="_jwt_service_8cs_source.html#l00013">JwtService.cs:14</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions.html">SECUiDEA_ERP_Server.Controllers.Extensions</a></div><div class="ttdef"><b>Definition</b> <a href="#l00006">ApiKeyAuthAttribute.cs:7</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication.html">SECUiDEA_ERP_Server.Models.Authentication</a></div><div class="ttdef"><b>Definition</b> <a href="_i_refresh_token_repository_8cs_source.html#l00001">IRefreshTokenRepository.cs:1</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_af34b85ff88993e1152170f543ba41d6.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_e3147d111bd9abb5b9521263f4a24daf.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_a225e1f05f35e0ceb39b0d04360d61e9.html">Controllers</a></li><li class="navelem"><a href="dir_9b93a7cd44c53599b91ee76c2f72fe09.html">Extensions</a></li><li class="navelem"><a href="_api_key_auth_attribute_8cs.html">ApiKeyAuthAttribute.cs</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

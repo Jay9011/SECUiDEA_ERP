@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SECUiDEA_ERP_Server: D:/Projects/SECUiDEA_ERP/SECUiDEA_ERP_Server/SECUiDEA_ERP_Server/Controllers/api/Account/AccountController.cs 소스 파일</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="SECUiDEA.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">SECUiDEA_ERP_Server<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">통합 운영 관리 솔루션 API 서버</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 다음에 의해 생성됨 :  Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','검색',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_account_controller_8cs_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">로딩중...</div>
+<div class="SRStatus" id="Searching">검색중...</div>
+<div class="SRStatus" id="NoMatches">일치하는것 없음</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">AccountController.cs</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_account_controller_8cs.html">이 파일의 문서화 페이지로 가기</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using </span>System.Security.Claims;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">using </span>CoreDAL.Configuration.Interface;</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using </span>CryptoManager;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using </span>Microsoft.AspNetCore.Authorization;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>Microsoft.AspNetCore.Mvc;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers.html">SECUiDEA_ERP_Server.Controllers.BaseControllers</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account.html">SECUiDEA_ERP_Server.Models.Account</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication.html">SECUiDEA_ERP_Server.Models.Authentication</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models.html">SECUiDEA_ERP_Server.Models.CommonModels</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models.html">SECUiDEA_ERP_Server.Models.ResultModels</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="namespace_s_e_c_ui_d_e_a___e_r_p___server.html">   12</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account.html">SECUiDEA_ERP_Server.Controllers.api.Account</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>[Route(<span class="stringliteral">&quot;api/[controller]/[action]&quot;</span>)]</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html">   15</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a9ff66fe047dbe09ec9823fede953dce0">AccountController</a> : <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller.html#a9e9f3d2e095735082fb5fdf86ad2b597">JwtController</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">    #region 의존 주입</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aca06304faecf667d49e89453fa56a10e">   19</a></span>    <span class="keyword">private</span> readonly ICryptoManager <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aca06304faecf667d49e89453fa56a10e">_crypto</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a8dc7283451862f9f25f43a137e0bc615">   20</a></span>    <span class="keyword">private</span> readonly IDatabaseSetupContainer <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a8dc7283451862f9f25f43a137e0bc615">_dbSetupContainer</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">   21</a></span>    <span class="keyword">private</span> readonly IDatabaseSetup <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">_dbSetup</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a9ff66fe047dbe09ec9823fede953dce0">   23</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a9ff66fe047dbe09ec9823fede953dce0">AccountController</a>(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html">JwtService</a> jwtService,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        [FromKeyedServices(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">StringClass</a>.<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#aebec391c7552da59c0996c844c362baf">CryptoSecuidea</a>)] ICryptoManager crypto, </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        IDatabaseSetupContainer dbSetupContainer)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    : base(jwtService)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aca06304faecf667d49e89453fa56a10e">_crypto</a> = crypto;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a8dc7283451862f9f25f43a137e0bc615">_dbSetupContainer</a> = dbSetupContainer;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">_dbSetup</a> = <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a8dc7283451862f9f25f43a137e0bc615">_dbSetupContainer</a>.GetSetup(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">StringClass</a>.<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#af64beef43ea065f5a13a29d13321a2ff">SECUIDEA</a>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    }</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">    #endregion</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// 혼동되기 쉬운 문자(0과 O, 1과 I)를 제외한 Base32 문자셋</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a6d9f0c5861ea38d22d625992420e8949">   37</a></span>    <span class="keyword">const</span> <span class="keywordtype">string</span> <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a6d9f0c5861ea38d22d625992420e8949">BASE32_CHARS</a> = <span class="stringliteral">&quot;0123456789ABCDEFGHJKLMNPQRSTUVWX&quot;</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    [HttpPost]</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a83e3b9ee6c5600653cf7131a60fb0e74">   45</a></span>    <span class="keyword">public</span> async Task&lt;IActionResult&gt; <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a83e3b9ee6c5600653cf7131a60fb0e74">CreatePasswordCertification</a>([FromBody] <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model.html">PassCertMobileModel</a> mobileModel)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            mobileModel.UpdateIp = <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#a2fa737bcaa639cd6c458c184a1c6918e">GetClientIpAddress</a>();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            mobileModel.Type = <span class="stringliteral">&quot;reg&quot;</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="comment">// 인증 Token 생성</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            var token = <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#acf27a08293e1d1aec52b70b5f42e7038">GenerateRandomToken</a>(6);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            mobileModel.CertificateData = token;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="comment">// 인증 Token을 DB에 저장</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            var result = await <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">_dbSetup</a>.DAL.ExecuteProcedureAsync(<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">_dbSetup</a>, <span class="stringliteral">&quot;PassCert_Mobile&quot;</span>, mobileModel);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span> (result.IsSuccess</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                &amp;&amp; result.ReturnValue == 1)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                var data = result.DataSet.Tables[0].Rows[0];</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                var message = data[<span class="stringliteral">&quot;Message&quot;</span>].ToString();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                <span class="keywordflow">return</span> Ok(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f">Success</a>(message, <span class="keyword">new</span> Dictionary&lt;string, object&gt;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    { <span class="stringliteral">&quot;data&quot;</span>, mobileModel },</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    { <span class="stringliteral">&quot;ApiKey&quot;</span>, _jwtService.GenerateApiKeyToken(StringClass.Issuer_Kakao, StringClass.SECUIDEA, nameof(CreatePasswordCertification))}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                }));</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (result.DataSet?.Tables.Count &gt; 0</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                     &amp;&amp; result.DataSet.Tables[0].Rows.Count &gt; 0)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                var data = result.DataSet.Tables[0].Rows[0];</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                var message = data[<span class="stringliteral">&quot;Message&quot;</span>].ToString();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                <span class="keywordflow">return</span> Ok(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(message));</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">catch</span> (Exception e)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">return</span> BadRequest(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(e.Message));</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">return</span> BadRequest(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(<span class="stringliteral">&quot;failedToCreatePasswordCertification&quot;</span>));</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    </div>
+<div class="foldopen" id="foldopen00093" data-start="{" data-end="}">
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aa7a0fc6c4dfa32990b41125633f2cd8e">   93</a></span>    <span class="keyword">public</span> async Task&lt;IActionResult&gt; <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aa7a0fc6c4dfa32990b41125633f2cd8e">CheckPasswordCertification</a>([FromBody] <a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model.html">PassCertMobileModel</a> mobileModel)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">try</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            mobileModel.Type = <span class="stringliteral">&quot;check&quot;</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            var result = await <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">_dbSetup</a>.DAL.ExecuteProcedureAsync(<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">_dbSetup</a>, <span class="stringliteral">&quot;PassCert_Mobile&quot;</span>, mobileModel);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">if</span> (result.IsSuccess</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                &amp;&amp; result.ReturnValue == 1)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                var data = result.DataSet.Tables[0].Rows[0];</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                var message = data[<span class="stringliteral">&quot;Message&quot;</span>].ToString();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                <span class="comment">// Certification이 성공한 Id만 인증된 것으로 간주</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                var additionalClaims = <span class="keyword">new</span> List&lt;Claim&gt;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="keyword">new</span> Claim(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">StringClass</a>.<a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#a98d860b596d4d0f3b87bb2fa15f16c4b">CertID</a>, mobileModel.Id)</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                };</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                <span class="comment">// 인증에 성공하면 이후 인증/인가용 JWT 토큰을 발급</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                <span class="keywordflow">return</span> Ok(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f">Success</a>(message, <span class="keyword">new</span> Dictionary&lt;string, object&gt;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                    { <span class="stringliteral">&quot;ApiKey&quot;</span>, _jwtService.GenerateApiKeyToken(StringClass.Issuer_Account, StringClass.SECUIDEA, nameof(CheckPasswordCertification)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                        , TimeSpan.FromMinutes(60)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                        , additionalClaims</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                    ) }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                }));</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (result.DataSet?.Tables.Count &gt; 0</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                     &amp;&amp; result.DataSet.Tables[0].Rows.Count &gt; 0)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                var data = result.DataSet.Tables[0].Rows[0];</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                var message = data[<span class="stringliteral">&quot;Message&quot;</span>].ToString();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                <span class="keywordflow">return</span> Ok(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(message));</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">catch</span> (Exception e)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">return</span> BadRequest(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(e.Message));</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordflow">return</span> BadRequest(<a class="code hl_class" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">BoolResultModel</a>.<a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">Fail</a>(<span class="stringliteral">&quot;failedToCheckPasswordCertification&quot;</span>));</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    </div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="}">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#acf27a08293e1d1aec52b70b5f42e7038">  145</a></span>    <span class="keyword">public</span> <span class="keywordtype">string</span> <a class="code hl_function" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#acf27a08293e1d1aec52b70b5f42e7038">GenerateRandomToken</a>(<span class="keywordtype">int</span> length)</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keyword">using </span>var rng = System.Security.Cryptography.RandomNumberGenerator.Create();</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        var bytes = <span class="keyword">new</span> <span class="keywordtype">byte</span>[length];</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        rng.GetBytes(bytes);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="comment">// 랜덤 바이트를 Base32 문자로 변환</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">return</span> <span class="keyword">new</span> string(bytes.Select(b =&gt; <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a6d9f0c5861ea38d22d625992420e8949">BASE32_CHARS</a>[b % <a class="code hl_variable" href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a6d9f0c5861ea38d22d625992420e8949">BASE32_CHARS</a>.Length]).ToArray());</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    }</div>
+</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>}</div>
+</div>
+</div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_html_a2fa737bcaa639cd6c458c184a1c6918e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#a2fa737bcaa639cd6c458c184a1c6918e">SECUiDEA_ERP_Server.Controllers.BaseControllers.BaseController.GetClientIpAddress</a></div><div class="ttdeci">string GetClientIpAddress()</div><div class="ttdoc">Client IP 주소를 획득</div><div class="ttdef"><b>Definition</b> <a href="_base_controller_8cs_source.html#l00019">BaseController.cs:19</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller_html_a9e9f3d2e095735082fb5fdf86ad2b597"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_jwt_controller.html#a9e9f3d2e095735082fb5fdf86ad2b597">SECUiDEA_ERP_Server.Controllers.BaseControllers.JwtController.JwtController</a></div><div class="ttdeci">JwtController(JwtService jwtService)</div><div class="ttdef"><b>Definition</b> <a href="_jwt_controller_8cs_source.html#l00010">JwtController.cs:10</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_a65f26b70839fd8a6c8e7c3f14d3449e7"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a65f26b70839fd8a6c8e7c3f14d3449e7">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController._dbSetup</a></div><div class="ttdeci">readonly IDatabaseSetup _dbSetup</div><div class="ttdef"><b>Definition</b> <a href="#l00021">AccountController.cs:21</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_a6d9f0c5861ea38d22d625992420e8949"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a6d9f0c5861ea38d22d625992420e8949">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController.BASE32_CHARS</a></div><div class="ttdeci">const string BASE32_CHARS</div><div class="ttdef"><b>Definition</b> <a href="#l00037">AccountController.cs:37</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_a83e3b9ee6c5600653cf7131a60fb0e74"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a83e3b9ee6c5600653cf7131a60fb0e74">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController.CreatePasswordCertification</a></div><div class="ttdeci">async Task&lt; IActionResult &gt; CreatePasswordCertification([FromBody] PassCertMobileModel mobileModel)</div><div class="ttdoc">비밀번호 찾기용 인증번호 생성</div><div class="ttdef"><b>Definition</b> <a href="#l00045">AccountController.cs:45</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_a8dc7283451862f9f25f43a137e0bc615"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a8dc7283451862f9f25f43a137e0bc615">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController._dbSetupContainer</a></div><div class="ttdeci">readonly IDatabaseSetupContainer _dbSetupContainer</div><div class="ttdef"><b>Definition</b> <a href="#l00020">AccountController.cs:20</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_a9ff66fe047dbe09ec9823fede953dce0"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a9ff66fe047dbe09ec9823fede953dce0">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController.AccountController</a></div><div class="ttdeci">AccountController(JwtService jwtService, [FromKeyedServices(StringClass.CryptoSecuidea)] ICryptoManager crypto, IDatabaseSetupContainer dbSetupContainer)</div><div class="ttdef"><b>Definition</b> <a href="#l00023">AccountController.cs:23</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_aa7a0fc6c4dfa32990b41125633f2cd8e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aa7a0fc6c4dfa32990b41125633f2cd8e">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController.CheckPasswordCertification</a></div><div class="ttdeci">async Task&lt; IActionResult &gt; CheckPasswordCertification([FromBody] PassCertMobileModel mobileModel)</div><div class="ttdoc">비밀번호 찾기용 인증번호 확인</div><div class="ttdef"><b>Definition</b> <a href="#l00093">AccountController.cs:93</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_aca06304faecf667d49e89453fa56a10e"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aca06304faecf667d49e89453fa56a10e">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController._crypto</a></div><div class="ttdeci">readonly ICryptoManager _crypto</div><div class="ttdef"><b>Definition</b> <a href="#l00019">AccountController.cs:19</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller_html_acf27a08293e1d1aec52b70b5f42e7038"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#acf27a08293e1d1aec52b70b5f42e7038">SECUiDEA_ERP_Server.Controllers.api.Account.AccountController.GenerateRandomToken</a></div><div class="ttdeci">string GenerateRandomToken(int length)</div><div class="ttdoc">Base32로 인코딩된 랜덤 토큰을 생성. 알아보기 쉬운 숫자와 문자로만 구성되며, 혼동되기 쉬운 문자(0과 O, 1과 I)는 제외. 알파벳은 대문자로만 사용.</div><div class="ttdef"><b>Definition</b> <a href="#l00145">AccountController.cs:145</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_pass_cert_mobile_model.html">SECUiDEA_ERP_Server.Models.Account.PassCertMobileModel</a></div><div class="ttdef"><b>Definition</b> <a href="_certificate_models_8cs_source.html#l00006">CertificateModels.cs:7</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html">SECUiDEA_ERP_Server.Models.Authentication.JwtService</a></div><div class="ttdef"><b>Definition</b> <a href="_jwt_service_8cs_source.html#l00013">JwtService.cs:14</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html">SECUiDEA_ERP_Server.Models.CommonModels.StringClass</a></div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00003">StringClass.cs:4</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html_a98d860b596d4d0f3b87bb2fa15f16c4b"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#a98d860b596d4d0f3b87bb2fa15f16c4b">SECUiDEA_ERP_Server.Models.CommonModels.StringClass.CertID</a></div><div class="ttdeci">const string CertID</div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00058">StringClass.cs:58</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html_aebec391c7552da59c0996c844c362baf"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#aebec391c7552da59c0996c844c362baf">SECUiDEA_ERP_Server.Models.CommonModels.StringClass.CryptoSecuidea</a></div><div class="ttdeci">const string CryptoSecuidea</div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00054">StringClass.cs:54</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_html_af64beef43ea065f5a13a29d13321a2ff"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class.html#af64beef43ea065f5a13a29d13321a2ff">SECUiDEA_ERP_Server.Models.CommonModels.StringClass.SECUIDEA</a></div><div class="ttdeci">const string SECUIDEA</div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00047">StringClass.cs:47</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_html"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html">SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel</a></div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00005">BoolResultModel.cs:6</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_html_a7bb335fcad0508bd2749cc9179c8c1ec"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec">SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel.Fail</a></div><div class="ttdeci">static BoolResultModel Fail(string message, Dictionary&lt; string, object &gt;? data=null)</div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00028">BoolResultModel.cs:28</a></div></div>
+<div class="ttc" id="aclass_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_html_a8b0ef2b800da87eeb1046e0bb6219b6f"><div class="ttname"><a href="class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f">SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel.Success</a></div><div class="ttdeci">static BoolResultModel Success(string message=&quot;&quot;, Dictionary&lt; string, object &gt;? data=null)</div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00023">BoolResultModel.cs:23</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers.html">SECUiDEA_ERP_Server.Controllers.BaseControllers</a></div><div class="ttdef"><b>Definition</b> <a href="_base_controller_8cs_source.html#l00011">BaseController.cs:11</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account.html">SECUiDEA_ERP_Server.Controllers.api.Account</a></div><div class="ttdef"><b>Definition</b> <a href="#l00012">AccountController.cs:12</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account.html">SECUiDEA_ERP_Server.Models.Account</a></div><div class="ttdef"><b>Definition</b> <a href="_account_service_8cs_source.html#l00004">AccountService.cs:4</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication.html">SECUiDEA_ERP_Server.Models.Authentication</a></div><div class="ttdef"><b>Definition</b> <a href="_i_refresh_token_repository_8cs_source.html#l00001">IRefreshTokenRepository.cs:1</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models.html">SECUiDEA_ERP_Server.Models.CommonModels</a></div><div class="ttdef"><b>Definition</b> <a href="_string_class_8cs_source.html#l00001">StringClass.cs:1</a></div></div>
+<div class="ttc" id="anamespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_html"><div class="ttname"><a href="namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models.html">SECUiDEA_ERP_Server.Models.ResultModels</a></div><div class="ttdef"><b>Definition</b> <a href="_bool_result_model_8cs_source.html#l00003">BoolResultModel.cs:3</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_af34b85ff88993e1152170f543ba41d6.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_e3147d111bd9abb5b9521263f4a24daf.html">SECUiDEA_ERP_Server</a></li><li class="navelem"><a href="dir_a225e1f05f35e0ceb39b0d04360d61e9.html">Controllers</a></li><li class="navelem"><a href="dir_acdb3eb1a63852939e0f6a8d6baa0896.html">api</a></li><li class="navelem"><a href="dir_4f4fd0d1e576274d562f9f57bcd99aab.html">Account</a></li><li class="navelem"><a href="_account_controller_8cs.html">AccountController.cs</a></li>
+    <li class="footer">다음에 의해 생성됨 :  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

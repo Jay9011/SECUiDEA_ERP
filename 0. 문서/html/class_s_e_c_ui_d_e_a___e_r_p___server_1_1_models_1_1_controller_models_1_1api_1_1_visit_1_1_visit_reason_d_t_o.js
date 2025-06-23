@@ -1,0 +1,5 @@
+var class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_visit_1_1_visit_reason_d_t_o =
+[
+    [ "VisitReasonID", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_visit_1_1_visit_reason_d_t_o.html#ac034156491b3ba06e708518bdd4d985e", null ],
+    [ "VisitReasonName", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1api_1_1_visit_1_1_visit_reason_d_t_o.html#afdcf0b779058e5d6c533a99f87dff83d", null ]
+];

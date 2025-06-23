@@ -1,0 +1,14 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Parking.IParkingSetupService.SaveMultiSetupAsync" name="SECUiDEA_ERP_Server.Controllers.api.Parking.IParkingSetupService.SaveMultiSetupAsync">
+<area shape="rect" id="Node000001" title="다중 API 설정 저장" alt="" coords="5,31,268,89"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec" title=" " alt="" coords="644,5,873,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="249,27,315,16,396,10,478,8,629,13,628,18,478,13,396,15,316,21,250,33"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service.html#ac50d9d5579eb3fa370242c7ddf6c2a12" title="단일 API 설정 저장" alt="" coords="316,31,581,89"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,57,300,57,300,63,268,63"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f" title=" " alt="" coords="629,72,888,115"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="250,87,316,99,392,105,469,107,613,103,613,108,469,112,392,110,315,104,249,93"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#ad40974f127682f30e7b5634d62800e23" title=" " alt="" coords="936,31,1171,89"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="874,37,921,42,921,48,873,42"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="581,43,629,38,629,43,582,48"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="582,72,614,75,613,80,581,77"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="889,76,921,72,921,78,889,81"/>
+</map>

@@ -1,0 +1,124 @@
+\doxysection{Aligo\+Controller.\+cs}
+\hypertarget{_aligo_controller_8cs_source}{}\label{_aligo_controller_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/api/Aligo/AligoController.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/api/Aligo/AligoController.cs}}
+\mbox{\hyperlink{_aligo_controller_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }AligoService;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }AligoService.Interface;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }AligoService.Model;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }AligoService.Model.Messages;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }AligoService.Model.Templates;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }CoreDAL.Configuration.Interface;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Mvc;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers}{SECUiDEA\_ERP\_Server.Controllers.BaseControllers}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions}{SECUiDEA\_ERP\_Server.Controllers.Extensions}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models}{SECUiDEA\_ERP\_Server.Models.CommonModels}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models}{SECUiDEA\_ERP\_Server.Models.ControllerModels}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo}{SECUiDEA\_ERP\_Server.Models.ControllerModels.Aligo}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }System.Security.Claims;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models}{SECUiDEA\_ERP\_Server.Models.ResultModels}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00016}\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo}{00016}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo}{SECUiDEA\_ERP\_Server.Controllers.api.Aligo}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00018}00018\ [Route(\textcolor{stringliteral}{"{}api/[controller]/[action]"{}})]}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00019}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller}{00019}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_abf04297b99adc42c447dc3db22b47d0e}{AligoController}}\ :\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller}{BaseController}}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00020}00020\ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00021}00021\ \textcolor{preprocessor}{\ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00023}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a130e873f6d09448e7799189fe6e64695}{00023}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a130e873f6d09448e7799189fe6e64695}{\_dbContainer}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00024}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a25af0dd94a1154a49a0b2feaf910bc2e}{00024}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetup\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a25af0dd94a1154a49a0b2feaf910bc2e}{\_s1Access}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00025}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_ae565c587250e1daecdf8d815bf5d3e2e}{00025}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IDatabaseSetup\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_ae565c587250e1daecdf8d815bf5d3e2e}{\_secuidea}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00027}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_abf04297b99adc42c447dc3db22b47d0e}{00027}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_abf04297b99adc42c447dc3db22b47d0e}{AligoController}}(IDatabaseSetupContainer\ dbContainer)}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00029}00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a130e873f6d09448e7799189fe6e64695}{\_dbContainer}}\ =\ dbContainer;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00031}00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a25af0dd94a1154a49a0b2feaf910bc2e}{\_s1Access}}\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a130e873f6d09448e7799189fe6e64695}{\_dbContainer}}.GetSetup(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a39362d74ac5f896ee0439388d5e02762}{S1Access}});}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_ae565c587250e1daecdf8d815bf5d3e2e}{\_secuidea}}\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a130e873f6d09448e7799189fe6e64695}{\_dbContainer}}.GetSetup(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_af64beef43ea065f5a13a29d13321a2ff}{SECUIDEA}});}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00035}00035\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00037}00037\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00038}00038\ \ \ \ \ [ApiKeyAuth(issuer:\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a7d8060b45929d1042db5024c87f7c28f}{Issuer\_Kakao}})]}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00039}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a31f7bca61dae33ffb35612ec2b8f9d77}{00039}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_a31f7bca61dae33ffb35612ec2b8f9d77}{SendRequest}}([FromBody]\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_1_1_send_request_model}{SendRequestModel}}\ request)}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00042}00042\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ 키\ 인증}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ var\ apiKeyId\ =\ HttpContext.Items[ClaimTypes.Authentication]\ as\ string;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ var\ serviceName\ =\ HttpContext.Items[ClaimTypes.AuthenticationMethod]\ as\ string;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o}{AligoAcountDTO}}\ aligoAcountDto\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_afdcdc8406d8543138348f5df7ecaab1e}{GetAligoAccountInfo}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_ae565c587250e1daecdf8d815bf5d3e2e}{\_secuidea}});}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o}{AligoTemplateDTO}}\ aligoTemplateDto\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller_ae834e36bc951b3c77882f778dcb1235e}{GetAligoTemplateInfo}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller_ae565c587250e1daecdf8d815bf5d3e2e}{\_secuidea}},\ request.Gubun);}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 만약\ 둘\ 중\ 하나가\ null이라면\ 에러\ 처리}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (aligoAcountDto\ ==\ \textcolor{keyword}{null}\ ||\ aligoTemplateDto\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\textcolor{stringliteral}{"{}Aligo\ account\ or\ template\ information\ is\ missing."{}});}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ IAligoClient\ aligoClient\ =\ AligoClientFactory.Create(aligoAcountDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_ab39da4bfc976a1fe0cf6bf9cb27735af}{APIKey}},\ aligoAcountDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_a1f5d927f0bc4797270e929ffd1ad6212}{UserID}},\ aligoTemplateDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_a486b32901e7dc60099c4d6528d6360c4}{SenderKey}});}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ AligoTemplateDTO의\ Path가\ null\ 혹은\ 빈\ 값이\ 아니라면\ 도메인\ +\ Path를\ 사용}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ domain\ =\ aligoAcountDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_a5d7921ae748953c7cd5fa279efb64392}{Url}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\textcolor{keywordtype}{string}.IsNullOrEmpty(aligoTemplateDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_a7dedd386401594f3b96df0f565cd3cfd}{Path}}))}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ domain\ =\ \$\textcolor{stringliteral}{"{}\{domain\}\{aligoTemplateDto.Path\}"{}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 템플릿\ 정보\ 조회}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ var\ templateResult\ =\ await\ aligoClient.TemplateService.GetTemplatesAsync(aligoTemplateDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_a943076141e00aecaab70ed7355e1847a}{TPL\_CODE}});}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (templateResult.Success\ \&\&\ templateResult.Templates.Count\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ \textcolor{keyword}{template}\ =\ templateResult.Templates[0];\ \textcolor{comment}{//\ 일단\ 템플릿은\ 하나만\ 사용한다고\ 가정}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ tplContent\ =\ \textcolor{keyword}{template}.Content;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ tplName\ =\ \textcolor{keyword}{template}.Name;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 수신자별로\ 메시지\ 내용과\ 변수\ 세팅}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ receiver\ \textcolor{keywordflow}{in}\ request.ReceiverList)}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receiver.Subject\ =\ tplName;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receiver.TemplateContent\ =\ tplContent;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receiver.FailoverSubject\ =\ tplName;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receiver.FailoverMessage\ =\ tplContent;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ variables는\ 클라이언트\ 측에서\ 세팅}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ queryVariables가\ 1개\ 이상이라면\ 해당\ 값에\ 도메인\ 추가\ (queryVariables도\ 클라이언트\ 측에서\ 세팅)}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (receiver.QueryVariables\ !=\ \textcolor{keyword}{null}\ \&\&\ receiver.QueryVariables.Count\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ queryVariable\ \textcolor{keywordflow}{in}\ receiver.QueryVariables)}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ key\ =\ queryVariable.Key;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ value\ =\ \$\textcolor{stringliteral}{"{}\{domain\}\{queryVariable.Value\}"{}};}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 도메인\ 추가}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receiver.QueryVariables[key]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 메시지\ 전송\ 요청\ 생성}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ sendRequest\ =\ TemplateHelper.CreateSendRequest(}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ templateCode:\ aligoTemplateDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_template_d_t_o_a943076141e00aecaab70ed7355e1847a}{TPL\_CODE}},}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sender:\ aligoAcountDto.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_aligo_acount_d_t_o_a4f02da5931b4637afa1ad58ad2df2a6e}{SenderPhone}},}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ receiverList:\ request.ReceiverList}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 메시지\ 전송}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ aligoClient.MessageService.SendMessageAsync(sendRequest);}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}Success\ to\ send\ message"{}}));}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message));}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00114}00114\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}Failed\ to\ send\ message"{}}));}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{_aligo_controller_8cs_source_l00118}00118\ \}}
+
+\end{DoxyCode}

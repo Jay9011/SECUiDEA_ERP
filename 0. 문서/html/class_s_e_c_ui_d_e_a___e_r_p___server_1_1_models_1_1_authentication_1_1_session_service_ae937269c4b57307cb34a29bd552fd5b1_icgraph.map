@@ -1,0 +1,15 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetUserKey" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetUserKey">
+<area shape="rect" id="Node000001" title=" " alt="" coords="917,129,1142,188"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#aebc6078bc00696a22330813fffe14885" title=" " alt="" coords="610,5,862,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="962,124,868,78,838,67,840,62,870,74,964,119"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ac2cebe54d493c477ec808cb2d4c66ec8" title="세션 생성 &#45; 로그인 성공 후 호출" alt="" coords="615,88,857,147"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="902,143,857,137,858,132,902,138"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ade8309c1b2e67e831f303519b1ea2188" title="세션 비활성화 (로그아웃 등으로 호출)" alt="" coords="603,171,869,229"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="902,179,870,184,870,179,902,174"/>
+<area shape="rect" id="Node000007" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a57f7d9aa7a99eae262f3d062fc0e44ec" title="세션 유효성 검증" alt="" coords="612,253,861,312"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="964,198,870,244,840,255,838,250,868,239,962,194"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#adaaaaf25b2ef1c9af6a3d4cb16bce378" title=" " alt="" coords="304,5,555,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="595,37,556,37,556,32,595,32"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a6b3b56a76e406c798ab29c27278abb0d" title=" " alt="" coords="5,5,256,64"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="288,37,256,37,256,32,288,32"/>
+</map>

@@ -1,0 +1,5 @@
+var _api_key_auth_attribute_8cs =
+[
+    [ "SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthAttribute", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute.html", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_attribute" ],
+    [ "SECUiDEA_ERP_Server.Controllers.Extensions.ApiKeyAuthWithClaimAttribute", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute.html", "class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions_1_1_api_key_auth_with_claim_attribute" ]
+];

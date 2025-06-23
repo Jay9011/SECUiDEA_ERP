@@ -1,0 +1,13 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.SessionService" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.SessionService">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,88,256,147"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#adaaaaf25b2ef1c9af6a3d4cb16bce378" title=" " alt="" coords="304,88,555,147"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,115,288,115,288,120,256,120"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#aebc6078bc00696a22330813fffe14885" title=" " alt="" coords="603,88,854,147"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="556,115,588,115,588,120,556,120"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a9e7a1f31afb067d0aefb8c774eed14fb" title=" " alt="" coords="902,5,1154,64"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="837,85,904,66,905,71,838,90"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#aee710471eedac5f64fb0dae35b1a4a25" title="DB에서 유효한(활성) 세션 모두 가져오기" alt="" coords="916,88,1140,147"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="855,115,901,115,901,120,855,120"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ae937269c4b57307cb34a29bd552fd5b1" title=" " alt="" coords="916,171,1140,229"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="838,145,905,163,904,169,837,150"/>
+</map>

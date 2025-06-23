@@ -1,0 +1,9 @@
+var searchData=
+[
+  ['dbsetup_0',['DBSetup',['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller.html#a955d603dbcfe28e8b6f9138525bc82a0',1,'SECUiDEA_ERP_Server.Controllers.PrivateController.DBSetup()'],['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller.html#abd9d96094c3f200d4720d4df0e427f62',1,'SECUiDEA_ERP_Server.Controllers.PrivateController.DBSetup(List&lt; DBSetupViewModel &gt; settings)']]],
+  ['dbsetupservice_1',['DBSetupService',['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service.html#a4aa2facfa99c0cd060fb0c14c2f93e1b',1,'SECUiDEA_ERP_Server::Models::DBServices::DBSetupService']]],
+  ['deactivateothersessionasync_2',['DeactivateOtherSessionAsync',['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a9785941714463b3c60b3a8ad58d75f21',1,'SECUiDEA_ERP_Server::Models::Authentication::SessionService']]],
+  ['deactivatesessionasync_3',['DeactivateSessionAsync',['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ade8309c1b2e67e831f303519b1ea2188',1,'SECUiDEA_ERP_Server::Models::Authentication::SessionService']]],
+  ['decryptendpoints_4',['DecryptEndpoints',['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller.html#a33cfaa84fd418e4fa4dea72875e7cff5',1,'SECUiDEA_ERP_Server::Controllers::api::Parking::IParkingController']]],
+  ['dispose_5',['Dispose',['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_account_1_1_account_service.html#a690b5f4daf8c5df8cd57e17408dfe537',1,'SECUiDEA_ERP_Server.Models.Account.AccountService.Dispose()'],['../class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ae708e1ead43f6cf2c2edc6d5e59f6242',1,'SECUiDEA_ERP_Server.Models.Authentication.SessionService.Dispose()']]]
+];

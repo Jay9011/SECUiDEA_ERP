@@ -1,0 +1,11 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.CreateSessionAsync" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.CreateSessionAsync">
+<area shape="rect" id="Node000001" title="세션 생성 &#45; 로그인 성공 후 호출" alt="" coords="5,129,248,188"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a9785941714463b3c60b3a8ad58d75f21" title="다른 세션 비활성화 (중복 로그인 방지 등...)" alt="" coords="296,5,562,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,126,295,74,311,67,313,72,297,78,184,131"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ae937269c4b57307cb34a29bd552fd5b1" title=" " alt="" coords="317,88,541,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="248,139,301,132,302,137,248,145"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ae1a504a95436c2574716dcd2fd9d0b1d" title=" " alt="" coords="317,171,541,229"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="248,173,302,180,301,185,248,178"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a1f3aa5d8925726d84d14eb06b5d0cf46" title="세션 저장" alt="" coords="312,253,546,312"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="184,186,297,239,313,245,311,250,295,244,182,191"/>
+</map>

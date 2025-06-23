@@ -1,0 +1,7 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Visit.VisitController.VisitReserveStatus" name="SECUiDEA_ERP_Server.Controllers.api.Visit.VisitController.VisitReserveStatus">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,13,268,56"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f" title=" " alt="" coords="316,13,575,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,32,300,32,300,37,268,37"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#ad40974f127682f30e7b5634d62800e23" title=" " alt="" coords="623,5,857,64"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="576,32,607,32,607,37,576,37"/>
+</map>

@@ -1,0 +1,125 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Auth\+User 네임스페이스 참조}
+\hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user}{}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}
+\doxysubsubsection*{클래스}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_i_user_repository}{IUser\+Repository}}
+\item 
+class \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_permission}{Permission}}
+\begin{DoxyCompactList}\small\item\em 사용자 권한 레벨 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}}
+\begin{DoxyCompactList}\small\item\em 사용자 정보 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_auth_service}{User\+Auth\+Service}}
+\item 
+class \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{User\+Repository\+Factory}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{열거형 타입}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5}{Permission\+Level}} \{ \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a6adf97f83acf6453d4a6a4b1070f3754}{None}} = 0
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a7a1a5f3e79fdc91edf2f5ead9d66abb4}{Read}} = 1
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a7f090bbab1cc7f9c08bf4e54d932d3c0}{Modify}} = 2
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a1129c0e4d43f2d121652a7302712cff6}{Write}} = 3
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99}{User\+Role}} \{ \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99aadb831a7fdd83dd1e2a309ce7591dff8}{Guest}} = 0
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99a858ba4765e53c712ef672a9570474b1d}{Member}} = 1
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99ae3afed0047b08059d0fada10f400c1e5}{Admin}} = 2
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99a0b28a5799a32c687dad2c5183718ceac}{Super\+Admin}} = 3
+ \}
+\item 
+enum \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395}{S1\+Auth\+Type}} \{ \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395aadb831a7fdd83dd1e2a309ce7591dff8}{Guest}} = 0
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395a45de6e8f0cf71a051fae5da2e0da63a8}{Cooperation}} = 1
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395af8c8b903cb2e4f297e4b96d4b9c1e98a}{Employee}} = 2
+, \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395ae3afed0047b08059d0fada10f400c1e5}{Admin}} = 3
+ \}
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_doc-enum-members}
+\doxysubsection{열거형 타입 문서화}
+\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!PermissionLevel@{PermissionLevel}}
+\index{PermissionLevel@{PermissionLevel}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}
+\doxysubsubsection{\texorpdfstring{PermissionLevel}{PermissionLevel}}
+{\footnotesize\ttfamily \label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5} 
+enum \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Auth\+User.\+Permission\+Level}}}
+
+\begin{DoxyEnumFields}[2]{열거형 멤버}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!None@{None}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a6adf97f83acf6453d4a6a4b1070f3754}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a6adf97f83acf6453d4a6a4b1070f3754} 
+None&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Read@{Read}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Read@{Read}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a7a1a5f3e79fdc91edf2f5ead9d66abb4}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a7a1a5f3e79fdc91edf2f5ead9d66abb4} 
+Read&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Modify@{Modify}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Modify@{Modify}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a7f090bbab1cc7f9c08bf4e54d932d3c0}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a7f090bbab1cc7f9c08bf4e54d932d3c0} 
+Modify&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Write@{Write}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Write@{Write}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a1129c0e4d43f2d121652a7302712cff6}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a40953ee58c5da4af92a773a6e78da8d5a1129c0e4d43f2d121652a7302712cff6} 
+Write&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\mbox{\hyperlink{_permissions_8cs_source}{Permissions.\+cs}} 파일의 \mbox{\hyperlink{_permissions_8cs_source_l00003}{3}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!S1AuthType@{S1AuthType}}
+\index{S1AuthType@{S1AuthType}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}
+\doxysubsubsection{\texorpdfstring{S1AuthType}{S1AuthType}}
+{\footnotesize\ttfamily \label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395} 
+enum \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Auth\+User.\+S1\+Auth\+Type}}}
+
+\begin{DoxyEnumFields}[2]{열거형 멤버}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Guest@{Guest}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Guest@{Guest}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395aadb831a7fdd83dd1e2a309ce7591dff8}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395aadb831a7fdd83dd1e2a309ce7591dff8} 
+Guest&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Cooperation@{Cooperation}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Cooperation@{Cooperation}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395a45de6e8f0cf71a051fae5da2e0da63a8}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395a45de6e8f0cf71a051fae5da2e0da63a8} 
+Cooperation&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Employee@{Employee}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Employee@{Employee}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395af8c8b903cb2e4f297e4b96d4b9c1e98a}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395af8c8b903cb2e4f297e4b96d4b9c1e98a} 
+Employee&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Admin@{Admin}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Admin@{Admin}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395ae3afed0047b08059d0fada10f400c1e5}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a875a559b499bc7e6dece7b6bcdd47395ae3afed0047b08059d0fada10f400c1e5} 
+Admin&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\mbox{\hyperlink{_permissions_8cs_source}{Permissions.\+cs}} 파일의 \mbox{\hyperlink{_permissions_8cs_source_l00019}{19}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!UserRole@{UserRole}}
+\index{UserRole@{UserRole}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}
+\doxysubsubsection{\texorpdfstring{UserRole}{UserRole}}
+{\footnotesize\ttfamily \label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99} 
+enum \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99}{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Auth\+User.\+User\+Role}}}
+
+\begin{DoxyEnumFields}[2]{열거형 멤버}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Guest@{Guest}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Guest@{Guest}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99aadb831a7fdd83dd1e2a309ce7591dff8}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99aadb831a7fdd83dd1e2a309ce7591dff8} 
+Guest&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Member@{Member}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Member@{Member}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99a858ba4765e53c712ef672a9570474b1d}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99a858ba4765e53c712ef672a9570474b1d} 
+Member&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Admin@{Admin}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!Admin@{Admin}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99ae3afed0047b08059d0fada10f400c1e5}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99ae3afed0047b08059d0fada10f400c1e5} 
+Admin&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SuperAdmin@{SuperAdmin}!SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}}\index{SECUiDEA\_ERP\_Server.Models.AuthUser@{SECUiDEA\_ERP\_Server.Models.AuthUser}!SuperAdmin@{SuperAdmin}}}\Hypertarget{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99a0b28a5799a32c687dad2c5183718ceac}\label{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_a13d10217ebeb3885a485990cb4b9ee99a0b28a5799a32c687dad2c5183718ceac} 
+Super\+Admin&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\mbox{\hyperlink{_permissions_8cs_source}{Permissions.\+cs}} 파일의 \mbox{\hyperlink{_permissions_8cs_source_l00011}{11}} 번째 라인에서 정의되었습니다.
+

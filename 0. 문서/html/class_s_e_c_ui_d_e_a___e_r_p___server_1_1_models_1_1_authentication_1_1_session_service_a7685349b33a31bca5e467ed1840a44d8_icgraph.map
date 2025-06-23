@@ -1,0 +1,5 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetLatestSessionAsync" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetLatestSessionAsync">
+<area shape="rect" id="Node000001" title="사용자 ID로 최신 세션 정보 조회" alt="" coords="303,5,527,64"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#a57f7d9aa7a99eae262f3d062fc0e44ec" title="세션 유효성 검증" alt="" coords="5,5,255,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="287,37,255,37,255,32,287,32"/>
+</map>

@@ -1,0 +1,279 @@
+\doxysection{D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/obj/\+Release/net8.0/\+Pub\+Tmp/\+Out/wwwroot/lib/i18next-\/http-\/backend 디렉토리 참조}
+\hypertarget{dir_7f5dbd03ca8e1f6095647f3ca7a641c1}{}\label{dir_7f5dbd03ca8e1f6095647f3ca7a641c1}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/obj/Release/net8.0/PubTmp/Out/wwwroot/lib/i18next-\/http-\/backend 디렉토리 참조@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/obj/Release/net8.0/PubTmp/Out/wwwroot/lib/i18next-\/http-\/backend 디렉토리 참조}}
+i18next-\/http-\/backend에 대한 디렉토리 의존성 그래프\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{dir_7f5dbd03ca8e1f6095647f3ca7a641c1_dep}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{상세한 설명}
+\hypertarget{README.md_autotoc_md79}{}\doxysubsection{\texorpdfstring{Introduction}{Introduction}}\label{README.md_autotoc_md79}
+\href{https://github.com/i18next/i18next-http-backend/actions?query=workflow\%3Anode}{\texttt{}} \href{https://github.com/i18next/i18next-http-backend/actions?query=workflow\%3Adeno}{\texttt{}} \href{https://www.npmjs.com/package/i18next-http-backend}{\texttt{}}
+
+This is a simple i18next backend to be used in Node.\+js, in the browser and for Deno. It will load resources from a backend server using the XMLHttp\+Request or the fetch API.
+
+Get a first idea on how it is used in \href{https://youtu.be/SA_9i4TtxLQ?t=953}{\texttt{this i18next crash course video}}.
+
+It\textquotesingle{}s based on the deprecated \href{https://github.com/i18next/i18next-xhr-backend}{\texttt{i18next-\/xhr-\/backend}} and can mostly be used as a drop-\/in replacement.
+
+{\itshape \href{https://github.com/i18next/i18next-xhr-backend/issues/348\#issuecomment-663060275}{\texttt{Why i18next-\/xhr-\/backend was deprecated?}}}\hypertarget{README.md_autotoc_md80}{}\doxysubsection{\texorpdfstring{Advice\+:}{Advice\+:}}\label{README.md_autotoc_md80}
+If you don\textquotesingle{}t like to manage your translation files manually or are simply looking for a \href{https://locize.com}{\texttt{better management solution}}, take a look at \href{https://github.com/locize/i18next-locize-backend}{\texttt{i18next-\/locize-\/backend}}. The i18next \href{https://www.i18next.com/overview/plugins-and-utils\#backends}{\texttt{backed plugin}} for 🌐 \href{https://locize.com}{\texttt{locize}} ☁️.
+
+{\itshape To see \href{https://github.com/locize/i18next-locize-backend}{\texttt{i18next-\/locize-\/backend}} in a working app example, check out\+:}
+
+
+\begin{DoxyItemize}
+\item {\itshape \href{https://github.com/locize/react-tutorial}{\texttt{this react-\/tutorial}} starting from \href{https://github.com/locize/react-tutorial\#step-2---use-the-locize-cdn}{\texttt{Step 2}}}
+\item {\itshape \href{https://locize.com/blog/react-i18next/}{\texttt{this guide}} starting from the step of \href{https://locize.com/blog/react-i18next/\#how-look}{\texttt{replacing i18next-\/http-\/backend with i18next-\/locize-\/backend}}}
+\item {\itshape \href{https://locize.com/blog/angular-i18next/}{\texttt{this Angular blog post}} \href{https://locize.com/blog/angular-i18next/\#how-look}{\texttt{introducing i18next-\/locize-\/backend}}}
+\item {\itshape \href{https://www.youtube.com/watch?v=TFV_vhJs5DY&t=294s}{\texttt{the code integration part}} in this \href{https://www.youtube.com/watch?v=TFV_vhJs5DY}{\texttt{You\+Tube video}}}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md81}{}\doxysubsection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{README.md_autotoc_md81}
+Make sure you set the {\ttfamily debug} option of i18next to {\ttfamily true}. This will maybe log more information in the developer console.
+
+{\bfseries{Seeing failed http requests, like 404?}}
+
+Are you using a \href{https://github.com/i18next/i18next-browser-languageDetector}{\texttt{language detector}} plugin that detects region specific languages you are not providing? i.\+e. you provide `\textquotesingle{}en'{\ttfamily  translations but you see a }\textquotesingle{}en-\/\+US\textquotesingle{}\`{} request first?
+
+This is because of the default {\ttfamily load} \href{https://www.i18next.com/overview/configuration-options}{\texttt{option}} set to `\textquotesingle{}all'\`{}.
+
+Try to set the {\ttfamily load} \href{https://www.i18next.com/overview/configuration-options}{\texttt{option}} to `\textquotesingle{}language\+Only'\`{}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{i18next.init(\{}
+\DoxyCodeLine{\ \ load:\ 'languageOnly',}
+\DoxyCodeLine{\ \ //\ other\ options}
+\DoxyCodeLine{\})}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md82}{}\doxysubsection{\texorpdfstring{Getting started}{Getting started}}\label{README.md_autotoc_md82}
+Source can be loaded via \href{https://www.npmjs.com/package/i18next-http-backend}{\texttt{npm}} or \href{https://github.com/i18next/i18next-http-backend/blob/master/i18nextHttpBackend.min.js}{\texttt{downloaded}} from this repo.
+
+There\textquotesingle{}s also the possibility to directly import it via a CDN like \href{https://cdn.jsdelivr.net/npm/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js}{\texttt{jsdelivr}} or \href{https://unpkg.com/i18next-http-backend@1.3.1/i18nextHttpBackend.min.js}{\texttt{unpkg}} or similar.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ npm\ package}
+\DoxyCodeLine{\$\ npm\ install\ i18next-\/http-\/backend}
+
+\end{DoxyCode}
+
+
+Wiring up\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ i18next\ from\ 'i18next';}
+\DoxyCodeLine{import\ HttpApi\ from\ 'i18next-\/http-\/backend';}
+\DoxyCodeLine{}
+\DoxyCodeLine{i18next.use(HttpApi).init(i18nextOptions);}
+
+\end{DoxyCode}
+
+
+for Deno\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ i18next\ from\ 'https://deno.land/x/i18next/index.js'}
+\DoxyCodeLine{import\ Backend\ from\ 'https://deno.land/x/i18next\_http\_backend/index.js'}
+\DoxyCodeLine{}
+\DoxyCodeLine{i18next.use(Backend).init(i18nextOptions);}
+
+\end{DoxyCode}
+
+
+for plain browser\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<script\ src="{}https://cdn.jsdelivr.net/npm/i18next-\/http-\/backend@1.3.1/i18nextHttpBackend.min.js"{}></script>}
+\DoxyCodeLine{<!-\/-\/\ an\ example\ can\ be\ found\ in\ example/jquery/index.html\ -\/-\/>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{i18next.use(i18nextHttpBackend).init(i18nextOptions);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item As with all modules you can either pass the constructor function (class) to the i18next.\+use or a concrete instance.
+\item If you don\textquotesingle{}t use a module loader it will be added to {\ttfamily window.\+i18next\+Http\+Backend}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md83}{}\doxysubsubsection{\texorpdfstring{Backend Options}{Backend Options}}\label{README.md_autotoc_md83}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ //\ path\ where\ resources\ get\ loaded\ from,\ or\ a\ function}
+\DoxyCodeLine{\ \ //\ returning\ a\ path:}
+\DoxyCodeLine{\ \ //\ function(lngs,\ namespaces)\ \{\ return\ customPath;\ \}}
+\DoxyCodeLine{\ \ //\ the\ returned\ path\ will\ interpolate\ lng,\ ns\ if\ provided\ like\ giving\ a\ static\ path}
+\DoxyCodeLine{\ \ //\ the\ function\ might\ return\ a\ promise}
+\DoxyCodeLine{\ \ //\ returning\ falsy\ will\ abort\ the\ download}
+\DoxyCodeLine{\ \ //}
+\DoxyCodeLine{\ \ //\ If\ not\ used\ with\ i18next-\/multiload-\/backend-\/adapter,\ lngs\ and\ namespaces\ will\ have\ only\ one\ element\ each,}
+\DoxyCodeLine{\ \ //\ If\ used\ with\ i18next-\/multiload-\/backend-\/adapter,\ lngs\ and\ namespaces\ can\ have\ multiple\ elements}
+\DoxyCodeLine{\ \ //\ \ \ and\ also\ your\ server\ needs\ to\ support\ multiloading}
+\DoxyCodeLine{\ \ //\ \ \ \ \ \ /locales/resources.json?lng=de+en\&ns=ns1+ns2}
+\DoxyCodeLine{\ \ //\ \ \ Adapter\ is\ needed\ to\ enable\ MultiLoading\ https://github.com/i18next/i18next-\/multiload-\/backend-\/adapter}
+\DoxyCodeLine{\ \ //\ \ \ Returned\ JSON\ structure\ in\ this\ case\ is}
+\DoxyCodeLine{\ \ //\ \ \ \{}
+\DoxyCodeLine{\ \ //\ \ \ \ lang\ :\ \{}
+\DoxyCodeLine{\ \ //\ \ \ \ \ namespaceA:\ \{\},}
+\DoxyCodeLine{\ \ //\ \ \ \ \ namespaceB:\ \{\},}
+\DoxyCodeLine{\ \ //\ \ \ \ \ ...etc}
+\DoxyCodeLine{\ \ //\ \ \ \ \}}
+\DoxyCodeLine{\ \ //\ \ \ \}}
+\DoxyCodeLine{\ \ loadPath:\ '/locales/\{\{lng\}\}/\{\{ns\}\}.json',}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ path\ to\ post\ missing\ resources,\ or\ a\ function}
+\DoxyCodeLine{\ \ //\ function(lng,\ namespace)\ \{\ return\ customPath;\ \}}
+\DoxyCodeLine{\ \ //\ the\ returned\ path\ will\ interpolate\ lng,\ ns\ if\ provided\ like\ giving\ a\ static\ path}
+\DoxyCodeLine{\ \ //}
+\DoxyCodeLine{\ \ //\ note\ that\ this\ only\ works\ when\ initialized\ with\ \{\ saveMissing:\ true\ \}}
+\DoxyCodeLine{\ \ //\ (see\ https://www.i18next.com/overview/configuration-\/options)}
+\DoxyCodeLine{\ \ addPath:\ '/locales/add/\{\{lng\}\}/\{\{ns\}\}',}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ parse\ data\ after\ it\ has\ been\ fetched}
+\DoxyCodeLine{\ \ //\ in\ example\ use\ https://www.npmjs.com/package/json5\ or\ https://www.npmjs.com/package/jsonc-\/parser}
+\DoxyCodeLine{\ \ //\ here\ it\ removes\ the\ letter\ a\ from\ the\ json\ (bad\ idea)}
+\DoxyCodeLine{\ \ parse:\ function(data)\ \{\ return\ data.replace(/a/g,\ '');\ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ parse\ data\ before\ it\ has\ been\ sent\ by\ addPath}
+\DoxyCodeLine{\ \ parsePayload:\ function(namespace,\ key,\ fallbackValue)\ \{\ return\ \{\ key:\ fallbackValue\ ||\ "{}"{}\ \}\ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ parse\ data\ before\ it\ has\ been\ sent\ by\ loadPath}
+\DoxyCodeLine{\ \ //\ if\ value\ returned\ it\ will\ send\ a\ POST\ request}
+\DoxyCodeLine{\ \ parseLoadPayload:\ function(languages,\ namespaces)\ \{\ return\ undefined\ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ allow\ cross\ domain\ requests}
+\DoxyCodeLine{\ \ crossDomain:\ false,}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ allow\ credentials\ on\ cross\ domain\ requests}
+\DoxyCodeLine{\ \ withCredentials:\ false,}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ overrideMimeType\ sets\ request.overrideMimeType("{}application/json"{})}
+\DoxyCodeLine{\ \ overrideMimeType:\ false,}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ custom\ request\ headers\ sets\ request.setRequestHeader(key,\ value)}
+\DoxyCodeLine{\ \ customHeaders:\ \{}
+\DoxyCodeLine{\ \ \ \ authorization:\ 'foo',}
+\DoxyCodeLine{\ \ \ \ //\ ...}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{\ \ //\ can\ also\ be\ a\ function,\ that\ returns\ the\ headers}
+\DoxyCodeLine{\ \ customHeaders:\ ()\ =>\ (\{}
+\DoxyCodeLine{\ \ \ \ authorization:\ 'foo',}
+\DoxyCodeLine{\ \ \ \ //\ ...}
+\DoxyCodeLine{\ \ \}),}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ requestOptions:\ \{\ //\ used\ for\ fetch,\ can\ also\ be\ a\ function\ (payload)\ =>\ (\{\ method:\ 'GET'\ \})}
+\DoxyCodeLine{\ \ \ \ mode:\ 'cors',}
+\DoxyCodeLine{\ \ \ \ credentials:\ 'same-\/origin',}
+\DoxyCodeLine{\ \ \ \ cache:\ 'default'}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ define\ a\ custom\ request\ function}
+\DoxyCodeLine{\ \ //\ can\ be\ used\ to\ support\ XDomainRequest\ in\ IE\ 8\ and\ 9}
+\DoxyCodeLine{\ \ //}
+\DoxyCodeLine{\ \ //\ 'options'\ will\ be\ this\ entire\ options\ object}
+\DoxyCodeLine{\ \ //\ 'url'\ will\ be\ passed\ the\ value\ of\ 'loadPath'}
+\DoxyCodeLine{\ \ //\ 'payload'\ will\ be\ a\ key:value\ object\ used\ when\ saving\ missing\ translations}
+\DoxyCodeLine{\ \ //\ 'callback'\ is\ a\ function\ that\ takes\ two\ parameters,\ 'err'\ and\ 'res'.}
+\DoxyCodeLine{\ \ //\ \ \ \ \ \ \ \ \ \ \ \ 'err'\ should\ be\ an\ error}
+\DoxyCodeLine{\ \ //\ \ \ \ \ \ \ \ \ \ \ \ 'res'\ should\ be\ an\ object\ with\ a\ 'status'\ property\ and\ a\ 'data'\ property\ containing\ a\ stringified\ object\ instance\ beeing\ the\ key:value\ translation\ pairs\ for\ the}
+\DoxyCodeLine{\ \ //\ \ \ \ \ \ \ \ \ \ \ \ requested\ language\ and\ namespace,\ or\ null\ in\ case\ of\ an\ error.}
+\DoxyCodeLine{\ \ request:\ function\ (options,\ url,\ payload,\ callback)\ \{\},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ adds\ parameters\ to\ resource\ URL.\ 'example.com'\ -\/>\ 'example.com?v=1.3.5'}
+\DoxyCodeLine{\ \ queryStringParams:\ \{\ v:\ '1.3.5'\ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ reloadInterval:\ false\ //\ can\ be\ used\ to\ reload\ resources\ in\ a\ specific\ interval\ (milliseconds)\ (useful\ in\ server\ environments)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Options can be passed in\+:
+
+{\bfseries{preferred}} -\/ by setting options.\+backend in i18next.\+init\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ i18next\ from\ 'i18next';}
+\DoxyCodeLine{import\ HttpApi\ from\ 'i18next-\/http-\/backend';}
+\DoxyCodeLine{}
+\DoxyCodeLine{i18next.use(HttpApi).init(\{}
+\DoxyCodeLine{\ \ backend:\ options,}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+
+
+on construction\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ HttpApi\ from\ 'i18next-\/http-\/backend';}
+\DoxyCodeLine{const\ HttpApi\ =\ new\ HttpApi(null,\ options);}
+
+\end{DoxyCode}
+
+
+via calling init\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ HttpApi\ from\ 'i18next-\/http-\/backend';}
+\DoxyCodeLine{const\ HttpApi\ =\ new\ HttpApi();}
+\DoxyCodeLine{HttpApi.init(null,\ options);}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md84}{}\doxysubsubsection{\texorpdfstring{Type\+Script}{Type\+Script}}\label{README.md_autotoc_md84}
+To properly type the backend options, you can import the {\ttfamily Http\+Backend\+Options} interface and use it as a generic type parameter to the i18next\textquotesingle{}s {\ttfamily init} method, e.\+g.\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ i18n\ from\ 'i18next'}
+\DoxyCodeLine{import\ HttpBackend,\ \{\ HttpBackendOptions\ \}\ from\ 'i18next-\/http-\/backend'}
+\DoxyCodeLine{}
+\DoxyCodeLine{i18n}
+\DoxyCodeLine{\ \ .use(HttpBackend)}
+\DoxyCodeLine{\ \ .init<HttpBackendOptions>(\{}
+\DoxyCodeLine{\ \ \ \ backend:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ //\ http\ backend\ options}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ //\ other\ i18next\ options}
+\DoxyCodeLine{\ \ \})}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+\doxysubsubsubsection*{Gold Sponsors}
+
+\href{https://locize.com/}{\texttt{ }} 
+
+\DoxyHorRuler{0}
+
+
+{\bfseries{From the creators of i18next\+: localization as a service -\/ locize.\+com}}
+
+A translation management system built around the i18next ecosystem -\/ \href{https://locize.com}{\texttt{locize.\+com}}.
+
+
+
+With using \href{http://locize.com/?utm_source=react_i18next_readme&utm_medium=github}{\texttt{locize}} you directly support the future of i18next.
+
+\DoxyHorRuler{0}
+ 

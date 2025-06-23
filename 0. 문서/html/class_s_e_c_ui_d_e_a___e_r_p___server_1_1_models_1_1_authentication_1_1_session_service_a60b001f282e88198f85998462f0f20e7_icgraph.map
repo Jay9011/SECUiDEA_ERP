@@ -1,0 +1,9 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetSessionByIdAsync" name="SECUiDEA_ERP_Server.Models.Authentication.SessionService.GetSessionByIdAsync">
+<area shape="rect" id="Node000001" title="세션 ID로 세션 정보 조회" alt="" coords="320,88,544,147"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#ade8309c1b2e67e831f303519b1ea2188" title="세션 비활성화 (로그아웃 등으로 호출)" alt="" coords="5,5,272,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="310,86,245,67,246,62,312,81"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#aee4449688b84ac7d84660ed50559f7cf" title="비활성 세션 확인" alt="" coords="28,88,249,147"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="304,120,249,120,249,115,304,115"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service.html#af8eebd4845e6a67ec35840e04d493f1e" title="세션 활성 상태 업데이트 (요청 처리시마다)" alt="" coords="16,171,261,229"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="312,154,246,173,245,167,310,149"/>
+</map>

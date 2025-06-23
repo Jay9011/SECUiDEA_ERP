@@ -1,0 +1,9 @@
+<map id="SECUiDEA_ERP_Server.Models.Authentication.JwtService.GetJwtCollection" name="SECUiDEA_ERP_Server.Models.Authentication.JwtService.GetJwtCollection">
+<area shape="rect" id="Node000001" title="JWT 설정을 가져오기 위한 메서드" alt="" coords="599,39,819,97"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#a438407d9347b06bcfc459b48ae403ef2" title="JWT 설정을 로드" alt="" coords="310,5,536,64"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="583,56,537,51,537,45,583,51"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program.html#ad4b68fc74b4f25647b8d739a053041af" title=" " alt="" coords="296,88,551,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="584,85,544,90,543,85,583,80"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service.html#a7abd5fb0cbb822474610746018e8bda3" title="JWT 서비스 생성자 Singleton으로 등록된다고 가성하고, 최초 호출시 Registry에서 값을 읽어옴" alt="" coords="5,13,248,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="294,37,248,37,248,32,294,32"/>
+</map>

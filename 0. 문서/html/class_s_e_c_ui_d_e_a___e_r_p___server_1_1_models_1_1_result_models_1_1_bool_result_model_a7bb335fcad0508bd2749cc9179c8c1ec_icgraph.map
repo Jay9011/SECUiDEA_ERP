@@ -1,0 +1,44 @@
+<map id="SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel.Fail" name="SECUiDEA_ERP_Server.Models.ResultModels.BoolResultModel.Fail">
+<area shape="rect" id="Node000001" title=" " alt="" coords="701,563,930,605"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_visit_1_1_visit_controller.html#a714d08a30c6f14c6fcce610aa405001f" title=" " alt="" coords="360,5,622,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="812,547,807,449,799,386,785,318,765,248,737,179,699,116,651,62,621,43,624,38,655,58,704,113,742,177,770,246,791,316,804,385,812,449,818,547"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#aa7a0fc6c4dfa32990b41125633f2cd8e" title="비밀번호 찾기용 인증번호 확인" alt="" coords="352,72,630,131"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="809,548,797,466,771,359,750,303,724,248,691,196,651,151,627,133,630,129,655,147,695,193,729,245,755,301,776,358,802,465,814,547"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller.html#a0bc7e6bdf9e20dc85b239375e2fe8f0f" title=" " alt="" coords="5,113,281,156"/>
+<area shape="poly" id="edge17_Node000001_Node000004" title=" " alt="" coords="809,547,796,471,770,374,749,324,723,276,691,232,652,196,634,188,602,180,508,166,281,146,281,141,509,161,603,175,635,183,654,191,695,229,728,273,754,322,775,372,802,470,814,546"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_account_controller.html#a83e3b9ee6c5600653cf7131a60fb0e74" title="비밀번호 찾기용 인증번호 생성" alt="" coords="352,205,630,264"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="803,548,785,489,754,415,734,378,710,341,683,307,651,278,629,264,632,259,655,274,687,304,715,338,739,375,759,413,790,487,808,547"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_visit_1_1_visit_controller.html#a535d41f4771f78b47dad2f5a6be0bbc6" title=" " alt="" coords="360,288,622,331"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="798,549,777,502,745,446,703,391,679,366,652,345,621,329,624,325,654,340,682,362,707,387,749,443,781,499,803,547"/>
+<area shape="rect" id="Node000007" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller.html#a001ac6af597c043a785104df1ddf70bc" title=" " alt="" coords="360,355,622,413"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="787,552,730,488,692,455,652,428,621,413,623,409,654,423,696,451,733,484,791,549"/>
+<area shape="rect" id="Node000008" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a7732537c9fdb78869d9e534c32580334" title=" " alt="" coords="353,437,628,480"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="765,557,711,528,652,501,595,483,597,478,654,496,714,523,767,552"/>
+<area shape="rect" id="Node000011" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service.html#a6d18622512126950f1e844c25729fca1" title="다중 API 설정 저장" alt="" coords="12,537,274,596"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="729,561,653,545,562,536,491,535,329,545,275,550,274,545,328,540,491,530,562,531,653,540,730,556"/>
+<area shape="rect" id="Node000012" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service.html#a4e44984b257862b11264ff57bfcf528e" title="다중 DB 설정을 저장" alt="" coords="16,655,270,713"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="724,612,653,628,452,658,271,677,270,672,452,653,653,623,722,607"/>
+<area shape="rect" id="Node000013" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service.html#ac50d9d5579eb3fa370242c7ddf6c2a12" title="단일 API 설정 저장" alt="" coords="358,555,624,613"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="685,587,624,587,624,581,685,581"/>
+<area shape="rect" id="Node000014" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service.html#aba7690e0098e6195a6ac343501f6dbcc" title="단일 DB 설정을 저장" alt="" coords="360,688,622,747"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="766,616,713,644,654,672,604,690,602,685,652,667,711,640,764,611"/>
+<area shape="rect" id="Node000015" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_aligo_1_1_aligo_controller.html#a31f7bca61dae33ffb35612ec2b8f9d77" title=" " alt="" coords="360,771,622,813"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="795,620,770,654,737,692,698,730,654,761,624,775,621,770,652,756,695,726,733,689,766,651,790,617"/>
+<area shape="rect" id="Node000016" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_private_controller.html#a1dc82e33b91872cfb458c3655b1e272e" title=" " alt="" coords="370,837,612,880"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="803,621,781,669,749,725,707,781,682,806,654,828,613,847,611,842,652,823,679,802,703,777,745,722,777,666,798,619"/>
+<area shape="rect" id="Node000017" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_d_b_services_1_1_d_b_setup_service.html#a35e8e534f74e2cb0489a9d66b25195db" title="연결 테스트" alt="" coords="329,904,653,947"/>
+<area shape="poly" id="edge19_Node000001_Node000017" title=" " alt="" coords="809,621,791,681,760,756,740,794,716,831,687,865,655,894,636,906,633,901,651,890,683,861,711,828,735,791,755,754,786,680,804,620"/>
+<area shape="rect" id="Node000018" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_account_1_1_s1_account_controller.html#acfacd0e0f22a058251d52163976e8159" title=" " alt="" coords="342,971,640,1013"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="812,621,798,694,770,786,749,834,724,881,692,924,655,961,637,972,634,968,651,957,688,920,719,878,745,832,765,784,793,693,807,620"/>
+<area shape="rect" id="Node000019" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller.html#aeae1e6c8df994fadcf5187ff7a8d5d00" title="방문 차량 등록" alt="" coords="360,1037,622,1080"/>
+<area shape="poly" id="edge21_Node000001_Node000019" title=" " alt="" coords="815,621,805,705,795,759,779,816,759,874,732,930,697,982,655,1027,624,1046,621,1042,651,1023,693,979,727,927,754,872,774,814,789,757,800,704,810,620"/>
+<area shape="rect" id="Node000020" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller.html#af0397f5e2017c8f1544f7ef888f8ffe8" title=" " alt="" coords="360,1104,622,1147"/>
+<area shape="poly" id="edge22_Node000001_Node000020" title=" " alt="" coords="817,621,811,717,802,778,788,845,768,913,740,979,702,1041,655,1094,624,1114,621,1109,651,1090,698,1038,735,977,763,911,783,843,797,777,806,716,812,621"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="337,119,281,124,281,119,337,113"/>
+<area shape="rect" id="Node000009" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a1c882a38b09bc9a1ffe531e566dd89c1" title="S1ACCESS 게스트 로그인 처리" alt="" coords="12,388,274,431"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="338,440,274,431,275,425,338,434"/>
+<area shape="rect" id="Node000010" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_login_1_1_s1_auth_controller.html#a18f7c957f90c231f48c0ffc75783d0d7" title="S1ACCESS 로그인 처리" alt="" coords="12,455,274,497"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="338,469,274,472,274,467,337,464"/>
+<area shape="poly" id="edge13_Node000013_Node000011" title=" " alt="" coords="343,579,274,576,275,571,343,574"/>
+<area shape="poly" id="edge15_Node000014_Node000012" title=" " alt="" coords="344,706,270,699,271,694,344,701"/>
+</map>

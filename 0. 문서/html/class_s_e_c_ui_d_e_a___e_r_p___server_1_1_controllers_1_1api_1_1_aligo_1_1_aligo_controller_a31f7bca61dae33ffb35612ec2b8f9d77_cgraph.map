@@ -1,0 +1,14 @@
+<map id="SECUiDEA_ERP_Server.Controllers.api.Aligo.AligoController.SendRequest" name="SECUiDEA_ERP_Server.Controllers.api.Aligo.AligoController.SendRequest">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,121,268,164"/>
+<area shape="rect" id="Node000002" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a7bb335fcad0508bd2749cc9179c8c1ec" title=" " alt="" coords="331,5,560,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,118,242,88,315,58,336,50,337,56,317,62,244,93,180,123"/>
+<area shape="rect" id="Node000004" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#afdcdc8406d8543138348f5df7ecaab1e" title="Aligo 계정 정보를 DB에서 조회" alt="" coords="325,72,566,131"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,122,308,117,309,122,268,128"/>
+<area shape="rect" id="Node000005" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller.html#ae834e36bc951b3c77882f778dcb1235e" title=" " alt="" coords="325,155,566,213"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="268,158,309,163,308,168,268,163"/>
+<area shape="rect" id="Node000006" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#a8b0ef2b800da87eeb1046e0bb6219b6f" title=" " alt="" coords="316,237,575,280"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="180,162,244,193,317,223,337,230,336,235,315,228,242,198,178,167"/>
+<area shape="rect" id="Node000003" href="$class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model.html#ad40974f127682f30e7b5634d62800e23" title=" " alt="" coords="623,113,857,172"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="541,46,576,58,674,103,672,108,574,62,540,51"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="540,234,574,223,672,177,674,182,576,228,541,239"/>
+</map>

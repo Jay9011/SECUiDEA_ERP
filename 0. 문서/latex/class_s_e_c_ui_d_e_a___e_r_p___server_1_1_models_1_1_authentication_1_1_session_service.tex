@@ -1,0 +1,724 @@
+\doxysection{SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service 클래스 참조}
+\hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service}{}\label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service에 대한 상속 다이어그램 \+: 
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service__inherit__graph}
+\end{center}
+\end{figure}
+
+
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service에 대한 협력 다이어그램\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a6b3b56a76e406c798ab29c27278abb0d}{Session\+Service}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} jwt\+Service, IDatabase\+Setup\+Container db\+Container, IMemory\+Cache cache, \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{User\+Repository\+Factory}} user\+Repository\+Factory)
+\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ac2cebe54d493c477ec808cb2d4c66ec8}{Create\+Session\+Async}} (string provider, string user\+Id, string ip\+Address, bool remember\+Me=false)
+\begin{DoxyCompactList}\small\item\em 세션 생성 -\/ 로그인 성공 후 호출 \end{DoxyCompactList}\item 
+async Task$<$ bool $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a57f7d9aa7a99eae262f3d062fc0e44ec}{Validate\+Session\+Async}} (string user\+Id, string provider, string session\+Id)
+\begin{DoxyCompactList}\small\item\em 세션 유효성 검증 \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af8eebd4845e6a67ec35840e04d493f1e}{Update\+Session\+Activity\+Async}} (string user\+Id, string provider, string session\+Id)
+\begin{DoxyCompactList}\small\item\em 세션 활성 상태 업데이트 (요청 처리시마다) \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ade8309c1b2e67e831f303519b1ea2188}{Deactivate\+Session\+Async}} (string session\+Id, string reason="{}Logout"{})
+\begin{DoxyCompactList}\small\item\em 세션 비활성화 (로그아웃 등으로 호출) \end{DoxyCompactList}\item 
+async Task$<$ bool $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee4449688b84ac7d84660ed50559f7cf}{Is\+Session\+Inactive\+Async}} (string session\+Id)
+\begin{DoxyCompactList}\small\item\em 비활성 세션 확인 \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9e7a1f31afb067d0aefb8c774eed14fb}{Cleanup\+Expired\+Sessions\+Async}} ()
+\item 
+void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae708e1ead43f6cf2c2edc6d5e59f6242}{Dispose}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 멤버 함수}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae937269c4b57307cb34a29bd552fd5b1}{Get\+User\+Key}} (string user\+Id, string provider)
+\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae1a504a95436c2574716dcd2fd9d0b1d}{Get\+User\+Session\+Key}} (string user\+Id, string provider)
+\item 
+string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a49e0a04bd7c5427531b1078079e48a9e}{Get\+Session\+Cache\+Key}} (string session\+Id)
+\item 
+async Task \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9785941714463b3c60b3a8ad58d75f21}{Deactivate\+Other\+Session\+Async}} (string user\+Id, string current\+Session\+Id, string reason)
+\begin{DoxyCompactList}\small\item\em 다른 세션 비활성화 (중복 로그인 방지 등...) \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a60b001f282e88198f85998462f0f20e7}{Get\+Session\+By\+Id\+Async}} (string session\+Id)
+\begin{DoxyCompactList}\small\item\em 세션 ID로 세션 정보 조회 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a7685349b33a31bca5e467ed1840a44d8}{Get\+Latest\+Session\+Async}} (string provider, string user\+Id)
+\begin{DoxyCompactList}\small\item\em 사용자 ID로 최신 세션 정보 조회 \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a1f3aa5d8925726d84d14eb06b5d0cf46}{Save\+Session\+Async}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} session)
+\begin{DoxyCompactList}\small\item\em 세션 저장 \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af2b027d33717cbb21103aee891f26926}{Update\+Session\+Async}} (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} session)
+\begin{DoxyCompactList}\small\item\em 세션 업데이트 \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}} $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ad5530f21135f1d614adecdf3a9f9a82c}{Get\+User\+By\+Id\+Async}} (string user\+Id, string provider)
+\item 
+void \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_adaaaaf25b2ef1c9af6a3d4cb16bce378}{Cleanup\+Cache\+Callback}} (object state)
+\item 
+async Task \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aebc6078bc00696a22330813fffe14885}{Cleanup\+Cache\+Async}} ()
+\item 
+async Task$<$ List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} $>$ $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee710471eedac5f64fb0dae35b1a4a25}{Get\+Active\+Sessions\+Async}} ()
+\begin{DoxyCompactList}\small\item\em DB에서 유효한(활성) 세션 모두 가져오기 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_acb33a396fad1579748397d6ef189f68d}{\+\_\+jwt\+Service}}
+\item 
+readonly IDatabase\+Setup\+Container \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a7f16f09e66715367f1495c3ff2c9568d}{\+\_\+db\+Container}}
+\item 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{User\+Repository\+Factory}} \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a19abf72480a415aabe97e6cc15b08806}{\+\_\+user\+Repository\+Factory}}
+\item 
+readonly IMemory\+Cache \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ab9b823d5b311ac063d5725e89257e3e8}{\+\_\+cache}}
+\item 
+readonly Time\+Span \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a29aca76b0f8067845111cea2d5a7969d}{\+\_\+session\+Cache\+Expiry}} = Time\+Span.\+From\+Minutes(5)
+\item 
+readonly Timer \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a559ada8b125170863e7a859c92d7024e}{\+\_\+cache\+Cleanup\+Timer}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{정적 Private 속성}
+\begin{DoxyCompactItemize}
+\item 
+static readonly Concurrent\+Dictionary$<$ string, string $>$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ad85f5706538b7864038fcb5718c09e17}{\+\_\+active\+Session\+Cache}} = new()
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a6face67a15cce1acd24619dc528e8f7d}{Session\+Cache\+Key\+Prefix}} = "{}session\+\_\+"{}
+\item 
+const string \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ac753c48ce8c417b75762f2392054ce10}{User\+Session\+Key\+Prefix}} = "{}user\+\_\+session\+\_\+"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{상세한 설명}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00012}{12}} 번째 라인에서 정의되었습니다.
+
+
+
+\label{doc-constructors}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_doc-constructors}
+\doxysubsection{생성자 \& 소멸자 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a6b3b56a76e406c798ab29c27278abb0d}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!SessionService@{SessionService}}
+\index{SessionService@{SessionService}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{SessionService()}{SessionService()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a6b3b56a76e406c798ab29c27278abb0d} 
+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Session\+Service (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}}}]{jwt\+Service}{, }\item[{IDatabase\+Setup\+Container}]{db\+Container}{, }\item[{IMemory\+Cache}]{cache}{, }\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{User\+Repository\+Factory}}}]{user\+Repository\+Factory}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00035}{35}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a6b3b56a76e406c798ab29c27278abb0d_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_doc-func-members}
+\doxysubsection{멤버 함수 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aebc6078bc00696a22330813fffe14885}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!CleanupCacheAsync@{CleanupCacheAsync}}
+\index{CleanupCacheAsync@{CleanupCacheAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{CleanupCacheAsync()}{CleanupCacheAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aebc6078bc00696a22330813fffe14885} 
+async Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Cleanup\+Cache\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00400}{400}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aebc6078bc00696a22330813fffe14885_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aebc6078bc00696a22330813fffe14885_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_adaaaaf25b2ef1c9af6a3d4cb16bce378}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!CleanupCacheCallback@{CleanupCacheCallback}}
+\index{CleanupCacheCallback@{CleanupCacheCallback}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{CleanupCacheCallback()}{CleanupCacheCallback()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_adaaaaf25b2ef1c9af6a3d4cb16bce378} 
+void SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Cleanup\+Cache\+Callback (\begin{DoxyParamCaption}\item[{object}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00385}{385}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_adaaaaf25b2ef1c9af6a3d4cb16bce378_cgraph}
+\end{center}
+\end{figure}
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_adaaaaf25b2ef1c9af6a3d4cb16bce378_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9e7a1f31afb067d0aefb8c774eed14fb}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!CleanupExpiredSessionsAsync@{CleanupExpiredSessionsAsync}}
+\index{CleanupExpiredSessionsAsync@{CleanupExpiredSessionsAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{CleanupExpiredSessionsAsync()}{CleanupExpiredSessionsAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9e7a1f31afb067d0aefb8c774eed14fb} 
+async Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Cleanup\+Expired\+Sessions\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00378}{378}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9e7a1f31afb067d0aefb8c774eed14fb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ac2cebe54d493c477ec808cb2d4c66ec8}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!CreateSessionAsync@{CreateSessionAsync}}
+\index{CreateSessionAsync@{CreateSessionAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{CreateSessionAsync()}{CreateSessionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ac2cebe54d493c477ec808cb2d4c66ec8} 
+async Task$<$ string $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Create\+Session\+Async (\begin{DoxyParamCaption}\item[{string}]{provider}{, }\item[{string}]{user\+Id}{, }\item[{string}]{ip\+Address}{, }\item[{bool}]{remember\+Me}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+세션 생성 -\/ 로그인 성공 후 호출 
+
+
+\begin{DoxyParams}{매개변수}
+{\em provider} & \doxylink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_providers}{Providers} 참조\\
+\hline
+{\em user\+Id} & \\
+\hline
+{\em ip\+Address} & \\
+\hline
+{\em remember\+Me} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00078}{78}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ac2cebe54d493c477ec808cb2d4c66ec8_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9785941714463b3c60b3a8ad58d75f21}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!DeactivateOtherSessionAsync@{DeactivateOtherSessionAsync}}
+\index{DeactivateOtherSessionAsync@{DeactivateOtherSessionAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{DeactivateOtherSessionAsync()}{DeactivateOtherSessionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9785941714463b3c60b3a8ad58d75f21} 
+async Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Deactivate\+Other\+Session\+Async (\begin{DoxyParamCaption}\item[{string}]{user\+Id}{, }\item[{string}]{current\+Session\+Id}{, }\item[{string}]{reason}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+다른 세션 비활성화 (중복 로그인 방지 등...) 
+
+
+\begin{DoxyParams}{매개변수}
+{\em user\+Id} & \\
+\hline
+{\em current\+Session\+Id} & \\
+\hline
+{\em reason} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00223}{223}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a9785941714463b3c60b3a8ad58d75f21_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ade8309c1b2e67e831f303519b1ea2188}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!DeactivateSessionAsync@{DeactivateSessionAsync}}
+\index{DeactivateSessionAsync@{DeactivateSessionAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{DeactivateSessionAsync()}{DeactivateSessionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ade8309c1b2e67e831f303519b1ea2188} 
+async Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Deactivate\+Session\+Async (\begin{DoxyParamCaption}\item[{string}]{session\+Id}{, }\item[{string}]{reason}{ = {\ttfamily "{}Logout"{}}}\end{DoxyParamCaption})}
+
+
+
+세션 비활성화 (로그아웃 등으로 호출) 
+
+
+\begin{DoxyParams}{매개변수}
+{\em session\+Id} & \\
+\hline
+{\em reason} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00192}{192}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ade8309c1b2e67e831f303519b1ea2188_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae708e1ead43f6cf2c2edc6d5e59f6242}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae708e1ead43f6cf2c2edc6d5e59f6242} 
+void SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00446}{446}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee710471eedac5f64fb0dae35b1a4a25}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!GetActiveSessionsAsync@{GetActiveSessionsAsync}}
+\index{GetActiveSessionsAsync@{GetActiveSessionsAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{GetActiveSessionsAsync()}{GetActiveSessionsAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee710471eedac5f64fb0dae35b1a4a25} 
+async Task$<$ List$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} $>$ $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Get\+Active\+Sessions\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+DB에서 유효한(활성) 세션 모두 가져오기 
+
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00432}{432}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee710471eedac5f64fb0dae35b1a4a25_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a7685349b33a31bca5e467ed1840a44d8}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!GetLatestSessionAsync@{GetLatestSessionAsync}}
+\index{GetLatestSessionAsync@{GetLatestSessionAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{GetLatestSessionAsync()}{GetLatestSessionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a7685349b33a31bca5e467ed1840a44d8} 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Get\+Latest\+Session\+Async (\begin{DoxyParamCaption}\item[{string}]{provider}{, }\item[{string}]{user\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+사용자 ID로 최신 세션 정보 조회 
+
+
+\begin{DoxyParams}{매개변수}
+{\em provider} & \\
+\hline
+{\em user\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00303}{303}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a7685349b33a31bca5e467ed1840a44d8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a60b001f282e88198f85998462f0f20e7}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!GetSessionByIdAsync@{GetSessionByIdAsync}}
+\index{GetSessionByIdAsync@{GetSessionByIdAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{GetSessionByIdAsync()}{GetSessionByIdAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a60b001f282e88198f85998462f0f20e7} 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Get\+Session\+By\+Id\+Async (\begin{DoxyParamCaption}\item[{string}]{session\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+세션 ID로 세션 정보 조회 
+
+
+\begin{DoxyParams}{매개변수}
+{\em session\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00276}{276}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a60b001f282e88198f85998462f0f20e7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a49e0a04bd7c5427531b1078079e48a9e}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!GetSessionCacheKey@{GetSessionCacheKey}}
+\index{GetSessionCacheKey@{GetSessionCacheKey}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{GetSessionCacheKey()}{GetSessionCacheKey()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a49e0a04bd7c5427531b1078079e48a9e} 
+string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Get\+Session\+Cache\+Key (\begin{DoxyParamCaption}\item[{string}]{session\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00065}{65}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a49e0a04bd7c5427531b1078079e48a9e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ad5530f21135f1d614adecdf3a9f9a82c}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!GetUserByIdAsync@{GetUserByIdAsync}}
+\index{GetUserByIdAsync@{GetUserByIdAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{GetUserByIdAsync()}{GetUserByIdAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ad5530f21135f1d614adecdf3a9f9a82c} 
+async Task$<$ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user}{User}} $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Get\+User\+By\+Id\+Async (\begin{DoxyParamCaption}\item[{string}]{user\+Id}{, }\item[{string}]{provider}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00370}{370}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ad5530f21135f1d614adecdf3a9f9a82c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae937269c4b57307cb34a29bd552fd5b1}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!GetUserKey@{GetUserKey}}
+\index{GetUserKey@{GetUserKey}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{GetUserKey()}{GetUserKey()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae937269c4b57307cb34a29bd552fd5b1} 
+string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Get\+User\+Key (\begin{DoxyParamCaption}\item[{string}]{user\+Id}{, }\item[{string}]{provider}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00055}{55}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae937269c4b57307cb34a29bd552fd5b1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae1a504a95436c2574716dcd2fd9d0b1d}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!GetUserSessionKey@{GetUserSessionKey}}
+\index{GetUserSessionKey@{GetUserSessionKey}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{GetUserSessionKey()}{GetUserSessionKey()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae1a504a95436c2574716dcd2fd9d0b1d} 
+string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Get\+User\+Session\+Key (\begin{DoxyParamCaption}\item[{string}]{user\+Id}{, }\item[{string}]{provider}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00060}{60}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ae1a504a95436c2574716dcd2fd9d0b1d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee4449688b84ac7d84660ed50559f7cf}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!IsSessionInactiveAsync@{IsSessionInactiveAsync}}
+\index{IsSessionInactiveAsync@{IsSessionInactiveAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{IsSessionInactiveAsync()}{IsSessionInactiveAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee4449688b84ac7d84660ed50559f7cf} 
+async Task$<$ bool $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Is\+Session\+Inactive\+Async (\begin{DoxyParamCaption}\item[{string}]{session\+Id}{}\end{DoxyParamCaption})}
+
+
+
+비활성 세션 확인 
+
+
+\begin{DoxyParams}{매개변수}
+{\em session\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00242}{242}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_aee4449688b84ac7d84660ed50559f7cf_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a1f3aa5d8925726d84d14eb06b5d0cf46}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!SaveSessionAsync@{SaveSessionAsync}}
+\index{SaveSessionAsync@{SaveSessionAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{SaveSessionAsync()}{SaveSessionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a1f3aa5d8925726d84d14eb06b5d0cf46} 
+async Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Save\+Session\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}}}]{session}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+세션 저장 
+
+
+\begin{DoxyParams}{매개변수}
+{\em session} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00330}{330}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a1f3aa5d8925726d84d14eb06b5d0cf46_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af8eebd4845e6a67ec35840e04d493f1e}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!UpdateSessionActivityAsync@{UpdateSessionActivityAsync}}
+\index{UpdateSessionActivityAsync@{UpdateSessionActivityAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{UpdateSessionActivityAsync()}{UpdateSessionActivityAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af8eebd4845e6a67ec35840e04d493f1e} 
+async Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Update\+Session\+Activity\+Async (\begin{DoxyParamCaption}\item[{string}]{user\+Id}{, }\item[{string}]{provider}{, }\item[{string}]{session\+Id}{}\end{DoxyParamCaption})}
+
+
+
+세션 활성 상태 업데이트 (요청 처리시마다) 
+
+
+\begin{DoxyParams}{매개변수}
+{\em user\+Id} & \\
+\hline
+{\em provider} & \\
+\hline
+{\em session\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00156}{156}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af8eebd4845e6a67ec35840e04d493f1e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af2b027d33717cbb21103aee891f26926}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!UpdateSessionAsync@{UpdateSessionAsync}}
+\index{UpdateSessionAsync@{UpdateSessionAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{UpdateSessionAsync()}{UpdateSessionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af2b027d33717cbb21103aee891f26926} 
+async Task SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Update\+Session\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_user_session}{User\+Session}}}]{session}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+세션 업데이트 
+
+
+\begin{DoxyParams}{매개변수}
+{\em session} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00354}{354}} 번째 라인에서 정의되었습니다.
+
+이 함수를 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_af2b027d33717cbb21103aee891f26926_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a57f7d9aa7a99eae262f3d062fc0e44ec}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!ValidateSessionAsync@{ValidateSessionAsync}}
+\index{ValidateSessionAsync@{ValidateSessionAsync}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{ValidateSessionAsync()}{ValidateSessionAsync()}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a57f7d9aa7a99eae262f3d062fc0e44ec} 
+async Task$<$ bool $>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Validate\+Session\+Async (\begin{DoxyParamCaption}\item[{string}]{user\+Id}{, }\item[{string}]{provider}{, }\item[{string}]{session\+Id}{}\end{DoxyParamCaption})}
+
+
+
+세션 유효성 검증 
+
+
+\begin{DoxyParams}{매개변수}
+{\em user\+Id} & \\
+\hline
+{\em session\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{반환값}
+
+\end{DoxyReturn}
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00118}{118}} 번째 라인에서 정의되었습니다.
+
+이 함수 내부에서 호출하는 함수들에 대한 그래프입니다.\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a57f7d9aa7a99eae262f3d062fc0e44ec_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_doc-variable-members}
+\doxysubsection{멤버 데이터 문서화}
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ad85f5706538b7864038fcb5718c09e17}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!\_activeSessionCache@{\_activeSessionCache}}
+\index{\_activeSessionCache@{\_activeSessionCache}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{\_activeSessionCache}{\_activeSessionCache}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ad85f5706538b7864038fcb5718c09e17} 
+readonly Concurrent\+Dictionary$<$string, string$>$ SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+\_\+active\+Session\+Cache = new()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00025}{25}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ab9b823d5b311ac063d5725e89257e3e8}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!\_cache@{\_cache}}
+\index{\_cache@{\_cache}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{\_cache}{\_cache}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ab9b823d5b311ac063d5725e89257e3e8} 
+readonly IMemory\+Cache SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+\_\+cache\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00024}{24}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a559ada8b125170863e7a859c92d7024e}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!\_cacheCleanupTimer@{\_cacheCleanupTimer}}
+\index{\_cacheCleanupTimer@{\_cacheCleanupTimer}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{\_cacheCleanupTimer}{\_cacheCleanupTimer}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a559ada8b125170863e7a859c92d7024e} 
+readonly Timer SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+\_\+cache\+Cleanup\+Timer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00031}{31}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a7f16f09e66715367f1495c3ff2c9568d}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!\_dbContainer@{\_dbContainer}}
+\index{\_dbContainer@{\_dbContainer}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{\_dbContainer}{\_dbContainer}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a7f16f09e66715367f1495c3ff2c9568d} 
+readonly IDatabase\+Setup\+Container SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+\_\+db\+Container\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00017}{17}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_acb33a396fad1579748397d6ef189f68d}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!\_jwtService@{\_jwtService}}
+\index{\_jwtService@{\_jwtService}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{\_jwtService}{\_jwtService}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_acb33a396fad1579748397d6ef189f68d} 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_jwt_service}{Jwt\+Service}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+\_\+jwt\+Service\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00016}{16}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a29aca76b0f8067845111cea2d5a7969d}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!\_sessionCacheExpiry@{\_sessionCacheExpiry}}
+\index{\_sessionCacheExpiry@{\_sessionCacheExpiry}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{\_sessionCacheExpiry}{\_sessionCacheExpiry}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a29aca76b0f8067845111cea2d5a7969d} 
+readonly Time\+Span SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+\_\+session\+Cache\+Expiry = Time\+Span.\+From\+Minutes(5)\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00026}{26}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a19abf72480a415aabe97e6cc15b08806}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!\_userRepositoryFactory@{\_userRepositoryFactory}}
+\index{\_userRepositoryFactory@{\_userRepositoryFactory}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{\_userRepositoryFactory}{\_userRepositoryFactory}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a19abf72480a415aabe97e6cc15b08806} 
+readonly \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_auth_user_1_1_user_repository_factory}{User\+Repository\+Factory}} SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+\_\+user\+Repository\+Factory\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00018}{18}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a6face67a15cce1acd24619dc528e8f7d}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!SessionCacheKeyPrefix@{SessionCacheKeyPrefix}}
+\index{SessionCacheKeyPrefix@{SessionCacheKeyPrefix}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{SessionCacheKeyPrefix}{SessionCacheKeyPrefix}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_a6face67a15cce1acd24619dc528e8f7d} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+Session\+Cache\+Key\+Prefix = "{}session\+\_\+"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00028}{28}} 번째 라인에서 정의되었습니다.
+
+\Hypertarget{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ac753c48ce8c417b75762f2392054ce10}\index{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}!UserSessionKeyPrefix@{UserSessionKeyPrefix}}
+\index{UserSessionKeyPrefix@{UserSessionKeyPrefix}!SECUiDEA\_ERP\_Server.Models.Authentication.SessionService@{SECUiDEA\_ERP\_Server.Models.Authentication.SessionService}}
+\doxysubsubsection{\texorpdfstring{UserSessionKeyPrefix}{UserSessionKeyPrefix}}
+{\footnotesize\ttfamily \label{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication_1_1_session_service_ac753c48ce8c417b75762f2392054ce10} 
+const string SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server.\+Models.\+Authentication.\+Session\+Service.\+User\+Session\+Key\+Prefix = "{}user\+\_\+session\+\_\+"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{_session_service_8cs_source}{Session\+Service.\+cs}} 파일의 \mbox{\hyperlink{_session_service_8cs_source_l00029}{29}} 번째 라인에서 정의되었습니다.
+
+
+
+이 클래스에 대한 문서화 페이지는 다음의 파일로부터 생성되었습니다.\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Projects/\+SECUi\+DEA\+\_\+\+ERP/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+SECUi\+DEA\+\_\+\+ERP\+\_\+\+Server/\+Models/\+Authentication/\mbox{\hyperlink{_session_service_8cs}{Session\+Service.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,747 @@
+\doxysection{i\+Parking\+Controller.\+cs}
+\hypertarget{i_parking_controller_8cs_source}{}\label{i_parking_controller_8cs_source}\index{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/api/Parking/iParkingController.cs@{D:/Projects/SECUiDEA\_ERP/SECUiDEA\_ERP\_Server/SECUiDEA\_ERP\_Server/Controllers/api/Parking/iParkingController.cs}}
+\mbox{\hyperlink{i_parking_controller_8cs}{이 파일의 문서화 페이지로 가기}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00001}00001\ \textcolor{keyword}{using\ }System.Text;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00002}00002\ \textcolor{keyword}{using\ }APIClient.Authentication.Models;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00003}00003\ \textcolor{keyword}{using\ }APIClient.Client;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00004}00004\ \textcolor{keyword}{using\ }APIClient.Client.Interfaces;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00005}00005\ \textcolor{keyword}{using\ }APIClient.Configuration.Interfaces;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00006}00006\ \textcolor{keyword}{using\ }APIClient.Configuration.Models;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00007}00007\ \textcolor{keyword}{using\ }APIClient.Models;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00008}00008\ \textcolor{keyword}{using\ }APIClient.Models.Interfaces;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00009}00009\ \textcolor{keyword}{using\ }CoreDAL.Configuration.Interface;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00010}00010\ \textcolor{keyword}{using\ }CryptoManager;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00011}00011\ \textcolor{keyword}{using\ }FileIOHelper;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00012}00012\ \textcolor{keyword}{using\ }Microsoft.AspNetCore.Mvc;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00013}00013\ \textcolor{keyword}{using\ }Newtonsoft.Json.Linq;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00014}00014\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers}{SECUiDEA\_ERP\_Server.Controllers.BaseControllers}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00015}00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_extensions}{SECUiDEA\_ERP\_Server.Controllers.Extensions}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00016}00016\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_a_p_i_services}{SECUiDEA\_ERP\_Server.Models.APIServices}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00017}00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models}{SECUiDEA\_ERP\_Server.Models.CommonModels}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00018}00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private}{SECUiDEA\_ERP\_Server.Models.ControllerModels.Private}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00019}00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_parking}{SECUiDEA\_ERP\_Server.Models.Parking}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00020}00020\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models}{SECUiDEA\_ERP\_Server.Models.ResultModels}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00021}00021\ \textcolor{keyword}{using\ }System.Text.Json;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00023}\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking}{00023}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking}{SECUiDEA\_ERP\_Server.Controllers.api.Parking}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00025}00025\ [Route(\textcolor{stringliteral}{"{}api/[controller]/[action]"{}})]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00026}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller}{00026}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a52ee5d0925dbf40883fda6bd452297e1}{IParkingController}}\ :\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1_base_controllers_1_1_base_controller}{BaseController}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00027}00027\ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00028}00028\ \textcolor{preprocessor}{\ \ \ \ \#region\ 상수\ 정의}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00030}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}{00030}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}{Selector}}\ =\ \textcolor{stringliteral}{"{}SelectVisitCar"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00031}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}{00031}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}{Register}}\ =\ \textcolor{stringliteral}{"{}RegistVisitCar"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00032}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{00032}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{EncryptedId}}\ =\ \textcolor{stringliteral}{"{}EncryptedId"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00033}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{00033}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{EncryptedPwd}}\ =\ \textcolor{stringliteral}{"{}EncryptedPwd"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00034}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{00034}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{EncryptedDestinationId}}\ =\ \textcolor{stringliteral}{"{}EncryptedDestinationId"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00036}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ade26de68fd8e3461f0f385c880c107b6}{00036}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ readonly\ List<string>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ade26de68fd8e3461f0f385c880c107b6}{EndpointsStrings}}\ =\ \textcolor{keyword}{new}()}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00037}00037\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00038}00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}{Selector}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}{Register}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{EncryptedId}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{EncryptedPwd}},\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{EncryptedDestinationId}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00039}00039\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00041}00041\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00042}00042\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00043}00043\ \textcolor{preprocessor}{\ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00045}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{00045}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ ICryptoManager\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\_crypto}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00046}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad83137e6e85973d1d4c7a9c01698bd84}{00046}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IIOHelper\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad83137e6e85973d1d4c7a9c01698bd84}{\_ioHelper}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00047}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6}{00047}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IAPISetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6}{\_apiContainer}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00048}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{00048}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IAPISetup\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00049}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a}{00049}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ ICoreAPI\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a}{\_coreApi}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00050}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}{00050}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service}{IParkingSetupService}}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}{\_setupService}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00052}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a52ee5d0925dbf40883fda6bd452297e1}{00052}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a52ee5d0925dbf40883fda6bd452297e1}{IParkingController}}(}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00053}00053\ \ \ \ \ \ \ \ \ [FromKeyedServices(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_aebec391c7552da59c0996c844c362baf}{CryptoSecuidea}})]\ ICryptoManager\ crypto,\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00054}00054\ \ \ \ \ \ \ \ \ [FromKeyedServices(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a49882bf54c168cc414a99e195a8d706b}{IoApiSetupFile}})]\ IIOHelper\ ioHelper,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00055}00055\ \ \ \ \ \ \ \ \ IAPISetupContainer\ apiContainer)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\_crypto}}\ =\ crypto;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad83137e6e85973d1d4c7a9c01698bd84}{\_ioHelper}}\ =\ ioHelper;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00059}00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6}{\_apiContainer}}\ =\ apiContainer;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00060}00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}}\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6}{\_apiContainer}}.GetSetup(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a944ff48a1db61b5ea0ad88f0a0164e4e}{IParking}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00061}00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}{\_setupService}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service}{IParkingSetupService}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a245b2a726b7b4cd039e6bc45cfac28d6}{\_apiContainer}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 만약\ \_apiSetup에\ 기본\ URL이\ 설정되어\ 있지\ 않다면,\ 하드코딩으로\ 최초\ 설정\ 세팅}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}}.GetConnectionInfo().BaseUrl))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00065}00065\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221}{InitializeApiConnectionInfo}}();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00067}00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00068}00068\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 만약\ Endpoints\ 중\ 하나라도\ 없으면\ 다시\ 설정}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}}.GetConnectionInfo().Endpoints.Count\ <\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ade26de68fd8e3461f0f385c880c107b6}{EndpointsStrings}}.Count)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00071}00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221}{InitializeApiConnectionInfo}}();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00074}00074\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00075}00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a}{\_coreApi}}\ =\ \textcolor{keyword}{new}\ CoreAPIClient(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}},\ ignoreSslErrors:\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00078}00078\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00080}00080\ \textcolor{preprocessor}{\ \ \ \ \#region\ API\ Setup}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00081}00081\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00082}00082\ \ \ \ \ [LocalHostOnly]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00083}00083\ \ \ \ \ [HttpGet]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00084}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab588c01f70325470a744e73297504a38}{00084}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab588c01f70325470a744e73297504a38}{Setup}}()}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00085}00085\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00086}00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetupViewModel}}\ setup\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00087}00087\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00089}00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ setup\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}{\_setupService}}.GetSetup(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a944ff48a1db61b5ea0ad88f0a0164e4e}{IParking}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00091}00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (FileNotFoundException)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00093}00093\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program}{Program}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_program_ac437165c251b0165dd6f292c0f9d1bff}{SetupApiContainer}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad83137e6e85973d1d4c7a9c01698bd84}{\_ioHelper}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (setup\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00098}00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}{\_setupService}}.GetSetup(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a944ff48a1db61b5ea0ad88f0a0164e4e}{IParking}});\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00100}00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00101}00101\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00102}00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a33cfaa84fd418e4fa4dea72875e7cff5}{DecryptEndpoints}}(setup.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model_a09dbff132dc704dd9378c11ed218bab5}{EndPoints}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ View(setup);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00105}00105\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00106}00106\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00107}00107\ \ \ \ \ [LocalHostOnly]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00108}00108\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00109}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af1ad6fb8cc417c01508ad5108079ece9}{00109}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af1ad6fb8cc417c01508ad5108079ece9}{SaveSingleSetup}}([FromForm]\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetupViewModel}}\ setting)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00111}00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ae5db4ae3521f50c995209e416fc5249a}{EncryptEndpoints}}(setting.EndPoints);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00112}00112\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00113}00113\ \ \ \ \ \ \ \ \ var\ result\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af47e0d3a8decfae4f2f460ad7eef1110}{\_setupService}}.SaveSingleSetupAsync(setting);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(result);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00117}00117\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00118}00118\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00120}00120\ \ \ \ \ [HttpGet]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00121}00121\ \ \ \ \ [ApiKeyAuth(issuer:\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a937160cf564fdc772109bfeff0dcbbc1}{Issuer\_Parking}})]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00122}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af0397f5e2017c8f1544f7ef888f8ffe8}{00122}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af0397f5e2017c8f1544f7ef888f8ffe8}{VisitCar}}(\textcolor{keywordtype}{string}?\ carNumber,\ DateTime?\ startDate,\ DateTime?\ endDate,\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ periodType\ =\ 1,\ \textcolor{keywordtype}{int}?\ currentPage\ =\ 1,\ \textcolor{keywordtype}{int}?\ pageSize\ =\ 10)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00124}00124\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00125}00125\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#region\ 인증\ 검사}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00128}00128\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ Key\ 인증}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ var\ apiKeyId\ =\ HttpContext.GetApiKeyId();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ var\ serviceName\ =\ HttpContext.GetApiServiceName();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(apiKeyId)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(serviceName))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00138}00138\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00140}00140\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00142}00142\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00143}00143\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00144}00144\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ id;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ password;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ destinationId;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685}{GetDecryptedApiCredentials}}(out\ \textcolor{keywordtype}{id},\ out\ password,\ out\ destinationId))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00151}00151\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00153}00153\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00154}00154\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00155}00155\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ 호출}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00157}00157\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 추가\ Header\ 설정}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ var\ header\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}Destination-\/Id"{}}]\ =\ destinationId}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Body\ 생성}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ var\ body\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (carNumber\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ !\textcolor{keywordtype}{string}.IsNullOrEmpty(carNumber))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}carNumber"{}}]\ =\ carNumber;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (startDate\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ startDate\ !=\ DateTime.MinValue)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}startDate"{}}]\ =\ startDate.Value.ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (endDate\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ endDate\ !=\ DateTime.MinValue)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}endDate"{}}]\ =\ endDate.Value.ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}periodType"{}}]\ =\ periodType.ToString();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}currentPage"{}}]\ =\ currentPage.ToString();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}pageSize"{}}]\ =\ pageSize.ToString();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Request\ 생성}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ IAPIRequest\ request\ =\ \textcolor{keyword}{new}\ APIRequest}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication}{Authentication}}\ =\ BasicAuthentication.FromUserPass(\textcolor{keywordtype}{id},\ password),}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Headers\ =\ header,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Body\ =\ RequestBody.CreateJson(body)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ APIResponse<VisitCarResponseModel>\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a}{\_coreApi}}.GetAsync<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_parking_1_1_visit_car_response_model}{VisitCarResponseModel}}>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}{Selector}},\ request);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ result.Data.TotalCount\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}visitCarFound"{}},\ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}visitCars"{}},\ result.Data.List\ \},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}totalCount"{}},\ result.Data.TotalCount\ \},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}currentPage"{}},\ result.Data.CurrentPage\ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00209}00209\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00211}00211\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}apiCallError"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00213}00213\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}visitCarNotFound"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00216}00216\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00217}00217\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00225}00225\ \ \ \ \ [HttpPost]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00226}00226\ \ \ \ \ [ApiKeyAuth(issuer:\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class}{StringClass}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_common_models_1_1_string_class_a937160cf564fdc772109bfeff0dcbbc1}{Issuer\_Parking}})]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00227}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aeae1e6c8df994fadcf5187ff7a8d5d00}{00227}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aeae1e6c8df994fadcf5187ff7a8d5d00}{VisitCar}}([FromBody]\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_parking_1_1_visit_car_model}{VisitCarModel}}\ visitCarModel)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00228}00228\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00229}00229\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#region\ 인증\ 검사}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00230}00230\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00232}00232\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ Key\ 인증}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ var\ apiKeyId\ =\ HttpContext.GetApiKeyId();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ var\ serviceName\ =\ HttpContext.GetApiServiceName();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(apiKeyId)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.IsNullOrEmpty(serviceName))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00242}00242\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00243}00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00244}00244\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00246}00246\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00247}00247\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00248}00248\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00249}00249\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ id;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ password;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ destinationId;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00253}00253\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685}{GetDecryptedApiCredentials}}(out\ \textcolor{keywordtype}{id},\ out\ password,\ out\ destinationId))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00255}00255\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00257}00257\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00258}00258\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00259}00259\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ 호출}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00260}00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00261}00261\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 추가\ Header\ 설정}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ var\ header\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}Destination-\/Id"{}}]\ =\ destinationId}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Body\ 생성}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ var\ body\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}carNumber"{}}]\ =\ visitCarModel.CarNumber,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}startDate"{}}]\ =\ visitCarModel.StartDate.ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd"{}}),}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}endDate"{}}]\ =\ visitCarModel.EndDate.ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd"{}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (visitCarModel.Dong\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ !\textcolor{keywordtype}{string}.IsNullOrEmpty(visitCarModel.Dong))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}dong"{}}]\ =\ visitCarModel.Dong;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (visitCarModel.Hosu\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ !\textcolor{keywordtype}{string}.IsNullOrEmpty(visitCarModel.Hosu))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}hosu"{}}]\ =\ visitCarModel.Hosu;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (visitCarModel.Memo\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ !\textcolor{keywordtype}{string}.IsNullOrEmpty(visitCarModel.Memo))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ body[\textcolor{stringliteral}{"{}memo"{}}]\ =\ visitCarModel.Memo;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Request\ 생성}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ IAPIRequest\ request\ =\ \textcolor{keyword}{new}\ APIRequest}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication}{Authentication}}\ =\ BasicAuthentication.FromUserPass(\textcolor{keywordtype}{id},\ password),}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Headers\ =\ header,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Body\ =\ RequestBody.CreateJson(body)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ APIResponse<JObject>\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ab706be3ade185eec560e82104f5ba09a}{\_coreApi}}.PostAsync<JObject>(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}{Register}},\ request);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 응답코드(result-\/code)\ 확인}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ result.Headers.TryGetValue(\textcolor{stringliteral}{"{}result-\/code"{}},\ out\ var\ resultCode))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 성공은\ result-\/code가\ "{}10201"{}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (resultCode\ ==\ \textcolor{stringliteral}{"{}10201"{}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 차량\ 등록\ 성공}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}visitCarRegistered"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00316}00316\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ 차량\ 등록\ 실패}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00317}00317\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ resultMessage;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!result.Headers.TryGetValue(\textcolor{stringliteral}{"{}result-\/message"{}},\ out\ resultMessage))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ result-\/message가\ 없으면\ 기본\ 메시지\ 사용}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (resultCode)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}10401"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}AUTHENTICATION\ ID\ IS\ REQUIRED"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}10402"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}SERVICE\ NOT\ FOUND"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}10403"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}JSON\ PARSE\ ERROR"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}10500"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}SERVER\ ERROR"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11003"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}DUPLICATED\ CAR\ NUMBER\ IN\ PERIOD\ VISIT\ CAR"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11004"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}DUPLICATED\ CAR\ NUMBER\ IN\ PERIOD\ REGULAR\ TICKET"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11011"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}CAR\ NUMBER\ IS\ REQUIRED"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11012"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}CAR\ NUMBER\ IS\ INVALID"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11013"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}START\ DATE\ IS\ REQUIRED"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00352}00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11014"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}END\ DATE\ IS\ REQUIRED"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11015"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}DONG\ LENGTH\ OVER"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11016"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}HOSU\ LENGTH\ OVER"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00361}00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11017"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00362}00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}MEMO\ LENGTH\ OVER"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}11019"{}}:}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ \textcolor{stringliteral}{"{}START\ DATE\ IS\ EQUAL\ OR\ BEFORE\ END\ DATE"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ result-\/message를\ 다국어\ 키로\ 활용하기\ 위해\ 소문자\ 변환\ 및\ 공백\ 제거\ 실행}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ resultMessage\ =\ resultMessage.ToLower().Replace(\textcolor{stringliteral}{"{}\ "{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ authString\ =\ result.Data[\textcolor{stringliteral}{"{}auth"{}}]?.ToString();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}visitCarRegisterFailed"{}},\ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}resultCode"{}},\ resultCode\ \},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}resultMessage"{}},\ resultMessage\ \},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}auth"{}},\ authString\ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00382}00382\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00383}00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00384}00384\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}apiCallError"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00386}00386\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00388}00388\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}visitCarRegisterFailed"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00389}00389\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00391}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685}{00391}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a07ad5d40d193d82717eb72fbc0a6b685}{GetDecryptedApiCredentials}}(out\ \textcolor{keywordtype}{string}?\ \textcolor{keywordtype}{id},\ out\ \textcolor{keywordtype}{string}?\ password,\ out\ \textcolor{keywordtype}{string}?\ destinationId)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00392}00392\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00393}00393\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{id}\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00394}00394\ \ \ \ \ \ \ \ \ password\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00395}00395\ \ \ \ \ \ \ \ \ destinationId\ =\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00396}00396\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00397}00397\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ Setup에서\ 암호화된\ ID,\ 비밀번호,\ 목적지\ ID를\ 가져옴}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00398}00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00399}00399\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{id}\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}}.GetConnectionInfo().GetEndpoint(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{EncryptedId}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{id}\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\_crypto}}.Decrypt(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ password\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}}.GetConnectionInfo().GetEndpoint(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{EncryptedPwd}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ password\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\_crypto}}.Decrypt(password);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ destinationId\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}}.GetConnectionInfo().GetEndpoint(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{EncryptedDestinationId}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ destinationId\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\_crypto}}.Decrypt(destinationId);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00410}00410\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00411}00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00412}00412\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00414}00414\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00415}00415\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00416}00416\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00417}00417\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00418}00418\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00423}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221}{00423}}\ \ \ \ \ \textcolor{keyword}{private}\ APIConnectionInfo\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_af3bfbefa1dd1a61a7315fbe95d581221}{InitializeApiConnectionInfo}}()}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00424}00424\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00425}00425\ \ \ \ \ \ \ \ \ var\ connectionInfo\ =\ \textcolor{keyword}{new}\ APIConnectionInfo}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00426}00426\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00427}00427\ \ \ \ \ \ \ \ \ \ \ \ \ BaseUrl\ =\ \textcolor{stringliteral}{"{}https://apis.stg.iparking.co.kr/api-\/proxies/"{}},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ Endpoints\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad107e2556cdd2a0f1b27aa804b1414e0}{Selector}}]\ =\ \textcolor{stringliteral}{"{}/api/api-\/proxy/v1/visit-\/car"{}},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a2ed01dad8883391455c4ecf0cf5290e9}{Register}}]\ =\ \textcolor{stringliteral}{"{}/api/api-\/proxy/v1/visit-\/car"{}},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{EncryptedId}}]\ =\ \textcolor{keywordtype}{string}.Empty,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{EncryptedPwd}}]\ =\ \textcolor{keywordtype}{string}.Empty,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{EncryptedDestinationId}}]\ =\ string.Empty}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00436}00436\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00438}00438\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_aa0191228dd669e3ab2c3f15cb13bf521}{\_apiSetup}}.UpdateConnectionInfo(connectionInfo);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00439}00439\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ connectionInfo;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00440}00440\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00441}00441\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00446}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a33cfaa84fd418e4fa4dea72875e7cff5}{00446}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a33cfaa84fd418e4fa4dea72875e7cff5}{DecryptEndpoints}}(Dictionary<string,\ string>\ encryptedEndpoints)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00447}00447\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00448}00448\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ (key,\ value)\ in\ encryptedEndpoints)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00449}00449\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.Equals(key,\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{EncryptedId}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.Equals(key,\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{EncryptedPwd}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.Equals(key,\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{EncryptedDestinationId}}))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ encryptedEndpoints[key]\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\_crypto}}.Decrypt(value);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00456}00456\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00457}00457\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00458}00458\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00463}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ae5db4ae3521f50c995209e416fc5249a}{00463}}\ \ \ \ \ \textcolor{keyword}{private}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ae5db4ae3521f50c995209e416fc5249a}{EncryptEndpoints}}(Dictionary<string,\ string>\ plainEndpoints)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00464}00464\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00465}00465\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ (key,\ value)\ in\ plainEndpoints)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00466}00466\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.Equals(key,\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a7319e9beebad8af5eb5b653f0950e7e0}{EncryptedId}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.Equals(key,\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_a023fc9969f0adb6e1f968bd5e39d8fe2}{EncryptedPwd}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||\ \textcolor{keywordtype}{string}.Equals(key,\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_ad95634ccdf5e1a929314f8477360caa3}{EncryptedDestinationId}}))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ plainEndpoints[key]\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_controller_afa2bd2705d9e255da47a5ffdc31ace3f}{\_crypto}}.Encrypt(value);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00473}00473\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00474}00474\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00475}00475\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00476}00476\ \textcolor{preprocessor}{\#if\ DEBUG}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00478}00478\ \ \ \ \ [HttpGet]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00479}00479\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ TestGetVisitCarList(\textcolor{keywordtype}{string}?\ carNumber,\ DateTime?\ startDate,\ DateTime?\ endDate)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00480}00480\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00481}00481\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ id;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00482}00482\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ password;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00483}00483\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}?\ destinationId;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00484}00484\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00485}00485\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!GetDecryptedApiCredentials(out\ \textcolor{keywordtype}{id},\ out\ password,\ out\ destinationId))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00486}00486\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ BadRequest(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}invalidApiKey"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00488}00488\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00489}00489\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00490}00490\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ API\ 호출}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00491}00491\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00492}00492\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 추가\ Header\ 설정}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ var\ header\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}Destination-\/Id"{}}]\ =\ destinationId}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Query\ 생성}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ var\ query\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string>();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (carNumber\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ !\textcolor{keywordtype}{string}.IsNullOrEmpty(carNumber))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ query[\textcolor{stringliteral}{"{}carNumber"{}}]\ =\ carNumber;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (startDate\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ startDate\ !=\ DateTime.MinValue)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00510}00510\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00511}00511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ query[\textcolor{stringliteral}{"{}startDate"{}}]\ =\ startDate.Value.ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00512}00512\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (endDate\ !=\ \textcolor{keyword}{null}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ endDate\ !=\ DateTime.MinValue)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ query[\textcolor{stringliteral}{"{}endDate"{}}]\ =\ endDate.Value.ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00518}00518\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00519}00519\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00520}00520\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Request\ 생성}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ IAPIRequest\ request\ =\ \textcolor{keyword}{new}\ APIRequest}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_authentication}{Authentication}}\ =\ BasicAuthentication.FromUserPass(\textcolor{keywordtype}{id},\ password),}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Headers\ =\ header,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QueryParameters\ =\ query}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00528}00528\ \ \ \ \ \ \ \ \ \ \ \ \ APIResponse<VisitCarResponseModel>\ result\ =\ await\ \_coreApi.GetAsync<\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_parking_1_1_visit_car_response_model}{VisitCarResponseModel}}>(Selector,\ request);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00529}00529\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.IsSuccess}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \&\&\ result.Data.TotalCount\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00532}00532\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}visitCarFound"{}},\ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}visitCars"{}},\ result.Data.List\ \},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}totalCount"{}},\ result.Data.TotalCount\ \},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}currentPage"{}},\ result.Data.CurrentPage\ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00540}00540\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00541}00541\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00542}00542\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}apiCallError"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00544}00544\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00545}00545\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00546}00546\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Ok(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(\textcolor{stringliteral}{"{}visitCarNotFound"{}}));}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00547}00547\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00548}00548\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00549}00549\ \ \ \ \ [HttpGet]}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00550}00550\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<IActionResult>\ TestResponseVisitCarList(\textcolor{keywordtype}{string}?\ carNumber,\ DateTime?\ startDate,\ DateTime?\ endDate,\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00551}00551\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}?\ periodType\ =\ 1,\ \textcolor{keywordtype}{int}?\ currentPage\ =\ 1,\ \textcolor{keywordtype}{int}?\ pageSize\ =\ 10)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00552}00552\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00553}00553\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 요청\ 헤더\ 검증}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00554}00554\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ authHeader\ =\ Request.Headers[\textcolor{stringliteral}{"{}Authorization"{}}].FirstOrDefault()\ ??\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00555}00555\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ destinationId\ =\ Request.Headers[\textcolor{stringliteral}{"{}Destination-\/Id"{}}].FirstOrDefault()\ ??\ \textcolor{keywordtype}{string}.Empty;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00556}00556\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00557}00557\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(authHeader)\ ||\ !authHeader.StartsWith(\textcolor{stringliteral}{"{}Basic\ "{}}))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00558}00558\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00559}00559\ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/code"{}},\ \textcolor{stringliteral}{"{}10401"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00560}00560\ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/message"{}},\ \textcolor{stringliteral}{"{}AUTHENTICATION\ ID\ IS\ REQUIRED"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00561}00561\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ StatusCode(401,\ \textcolor{keyword}{new}\ \{\ error\ =\ \textcolor{stringliteral}{"{}인증\ 정보가\ 없거나\ 잘못되었습니다."{}}\ \});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00562}00562\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00563}00563\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00564}00564\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrEmpty(destinationId))}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00565}00565\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00566}00566\ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/code"{}},\ \textcolor{stringliteral}{"{}10402"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00567}00567\ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/message"{}},\ \textcolor{stringliteral}{"{}DESTINATION\ ID\ IS\ REQUIRED"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00568}00568\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ StatusCode(401,\ \textcolor{keyword}{new}\ \{\ error\ =\ \textcolor{stringliteral}{"{}목적지\ ID가\ 없습니다."{}}\ \});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00569}00569\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00570}00570\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00571}00571\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00572}00572\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00573}00573\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Basic\ 인증\ 디코딩\ (실제로는\ 검증만\ 하고\ 사용하지\ 않음)}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ encodedCredentials\ =\ authHeader.Substring(\textcolor{stringliteral}{"{}Basic\ "{}}.Length).Trim();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{byte}[]\ credentialBytes\ =\ Convert.FromBase64String(encodedCredentials);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ credentials\ =\ Encoding.UTF8.GetString(credentialBytes);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}[]\ parts\ =\ credentials.Split(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parts.Length\ !=\ 2)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/code"{}},\ \textcolor{stringliteral}{"{}10401"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/message"{}},\ \textcolor{stringliteral}{"{}INVALID\ CREDENTIALS\ FORMAT"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ StatusCode(401,\ \textcolor{keyword}{new}\ \{\ error\ =\ \textcolor{stringliteral}{"{}인증\ 정보\ 형식이\ 잘못되었습니다."{}}\ \});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00585}00585\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00586}00586\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00587}00587\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00588}00588\ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/code"{}},\ \textcolor{stringliteral}{"{}10401"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00589}00589\ \ \ \ \ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/message"{}},\ \textcolor{stringliteral}{"{}INVALID\ CREDENTIALS"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00590}00590\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ StatusCode(401,\ \textcolor{keyword}{new}\ \{\ error\ =\ \textcolor{stringliteral}{"{}인증\ 정보가\ 잘못되었습니다."{}}\ \});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00591}00591\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00592}00592\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00593}00593\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 응답\ 헤더\ 설정}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00594}00594\ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/code"{}},\ \textcolor{stringliteral}{"{}10200"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00595}00595\ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}result-\/message"{}},\ \textcolor{stringliteral}{"{}SUCCESS"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00596}00596\ \ \ \ \ \ \ \ \ Response.Headers.Add(\textcolor{stringliteral}{"{}Content-\/Type"{}},\ \textcolor{stringliteral}{"{}application/json"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00597}00597\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00598}00598\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ JSON\ 문자열로\ 직접\ 응답\ 생성}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00599}00599\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ jsonResponse;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00600}00600\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00601}00601\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 특정\ 차량번호일\ 경우\ 더미\ 데이터\ 2개\ 반환\ (12가3456)}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00602}00602\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (carNumber\ ==\ \textcolor{stringliteral}{"{}12가3456"{}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00603}00603\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00604}00604\ \ \ \ \ \ \ \ \ \ \ \ \ jsonResponse\ =\ \textcolor{stringliteral}{@"{}\{}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00605}00605\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}List"{}"{}:\ [}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00606}00606\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00607}00607\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}VisitCarSeq"{}"{}:\ 1,}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00608}00608\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}CarNumber"{}"{}:\ "{}"{}12가3456"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00609}00609\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}StartDate"{}"{}:\ "{}"{}"{}}\ +\ DateTime.Now.AddDays(-\/5).ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}})\ +\ \textcolor{stringliteral}{@"{}"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00610}00610\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}EndDate"{}"{}:\ "{}"{}"{}}\ +\ DateTime.Now.AddDays(5).ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}})\ +\ \textcolor{stringliteral}{@"{}"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00611}00611\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Dong"{}"{}:\ "{}"{}101"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00612}00612\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Hosu"{}"{}:\ "{}"{}1001"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00613}00613\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Memo"{}"{}:\ "{}"{}방문객\ 1"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00614}00614\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Auth"{}"{}:\ true}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00615}00615\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00616}00616\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00617}00617\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}VisitCarSeq"{}"{}:\ 2,}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00618}00618\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}CarNumber"{}"{}:\ "{}"{}12가3456"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00619}00619\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}StartDate"{}"{}:\ "{}"{}"{}}\ +\ DateTime.Now.AddDays(-\/2).ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}})\ +\ \textcolor{stringliteral}{@"{}"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00620}00620\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}EndDate"{}"{}:\ "{}"{}"{}}\ +\ DateTime.Now.AddDays(10).ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}})\ +\ \textcolor{stringliteral}{@"{}"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00621}00621\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Dong"{}"{}:\ "{}"{}102"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00622}00622\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Hosu"{}"{}:\ "{}"{}2001"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00623}00623\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Memo"{}"{}:\ "{}"{}방문객\ 2"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00624}00624\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Auth"{}"{}:\ true}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00625}00625\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00626}00626\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ],}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00627}00627\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}CurrentPage"{}"{}:\ "{}}\ +\ (currentPage\ ??\ 1)\ +\ \textcolor{stringliteral}{@"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00628}00628\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}TotalCount"{}"{}:\ 2}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00629}00629\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \}"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00630}00630\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00631}00631\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ null\ 가능한\ 데이터에\ null이\ 들어있는\ 데이터\ 1개\ 반환\ (34나5678)}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00632}00632\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (carNumber\ ==\ \textcolor{stringliteral}{"{}34나5678"{}})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00633}00633\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00634}00634\ \ \ \ \ \ \ \ \ \ \ \ \ jsonResponse\ =\ \textcolor{stringliteral}{@"{}\{}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00635}00635\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}CurrentPage"{}"{}:\ "{}}\ +\ (currentPage\ ??\ 1)\ +\ \textcolor{stringliteral}{@"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00636}00636\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}TotalCount"{}"{}:\ 1,}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00637}00637\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}List"{}"{}:\ [}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00638}00638\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00639}00639\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}VisitCarSeq"{}"{}:\ 3,}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00640}00640\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}CarNumber"{}"{}:\ "{}"{}34나5678"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00641}00641\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}StartDate"{}"{}:\ "{}"{}"{}}\ +\ DateTime.Now.AddDays(-\/1).ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}})\ +\ \textcolor{stringliteral}{@"{}"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00642}00642\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}EndDate"{}"{}:\ "{}"{}"{}}\ +\ DateTime.Now.AddDays(3).ToString(\textcolor{stringliteral}{"{}yyyy-\/MM-\/dd\ HH:mm:ss"{}})\ +\ \textcolor{stringliteral}{@"{}"{}"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00643}00643\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}Auth"{}"{}:\ false}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00644}00644\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00645}00645\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00646}00646\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \}"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00647}00647\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00648}00648\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 그\ 외의\ 경우\ 빈\ 리스트\ 반환}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00649}00649\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00650}00650\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00651}00651\ \ \ \ \ \ \ \ \ \ \ \ \ jsonResponse\ =\ \textcolor{stringliteral}{@"{}\{}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00652}00652\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}CurrentPage"{}"{}:\ "{}}\ +\ (currentPage\ ??\ 1)\ +\ \textcolor{stringliteral}{@"{},}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00653}00653\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}TotalCount"{}"{}:\ 0,}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00654}00654\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{}List"{}"{}:\ []}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00655}00655\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \}"{}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00656}00656\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00657}00657\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00658}00658\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ JSON\ 문자열을\ 직접\ 반환}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00659}00659\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Content(jsonResponse,\ \textcolor{stringliteral}{"{}application/json"{}});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00660}00660\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00661}00661\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00662}00662\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00663}00663\ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00664}00664\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00665}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service}{00665}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a958f947f626e5d41d5e7a048371c4b6e}{IParkingSetupService}}\ :\ \mbox{\hyperlink{interface_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_a_p_i_services_1_1_i_a_p_i_setup_service}{IAPISetupService}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00666}00666\ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00667}00667\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00668}00668\ \textcolor{comment}{\ \ \ \ \ *\ IParking\ 쪽에서\ 계정정보는\ ID,\ PW,\ Destination-\/Id로\ 구성되어\ 있으며}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00669}00669\ \textcolor{comment}{\ \ \ \ \ *\ 이\ 정보들은\ 기밀\ 내용이기\ 때문에\ 암호화하여\ 저장하고\ 사용.}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00670}00670\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00671}00671\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00672}00672\ \textcolor{preprocessor}{\ \ \ \ \#region\ 의존\ 주입}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00673}00673\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00674}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6bbe59e5ed278b8dae4b5fc9c4ef589c}{00674}}\ \ \ \ \ \textcolor{keyword}{private}\ readonly\ IAPISetupContainer\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6bbe59e5ed278b8dae4b5fc9c4ef589c}{\_apiContainer}};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00675}00675\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00676}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a958f947f626e5d41d5e7a048371c4b6e}{00676}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a958f947f626e5d41d5e7a048371c4b6e}{IParkingSetupService}}(IAPISetupContainer\ apiContainer)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00677}00677\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00678}00678\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6bbe59e5ed278b8dae4b5fc9c4ef589c}{\_apiContainer}}\ =\ apiContainer;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00679}00679\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00680}00680\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00681}00681\ \textcolor{preprocessor}{\ \ \ \ \#endregion}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00682}00682\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00683}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_ac50d9d5579eb3fa370242c7ddf6c2a12}{00683}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<BoolResultModel>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_ac50d9d5579eb3fa370242c7ddf6c2a12}{SaveSingleSetupAsync}}(\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetupViewModel}}\ setting)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00684}00684\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00685}00685\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00686}00686\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00687}00687\ \ \ \ \ \ \ \ \ \ \ \ \ var\ connectionInfo\ =\ \textcolor{keyword}{new}\ APIConnectionInfo}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00688}00688\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00689}00689\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BaseUrl\ =\ setting.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model_a261b7e6cbc04d1343825174b530a2ba1}{BaseUrl}},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00690}00690\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Endpoints\ =\ setting.EndPoints}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00691}00691\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00692}00692\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00693}00693\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6bbe59e5ed278b8dae4b5fc9c4ef589c}{\_apiContainer}}.UpdateSetup(setting.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model_af99097c21df4033c92631ecfac55539a}{SectionName}},\ connectionInfo);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00694}00694\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00695}00695\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}response:기본.\{\{what\}\}\ 설정이\ 성공적으로\ 저장되었습니다."{}},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00696}00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00697}00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00698}00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}what"{}},\ setting.SectionName\ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00699}00699\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00700}00700\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00701}00701\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00702}00702\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00703}00703\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00704}00704\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00705}00705\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00706}00706\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00707}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6d18622512126950f1e844c25729fca1}{00707}}\ \ \ \ \ \textcolor{keyword}{public}\ async\ Task<BoolResultModel>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6d18622512126950f1e844c25729fca1}{SaveMultiSetupAsync}}(List<APISetupViewModel>\ settings)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00708}00708\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00709}00709\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00710}00710\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00711}00711\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{foreach}\ (var\ setting\ \textcolor{keywordflow}{in}\ settings)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00712}00712\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00713}00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var\ result\ =\ await\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_ac50d9d5579eb3fa370242c7ddf6c2a12}{SaveSingleSetupAsync}}(setting);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00714}00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!result.IsSuccess)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00715}00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00716}00716\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00717}00717\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00718}00718\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00719}00719\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00720}00720\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a8b0ef2b800da87eeb1046e0bb6219b6f}{Success}}(\textcolor{stringliteral}{"{}response:기본.\{\{what\}\}\ 설정이\ 성공적으로\ 저장되었습니다."{}},}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00721}00721\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00722}00722\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00723}00723\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}what"{}},\ \textcolor{stringliteral}{"{}API.API설정"{}}\ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00724}00724\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00725}00725\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00726}00726\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (Exception\ e)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00727}00727\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00728}00728\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model}{BoolResultModel}}.\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_result_models_1_1_bool_result_model_a7bb335fcad0508bd2749cc9179c8c1ec}{Fail}}(e.Message);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00729}00729\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00730}00730\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00731}00731\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00732}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a7f5863fd9a061a04ef461b33434b1fdd}{00732}}\ \ \ \ \ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetupViewModel}}?\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a7f5863fd9a061a04ef461b33434b1fdd}{GetSetup}}(\textcolor{keywordtype}{string}\ setupName)}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00733}00733\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00734}00734\ \ \ \ \ \ \ \ \ var\ setup\ =\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6bbe59e5ed278b8dae4b5fc9c4ef589c}{\_apiContainer}}.GetSetup(setupName);}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00735}00735\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00736}00736\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (setup\ ==\ \textcolor{keyword}{null})}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00737}00737\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00738}00738\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00739}00739\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00740}00740\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00741}00741\ \ \ \ \ \ \ \ \ var\ connectionInfo\ =\ setup.GetConnectionInfo();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00742}00742\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00743}00743\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetupViewModel}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00744}00744\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00745}00745\ \ \ \ \ \ \ \ \ \ \ \ \ SectionName\ =\ setupName,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00746}00746\ \ \ \ \ \ \ \ \ \ \ \ \ BaseUrl\ =connectionInfo.BaseUrl,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00747}00747\ \ \ \ \ \ \ \ \ \ \ \ \ EndPoints\ =\ connectionInfo.Endpoints}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00748}00748\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00749}00749\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00750}00750\ }
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00751}\mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_ac5fe9bcde96cdf5e2603efd196744574}{00751}}\ \ \ \ \ \textcolor{keyword}{public}\ List<APISetupViewModel>\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_ac5fe9bcde96cdf5e2603efd196744574}{GetAllSetups}}()}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00752}00752\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00753}00753\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_controllers_1_1api_1_1_parking_1_1_i_parking_setup_service_a6bbe59e5ed278b8dae4b5fc9c4ef589c}{\_apiContainer}}.Setups.Select(setup\ =>\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_s_e_c_ui_d_e_a___e_r_p___server_1_1_models_1_1_controller_models_1_1_private_1_1_a_p_i_setup_view_model}{APISetupViewModel}}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00754}00754\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00755}00755\ \ \ \ \ \ \ \ \ \ \ \ \ SectionName\ =\ setup.Key,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00756}00756\ \ \ \ \ \ \ \ \ \ \ \ \ BaseUrl\ =\ setup.Value.ConnectionInfo.BaseUrl,}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00757}00757\ \ \ \ \ \ \ \ \ \ \ \ \ EndPoints\ =\ setup.Value.ConnectionInfo.Endpoints}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00758}00758\ \ \ \ \ \ \ \ \ \}).ToList();}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00759}00759\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{i_parking_controller_8cs_source_l00760}00760\ \}\ }
+
+\end{DoxyCode}
