@@ -112,11 +112,15 @@ public class S1UserRepository : IUserRepository
     #region 의존 주입
 
     private readonly IDatabaseSetupContainer _dbContainer;
+    private readonly ICryptoManager _cryptoSha512;
 
-    public S1UserRepository(IDatabaseSetupContainer dbContainer)
+    public S1UserRepository(
+        IDatabaseSetupContainer dbContainer, 
+        [FromKeyedServices(StringClass.CryptoS1Sha512)] ICryptoManager cryptoSha512)
     {
         _dbContainer = dbContainer;
         _dbSetup = _dbContainer.GetSetup(StringClass.S1Access);
+        _cryptoSha512 = cryptoSha512;
     }
 
     #endregion
@@ -190,11 +194,19 @@ public class S1UserRepository : IUserRepository
                 return null;
             }
             
-            // 비밀번호 검증
+            #region 비밀번호 검증
+
+            if (string.IsNullOrEmpty(userEntity.Password)) // 비밀번호가 NULL인 경우 Sabun(Id)을 비밀번호로 사용
+            {
+                userEntity.Password = _cryptoSha512.Encrypt(userEntity.Id);
+            }
+            
             if (userEntity.Password != password)
             {
                 return null;
             }
+
+            #endregion
 
             var user = new User
             {
