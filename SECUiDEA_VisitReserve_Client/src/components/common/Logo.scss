@@ -142,6 +142,10 @@
         animation: spinComplex 3s ease-in-out infinite;
     }
 
+    &.rotate3d-complex-pause .logo-svg {
+        animation: spinComplexWithPause 6s ease-in-out infinite;
+    }
+
     &.rotate3d-tilt .logo-svg {
         transform: rotateY(15deg) rotateX(10deg);
         transition:
@@ -219,6 +223,30 @@
     }
     75% {
         transform: rotateX(-45deg) rotateY(45deg);
+    }
+    100% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+}
+
+@keyframes spinComplexWithPause {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    12.5% {
+        transform: rotateX(45deg) rotateY(45deg);
+    }
+    25% {
+        transform: rotateX(0deg) rotateY(90deg);
+    }
+    37.5% {
+        transform: rotateX(-45deg) rotateY(45deg);
+    }
+    50% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    51% {
+        transform: rotateX(0deg) rotateY(0deg);
     }
     100% {
         transform: rotateX(0deg) rotateY(0deg);

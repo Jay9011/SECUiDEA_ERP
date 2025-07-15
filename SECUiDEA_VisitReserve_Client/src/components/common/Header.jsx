@@ -5,6 +5,9 @@ import LogoComponent from "./Logo";
 import './Header.scss';
 import { getColorVariables } from '../../utils/cssVariables';
 
+// 이미지
+import logo from '../../assets/images/Logo_Black.png';
+
 const Header = ({ onToggleNav }) => {
     const { t } = useTranslation('visit');
 
@@ -25,6 +28,7 @@ const Header = ({ onToggleNav }) => {
                         textComponent="h1"
                         textContent={t('navigation.systemTitle')}
                         logoColor={getColorVariables().primary}
+                        logo={logo}
                     />
                 </div>
 
