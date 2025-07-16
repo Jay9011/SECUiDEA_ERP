@@ -194,7 +194,7 @@ function ReserveResult() {
           <video
             ref={videoRef}
             className="outro-video"
-            src="/visit/videos/outro_16_9.mp4"
+            src="/visit/videos/VO_Intro.mp4"
             muted
             playsInline
           />

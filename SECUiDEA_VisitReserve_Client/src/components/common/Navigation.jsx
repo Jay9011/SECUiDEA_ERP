@@ -88,7 +88,6 @@ const Navigation = ({ isOpen, onClose }) => {
                         textComponent="span"
                         textContent={t('navigation.systemTitle')}
                         logoColor={getColorVariables().lightText}
-                        rotation3d="rotate3d-complex-pause"
                         logo={logo}
                     />
 
