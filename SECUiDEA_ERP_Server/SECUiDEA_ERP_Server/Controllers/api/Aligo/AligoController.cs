@@ -79,6 +79,7 @@ public class AligoController : BaseController
                     receiver.FailoverMessage = tplContent;
 
                     // variables는 클라이언트 측에서 세팅
+                    // FailoverMessage도 수정 필요
 
                     // queryVariables가 1개 이상이라면 해당 값에 도메인 추가 (queryVariables도 클라이언트 측에서 세팅)
                     if (receiver.QueryVariables != null && receiver.QueryVariables.Count > 0)

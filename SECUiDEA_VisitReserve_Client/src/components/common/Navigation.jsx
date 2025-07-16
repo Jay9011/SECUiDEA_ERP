@@ -11,6 +11,9 @@ import LanguageSwitcher from "../LanguageSwitcher";
 // 스타일
 import './Navigation.scss';
 
+// 이미지
+import logo from '../../assets/images/Logo.png';
+
 // 개별 메뉴 아이템 컴포넌트
 const MenuItem = ({ item, isActive, onClick }) => (
     <li>
@@ -85,7 +88,8 @@ const Navigation = ({ isOpen, onClose }) => {
                         textComponent="span"
                         textContent={t('navigation.systemTitle')}
                         logoColor={getColorVariables().lightText}
-                        rotation3d="rotate3d-y-continuous"
+                        rotation3d="rotate3d-complex-pause"
+                        logo={logo}
                     />
 
                     <div className="navigation_auth">
