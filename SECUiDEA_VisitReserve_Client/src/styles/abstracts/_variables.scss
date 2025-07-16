@@ -20,6 +20,53 @@ $warning-color: #e0b54e;
 $error-color: #b83160;
 $info-color: #4a6cf7;
 
+// 투명도 레벨
+$alpha-high: 0.9;
+$alpha-medium: 0.7;
+$alpha-low: 0.5;
+$alpha-very-low: 0.3;
+$alpha-minimal: 0.15;
+$alpha-subtle: 0.1;
+$alpha-faint: 0.05;
+
+// 글래스모피즘 효과용 색상 변수
+$glass-white-high: rgba(255, 255, 255, $alpha-low); // 0.5
+$glass-white-medium: rgba(255, 255, 255, $alpha-very-low); // 0.3
+$glass-white-low: rgba(255, 255, 255, $alpha-minimal); // 0.15
+$glass-white-subtle: rgba(255, 255, 255, $alpha-subtle); // 0.1
+$glass-white-faint: rgba(255, 255, 255, $alpha-faint); // 0.05
+
+// 기존 색상들의 투명 버전
+$primary-alpha-high: rgba($primary-color, $alpha-high);
+$primary-alpha-medium: rgba($primary-color, $alpha-medium);
+$primary-alpha-low: rgba($primary-color, $alpha-low);
+$background-alpha-high: rgba($background-color, $alpha-high);
+$background-alpha-medium: rgba($background-color, $alpha-medium);
+$background-alpha-low: rgba($background-color, $alpha-low);
+$background-alpha-minimal: rgba($background-color, $alpha-minimal);
+$background-alpha-subtle: rgba($background-color, $alpha-subtle);
+$background-alpha-faint: rgba($background-color, $alpha-faint);
+$text-alpha-high: rgba($text-color, $alpha-high);
+$text-alpha-medium: rgba($text-color, $alpha-medium);
+
+// 글래스 효과용 테두리 색상
+$glass-border-light: rgba(255, 255, 255, 0.2);
+$glass-border-medium: rgba(255, 255, 255, 0.3);
+$glass-border-strong: rgba(255, 255, 255, 0.5);
+
+// 글래스 효과용 그림자
+$glass-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+$glass-shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.2);
+$glass-shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+// 글래스 효과용 텍스트 그림자
+$glass-text-shadow-light: 0 1px 2px rgba(0, 0, 0, 0.3);
+$glass-text-shadow-medium: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+// 글래스 효과용 텍스트 색상
+$glass-text-white: #ffffff;
+$glass-text-white-semi: rgba(255, 255, 255, 0.8);
+
 // CSS 변수 정의 (루트 레벨에 적용)
 :root {
     --primary-color: #{$primary-color};
@@ -42,6 +89,16 @@ $info-color: #4a6cf7;
     --warning-color: #{$warning-color};
     --error-color: #{$error-color};
     --info-color: #{$info-color};
+
+    // 글래스모피즘 효과용 CSS 변수
+    --glass-white-high: #{$glass-white-high};
+    --glass-white-medium: #{$glass-white-medium};
+    --glass-white-low: #{$glass-white-low};
+    --glass-white-subtle: #{$glass-white-subtle};
+    --glass-white-faint: #{$glass-white-faint};
+    --glass-border-light: #{$glass-border-light};
+    --glass-border-medium: #{$glass-border-medium};
+    --glass-border-strong: #{$glass-border-strong};
 }
 
 // 폰트
